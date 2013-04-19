@@ -1,0 +1,12 @@
+wSheet=1434
+hSheet=342
+wSprite=478
+hSprite=114
+MenuButtons_Audio
+MenuButtons_AudioSelected
+MenuButtons_Controls
+MenuButtons_ControlsSelected
+MenuButtons_MainMenu
+MenuButtons_MainMenuSelected
+MenuButtons_Video
+MenuButtons_VideoSelected

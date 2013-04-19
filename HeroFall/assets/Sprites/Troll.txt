@@ -1,0 +1,5 @@
+wSheet=1739
+hSheet=1960
+wSprite=1739
+hSprite=1960
+Troll_concept

@@ -1,0 +1,5 @@
+wSheet=8425
+hSheet=8423
+wSprite=8425
+hSprite=8423
+DBG_0

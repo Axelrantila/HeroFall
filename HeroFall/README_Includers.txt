@@ -1,0 +1,1 @@
+Syftet med includers är att underlätta när man ska importera alla underklasser till en viss klass
