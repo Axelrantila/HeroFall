@@ -8,11 +8,11 @@
 #include <math.h>
 
 Player::Player(float xPos, float yPos)
-	:Character(PT_UPPER_LEFT, xPos, yPos, 125.0f)
+	:Character(PT_UPPER_LEFT, xPos, yPos, SettingsManager::getSettings()->PLAYER_HEALTH)
 {
 	m_swordIsSwinging = false;
 	m_swordHasHittedEnemy = true;
-	m_targetSwingTime = 0.5f;
+	m_targetSwingTime = SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME;
 
 	m_rect = SpriteSheetLoader::getInstance()->getSprite("Avatar", "Avatar_0");
 	m_rect->setPosition(100.0f, 100.0f);
@@ -29,6 +29,11 @@ Player::Player(float xPos, float yPos)
 
 	d_testAnim = new Animation(this, "Turt_Attack_0", 0.5f, 200.0f, 200.0f);
 	d_testAnim->play();
+
+	m_markedForHalt = false;
+
+	m_meleeHitTime = 2.0f;
+	m_meleeHitClock.restart();
 }
 
 
@@ -51,19 +56,7 @@ void Player::draw(sf::RenderWindow* window)
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 {
 	m_yVel += getGravityDistance(delta);
-	float m_xMove = delta * m_xVel;
 	float m_yMove = delta * m_yVel;
-
-	m_xPos += m_xMove;
-	for(unsigned int a = 0; a < levelObjects.size(); a++)
-	{
-		if(collidesWith(levelObjects[a]))
-		{
-			m_xPos -= m_xMove;
-			m_xVel = 0.0f;
-			break;
-		}
-	}
 
 	m_yPos += m_yMove;
 	for(unsigned int a = 0; a < levelObjects.size(); a++)
@@ -73,6 +66,58 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 			m_yPos -= m_yMove;
 			m_yVel = 0.0f;
 			break;
+		}
+	}
+
+	if(m_markedForHalt)
+	{
+		if(m_xVel > 0.0f)
+		{
+			m_xVel -= SettingsManager::getSettings()->PLAYER_SPEED_SIDE_HALTING * delta;
+			if(m_xVel < 0.0f){m_xVel = 0.0f;}
+
+			float m_xMove = delta * m_xVel;
+			m_xPos += m_xMove;
+			for(unsigned int a = 0; a < levelObjects.size(); a++)
+			{
+				if(collidesWith(levelObjects[a]))
+				{
+					m_xPos -= m_xMove;
+					m_xVel = 0.0f;
+					break;
+				}
+			}
+		}
+		else
+		{
+			m_xVel += SettingsManager::getSettings()->PLAYER_SPEED_SIDE_HALTING * delta;
+			if(m_xVel > 0.0f){m_xVel = 0.0f;}
+
+			float m_xMove = delta * m_xVel;
+			m_xPos += m_xMove;
+			for(unsigned int a = 0; a < levelObjects.size(); a++)
+			{
+				if(collidesWith(levelObjects[a]))
+				{
+					m_xPos -= m_xMove;
+					m_xVel = 0.0f;
+					break;
+				}
+			}
+		}
+	}
+	else
+	{
+		float m_xMove = delta * m_xVel;
+		m_xPos += m_xMove;
+		for(unsigned int a = 0; a < levelObjects.size(); a++)
+		{
+			if(collidesWith(levelObjects[a]))
+			{
+				m_xPos -= m_xMove;
+				m_xVel = 0.0f;
+				break;
+			}
 		}
 	}
 
@@ -115,13 +160,13 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				&& m_swordIsSwinging
 				&& !m_swordHasHittedEnemy)
 			{
-				enemies->at(a)->takeDamage(50.0f);
+				enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER);
 				m_swordHasHittedEnemy = true;
 			}
 
 			if(m_rect->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
 			{
-				this->takeDamage(60.0f);
+				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER);
 			}
 		}
 		
@@ -173,4 +218,23 @@ void Player::update(float delta)
 void Player::setXSpeed(float xVel)
 {
 	m_xVel = xVel;
+	m_markedForHalt = false;
+}
+
+void Player::haltXSpeed()
+{
+	m_markedForHalt = true;
+}
+
+void Player::takeDamage(float damage)
+{
+	if(m_meleeHitClock.getElapsedTime().asSeconds() > m_meleeHitTime)
+	{
+		m_meleeHitClock.restart();
+		m_health -= damage;
+
+		//Check if character is dead
+		if(m_health <= 0.0f)
+		{m_isDead = true;}
+	}
 }

@@ -31,6 +31,15 @@ public:
 	float PLAYER_SPEED_SIDE;
 	float PLAYER_SPEED_JUMP;
 	float PLAYER_SPEED_DOWN;
+	float PLAYER_SPEED_SIDE_HALTING;
+	float PLAYER_HEALTH;
+	float PLAYER_SWORD_SWING_TIME;
+	float PLAYER_HIT_TIME_LIMIT_MELEE;
+#pragma endregion
+
+#pragma region DAMAGE
+	float DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER;
+	float DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER;
 #pragma endregion
 };
 

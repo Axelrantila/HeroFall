@@ -4,10 +4,11 @@
 #include "gameobject.h"
 
 class LevelObject;
+namespace sf{class RenderWindow;};
 
-namespace sf
+enum DamageType
 {
-	class RenderWindow;
+	DT_MELEE
 };
 
 class Character :
