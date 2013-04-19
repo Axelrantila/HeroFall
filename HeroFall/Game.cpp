@@ -10,7 +10,9 @@
 Game::Game()
 	:State()
 {
-	m_view = new sf::View(sf::Vector2f(800.0f / 2.0f, 800.0f / 2.0f), sf::Vector2f(800.0f, 800.0f));
+	m_view = new sf::View(
+		sf::Vector2f(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X / 2.0f, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y / 2.0f),
+		sf::Vector2f(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y));
 	m_levelManager = new LevelManager(m_view);
 
 	d_sprite = SpriteSheetLoader::getInstance()->getSprite("DBG", "DBG_0");
@@ -38,7 +40,7 @@ void Game::update(StateManager* stateManager)
 		m_deltaTime = m_clock.getElapsedTime().asSeconds();
 		m_clock.restart();
 		
-		std::cout << (1.0f/m_deltaTime) << std::endl;
+		//std::cout << (1.0f/m_deltaTime) << std::endl;
 
 		//Update
 		//AudioMixer::getInstance()->update();

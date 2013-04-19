@@ -21,12 +21,15 @@ public:
 	void move(float delta, std::vector<LevelObject*> levelObjects);
 	void update(float delta);
 	void draw(sf::RenderWindow* window);
+	void haltXSpeed();
 
 	bool collidesWith(LevelObject* levelObject);
 	void collidesWith(std::vector<Enemy*>* enemies);
 
 	sf::Vector2f getCenter();
 	void swingSword();
+
+	void takeDamage(float damage);
 
 private:
 	sf::Sprite* m_rect;
@@ -37,7 +40,12 @@ private:
 	sf::Clock m_swordClock;
 	float m_targetSwingTime;
 
+	bool m_markedForHalt;
+
 	Animation* d_testAnim;
+
+	sf::Clock m_meleeHitClock;
+	float m_meleeHitTime;
 };
 
 #endif

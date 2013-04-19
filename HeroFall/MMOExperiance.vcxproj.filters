@@ -44,21 +44,27 @@
     <ClCompile Include="LevelObjectRectangle.cpp">
       <Filter>Game\Level\LevelObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="StateManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationManager.cpp">
+      <Filter>Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Characters\Enemies</Filter>
+    </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="Menus.cpp" />
+=======
+>>>>>>> BUILD 20130419_0
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -103,24 +109,30 @@
     <ClInclude Include="LevelObject.h">
       <Filter>Game\Level\LevelObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.h">
       <Filter>Engine</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="Menus.h" />
+=======
+    <ClInclude Include="AnimationManager.h">
+      <Filter>Engine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Characters\Enemies</Filter>
+    </ClInclude>
+>>>>>>> BUILD 20130419_0
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -149,6 +161,12 @@
     </Filter>
     <Filter Include="Includers">
       <UniqueIdentifier>{b7d0fd1c-7bd2-41ea-93c5-8ee906ec1b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation">
+      <UniqueIdentifier>{6c46a2f9-de32-4bac-b47d-ada1aacf5316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States">
+      <UniqueIdentifier>{c875af70-cb19-44e1-be62-204e307b6678}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

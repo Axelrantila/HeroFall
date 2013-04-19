@@ -40,8 +40,15 @@ bool SettingsManager::loadSettings()
 	m_settings->WORLD_GRAVITY = (float)ini.GetDoubleValue("WORLD", "GRAVITY", 0);
 
 	m_settings->PLAYER_SPEED_SIDE = (float)ini.GetDoubleValue("PLAYER", "SPEED_SIDE", 0);
+	m_settings->PLAYER_SPEED_SIDE_HALTING = (float)ini.GetDoubleValue("PLAYER", "SPEED_SIDE_HALTING", 0);
 	m_settings->PLAYER_SPEED_JUMP = (float)ini.GetDoubleValue("PLAYER", "SPEED_JUMP", 0);
-	m_settings->PLAYER_SPEED_DOWN= (float)ini.GetDoubleValue("PLAYER", "SPEED_DOWN", 0);
+	m_settings->PLAYER_SPEED_DOWN = (float)ini.GetDoubleValue("PLAYER", "SPEED_DOWN", 0);
+	m_settings->PLAYER_HEALTH = (float)ini.GetDoubleValue("PLAYER", "HEALTH", 0);
+	m_settings->PLAYER_SWORD_SWING_TIME = (float)ini.GetDoubleValue("PLAYER", "SWORD_SWING_TIME", 0);
+	m_settings->PLAYER_HIT_TIME_LIMIT_MELEE = (float)ini.GetDoubleValue("PLAYER", "HIT_TIME_LIMIT_MELEE", 0);
+
+	m_settings->DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER = (float)ini.GetDoubleValue("DAMAGE", "ENEMY_PLACEHOLDER_TO_PLAYER", 0);
+	m_settings->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER = (float)ini.GetDoubleValue("DAMAGE", "PLAYER_TO_ENEMY_PLACEHOLDER", 0);
 
 	return true;
 }

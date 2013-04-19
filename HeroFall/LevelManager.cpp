@@ -61,6 +61,7 @@ void LevelManager::update(float deltaTime)
 void LevelManager::updatePlayerSpeed()
 {
 	//Update player speed
+
 	if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP"))
 	{
 		m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
@@ -85,7 +86,7 @@ void LevelManager::updatePlayerSpeed()
 
 	else
 	{
-		m_player->setXSpeed(0.0f);
+		m_player->haltXSpeed();
 	}
 }
 
