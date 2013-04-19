@@ -57,6 +57,8 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="Menus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -117,6 +119,8 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="Menus.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

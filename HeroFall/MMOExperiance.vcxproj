@@ -100,6 +100,7 @@
     <ClCompile Include="LevelObject.cpp" />
     <ClCompile Include="LevelObjectRectangle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="SettingsObject.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="SpriteSheetLoader.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +123,7 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LevelObject.h" />
     <ClInclude Include="LevelObjectRectangle.h" />
+    <ClInclude Include="Menus.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="SettingsObject.h" />
@@ -129,6 +132,7 @@
     <ClInclude Include="SpriteSheetLoader.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="UIButton.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
