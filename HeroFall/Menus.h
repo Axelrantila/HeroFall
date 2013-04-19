@@ -23,7 +23,6 @@ public:
 	void Update(sf::Time deltaTime);
 	void Draw(sf::RenderWindow *window);
 	Menu currentState;
-	sf::Sprite background;
 
 private:
 	UIButton* Play;
@@ -32,6 +31,7 @@ private:
 	UIButton* Quit;
 	UIButton* Return;
 	int tracker;
+	sf::Sprite *background;
 };
 
 #endif

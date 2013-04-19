@@ -100,7 +100,7 @@ void Menus::Update(sf::Time deltaTime)
 
 void Menus::Draw(sf::RenderWindow *window)
 {
-	window->draw(background);
+	window->draw(*background);
 
 	if (currentState == MAIN)
 	{
