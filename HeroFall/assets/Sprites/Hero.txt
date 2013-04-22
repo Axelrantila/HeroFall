@@ -1,0 +1,6 @@
+wSheet=195
+hSheet=384
+wSprite=195
+hSprite=192
+Hero_Sword_0_0
+Hero_Walk_0_0

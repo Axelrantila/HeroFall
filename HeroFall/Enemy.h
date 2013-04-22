@@ -25,11 +25,12 @@ public:
 	virtual void update(float delta) = 0;
 	virtual void applyGravity(float delta);
 	virtual void draw (sf::RenderWindow* window) = 0;
-
-	virtual bool collidesWith(LevelObject* levelObject) = 0;
+								
 	virtual float getGravityDistance(float delta);
 
 	EnemyType getType(){return m_type;}
+
+	bool collidesWith(LevelObject* levelObject) = 0;
 
 protected:
 	float m_xVel;

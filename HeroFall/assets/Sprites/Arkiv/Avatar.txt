@@ -1,0 +1,6 @@
+wSheet=547
+hSheet=1046
+wSprite=547
+hSprite=523
+Avatar_0
+Avatar_Sword

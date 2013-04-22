@@ -48,7 +48,11 @@ bool SettingsManager::loadSettings()
 	m_settings->PLAYER_HIT_TIME_LIMIT_MELEE = (float)ini.GetDoubleValue("PLAYER", "HIT_TIME_LIMIT_MELEE", 0);
 
 	m_settings->DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER = (float)ini.GetDoubleValue("DAMAGE", "ENEMY_PLACEHOLDER_TO_PLAYER", 0);
+	m_settings->DAMAGE_ENEMY_TROLL_TO_PLAYER = (float)ini.GetDoubleValue("DAMAGE", "ENEMY_TROLL_TO_PLAYER", 0);
 	m_settings->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER = (float)ini.GetDoubleValue("DAMAGE", "PLAYER_TO_ENEMY_PLACEHOLDER", 0);
+	m_settings->DAMAGE_PLAYER_TO_ENEMY_TROLL = (float)ini.GetDoubleValue("DAMAGE", "PLAYER_TO_ENEMY_TROLL", 0);
+
+	m_settings->ENEMY_TROLL_HEALTH = (float)ini.GetDoubleValue("ENEMY_TROLL", "HEALTH", 0);
 
 	return true;
 }

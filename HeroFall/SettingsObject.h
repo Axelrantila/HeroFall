@@ -39,7 +39,13 @@ public:
 
 #pragma region DAMAGE
 	float DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER;
+	float DAMAGE_ENEMY_TROLL_TO_PLAYER;
 	float DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER;
+	float DAMAGE_PLAYER_TO_ENEMY_TROLL;
+#pragma endregion
+
+#pragma region ENEMY_TROLL
+	float ENEMY_TROLL_HEALTH;
 #pragma endregion
 };
 

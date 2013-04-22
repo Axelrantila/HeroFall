@@ -62,9 +62,6 @@
     <ClCompile Include="LevelObjectPlattform.cpp">
       <Filter>Game\Level\LevelObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyGoblin.cpp">
       <Filter>Game\Characters\Enemies</Filter>
     </ClCompile>
@@ -76,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="EnemyTroll.cpp">
       <Filter>Game\Characters\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,9 +145,6 @@
     <ClInclude Include="EnemyTroll.h">
       <Filter>Game\Characters\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyGoblin.h">
       <Filter>Game\Characters\Enemies</Filter>
     </ClInclude>
@@ -156,6 +153,9 @@
     </ClInclude>
     <ClInclude Include="EnemyShooter.h">
       <Filter>Game\Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

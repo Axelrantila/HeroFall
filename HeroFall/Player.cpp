@@ -1,4 +1,5 @@
 #include "EnemyPlaceholder.h"
+#include "EnemyTroll.h"
 #include "InputManager.h"
 #include "LevelObjectRectangle.h"
 #include "Player.h"
@@ -14,13 +15,11 @@ Player::Player(float xPos, float yPos)
 	m_swordHasHittedEnemy = true;
 	m_targetSwingTime = SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME;
 
-	m_rect = SpriteSheetLoader::getInstance()->getSprite("Avatar", "Avatar_0");
+	m_rect = SpriteSheetLoader::getInstance()->getSprite("Hero", "Hero_Walk_0_0");
 	m_rect->setPosition(100.0f, 100.0f);
-	m_rect->setScale(0.2f, 0.2f);
 
-	m_swordRect = SpriteSheetLoader::getInstance()->getSprite("Avatar", "Avatar_Sword");
-	m_swordRect->setOrigin(0.0f, 273.5f);
-	m_swordRect->setScale(0.2f, 0.2f);
+	m_swordRect = SpriteSheetLoader::getInstance()->getSprite("Hero", "Hero_Sword_0_0");
+	m_swordRect->setOrigin(0.0f, 96.0f);
 	m_swordRect->setPosition(m_rect->getGlobalBounds().left  + m_rect->getGlobalBounds().width * 0.5f,
 		m_rect->getGlobalBounds().top + m_rect->getGlobalBounds().height * 0.5f);
 
@@ -153,6 +152,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 {
 	for(unsigned int a = 0; a < enemies->size();)
 	{
+		//ENEMY PLACEHOLDER
 		if(enemies->at(a)->getType() == ENEMY_PLACEHOLDER)
 		{
 			EnemyPlaceholder* tEnemy = ((EnemyPlaceholder*)enemies->at(a));
@@ -167,6 +167,24 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			if(m_rect->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
 			{
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER);
+			}
+		}
+
+		//TROLL
+		else if(enemies->at(a)->getType() == ENEMY_TROLL)
+		{
+			EnemyTroll* tEnemy = ((EnemyTroll*)enemies->at(a));
+			if(m_swordRect->getGlobalBounds().intersects(tEnemy->getGlobalBounds())
+				&& m_swordIsSwinging
+				&& !m_swordHasHittedEnemy)
+			{
+				enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
+				m_swordHasHittedEnemy = true;
+			}
+
+			if(m_rect->getGlobalBounds().intersects(tEnemy->getGlobalBounds()))
+			{
+				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_TROLL_TO_PLAYER);
 			}
 		}
 		

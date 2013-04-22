@@ -28,7 +28,13 @@ SettingsObject::SettingsObject()
 
 #pragma region DAMAGE
 	DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER = 60.0f;
+	DAMAGE_ENEMY_TROLL_TO_PLAYER = 60.0f;
 	DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER = 50.0f;
+	DAMAGE_PLAYER_TO_ENEMY_TROLL = 50.0f;
+#pragma endregion
+
+#pragma region ENEMY_TROLL
+	ENEMY_TROLL_HEALTH = 125.0f;
 #pragma endregion
 }
 

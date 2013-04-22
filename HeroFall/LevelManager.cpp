@@ -9,7 +9,7 @@ LevelManager::LevelManager(sf::View* view)
 {
 	m_view = view;
 	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 400.0f, 125.0f, 125.0f, sf::Color::Blue));
-	m_levelObjects.push_back(new LevelObjectRectangle(100.0f, 500.0f, 10000.0f, 100.0f, sf::Color::Transparent));
+	m_levelObjects.push_back(new LevelObjectRectangle(100.0f, 500.0f, 10000.0f, 100.0f, sf::Color::Red));
 	m_player = new Player(200.0f, 200.0f);
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("DBG", "DBG_0");
@@ -17,6 +17,7 @@ LevelManager::LevelManager(sf::View* view)
 
 	m_enemies = new std::vector<Enemy*>();
 	m_enemies->push_back(new EnemyPlaceholder(1000.0f, 400.0f));
+	m_enemies->push_back(new EnemyTroll(3000.0f, 0.0f));
 }
 
 LevelManager::~LevelManager()
@@ -51,11 +52,18 @@ void LevelManager::update(float deltaTime)
 	m_player->update(deltaTime);
 	m_player->move(deltaTime, m_levelObjects);
 
+	for(unsigned int a = 0; a < m_enemies->size(); a++)
+	{
+		m_enemies->at(a)->update(deltaTime);
+		m_enemies->at(a)->move(deltaTime, m_levelObjects);
+	}
+
 	//Check collision between the enemies and the player
 	m_player->collidesWith(m_enemies);
 
 	//Update the camera's view
-	m_view->setCenter(m_player->getCenter());
+	m_view->setCenter(m_player->getCenter().x /*+ (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X / 2.0f*/
+		, m_player->getCenter().y - (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y / 3.5f);
 }
 
 void LevelManager::updatePlayerSpeed()
