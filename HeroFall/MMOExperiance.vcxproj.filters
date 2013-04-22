@@ -1,178 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Character.cpp">
-      <Filter>Game\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
-      <Filter>Game\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\Sprites</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheet.cpp">
-      <Filter>Engine\Sprites</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheetLoader.cpp">
-      <Filter>Engine\Sprites</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsManager.cpp">
-      <Filter>Engine\Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsObject.cpp">
-      <Filter>Engine\Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyPlaceholder.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelObject.cpp">
-      <Filter>Game\Level\LevelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelObjectRectangle.cpp">
-      <Filter>Game\Level\LevelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="StateManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Engine\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationManager.cpp">
-      <Filter>Engine\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game\States</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClCompile>
-<<<<<<< HEAD
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
-    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyPlaceholder.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LevelObject.cpp" />
+    <ClCompile Include="LevelObjectRectangle.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Menus.cpp" />
-=======
->>>>>>> BUILD 20130419_0
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SettingsManager.cpp" />
+    <ClCompile Include="SettingsObject.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteSheet.cpp" />
+    <ClCompile Include="SpriteSheetLoader.cpp" />
+    <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="EnemyTroll.cpp" />
+    <ClCompile Include="EnemyGoblin.cpp" />
+    <ClCompile Include="EnemyShooter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Character.h">
-      <Filter>Game\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelManager.h">
-      <Filter>Game\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheetLoader.h">
-      <Filter>Engine\Sprites</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine\Sprites</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheet.h">
-      <Filter>Engine\Sprites</Filter>
-    </ClInclude>
-    <ClInclude Include="SettingsObject.h">
-      <Filter>Engine\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="SettingsManager.h">
-      <Filter>Engine\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyPlaceholder.h">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelObjectRectangle.h">
-      <Filter>Game\Level\LevelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelObject.h">
-      <Filter>Game\Level\LevelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="StateManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-<<<<<<< HEAD
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationManager.h" />
-    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyPlaceholder.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="LevelObject.h" />
+    <ClInclude Include="LevelObjectRectangle.h" />
     <ClInclude Include="Menus.h" />
-=======
-    <ClInclude Include="AnimationManager.h">
-      <Filter>Engine\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Engine\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClInclude>
->>>>>>> BUILD 20130419_0
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{d3d6faa9-e3cf-436f-b365-ef67b47b73d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{bf20114b-a730-43f9-95b3-9f1bda908500}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Sprites">
-      <UniqueIdentifier>{004ef81b-b730-49f9-9dbc-dfd450957cb1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Settings">
-      <UniqueIdentifier>{8dd98bc2-1461-4901-83b4-310fbc2aeafa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Characters">
-      <UniqueIdentifier>{27fdad45-d8bd-4c0d-ab7f-52bcd8805cea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Characters\Enemies">
-      <UniqueIdentifier>{ebaae087-54d0-4206-96ad-b67ef0ff1d74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Level">
-      <UniqueIdentifier>{97ec0a2c-813f-4441-8ed5-5dce1954172a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Level\LevelObjects">
-      <UniqueIdentifier>{3a16f982-ade0-4d09-8844-f9db3cc97155}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Includers">
-      <UniqueIdentifier>{b7d0fd1c-7bd2-41ea-93c5-8ee906ec1b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Animation">
-      <UniqueIdentifier>{6c46a2f9-de32-4bac-b47d-ada1aacf5316}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\States">
-      <UniqueIdentifier>{c875af70-cb19-44e1-be62-204e307b6678}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="SettingsManager.h" />
+    <ClInclude Include="SettingsObject.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteSheet.h" />
+    <ClInclude Include="SpriteSheetLoader.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateManager.h" />
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="Util.h" />
+    <ClInclude Include="EnemyTroll.h" />
+    <ClInclude Include="EnemyGoblin.h" />
+    <ClInclude Include="EnemyShooter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
-    <None Include="README_Includers.txt">
-      <Filter>Includers</Filter>
-    </None>
+    <None Include="README_Includers.txt" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

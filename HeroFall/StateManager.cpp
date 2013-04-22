@@ -12,7 +12,7 @@ StateManager::StateManager()
 	//Preload resources
 	SpriteSheetLoader::getInstance()->getSheet("DBG");
 
-	m_states.push_back(new Menus());
+	m_states.push_back(new Game());
 
 	m_deltaTime = 0.0f;
 	m_clock.restart();

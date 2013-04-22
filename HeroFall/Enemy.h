@@ -5,7 +5,10 @@
 
 enum EnemyType
 {
-	ENEMY_PLACEHOLDER
+	ENEMY_PLACEHOLDER,
+	ENEMY_TROLL,
+	ENEMY_GOBLIN,
+	ENEMY_SHOOTER
 };
 
 class Enemy :

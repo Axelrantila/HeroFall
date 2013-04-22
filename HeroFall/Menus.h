@@ -35,7 +35,6 @@ private:
 	UIButton* Quit;
 	UIButton* Return;
 	int tracker;
-	sf::Sprite *background;
 };
 
 #endif

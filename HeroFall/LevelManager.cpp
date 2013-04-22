@@ -9,7 +9,7 @@ LevelManager::LevelManager(sf::View* view)
 {
 	m_view = view;
 	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 400.0f, 125.0f, 125.0f, sf::Color::Blue));
-	m_levelObjects.push_back(new LevelObjectRectangle(100.0f, 500.0f, 10000.0f, 100.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(100.0f, 500.0f, 10000.0f, 100.0f, sf::Color::Transparent));
 	m_player = new Player(200.0f, 200.0f);
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("DBG", "DBG_0");
