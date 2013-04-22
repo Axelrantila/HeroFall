@@ -1,6 +1,0 @@
-*.sdf
-*.opensdf
-*.suo
-ipch folder
-Debug folder
-Release folder
