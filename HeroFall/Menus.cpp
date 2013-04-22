@@ -1,86 +1,60 @@
 #include "Menus.h"
 #include "InputManager.h"
+#include "StateManager.h"
 
-Menus::Menus(sf::RenderWindow* window)
+Menus::Menus()
 {
 	tracker = 0;
 	currentState = MAIN;
 	background = SpriteSheetLoader::getInstance()->getSprite ("DBG", "DBG_0");
 
-	Play = new UIButton(window);
+	Play = new UIButton();
 	Play->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Audio");
 	Play->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
 	Play->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
 	Play->Center(sf::Vector2f(800, 800));
-	Play->Move(sf::Vector2f(0, -Play->m_standard->getTextureRect().height + 50));
+	Play->Move(sf::Vector2f(0.0f, (float)-Play->m_standard->getTextureRect().height + 50));
 
-	Options = new UIButton(window);
+	Options = new UIButton();
 	Options->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Controls");
 	Options->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_ControlsSelected");
 	Options->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_ControlsSelected");
 	Options->Center(sf::Vector2f(800, 800));
 
-	Credits = new UIButton(window);
+	Credits = new UIButton();
 	Credits->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_MainMenu");
 	Credits->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_MainMenuSelected");
 	Credits->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_MainMenuSelected");
 	Credits->SetPosition(sf::Vector2f(Options->m_standard->getPosition()));
-	Credits->Move(sf::Vector2f(0, Credits->m_standard->getTextureRect().height + 50));
+	Credits->Move(sf::Vector2f(0.0f, (float)Credits->m_standard->getTextureRect().height + 50));
 
-	Quit = new UIButton(window);
+	Quit = new UIButton();
 	Quit->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Video");
 	Quit->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_VideoSelected");
 	Quit->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_VideoSelected");
 	Quit->SetPosition(sf::Vector2f(Credits->m_standard->getPosition()));
-	Quit->Move(sf::Vector2f(0, Quit->m_standard->getTextureRect().height + 50));
+	Quit->Move(sf::Vector2f(0.0f, (float)Quit->m_standard->getTextureRect().height + 50));
 }
 
-void Menus::Update(sf::Time deltaTime)
+void Menus::update(StateManager* stateManager, float deltaTime)
 {
-	if (tracker == 0)
-	{ 
-		Play->SELECTED;
-		Options->STANDARD;
-		Credits->STANDARD;
-		Quit->STANDARD;
-	}
-	if (tracker == 1)
-	{ 
-		Play->STANDARD;
-		Options->SELECTED;
-		Credits->STANDARD;
-		Quit->STANDARD;
-	}
-	if (tracker == 2)
-	{ 
-		Play->STANDARD;
-		Options->STANDARD;
-		Credits->SELECTED;
-		Quit->STANDARD;
-	}
-	if (tracker == 3)
-	{ 
-		Play->STANDARD;
-		Options->STANDARD;
-		Credits->STANDARD;
-		Quit->SELECTED;
-	}
-	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Down) )
+	if ( InputManager::getInstance()->isKeyPressed("P1_MOVE_DOWN") )
 	{
 		tracker ++;
 	}
-	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Up) )
+	if ( InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") )
 	{
 		tracker --;
 	}
-	if ( tracker == 3 && sf::Keyboard::isKeyPressed(sf::Keyboard::Down) )
+	if ( tracker == 3 && InputManager::getInstance()->isKeyPressed("P1_MOVE_DOWN") )
 	{
 		tracker = 0;
 	}
-	if ( tracker == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) )
+	if ( tracker == 0 && InputManager::getInstance()->isKeyPressed("P1_MOVE_UP" ))
 	{
 		tracker = 3;
 	}
+
 	if (currentState == MAIN)
 	{
 		Play->Update(deltaTime);
@@ -96,19 +70,46 @@ void Menus::Update(sf::Time deltaTime)
 		if ( Quit->Pressed() )
 			{  }
 	}
+
+	////////////////////////////////////////////////////////
+	if (tracker == 0)
+	{ 
+		Play->CURRENT_STATE = SELECTED;
+		Options->CURRENT_STATE = STANDARD;
+		Credits->CURRENT_STATE = STANDARD;
+		Quit->CURRENT_STATE = STANDARD;
+	}
+	else if (tracker == 1)
+	{ 
+		Play->CURRENT_STATE = STANDARD;
+		Options->CURRENT_STATE = SELECTED;
+		Credits->CURRENT_STATE = STANDARD;
+		Quit->CURRENT_STATE = STANDARD;
+	}
+	else if (tracker == 2)
+	{ 
+		Play->CURRENT_STATE = STANDARD;
+		Options->CURRENT_STATE = STANDARD;
+		Credits->CURRENT_STATE = SELECTED;
+		Quit->CURRENT_STATE = STANDARD;
+	}
+	else if (tracker == 3)
+	{ 
+		Play->CURRENT_STATE = STANDARD;
+		Options->CURRENT_STATE = STANDARD;
+		Credits->CURRENT_STATE = STANDARD;
+		Quit->CURRENT_STATE = SELECTED;
+	}
 }
 
-void Menus::Draw(sf::RenderWindow *window)
+void Menus::draw(sf::RenderWindow* window)
 {
 	window->draw(*background);
 
-	if (currentState == MAIN)
-	{
-		Play->Draw(window);
-		Options->Draw(window);
-		Credits->Draw(window);
-		Quit->Draw(window);
-	}
+	Play->Draw(window);
+	Options->Draw(window);
+	Credits->Draw(window);
+	Quit->Draw(window);
 }
 
 Menus::~Menus(void)
@@ -117,4 +118,8 @@ Menus::~Menus(void)
 	delete Options;
 	delete Credits;
 	delete Quit;
+}
+
+void Menus::handleEvents(sf::Event windowEvent)
+{
 }

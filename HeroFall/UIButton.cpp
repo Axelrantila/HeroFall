@@ -3,10 +3,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-UIButton::UIButton(sf::RenderWindow* window)
+UIButton::UIButton()
 {
 	bPressed = false;
-	m_window = window;
 	m_standard = nullptr;
 	m_selected = nullptr;
 	m_down = nullptr;
@@ -23,10 +22,10 @@ UIButton::~UIButton(void)
 		delete m_down;
 }
 
-void UIButton::Update( sf::Time DeltaTime )
+void UIButton::Update( float delta )
 {
 	bPressed = false;
-	if (CURRENT_STATE == SELECTED && sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	if (CURRENT_STATE == SELECTED /*&& sf::Keyboard::isKeyPressed(sf::Keyboard::Return)*/)
 	{ bPressed = true; }
 }
 

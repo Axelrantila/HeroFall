@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "InputManager.h"
+#include "Menus.h"
 #include "SpriteSheetLoader.h"
 #include "StateManager.h"
 
@@ -10,7 +12,10 @@ StateManager::StateManager()
 	//Preload resources
 	SpriteSheetLoader::getInstance()->getSheet("DBG");
 
-	m_states.push_back(new Game());
+	m_states.push_back(new Menus());
+
+	m_deltaTime = 0.0f;
+	m_clock.restart();
 }
 
 
@@ -32,12 +37,21 @@ void StateManager::run()
 
 	while(m_running)
 	{
+		m_deltaTime = m_clock.getElapsedTime().asSeconds();
+		m_clock.restart();
+
 		//Handle events
 		sf::Event windowEvent;
 		while(m_window->pollEvent(windowEvent))
 		{
 			if(windowEvent.type == sf::Event::Closed)
 			{m_running = false;}
+
+			else if(windowEvent.type == sf::Event::KeyPressed)
+			{InputManager::getInstance()->keyPressed(windowEvent.key.code);}
+			
+			else if(windowEvent.type == sf::Event::KeyReleased)
+			{InputManager::getInstance()->keyReleased(windowEvent.key.code);}
 
 			else{sendInputToCurrentState(windowEvent);}
 		}
@@ -53,8 +67,10 @@ void StateManager::run()
 				{
 					if(currentState->getRunning())
 					{
-						currentState->update(this);
+						m_window->clear();
+						currentState->update(this, m_deltaTime);
 						currentState->draw(m_window);
+						m_window->display();
 					}
 				}
 			}
@@ -78,6 +94,8 @@ void StateManager::run()
 		}
 
 	}
+
+	InputManager::getInstance()->update();
 }
 
 void StateManager::sendInputToCurrentState(sf::Event windowEvent)

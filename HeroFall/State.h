@@ -18,7 +18,7 @@ public:
 	virtual void markForDeletion() {m_markedForDeletion = true;}
 	virtual bool getMarkedForDeletion() {return m_markedForDeletion;}
 
-	virtual void update(StateManager* stateManager) = 0;
+	virtual void update(StateManager* stateManager, float deltaTime) = 0;
 	virtual void draw(sf::RenderWindow* window) = 0;
 	virtual void handleEvents(sf::Event windowEvent) = 0;
 

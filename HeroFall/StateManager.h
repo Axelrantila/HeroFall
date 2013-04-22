@@ -20,6 +20,9 @@ private:
 	bool m_running;
 	std::vector<State*> m_states;
 	sf::RenderWindow* m_window;
+
+	sf::Clock m_clock;
+	float m_deltaTime;
 };
 
 #endif

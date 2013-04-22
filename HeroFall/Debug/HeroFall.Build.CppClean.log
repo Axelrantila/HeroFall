@@ -1,9 +1,41 @@
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\Animation.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\AnimationManager.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\Character.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\cl.command.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\CL.read.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\CL.write.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\Enemy.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\EnemyPlaceholder.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\Game.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\GameObject.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.exe
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.exe.intermediate.manifest
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.ilk
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.pdb
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\InputManager.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\LevelManager.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\LevelObject.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\LevelObjectRectangle.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\link.command.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\link.read.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\link.write.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\main.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\mt.command.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\mt.read.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\mt.write.1.tlog
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\Player.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\SettingsManager.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\SettingsObject.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\Sprite.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\SpriteSheet.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\SpriteSheetLoader.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\StateManager.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\Util.obj
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\vc100.idb
+C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\vc100.pdb
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\ANIMATION.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\ANIMATIONMANAGER.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\CHARACTER.OBJ
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\cl.command.1.tlog
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\CL.read.1.tlog
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\CL.write.1.tlog
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\ENEMY.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\ENEMYPLACEHOLDER.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\GAME.OBJ
@@ -16,13 +48,7 @@ C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\LEVELMANAGER.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\LEVELOBJECT.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\LEVELOBJECTRECTANGLE.OBJ
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\link.command.1.tlog
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\link.read.1.tlog
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\link.write.1.tlog
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\MAIN.OBJ
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\mt.command.1.tlog
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\mt.read.1.tlog
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\mt.write.1.tlog
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\PLAYER.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\SETTINGSMANAGER.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\SETTINGSOBJECT.OBJ
@@ -31,5 +57,4 @@ C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\SPRITESHEETLOADER.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\STATEMANAGER.OBJ
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\UTIL.OBJ
-C:\Users\Axel\Dropbox\Programmering\C++\Skolarbeten\År 1\VT13.2\HeroFall\Debug\vc100.idb
 C:\USERS\AXEL\DROPBOX\PROGRAMMERING\C++\SKOLARBETEN\ÅR 1\VT13.2\HEROFALL\DEBUG\VC100.PDB

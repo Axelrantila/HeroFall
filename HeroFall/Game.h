@@ -15,11 +15,8 @@ public:
 	Game();
 	~Game();
 
-	void init();
-	void run();
-	void cleanup();
 
-	void update(StateManager* stateManager);
+	void update(StateManager* stateManager, float m_deltaTime);
 	void draw(sf::RenderWindow* window);
 	void handleEvents(sf::Event windowEvent);
 

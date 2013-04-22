@@ -3,12 +3,19 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+enum BUTTON_STATE
+		{
+			STANDARD,
+			SELECTED,
+			DOWN
+		}; 
+
 class UIButton
 {
 public:
-	    UIButton(sf::RenderWindow* window);
+	    UIButton();
 		~UIButton(void);
-		virtual void Update(sf::Time deltaTime);
+		virtual void Update(float delta);
 		virtual void Draw(sf::RenderWindow* window);
 		virtual void SetPosition(sf::Vector2f);
 		virtual void Move(sf::Vector2f);
@@ -17,19 +24,13 @@ public:
 		//virtual void Scale(sf::Vector2f);
 		//virtual void Opacity(int);
 
-		enum BUTTON_STATE
-		{
-			STANDARD,
-			SELECTED,
-			DOWN
-		} CURRENT_STATE;
+		BUTTON_STATE CURRENT_STATE;
 
 		sf::Sprite* m_standard;
 		sf::Sprite* m_selected;
 		sf::Sprite* m_down;
 
 protected:
-		sf::RenderWindow* m_window;
 		bool bPressed;
 };
 
