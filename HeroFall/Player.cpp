@@ -1,3 +1,4 @@
+#include "AudioMixer.h"
 #include "EnemyPlaceholder.h"
 #include "EnemyTroll.h"
 #include "InputManager.h"
@@ -212,6 +213,7 @@ void Player::swingSword()
 	m_swordIsSwinging = true;
 	m_swordHasHittedEnemy = false;
 	m_swordClock.restart();
+	AudioMixer::getInstance()->playSound("Draw sword (skämt)");
 }
 
 void Player::update(float delta)

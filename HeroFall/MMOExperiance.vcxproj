@@ -90,6 +90,9 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="AudioAssetsPathLoader.cpp" />
+    <ClCompile Include="AudioLoader.cpp" />
+    <ClCompile Include="AudioMixer.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyGoblin.cpp" />
@@ -118,6 +121,9 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="AudioAssetsPathLoader.h" />
+    <ClInclude Include="AudioLoader.h" />
+    <ClInclude Include="AudioMixer.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyGoblin.h" />

@@ -77,6 +77,15 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="AudioAssetsPathLoader.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioLoader.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioMixer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -156,6 +165,15 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioAssetsPathLoader.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioLoader.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioMixer.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
