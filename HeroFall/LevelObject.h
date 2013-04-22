@@ -7,7 +7,8 @@
 
 enum LevelObjectType
 {
-	LO_RECTANGLE
+	LO_RECTANGLE,
+	LO_PLATTFORM
 };
 
 class LevelObject

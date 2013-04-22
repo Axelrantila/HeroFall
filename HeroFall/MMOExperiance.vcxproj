@@ -101,6 +101,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelObject.cpp" />
+    <ClCompile Include="LevelObjectPlattform.cpp" />
     <ClCompile Include="LevelObjectRectangle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menus.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LevelObject.h" />
+    <ClInclude Include="LevelObjectPlattform.h" />
     <ClInclude Include="LevelObjectRectangle.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Player.h" />
@@ -144,6 +146,7 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="CONFIG.ini" />
+    <None Include="ENEMIES_BEHAVIOURS.txt" />
     <None Include="README_Includers.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,19 +1,10 @@
-﻿Build started 2013-04-22 12:27:27.
+﻿Build started 2013-04-22 13:41:57.
      1>Project "C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\MMOExperiance.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\HeroFall.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\HeroFall.unsuccessfulbuild".
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_DYNAMIC /D WIN32 /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Enemy.cpp EnemyGoblin.cpp EnemyPlaceholder.cpp EnemyShooter.cpp EnemyTroll.cpp Game.cpp LevelManager.cpp Player.cpp StateManager.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_DYNAMIC /D WIN32 /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Enemy.cpp
          Enemy.cpp
-         EnemyGoblin.cpp
-         EnemyPlaceholder.cpp
-         EnemyShooter.cpp
-         EnemyTroll.cpp
-         Game.cpp
-         LevelManager.cpp
-         Player.cpp
-         StateManager.cpp
-         Generating Code...
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.exe" /NOLOGO "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-main-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\HeroFall.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.lib" /MACHINE:X86 Debug\Animation.obj
          Debug\AnimationManager.obj
@@ -28,6 +19,7 @@
          Debug\InputManager.obj
          Debug\LevelManager.obj
          Debug\LevelObject.obj
+         Debug\LevelObjectPlattform.obj
          Debug\LevelObjectRectangle.obj
          Debug\main.obj
          Debug\Menus.obj
@@ -40,7 +32,6 @@
          Debug\StateManager.obj
          Debug\UIButton.obj
          Debug\Util.obj
-         LINK : C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.exe not found or not built by the last incremental link; performing full link
          MMOExperiance.vcxproj -> C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.exe
        Manifest:
          c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Debug\HeroFall.exe;#1" /manifest Debug\HeroFall.exe.intermediate.manifest
@@ -51,4 +42,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.71
+Time Elapsed 00:00:01.12
