@@ -225,7 +225,22 @@ void Player::update(float delta)
 
 	if(m_swordIsSwinging)
 	{
-		m_swordRect->setRotation((m_swordClock.getElapsedTime().asSeconds() / m_targetSwingTime) * 360.0f);
+		//m_swordRect->setRotation((m_swordClock.getElapsedTime().asSeconds() / m_targetSwingTime) * 360.0f);
+
+		if(m_swordClock.getElapsedTime().asSeconds()  < (m_targetSwingTime / 2.0f))
+		{
+			m_swordRect->setRotation(360.0f -
+				(m_swordClock.getElapsedTime().asSeconds() / (m_targetSwingTime * 0.5f)) * 90.0f
+				);
+		}
+		else
+		{
+			m_swordRect->setRotation(
+				270.0f + ((m_swordClock.getElapsedTime().asSeconds() - (m_targetSwingTime * 0.5f)) / (m_targetSwingTime * 0.5f)) * 90.0f
+				);
+		}
+
+		std::cout << m_swordRect->getRotation() << std::endl;
 
 		if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
 		{

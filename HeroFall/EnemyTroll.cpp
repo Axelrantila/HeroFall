@@ -3,6 +3,7 @@
 #include "SpriteSheetLoader.h"
 
 #include <iostream>
+
 EnemyTroll::EnemyTroll(float xPos, float yPos)
 	:Enemy(ENEMY_TROLL, xPos, yPos, SettingsManager::getSettings()->ENEMY_TROLL_HEALTH)
 {
@@ -20,7 +21,6 @@ EnemyTroll::~EnemyTroll()
 
 void EnemyTroll::update(float delta)
 {
-	std::cout << m_xPos << "\t" << m_yPos << std::endl;
 	m_sprite->setPosition(m_xPos, m_yPos);
 }
 
