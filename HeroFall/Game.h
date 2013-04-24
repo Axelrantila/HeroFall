@@ -15,7 +15,6 @@ public:
 	Game();
 	~Game();
 
-
 	void update(StateManager* stateManager, float m_deltaTime);
 	void draw(sf::RenderWindow* window);
 	void handleEvents(sf::Event windowEvent);
@@ -25,10 +24,10 @@ private:
 	sf::RenderWindow* m_window;
 	sf::View* m_view;
 
-	sf::Clock m_clock;
+	//sf::Clock m_clock;
 	sf::Sprite* d_sprite;
 
-	float m_deltaTime;
+	//float m_deltaTime;
 };
 
 #endif

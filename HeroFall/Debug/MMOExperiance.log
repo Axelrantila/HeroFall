@@ -1,4 +1,4 @@
-﻿Build started 2013-04-23 15:28:12.
+﻿Build started 2013-04-24 10:56:02.
      1>Project "C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\MMOExperiance.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\HeroFall.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -46,4 +46,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.37
+Time Elapsed 00:00:01.31

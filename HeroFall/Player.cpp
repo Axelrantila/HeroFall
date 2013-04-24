@@ -27,12 +27,9 @@ Player::Player(float xPos, float yPos)
 	m_xVel = 0.0f;
 	m_yVel = 0.0f;
 
-	d_testAnim = new Animation(this, "Turt_Attack_0", 0.5f, 200.0f, 200.0f);
-	d_testAnim->play();
-
 	m_markedForHalt = false;
 
-	m_meleeHitTime = 2.0f;
+	m_meleeHitTime = SettingsManager::getSettings()->PLAYER_HIT_TIME_LIMIT_MELEE;
 	m_meleeHitClock.restart();
 }
 
@@ -41,16 +38,12 @@ Player::~Player()
 {
 	delete m_rect;
 	delete m_swordRect;
-
-	delete d_testAnim;
 }
 
 void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_rect);
 	window->draw(*m_swordRect);
-	d_testAnim->update(200.0f, 200.0f);
-	window->draw(*d_testAnim->getCurrentSprite());
 }
 
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)

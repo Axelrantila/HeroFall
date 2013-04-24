@@ -41,9 +41,6 @@ private:
 	float m_targetSwingTime;
 
 	bool m_markedForHalt;
-
-	Animation* d_testAnim;
-
 	sf::Clock m_meleeHitClock;
 	float m_meleeHitTime;
 };

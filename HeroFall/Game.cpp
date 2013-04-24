@@ -5,6 +5,8 @@
 #include "SpriteSheetLoader.h"
 #include "Util.h"
 
+#include "Menus.h"
+
 #include <iostream>
 
 Game::Game()
@@ -24,29 +26,23 @@ Game::~Game()
 {	
 	delete m_levelManager;
 	delete m_view;
-
-	//Clean up singeltons
 }
 
 void Game::update(StateManager* stateManager, float delta)
 {
-		//std::cout << (1.0f/m_deltaTime) << std::endl;
-
 		//Update
-		//AudioMixer::getInstance()->update();
 		m_levelManager->updatePlayerSpeed();
 		m_levelManager->update(delta);
 
 		if(m_levelManager->playerIsDead())
 		{
 			markForDeletion();
+			//Lägg till death screen statet här.
 		}
 }
 
 void Game::draw(sf::RenderWindow* window)
 {
-	m_view->setCenter(m_view->getCenter().x, m_view->getCenter().y);
-	window->setView(*m_view);
 	m_levelManager->draw(window);
 }
 

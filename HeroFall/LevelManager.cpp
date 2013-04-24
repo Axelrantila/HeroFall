@@ -35,6 +35,8 @@ LevelManager::~LevelManager()
 
 void LevelManager::draw(sf::RenderWindow* window)
 {
+	window->setView(*m_view);
+
 	window->draw(*d_bg);
 
 	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
@@ -62,7 +64,7 @@ void LevelManager::update(float deltaTime)
 	m_player->collidesWith(m_enemies);
 
 	//Update the camera's view
-	m_view->setCenter(m_player->getCenter().x /*+ (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X / 2.0f*/
+	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y / 3.5f);
 }
 

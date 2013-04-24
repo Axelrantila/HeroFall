@@ -1,3 +1,4 @@
+#include "AudioMixer.h"
 #include "Game.h"
 #include "InputManager.h"
 #include "Menus.h"
@@ -75,8 +76,6 @@ void StateManager::run()
 				}
 			}
 
-			//Update stuff
-
 			//Remove dead states
 			for(int a = m_states.size() - 1; a >= 0; a--)
 			{
@@ -85,6 +84,7 @@ void StateManager::run()
 				{
 					delete currentState;
 					m_states.erase(m_states.begin() + a);
+					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X, (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y)));
 				}
 			}
 		}
@@ -95,6 +95,7 @@ void StateManager::run()
 
 	}
 
+	AudioMixer::getInstance()->update();
 	InputManager::getInstance()->update();
 }
 
