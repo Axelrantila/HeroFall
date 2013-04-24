@@ -5,6 +5,7 @@
 #include "SpriteSheetLoader.h"
 #include "Util.h"
 
+#include "GameOver.h"
 #include "Menus.h"
 
 #include <iostream>
@@ -38,6 +39,7 @@ void Game::update(StateManager* stateManager, float delta)
 		{
 			markForDeletion();
 			//Lägg till death screen statet här.
+			stateManager->addState(new GameOver());
 		}
 }
 

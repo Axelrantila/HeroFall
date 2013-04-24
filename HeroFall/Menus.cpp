@@ -1,4 +1,5 @@
 #include "Menus.h"
+#include "Game.h"
 #include "InputManager.h"
 #include "StateManager.h"
 
@@ -13,7 +14,7 @@ Menus::Menus()
 	Play->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
 	Play->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
 	Play->Center(sf::Vector2f(800, 800));
-	Play->Move(sf::Vector2f(0.0f, (float)-Play->m_standard->getTextureRect().height + 50));
+	Play->Move(sf::Vector2f(0.0f, -(float)Play->m_standard->getTextureRect().height - 50));
 
 	Options = new UIButton();
 	Options->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Controls");
@@ -36,39 +37,44 @@ Menus::Menus()
 	Quit->Move(sf::Vector2f(0.0f, (float)Quit->m_standard->getTextureRect().height + 50));
 }
 
-void Menus::update(StateManager* stateManager, float deltaTime)
+void Menus::update(StateManager* stateManager, float delta)
 {
-	if ( InputManager::getInstance()->isKeyPressed("P1_MOVE_DOWN") )
-	{
-		tracker ++;
-	}
-	if ( InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") )
-	{
-		tracker --;
-	}
 	if ( tracker == 3 && InputManager::getInstance()->isKeyPressed("P1_MOVE_DOWN") )
 	{
 		tracker = 0;
+	}
+	else if ( InputManager::getInstance()->isKeyPressed("P1_MOVE_DOWN") )
+	{
+		tracker ++;
 	}
 	if ( tracker == 0 && InputManager::getInstance()->isKeyPressed("P1_MOVE_UP" ))
 	{
 		tracker = 3;
 	}
+	else if ( InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") )
+	{
+		tracker --;
+	}
 
 	if (currentState == MAIN)
 	{
-		Play->Update(deltaTime);
+		Play->Update(delta);
 		if ( Play->Pressed() )
-			{  }
-		Options->Update(deltaTime);
+		{
+			markForDeletion();
+			stateManager->addState(new Game());
+		}
+		Options->Update(delta);
 		if ( Options->Pressed() )
 			{ currentState = OPTIONS; }
-		Credits->Update(deltaTime);
+		Credits->Update(delta);
 		if ( Credits->Pressed() )
 			{ currentState = CREDITS; }
-		Quit->Update(deltaTime);
+		Quit->Update(delta);
 		if ( Quit->Pressed() )
-			{  }
+		{
+				markForDeletion();
+		}
 	}
 
 	////////////////////////////////////////////////////////

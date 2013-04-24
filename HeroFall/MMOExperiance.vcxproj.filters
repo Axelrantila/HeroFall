@@ -86,6 +86,7 @@
     <ClCompile Include="AudioMixer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="GameOver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -175,6 +176,7 @@
     <ClInclude Include="AudioMixer.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="GameOver.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />

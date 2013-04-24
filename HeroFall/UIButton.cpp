@@ -2,6 +2,7 @@
 #include <math.h>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "InputManager.h"
 
 UIButton::UIButton()
 {
@@ -25,7 +26,7 @@ UIButton::~UIButton(void)
 void UIButton::Update( float delta )
 {
 	bPressed = false;
-	if (CURRENT_STATE == SELECTED /*&& sf::Keyboard::isKeyPressed(sf::Keyboard::Return)*/)
+	if (CURRENT_STATE == SELECTED && InputManager::getInstance()->isKeyPressed("P1_ATTACK_1"))
 	{ bPressed = true; }
 }
 
