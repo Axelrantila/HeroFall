@@ -19,11 +19,6 @@ Player::Player(float xPos, float yPos)
 	m_rect = SpriteSheetLoader::getInstance()->getSprite("Hero", "Hero_Walk_0_0");
 	m_rect->setPosition(100.0f, 100.0f);
 
-	m_swordRect = SpriteSheetLoader::getInstance()->getSprite("Hero", "Hero_Sword_0_0");
-	m_swordRect->setOrigin(0.0f, 96.0f);
-	m_swordRect->setPosition(m_rect->getGlobalBounds().left  + m_rect->getGlobalBounds().width * 0.5f,
-		m_rect->getGlobalBounds().top + m_rect->getGlobalBounds().height * 0.5f);
-
 	m_xVel = 0.0f;
 	m_yVel = 0.0f;
 	
@@ -41,19 +36,23 @@ Player::Player(float xPos, float yPos)
 	m_animations->setCurrentAnimation("Hero_Walk_0");
 
 	m_hitted = false;
-	m_canChangeAnimation = false;
-}
 
+	m_swordRect = SpriteSheetLoader::getInstance()->getSprite("Hero", "Hero_Sword_0_0");
+	m_swordRect->setOrigin(0.0f, 96.0f);
+	m_swordRect->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left  + m_animations->getCurrentSprite()->getGlobalBounds().width * 0.5f,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height * 0.5f);
+}
 
 Player::~Player()
 {
-	delete m_rect;
+	delete m_animations->getCurrentSprite();
 	delete m_swordRect;
+	delete m_animations;
 }
 
 void Player::draw(sf::RenderWindow* window)
 {
-	//window->draw(*m_rect);
+	//window->draw(*m_animations->getCurrentSprite());
 	//window->draw(*d_anim->getCurrentSprite());
 	window->draw(*m_animations->getCurrentSprite());
 	window->draw(*m_swordRect);
@@ -127,10 +126,10 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 		}
 	}
 
-	m_rect->setPosition(m_xPos, m_yPos);
+	m_animations->getCurrentSprite()->setPosition(m_xPos, m_yPos);
 	m_animations->update(m_xPos, m_yPos);
-	m_swordRect->setPosition(m_rect->getGlobalBounds().left  + m_rect->getGlobalBounds().width * 0.5f,
-		m_rect->getGlobalBounds().top + m_rect->getGlobalBounds().height * 0.5f);
+	m_swordRect->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left  + m_animations->getCurrentSprite()->getGlobalBounds().width * 0.5f,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height * 0.5f);
 }
 
 void Player::increaseSpeed(float xVel, float yVel)
@@ -147,9 +146,9 @@ bool Player::collidesWith(LevelObject* levelObject)
 		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
 		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
 
-		return(!(otherXPos > getXPos() + m_rect->getGlobalBounds().width
+		return(!(otherXPos > getXPos() + m_animations->getCurrentSprite()->getGlobalBounds().width
 			|| otherXPos + otherSize.x < getXPos()
-			|| otherYPos > getYPos() + m_rect->getGlobalBounds().height
+			|| otherYPos > getYPos() + m_animations->getCurrentSprite()->getGlobalBounds().height
 			|| otherYPos + otherSize.y < getYPos()));
 	}
 
@@ -172,7 +171,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				m_swordHasHittedEnemy = true;
 			}
 
-			if(m_rect->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
+			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
 			{
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER);
 			}
@@ -190,7 +189,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				m_swordHasHittedEnemy = true;
 			}
 
-			if(m_rect->getGlobalBounds().intersects(tEnemy->getGlobalBounds()))
+			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(tEnemy->getGlobalBounds()))
 			{
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_TROLL_TO_PLAYER);
 			}
@@ -211,8 +210,8 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 
 sf::Vector2f Player::getCenter()
 {
-	return sf::Vector2f(m_xPos + m_rect->getGlobalBounds().width/2.0f,
-		m_yPos + m_rect->getGlobalBounds().height/2.0f);
+	return sf::Vector2f(m_xPos + m_animations->getCurrentSprite()->getGlobalBounds().width/2.0f,
+		m_yPos + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
 }
 
 void Player::swingSword()
@@ -252,11 +251,6 @@ void Player::update(float delta)
 		}
 	}
 
-	if(!m_hitted && m_canChangeAnimation)
-	{
-		m_animations->setCurrentAnimation("Hero_Walk_0");
-	}
-
 	if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
 	{
 		m_hitted  = false;
@@ -284,7 +278,6 @@ void Player::takeDamage(float damage)
 		m_animations->setCurrentAnimation("Hero_Hit_0");
 
 		m_hitted = true;
-		m_canChangeAnimation = false;
 
 		//Check if character is dead
 		if(m_health <= 0.0f)

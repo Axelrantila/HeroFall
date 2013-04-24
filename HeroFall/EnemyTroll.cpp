@@ -12,26 +12,45 @@ EnemyTroll::EnemyTroll(float xPos, float yPos)
 
 	m_yVel = 0.0f;
 	m_xVel = -125.0f;
+
+	m_animations = new AnimationManager(this);
+	m_animations->addAnimation("Troll_Walk_0", 1.0f, m_xPos, m_yPos);
+	m_animations->addAnimation("Troll_Hit_0", 0.15f, m_xPos, m_yPos);
+	m_animations->setCurrentAnimation("Troll_Walk_0");
+
+	m_hitted = false;
+	m_meleeHitTime = SettingsManager::getSettings()->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
+	m_hitClock.restart();
 }
 
 
 EnemyTroll::~EnemyTroll()
 {
+	delete m_animations;
+	delete m_sprite;
 }
 
 void EnemyTroll::update(float delta)
 {
 	m_sprite->setPosition(m_xPos, m_yPos);
+	m_animations->update(m_xPos, m_yPos);
+
+	if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
+	{
+		m_hitted  = false;
+		m_animations->setCurrentAnimation("Troll_Walk_0");
+	}
 }
 
 void EnemyTroll::draw(sf::RenderWindow* window)
 {
-	window->draw(*m_sprite);
+	//window->draw(*m_sprite);
+	window->draw(*m_animations->getCurrentSprite());
 }
 
 sf::FloatRect EnemyTroll::getGlobalBounds()
 {
-	return m_sprite->getGlobalBounds();
+	return m_animations->getCurrentSprite()->getGlobalBounds();
 }
 
 bool EnemyTroll::collidesWith(LevelObject* levelObject)
@@ -49,4 +68,20 @@ bool EnemyTroll::collidesWith(LevelObject* levelObject)
 	}
 
 	return false;
+}
+
+void EnemyTroll::takeDamage(float damage)
+{
+	if(m_hitClock.getElapsedTime().asSeconds() > m_meleeHitTime)
+	{
+		m_hitClock.restart();
+		m_health -= damage;
+		m_animations->setCurrentAnimation("Troll_Hit_0");
+
+		m_hitted = true;
+
+		//Check if character is dead
+		if(m_health <= 0.0f)
+		{m_isDead = true;}
+	}
 }

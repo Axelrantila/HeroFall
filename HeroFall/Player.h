@@ -47,7 +47,6 @@ private:
 	float m_meleeHitTime;
 
 	bool m_hitted;
-	bool m_canChangeAnimation;
 };
 
 #endif

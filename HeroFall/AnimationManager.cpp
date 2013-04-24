@@ -46,5 +46,9 @@ sf::Sprite* AnimationManager::getCurrentSprite()
 
 void AnimationManager::update(float xPos, float yPos)
 {
-	m_currentAnimation->update(xPos, yPos);
+	for(std::map<std::string, Animation*>::iterator it = m_animations.begin();
+		it != m_animations.end(); ++it)
+	{
+		it->second->update(xPos, yPos);
+	}
 }

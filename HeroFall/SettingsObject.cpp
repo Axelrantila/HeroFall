@@ -35,6 +35,7 @@ SettingsObject::SettingsObject()
 
 #pragma region ENEMY_TROLL
 	ENEMY_TROLL_HEALTH = 125.0f;
+	ENEMY_TROLL_HIT_TIME_LIMIT_MELEE = 1.0f;
 #pragma endregion
 }
 

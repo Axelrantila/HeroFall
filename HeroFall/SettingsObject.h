@@ -46,6 +46,7 @@ public:
 
 #pragma region ENEMY_TROLL
 	float ENEMY_TROLL_HEALTH;
+	float ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
 #pragma endregion
 };
 

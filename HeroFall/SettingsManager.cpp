@@ -53,6 +53,7 @@ bool SettingsManager::loadSettings()
 	m_settings->DAMAGE_PLAYER_TO_ENEMY_TROLL = (float)ini.GetDoubleValue("DAMAGE", "PLAYER_TO_ENEMY_TROLL", 0);
 
 	m_settings->ENEMY_TROLL_HEALTH = (float)ini.GetDoubleValue("ENEMY_TROLL", "HEALTH", 0);
+	m_settings->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE = (float)ini.GetDoubleValue("ENEMY_TROLL", "HIT_TIME_LIMIT_MELEE", 0);
 
 	return true;
 }

@@ -6,6 +6,7 @@ Enemy::Enemy(EnemyType type, float xPos, float yPos, float health)
 	:Character(PT_UPPER_LEFT, xPos, yPos, health)
 {
 	m_type = type;
+	m_health = health;
 }
 
 

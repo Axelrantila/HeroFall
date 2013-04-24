@@ -7,7 +7,9 @@
 
 StateManager::StateManager()
 {
-	m_window = new sf::RenderWindow(sf::VideoMode(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y), "MMO Experiance");
+	m_window = new sf::RenderWindow(
+		sf::VideoMode(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y),
+		SettingsManager::getSettings()->FRAME_TITLE);
 	m_window->setMouseCursorVisible(false);
 
 	//Preload resources
