@@ -26,11 +26,22 @@ Player::Player(float xPos, float yPos)
 
 	m_xVel = 0.0f;
 	m_yVel = 0.0f;
-
+	
 	m_markedForHalt = false;
 
 	m_meleeHitTime = SettingsManager::getSettings()->PLAYER_HIT_TIME_LIMIT_MELEE;
 	m_meleeHitClock.restart();
+
+	d_anim = new Animation(this, "Hero_Hit_0", 0.1f, this->m_xPos, this->m_yPos);
+	d_anim->play();
+
+	m_animations = new AnimationManager(this);
+	m_animations->addAnimation("Hero_Hit_0", 0.1f, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Hero_Walk_0", 0.1f, this->m_xPos, this->m_yPos);
+	m_animations->setCurrentAnimation("Hero_Walk_0");
+
+	m_hitted = false;
+	m_canChangeAnimation = false;
 }
 
 
@@ -42,7 +53,9 @@ Player::~Player()
 
 void Player::draw(sf::RenderWindow* window)
 {
-	window->draw(*m_rect);
+	//window->draw(*m_rect);
+	//window->draw(*d_anim->getCurrentSprite());
+	window->draw(*m_animations->getCurrentSprite());
 	window->draw(*m_swordRect);
 }
 
@@ -115,6 +128,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 	}
 
 	m_rect->setPosition(m_xPos, m_yPos);
+	m_animations->update(m_xPos, m_yPos);
 	m_swordRect->setPosition(m_rect->getGlobalBounds().left  + m_rect->getGlobalBounds().width * 0.5f,
 		m_rect->getGlobalBounds().top + m_rect->getGlobalBounds().height * 0.5f);
 }
@@ -218,8 +232,6 @@ void Player::update(float delta)
 
 	if(m_swordIsSwinging)
 	{
-		//m_swordRect->setRotation((m_swordClock.getElapsedTime().asSeconds() / m_targetSwingTime) * 360.0f);
-
 		if(m_swordClock.getElapsedTime().asSeconds()  < (m_targetSwingTime / 2.0f))
 		{
 			m_swordRect->setRotation(360.0f -
@@ -233,13 +245,22 @@ void Player::update(float delta)
 				);
 		}
 
-		std::cout << m_swordRect->getRotation() << std::endl;
-
 		if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
 		{
 			m_swordRect->setRotation(0.0f);
 			m_swordIsSwinging = false;
 		}
+	}
+
+	if(!m_hitted && m_canChangeAnimation)
+	{
+		m_animations->setCurrentAnimation("Hero_Walk_0");
+	}
+
+	if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
+	{
+		m_hitted  = false;
+		m_animations->setCurrentAnimation("Hero_Walk_0");
 	}
 } 
 
@@ -260,6 +281,10 @@ void Player::takeDamage(float damage)
 	{
 		m_meleeHitClock.restart();
 		m_health -= damage;
+		m_animations->setCurrentAnimation("Hero_Hit_0");
+
+		m_hitted = true;
+		m_canChangeAnimation = false;
 
 		//Check if character is dead
 		if(m_health <= 0.0f)

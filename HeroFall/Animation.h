@@ -20,8 +20,9 @@ public:
 	void update(float xPos, float yPos);
 
 	sf::Sprite* getCurrentSprite();
-
 	unsigned int getCurrentFrame();
+
+	std::string getName() {return m_spriteBaseName;}
 
 private:
 	GameObject* m_parent;

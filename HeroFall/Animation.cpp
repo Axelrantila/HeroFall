@@ -43,14 +43,15 @@ Animation::Animation(GameObject* parent, std::string name, float totalTime, floa
 
 Animation::~Animation()
 {
+	for(unsigned int a = 0; a < m_sprites.size(); a++)
+	{delete m_sprites[a];}
 }
 
 void Animation::play()
 {
 	m_playing = true;
-	
-	if(m_stopped) {m_clock.restart();}
 	m_stopped = false;
+	m_clock.restart();
 }
 
 void Animation::pause()
@@ -72,12 +73,15 @@ void Animation::update(float xPos, float yPos)
 	m_xPos = xPos;
 	m_yPos = yPos;
 
+	//std::cout << m_currentFrame << " " << m_clock.getElapsedTime().asSeconds() << std::endl;
+
 	if(m_clock.getElapsedTime().asSeconds() > m_frameTime)
 	{
 		m_clock.restart();
-		m_currentFrame++;
+		
 		if(m_currentFrame == m_totalFrames - 1)
 		{m_currentFrame = 0;}
+		else{m_currentFrame++;}
 
 		m_currentSprite = m_sprites[m_currentFrame];
 	}

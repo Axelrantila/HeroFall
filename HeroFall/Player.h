@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Animation.h"
+#include "AnimationManager.h"
 #include "character.h"
 
 #include <SFML\Graphics.hpp>
@@ -32,8 +32,10 @@ public:
 	void takeDamage(float damage);
 
 private:
+	Animation* d_anim;
 	sf::Sprite* m_rect;
 	sf::Sprite* m_swordRect;
+	AnimationManager* m_animations;
 
 	bool m_swordIsSwinging;
 	bool m_swordHasHittedEnemy;
@@ -43,6 +45,9 @@ private:
 	bool m_markedForHalt;
 	sf::Clock m_meleeHitClock;
 	float m_meleeHitTime;
+
+	bool m_hitted;
+	bool m_canChangeAnimation;
 };
 
 #endif

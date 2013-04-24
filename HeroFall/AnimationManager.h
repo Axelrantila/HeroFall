@@ -4,8 +4,6 @@ ANIMATIONMANAGER
 Funktion: Hantera animationer och övergångar mellan de för olika karaktärer
 
 Vad som behövs:
-*En std::map som innehåller alla animationer
-*Parameter i konstruktorn för att sätta defaultanimation
 *Funktion som sätter vilken animation som ska spelas upp när den nuvarande animationen har spelat klart sin loop
 *Metod som stoppar den nuvarande animationen när den är klar
 
@@ -25,10 +23,20 @@ Hur klassen ska användas:
 class AnimationManager
 {
 public:
-	AnimationManager();
+	AnimationManager(GameObject* parent);
 	~AnimationManager();
 
+	void addAnimation(std::string name, float totalTime, float xPos, float yPos);
+	void setCurrentAnimation(std::string name);
+	void update(float xPos, float yPos);
+
+	sf::Sprite* getCurrentSprite();
+
+private:
+	GameObject* m_parent;
+
 	std::map<std::string, Animation*> m_animations;
+	Animation* m_currentAnimation;
 };
 
 #endif

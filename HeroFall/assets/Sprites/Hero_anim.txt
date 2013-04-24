@@ -1,0 +1,10 @@
+[Settings]
+defaultSubset=walk
+speed=0.5
+[Hit0]
+Hero_Hit_0_0
+Hero_Hit_0_1
+[Sword0]
+Hero_Sword_0_0
+[Walk0]
+Hero_Walk_0_0
