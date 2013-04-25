@@ -81,7 +81,7 @@ void EnemyTroll::takeDamage(float damage)
 
 		m_hitted = true;
 
-		AudioMixer::getInstance()->playSound("phaser", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
+		AudioMixer::getInstance()->playSound("Attack_hit_1", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 
 		//Check if character is dead
 		if(m_health <= 0.0f)
