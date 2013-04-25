@@ -89,6 +89,12 @@
     <ClCompile Include="UIButton.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
+    <ClCompile Include="SwordBehavior.cpp">
+      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordBehaviorUpAndDown.cpp">
+      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -181,6 +187,12 @@
     <ClInclude Include="UIButton.h">
       <Filter>Game\States</Filter>
     </ClInclude>
+    <ClInclude Include="SwordBehavior.h">
+      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordBehaviorUpAndDown.h">
+      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
@@ -229,6 +241,9 @@
     </Filter>
     <Filter Include="Game\States">
       <UniqueIdentifier>{8a67f8fc-8572-4234-97f5-eebb53a560c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Characters\Sword Swing Behavior">
+      <UniqueIdentifier>{f3748c01-f995-4d20-9161-18273362b64c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

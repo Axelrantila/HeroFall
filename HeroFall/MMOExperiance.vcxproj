@@ -116,6 +116,8 @@
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="SpriteSheetLoader.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="SwordBehavior.cpp" />
+    <ClCompile Include="SwordBehaviorUpAndDown.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
@@ -148,6 +150,8 @@
     <ClInclude Include="SpriteSheetLoader.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="SwordBehavior.h" />
+    <ClInclude Include="SwordBehaviorUpAndDown.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>

@@ -3,6 +3,7 @@
 
 #include "AnimationManager.h"
 #include "character.h"
+#include "SwordBehaviorUpAndDown.h"
 
 #include <SFML\Graphics.hpp>
 
@@ -44,7 +45,10 @@ private:
 	sf::Clock m_meleeHitClock;
 	float m_meleeHitTime;
 
+	SwordBehaviorUpAndDown* m_upDownAttack;
+
 	bool m_hitted;
+
 };
 
 #endif

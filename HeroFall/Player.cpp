@@ -35,6 +35,8 @@ Player::Player(float xPos, float yPos)
 	m_swordRect->setOrigin(0.0f, 96.0f);
 	m_swordRect->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left  + m_animations->getCurrentSprite()->getGlobalBounds().width * 0.5f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height * 0.5f);
+
+	m_upDownAttack = new SwordBehaviorUpAndDown(m_swordRect, SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME);
 }
 
 Player::~Player()
@@ -215,6 +217,7 @@ void Player::swingSword()
 	m_swordHasHittedEnemy = false;
 	m_swordClock.restart();
 	AudioMixer::getInstance()->playSound("Draw sword (skämt)");
+	m_upDownAttack->restart();
 }
 
 void Player::update(float delta)
@@ -229,19 +232,7 @@ void Player::update(float delta)
 
 	if(m_swordIsSwinging)
 	{
-		if(m_swordClock.getElapsedTime().asSeconds()  < (m_targetSwingTime / 2.0f))
-		{
-			m_swordRect->setRotation(360.0f -
-				(m_swordClock.getElapsedTime().asSeconds() / (m_targetSwingTime * 0.5f)) * 90.0f
-				);
-		}
-		else
-		{
-			m_swordRect->setRotation(
-				270.0f + ((m_swordClock.getElapsedTime().asSeconds() - (m_targetSwingTime * 0.5f)) / (m_targetSwingTime * 0.5f)) * 90.0f
-				);
-		}
-
+		m_upDownAttack->update();
 		if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
 		{
 			m_swordRect->setRotation(0.0f);
