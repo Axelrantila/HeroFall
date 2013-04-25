@@ -219,6 +219,9 @@ void Player::swingSword()
 
 void Player::update(float delta)
 {
+	AudioMixer::getInstance()->setListenerPosition(m_xPos, m_yPos);
+	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
+
 	if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1") && !m_swordIsSwinging)
 	{
 		swingSword();
