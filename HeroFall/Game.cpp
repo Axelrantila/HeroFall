@@ -1,4 +1,4 @@
-//#include "AudioMixer.h"
+#include "AudioMixer.h"
 #include "Game.h"
 #include "InputManager.h"
 #include "SettingsManager.h"
@@ -20,6 +20,7 @@ Game::Game()
 
 	d_sprite = SpriteSheetLoader::getInstance()->getSprite("DBG", "DBG_0");
 
+	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 100.0f, 100.0f, true);
 }
 
 
