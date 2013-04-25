@@ -8,16 +8,16 @@
 LevelManager::LevelManager(sf::View* view)
 {
 	m_view = view;
-	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 400.0f, 125.0f, 125.0f, sf::Color::Blue));
-	m_levelObjects.push_back(new LevelObjectRectangle(100.0f, 500.0f, 10000.0f, 100.0f, sf::Color::Red));
-	m_player = new Player(200.0f, 200.0f);
+	m_levelObjects.push_back(new LevelObjectRectangle(100.0f, 2160.0f, 10000.0f, 100.0f, sf::Color::Red));
+	m_player = new Player(200.0f, 1950.0f);
 
-	d_bg = SpriteSheetLoader::getInstance()->getSprite("DBG", "DBG_0");
-	d_bg->setPosition(-1000.0f, -1000.0f);
+	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
+	d_bg->setPosition(0.0f, 0.0f);
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyPlaceholder(1000.0f, 400.0f));
-	m_enemies->push_back(new EnemyTroll(3000.0f, 0.0f));
+	m_enemies->push_back(new EnemyTroll(3000.0f, 1750.0f));
+	m_enemies->push_back(new EnemyTroll(5000.0f, 1750.0f));
+	m_enemies->push_back(new EnemyTroll(7000.0f, 1750.0f));
 }
 
 LevelManager::~LevelManager()

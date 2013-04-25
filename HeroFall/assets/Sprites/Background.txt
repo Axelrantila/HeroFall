@@ -1,0 +1,5 @@
+wSheet=8160
+hSheet=4233
+wSprite=8160
+hSprite=4233
+Background_0

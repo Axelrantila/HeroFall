@@ -1,0 +1,8 @@
+TROLL
+Ska gå framåt och anfaller i övrigt inte spelaren
+
+GOBLIN
+Flyger runt och droppar bomber
+
+SHAMAN
+Avståndsattacker

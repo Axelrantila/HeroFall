@@ -15,7 +15,7 @@ EnemyTroll::EnemyTroll(float xPos, float yPos)
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Troll_Walk_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("Troll_Hit_0", 0.15f, m_xPos, m_yPos);
+	m_animations->addAnimation("Troll_Hit_0", 0.1f, m_xPos, m_yPos);
 	m_animations->setCurrentAnimation("Troll_Walk_0");
 
 	m_hitted = false;

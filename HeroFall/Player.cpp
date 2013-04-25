@@ -16,9 +16,6 @@ Player::Player(float xPos, float yPos)
 	m_swordHasHittedEnemy = true;
 	m_targetSwingTime = SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME;
 
-	m_rect = SpriteSheetLoader::getInstance()->getSprite("Hero", "Hero_Walk_0_0");
-	m_rect->setPosition(100.0f, 100.0f);
-
 	m_xVel = 0.0f;
 	m_yVel = 0.0f;
 	
@@ -26,9 +23,6 @@ Player::Player(float xPos, float yPos)
 
 	m_meleeHitTime = SettingsManager::getSettings()->PLAYER_HIT_TIME_LIMIT_MELEE;
 	m_meleeHitClock.restart();
-
-	d_anim = new Animation(this, "Hero_Hit_0", 0.1f, this->m_xPos, this->m_yPos);
-	d_anim->play();
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Hero_Hit_0", 0.1f, this->m_xPos, this->m_yPos);
@@ -52,8 +46,6 @@ Player::~Player()
 
 void Player::draw(sf::RenderWindow* window)
 {
-	//window->draw(*m_animations->getCurrentSprite());
-	//window->draw(*d_anim->getCurrentSprite());
 	window->draw(*m_animations->getCurrentSprite());
 	window->draw(*m_swordRect);
 }
@@ -87,6 +79,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 			{
 				if(collidesWith(levelObjects[a]))
 				{
+					std::cout << "Test2\n";
 					m_xPos -= m_xMove;
 					m_xVel = 0.0f;
 					break;
@@ -104,6 +97,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 			{
 				if(collidesWith(levelObjects[a]))
 				{
+					std::cout << "Test3\n";
 					m_xPos -= m_xMove;
 					m_xVel = 0.0f;
 					break;
@@ -119,6 +113,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 		{
 			if(collidesWith(levelObjects[a]))
 			{
+				std::cout << "Test4\n";
 				m_xPos -= m_xMove;
 				m_xVel = 0.0f;
 				break;
@@ -126,7 +121,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 		}
 	}
 
-	m_animations->getCurrentSprite()->setPosition(m_xPos, m_yPos);
+	//m_animations->getCurrentSprite()->setPosition(m_xPos, m_yPos);
 	m_animations->update(m_xPos, m_yPos);
 	m_swordRect->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left  + m_animations->getCurrentSprite()->getGlobalBounds().width * 0.5f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height * 0.5f);
@@ -146,10 +141,10 @@ bool Player::collidesWith(LevelObject* levelObject)
 		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
 		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
 
-		return(!(otherXPos > getXPos() + m_animations->getCurrentSprite()->getGlobalBounds().width
-			|| otherXPos + otherSize.x < getXPos()
-			|| otherYPos > getYPos() + m_animations->getCurrentSprite()->getGlobalBounds().height
-			|| otherYPos + otherSize.y < getYPos()));
+		return(!(otherXPos > m_xPos + m_animations->getCurrentSprite()->getGlobalBounds().width
+			|| otherXPos + otherSize.x < m_xPos
+			|| otherYPos > m_yPos + m_animations->getCurrentSprite()->getGlobalBounds().height
+			|| otherYPos + otherSize.y < m_yPos));
 	}
 
 	return false;

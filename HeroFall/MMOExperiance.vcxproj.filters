@@ -2,46 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Animation.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsObject.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheet.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheetLoader.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="UIButton.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="StateManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Menus.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
@@ -77,61 +38,60 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationManager.cpp">
+      <Filter>Engine\Animation</Filter>
+    </ClCompile>
     <ClCompile Include="AudioAssetsPathLoader.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Audio</Filter>
     </ClCompile>
     <ClCompile Include="AudioLoader.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Audio</Filter>
     </ClCompile>
     <ClCompile Include="AudioMixer.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="SettingsManager.cpp">
+      <Filter>Engine\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsObject.cpp">
+      <Filter>Engine\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Engine\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Engine\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheetLoader.cpp">
+      <Filter>Engine\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Engine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Menus.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SettingsObject.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SettingsManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheet.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheetLoader.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="UIButton.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="StateManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Menus.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
@@ -167,16 +127,60 @@
     <ClInclude Include="Enemy.h">
       <Filter>Game\Characters</Filter>
     </ClInclude>
-    <ClInclude Include="AudioAssetsPathLoader.h">
-      <Filter>Engine</Filter>
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="AudioLoader.h">
-      <Filter>Engine</Filter>
+    <ClInclude Include="AnimationManager.h">
+      <Filter>Engine\Animation</Filter>
     </ClInclude>
     <ClInclude Include="AudioMixer.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="AudioAssetsPathLoader.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioLoader.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsObject.h">
+      <Filter>Engine\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsManager.h">
+      <Filter>Engine\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Engine\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Engine\State</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheetLoader.h">
+      <Filter>Engine\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Engine\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Menus.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
@@ -184,7 +188,7 @@
     <None Include="ENEMIES_BEHAVIOURS.txt">
       <Filter>Game\Characters</Filter>
     </None>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram11.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -204,6 +208,27 @@
     </Filter>
     <Filter Include="Game\Characters\Enemies">
       <UniqueIdentifier>{86996a7b-6cf1-4c5b-9e75-51a46df2050f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation">
+      <UniqueIdentifier>{d297d6f6-9552-4ac8-90da-19b902c8b5ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{9b2a3daf-812a-4919-8b54-c76297870287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\State">
+      <UniqueIdentifier>{db2f34ed-25b9-410c-894d-196b5990f385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Util">
+      <UniqueIdentifier>{fafe96a7-3aec-4c9b-8b61-ee9464d2926c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Sprite">
+      <UniqueIdentifier>{dd0199b2-58b3-400e-8bc1-05c78897b8cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Settings">
+      <UniqueIdentifier>{0be70ffa-aa88-4289-bcd0-06eecbdadbb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States">
+      <UniqueIdentifier>{8a67f8fc-8572-4234-97f5-eebb53a560c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

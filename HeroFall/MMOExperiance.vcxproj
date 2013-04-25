@@ -152,7 +152,7 @@
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram11.cd" />
     <None Include="CONFIG.ini" />
     <None Include="ENEMIES_BEHAVIOURS.txt" />
     <None Include="README_Includers.txt" />

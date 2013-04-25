@@ -32,8 +32,6 @@ public:
 	void takeDamage(float damage);
 
 private:
-	Animation* d_anim;
-	sf::Sprite* m_rect;
 	sf::Sprite* m_swordRect;
 	AnimationManager* m_animations;
 

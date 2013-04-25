@@ -13,7 +13,7 @@ StateManager::StateManager()
 	m_window->setMouseCursorVisible(false);
 
 	//Preload resources
-	SpriteSheetLoader::getInstance()->getSheet("DBG");
+	SpriteSheetLoader::getInstance()->getSheet("Background");
 
 	m_states.push_back(new Game());
 
