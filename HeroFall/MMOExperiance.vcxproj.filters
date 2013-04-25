@@ -95,6 +95,9 @@
     <ClCompile Include="SwordBehaviorUpAndDown.cpp">
       <Filter>Game\Characters\Sword Swing Behavior</Filter>
     </ClCompile>
+    <ClCompile Include="SwordBehaviorFireRush.cpp">
+      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -191,6 +194,9 @@
       <Filter>Game\Characters\Sword Swing Behavior</Filter>
     </ClInclude>
     <ClInclude Include="SwordBehaviorUpAndDown.h">
+      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordBehaviorFireRush.h">
       <Filter>Game\Characters\Sword Swing Behavior</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,8 +1,6 @@
 #include "GameOver.h"
 #include "SpriteSheetLoader.h"
 #include "InputManager.h"
-#include "Game.h"
-#include "Menus.h"
 
 GameOver::GameOver(void)
 {
@@ -63,13 +61,13 @@ void GameOver::update(StateManager* stateManager, float delta)
 		if ( Continue->Pressed() )
 		{ 
 			markForDeletion();
-			stateManager->addState (new Game());
+			stateManager->addState (STATE_GAME);
 		}
 	Quit->Update(delta);
 		if ( Quit->Pressed() )
 		{
 			markForDeletion();
-			stateManager->addState (new Menus());
+			stateManager->addState (STATE_MENUS);
 		}
 }
 

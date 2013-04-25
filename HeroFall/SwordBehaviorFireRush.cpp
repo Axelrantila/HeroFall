@@ -1,7 +1,8 @@
 #include "SwordBehaviorFireRush.h"
 
 
-SwordBehaviorFireRush::SwordBehaviorFireRush()
+SwordBehaviorFireRush::SwordBehaviorFireRush(sf::Sprite* targetSprite, float totalTime)
+	:SwordBehavior(targetSprite, totalTime)
 {
 }
 

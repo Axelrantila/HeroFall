@@ -1,10 +1,12 @@
-﻿Build started 2013-04-25 14:40:28.
+﻿Build started 2013-04-25 16:16:27.
      1>Project "C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\MMOExperiance.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release\HeroFall.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\include /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
-         Player.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\include /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameOver.cpp Menus.cpp
+         Game.cpp
+         GameOver.cpp
+         Menus.cpp
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Release\HeroFall.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\lib "sfml-audio.lib" "sfml-graphics.lib" "sfml-main.lib" "sfml-network.lib" "sfml-system.lib" "sfml-window.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\HeroFall.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Release\HeroFall.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Axel\Documents\GitHub\HeroFall\HeroFall\Release\HeroFall.lib" /MACHINE:X86 Release\Animation.obj
          Release\AnimationManager.obj
@@ -35,6 +37,7 @@
          Release\SpriteSheetLoader.obj
          Release\StateManager.obj
          Release\SwordBehavior.obj
+         Release\SwordBehaviorFireRush.obj
          Release\SwordBehaviorUpAndDown.obj
          Release\UIButton.obj
          Release\Util.obj
@@ -50,4 +53,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.63
+Time Elapsed 00:00:07.43

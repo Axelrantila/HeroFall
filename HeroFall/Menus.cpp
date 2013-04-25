@@ -1,5 +1,4 @@
 #include "Menus.h"
-#include "Game.h"
 #include "InputManager.h"
 #include "StateManager.h"
 
@@ -62,7 +61,7 @@ void Menus::update(StateManager* stateManager, float delta)
 		if ( Play->Pressed() )
 		{
 			markForDeletion();
-			stateManager->addState(new Game());
+			stateManager->addState(STATE_GAME);
 		}
 		Options->Update(delta);
 		if ( Options->Pressed() )

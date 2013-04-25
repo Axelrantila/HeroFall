@@ -1,5 +1,6 @@
 #include "AudioMixer.h"
 #include "Game.h"
+#include "GameOver.h"
 #include "InputManager.h"
 #include "Menus.h"
 #include "SpriteSheetLoader.h"
@@ -15,7 +16,7 @@ StateManager::StateManager()
 	//Preload resources
 	SpriteSheetLoader::getInstance()->getSheet("Background");
 
-	m_states.push_back(new Game());
+	m_states.push_back(new Menus());
 
 	m_deltaTime = 0.0f;
 	m_clock.restart();
@@ -89,6 +90,21 @@ void StateManager::run()
 					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X, (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y)));
 				}
 			}
+
+			//Add addition states
+			while(!m_statesToAdd.empty())
+			{
+				if(m_statesToAdd[0] == STATE_MENUS)
+				{m_states.push_back(new Menus());}
+
+				else if(m_statesToAdd[0] == STATE_GAME)
+				{m_states.push_back(new Game());}
+
+				else if(m_statesToAdd[0] == STATE_GAMEOVER)
+				{m_states.push_back(new GameOver());}
+
+				m_statesToAdd.pop_back();
+			}
 		}
 		else
 		{
@@ -113,4 +129,9 @@ void StateManager::sendInputToCurrentState(sf::Event windowEvent)
 			currentState->handleEvents(windowEvent);
 		}
 	}
+}
+
+void StateManager::addState(StateType state)
+{
+	m_statesToAdd.push_back(state);
 }

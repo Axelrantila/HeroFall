@@ -7,7 +7,7 @@ class SwordBehaviorFireRush
 	:public SwordBehavior
 {
 public:
-	SwordBehaviorFireRush();
+	SwordBehaviorFireRush(sf::Sprite* targetSprite, float totalTime);
 	~SwordBehaviorFireRush();
 };
 
