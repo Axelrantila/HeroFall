@@ -1,6 +1,13 @@
 *.sdf
 *.opensdf
 *.suo
+*.tlog
+*.exe
+*.ilk
+*.pdb
+*.obj
+*.log
+*.idb
 ipch/
 Debug/
 Release/
