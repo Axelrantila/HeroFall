@@ -18,6 +18,7 @@ LevelManager::LevelManager(sf::View* view)
 	m_enemies->push_back(new EnemyTroll(3000.0f, 1750.0f));
 	m_enemies->push_back(new EnemyTroll(5000.0f, 1750.0f));
 	m_enemies->push_back(new EnemyTroll(7000.0f, 1750.0f));
+	m_enemies->push_back(new EnemyGoblin(0.0f, 0.0f, 1.0f, 1000.0f));
 }
 
 LevelManager::~LevelManager()

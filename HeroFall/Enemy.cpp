@@ -14,16 +14,6 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::move(float delta)
-{
-	/*
-	UNFINISHED METOD!!!!!!!!!
-	*/
-
-	m_xPos += delta * m_xVel;
-	m_yPos += delta * m_yVel;
-}
-
 void Enemy::move(float delta, std::vector<LevelObject*> levelObjects)
 {
 	m_yVel += getGravityDistance(delta);

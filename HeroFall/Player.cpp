@@ -148,8 +148,6 @@ bool Player::collidesWith(LevelObject* levelObject)
 		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
 		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
 
-		std::cout << otherXPos << " " << otherYPos << "     " << m_xPos << " " << m_yPos << std::endl;
-
 		return(!(otherXPos > m_xPos + m_animations->getCurrentSprite()->getGlobalBounds().width
 			|| otherXPos + otherSize.x < m_xPos
 			|| otherYPos > m_yPos + m_animations->getCurrentSprite()->getGlobalBounds().height

@@ -3,6 +3,7 @@
 
 #include <SFML\Graphics.hpp>
 
+#include "EnemyGoblin.h"
 #include "EnemyPlaceholder.h"
 #include "EnemyTroll.h"
 #include "LevelObjectRectangle.h"

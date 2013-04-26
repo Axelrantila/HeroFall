@@ -21,7 +21,6 @@ public:
 	Enemy(EnemyType type, float xPos, float yPos, float health);
 	virtual ~Enemy();
 
-	virtual void move(float delta);
 	virtual void move(float delta, std::vector<LevelObject*> levelObjects);
 	virtual void update(float delta) = 0;
 	virtual void applyGravity(float delta);
