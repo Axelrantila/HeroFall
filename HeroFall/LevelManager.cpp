@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "SettingsManager.h"
 #include "SpriteSheetLoader.h"
+#include "AudioMixer.h"
 
 #include <iostream>
 
@@ -75,6 +76,7 @@ void LevelManager::updatePlayerSpeed()
 
 	if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP"))
 	{
+		AudioMixer::getInstance()->playSound("Grunt");
 		m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
 	}
 
