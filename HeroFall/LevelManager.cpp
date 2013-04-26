@@ -45,11 +45,6 @@ void LevelManager::draw(sf::RenderWindow* window)
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
 	m_player->draw(window);
-
-	sf::CircleShape d_circ(511.0f, 100);
-	d_circ.setFillColor(sf::Color::Magenta);
-	d_circ.setPosition(100.0f, 100.0f);
-	window->draw(d_circ);
 }
 
 void LevelManager::update(float deltaTime)

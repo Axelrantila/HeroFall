@@ -6,6 +6,8 @@
 #include "SpriteSheetLoader.h"
 #include "StateManager.h"
 
+#include <iostream>
+
 StateManager::StateManager()
 {
 	m_window = new sf::RenderWindow(
@@ -112,10 +114,9 @@ void StateManager::run()
 			m_running = false;
 		}
 
+		AudioMixer::getInstance()->update();
+		InputManager::getInstance()->update();
 	}
-
-	AudioMixer::getInstance()->update();
-	InputManager::getInstance()->update();
 }
 
 void StateManager::sendInputToCurrentState(sf::Event windowEvent)
