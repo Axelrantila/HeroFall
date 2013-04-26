@@ -98,6 +98,9 @@
     <ClCompile Include="SwordBehaviorFireRush.cpp">
       <Filter>Game\Characters\Sword Swing Behavior</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyBomb.cpp">
+      <Filter>Game\Characters\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -199,6 +202,9 @@
     <ClInclude Include="SwordBehaviorFireRush.h">
       <Filter>Game\Characters\Sword Swing Behavior</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyBomb.h">
+      <Filter>Game\Characters\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
@@ -206,7 +212,6 @@
     <None Include="ENEMIES_BEHAVIOURS.txt">
       <Filter>Game\Characters</Filter>
     </None>
-    <None Include="ClassDiagram11.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

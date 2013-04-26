@@ -48,6 +48,11 @@ Player::~Player()
 
 void Player::draw(sf::RenderWindow* window)
 {
+	sf::RectangleShape d_collisionBox(sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().width, m_animations->getCurrentSprite()->getGlobalBounds().height));
+	d_collisionBox.setPosition(m_animations->getCurrentSprite()->getPosition());
+	d_collisionBox.setFillColor(sf::Color::Green);
+
+	window->draw(d_collisionBox);
 	window->draw(*m_animations->getCurrentSprite());
 	window->draw(*m_swordRect);
 }
@@ -142,6 +147,8 @@ bool Player::collidesWith(LevelObject* levelObject)
 		sf::Vector2f otherSize = ((LevelObjectRectangle*)levelObject)->getSize();
 		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
 		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
+
+		std::cout << otherXPos << " " << otherYPos << "     " << m_xPos << " " << m_yPos << std::endl;
 
 		return(!(otherXPos > m_xPos + m_animations->getCurrentSprite()->getGlobalBounds().width
 			|| otherXPos + otherSize.x < m_xPos

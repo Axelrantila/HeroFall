@@ -12,6 +12,7 @@ StateManager::StateManager()
 		sf::VideoMode(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y),
 		SettingsManager::getSettings()->FRAME_TITLE);
 	m_window->setMouseCursorVisible(false);
+	m_window->setFramerateLimit(60);
 
 	//Preload resources
 	SpriteSheetLoader::getInstance()->getSheet("Background");
