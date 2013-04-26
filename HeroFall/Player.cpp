@@ -48,11 +48,6 @@ Player::~Player()
 
 void Player::draw(sf::RenderWindow* window)
 {
-	sf::RectangleShape d_collisionBox(sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().width, m_animations->getCurrentSprite()->getGlobalBounds().height));
-	d_collisionBox.setPosition(m_animations->getCurrentSprite()->getPosition());
-	d_collisionBox.setFillColor(sf::Color::Green);
-
-	window->draw(d_collisionBox);
 	window->draw(*m_animations->getCurrentSprite());
 	window->draw(*m_swordRect);
 }

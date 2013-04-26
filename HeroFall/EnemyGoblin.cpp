@@ -12,7 +12,7 @@ EnemyGoblin::EnemyGoblin(float xPos, float yPos, float health, float travelDista
 	m_animations->addAnimation("Airship_Walk_1", 1.0f, xPos, yPos);
 	m_animations->setCurrentAnimation("Airship_Walk_0");
 
-	m_xVel = 125.0f;
+	m_xVel = 1000.0f;
 	m_yVel = 0.0f;
 }
 
