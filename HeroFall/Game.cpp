@@ -17,7 +17,7 @@ Game::Game()
 
 	d_sprite = SpriteSheetLoader::getInstance()->getSprite("DBG", "DBG_0");
 
-	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 20.0f, 20.0f, true);
+	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 10.0f, 10.0f, true);
 }
 
 
@@ -36,6 +36,7 @@ void Game::update(StateManager* stateManager, float delta)
 		if(m_levelManager->playerIsDead())
 		{
 			markForDeletion();
+			AudioMixer::getInstance()->stopMusic();
 			//Lägg till death screen statet här.
 			stateManager->addState(STATE_GAMEOVER);
 		}

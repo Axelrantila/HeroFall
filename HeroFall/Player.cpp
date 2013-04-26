@@ -265,6 +265,7 @@ void Player::takeDamage(float damage)
 		m_meleeHitClock.restart();
 		m_health -= damage;
 		m_animations->setCurrentAnimation("Hero_Hit_0");
+		AudioMixer::getInstance()->playSound("Hurt_2", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 
 		m_hitted = true;
 
