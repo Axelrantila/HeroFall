@@ -4,6 +4,7 @@
 #include "AnimationManager.h"
 #include "character.h"
 #include "SwordBehaviorUpAndDown.h"
+#include "SwordPointManager.h"
 
 #include <SFML\Graphics.hpp>
 
@@ -32,6 +33,8 @@ public:
 
 	void takeDamage(float damage);
 
+	bool isOnGround() {return m_isOnGround;}
+
 private:
 	sf::Sprite* m_swordRect;
 	AnimationManager* m_animations;
@@ -44,11 +47,14 @@ private:
 	bool m_markedForHalt;
 	sf::Clock m_meleeHitClock;
 	float m_meleeHitTime;
-
-	SwordBehaviorUpAndDown* m_upDownAttack;
-
 	bool m_hitted;
 
+	SwordBehaviorUpAndDown* m_upDownAttack;
+	std::vector<SwordPointInfo> m_boxInfo;
+	SwordPointManager* m_swordPointManager;
+
+	bool m_isOnGround;
+	bool m_groundMarked;
 };
 
 #endif

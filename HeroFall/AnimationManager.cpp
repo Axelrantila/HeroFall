@@ -52,3 +52,16 @@ void AnimationManager::update(float xPos, float yPos)
 		it->second->update(xPos, yPos);
 	}
 }
+
+Animation* AnimationManager::getAnimation(std::string name)
+{
+	for(std::map<std::string, Animation*>::iterator it = m_animations.begin(); it != m_animations.end(); ++it)
+	{
+		if(it->first == name)
+		{
+			return it->second;
+		}
+	}
+
+	return nullptr;
+}

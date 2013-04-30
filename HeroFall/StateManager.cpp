@@ -47,6 +47,9 @@ void StateManager::run()
 		m_deltaTime = m_clock.getElapsedTime().asSeconds();
 		m_clock.restart();
 
+		//Print FPS
+		std::cout << (1.0f / m_deltaTime) << std::endl;
+
 		//Handle events
 		sf::Event windowEvent;
 		while(m_window->pollEvent(windowEvent))

@@ -63,6 +63,7 @@ void Animation::stop()
 {
 	m_playing = false;
 	m_stopped = true;
+	m_currentFrame = 0;
 }
 
 void Animation::update(float xPos, float yPos)
@@ -72,8 +73,6 @@ void Animation::update(float xPos, float yPos)
 
 	m_xPos = xPos;
 	m_yPos = yPos;
-
-	//std::cout << m_currentFrame << " " << m_clock.getElapsedTime().asSeconds() << std::endl;
 
 	if(m_clock.getElapsedTime().asSeconds() > m_frameTime)
 	{
@@ -91,6 +90,11 @@ void Animation::update(float xPos, float yPos)
 sf::Sprite* Animation::getCurrentSprite()
 {
 	return m_currentSprite;
+}
+
+sf::Sprite* Animation::getSprite(unsigned int index)
+{
+	return m_sprites[index];
 }
 
 unsigned int Animation::getCurrentFrame()

@@ -9,8 +9,8 @@
 LevelManager::LevelManager(sf::View* view)
 {
 	m_view = view;
-	m_levelObjects.push_back(new LevelObjectRectangle(100.0f, 2160.0f, 10000.0f, 100.0f, sf::Color::Red));
-	m_player = new Player(200.0f, 1950.0f);
+	m_levelObjects.push_back(new LevelObjectRectangle(100.0f, 2160.0f, 10000.0f, 10000.0f, sf::Color::Red));
+	m_player = new Player(200.0f, 1850.0f);
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
 	d_bg->setPosition(0.0f, 0.0f);
@@ -71,7 +71,7 @@ void LevelManager::updatePlayerSpeed()
 {
 	//Update player speed
 
-	if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP"))
+	if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") && m_player->isOnGround())
 	{
 		AudioMixer::getInstance()->playSound("Grunt");
 		m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);

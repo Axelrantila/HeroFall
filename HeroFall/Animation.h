@@ -20,6 +20,7 @@ public:
 	void update(float xPos, float yPos);
 
 	sf::Sprite* getCurrentSprite();
+	sf::Sprite* getSprite(unsigned int index);
 	unsigned int getCurrentFrame();
 
 	std::string getName() {return m_spriteBaseName;}

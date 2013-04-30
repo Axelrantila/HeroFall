@@ -1,0 +1,8 @@
+[Settings]
+defaultSubset=walk
+speed=0.5
+[Hit0]
+Troll_Hit_0_0
+Troll_Hit_0_1
+[Walk0]
+Troll_Walk_0_0

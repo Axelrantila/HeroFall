@@ -8,9 +8,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game\Characters</Filter>
-    </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Game\Level</Filter>
     </ClCompile>
@@ -90,16 +87,22 @@
       <Filter>Game\States</Filter>
     </ClCompile>
     <ClCompile Include="SwordBehavior.cpp">
-      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
     </ClCompile>
     <ClCompile Include="SwordBehaviorUpAndDown.cpp">
-      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
     </ClCompile>
     <ClCompile Include="SwordBehaviorFireRush.cpp">
-      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBomb.cpp">
       <Filter>Game\Characters\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordPointManager.cpp">
+      <Filter>Game\Characters\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +110,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>Game\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>Game\Characters</Filter>
     </ClInclude>
     <ClInclude Include="LevelManager.h">
@@ -194,16 +194,22 @@
       <Filter>Game\States</Filter>
     </ClInclude>
     <ClInclude Include="SwordBehavior.h">
-      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
     </ClInclude>
     <ClInclude Include="SwordBehaviorUpAndDown.h">
-      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
     </ClInclude>
     <ClInclude Include="SwordBehaviorFireRush.h">
-      <Filter>Game\Characters\Sword Swing Behavior</Filter>
+      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBomb.h">
       <Filter>Game\Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordPointManager.h">
+      <Filter>Game\Characters\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -253,7 +259,10 @@
     <Filter Include="Game\States">
       <UniqueIdentifier>{8a67f8fc-8572-4234-97f5-eebb53a560c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Characters\Sword Swing Behavior">
+    <Filter Include="Game\Characters\Player">
+      <UniqueIdentifier>{7415e2a1-1bbb-451e-b826-5d7e7c86ce8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Characters\Player\Sword Swing Behavior">
       <UniqueIdentifier>{f3748c01-f995-4d20-9161-18273362b64c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

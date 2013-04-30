@@ -25,7 +25,6 @@ private:
 	sf::View* m_view;
 
 	//sf::Clock m_clock;
-	sf::Sprite* d_sprite;
 
 	//float m_deltaTime;
 };

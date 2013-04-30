@@ -375,6 +375,9 @@
 			_trackFadeInfo.maxVolume = maxVolume;
 		}*/
 
+		m_trackFadeInfo.initVolume = initVolume;
+		m_trackFadeInfo.maxVolume = maxVolume;
+
 		m_currentTrackName = trackName;
 		m_currentTrack = m_audioLoader->getMusic(trackName);
 		m_currentTrack->setVolume(initVolume);
