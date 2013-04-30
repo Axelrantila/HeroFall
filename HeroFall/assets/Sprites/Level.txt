@@ -1,0 +1,12 @@
+wSheet=15000
+hSheet=4152
+wSprite=5000
+hSprite=1384
+Level_Grass_block1
+Level_Grass_block2
+Level_Grass_block3
+Level_Grass_block4
+Level_Grass_block5
+Level_Grass_block6
+Level_Grass_block7
+Level_Grass_block8

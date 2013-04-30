@@ -31,6 +31,15 @@ private:
 	std::vector<Enemy*>* m_enemies;
 
 	sf::Sprite* d_bg;
+	sf::Sprite* d_bg1;
+	sf::Sprite* levelBlock1;
+	sf::Sprite* levelBlock2;
+	sf::Sprite* levelBlock3;
+	sf::Sprite* levelBlock4;
+	sf::Sprite* levelBlock5;
+	sf::Sprite* levelBlock6;
+	sf::Sprite* levelBlock7;
+	sf::Sprite* levelBlock8;
 };
 
 #endif

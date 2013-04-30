@@ -5,7 +5,8 @@
 #include "LevelObjectRectangle.h"
 #include "Player.h"
 #include "SpriteSheetLoader.h"
-
+//CONFIG Speed = 350
+//CONFIG Jump = -500
 #include <iostream>
 #include <math.h>
 
