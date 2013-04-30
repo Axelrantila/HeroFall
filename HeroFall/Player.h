@@ -36,8 +36,8 @@ public:
 	bool isOnGround() {return m_isOnGround;}
 
 private:
-	sf::Sprite* m_swordRect;
 	AnimationManager* m_animations;
+	sf::RectangleShape* m_hitBox;
 
 	bool m_swordIsSwinging;
 	bool m_swordHasHittedEnemy;
@@ -49,7 +49,6 @@ private:
 	float m_meleeHitTime;
 	bool m_hitted;
 
-	SwordBehaviorUpAndDown* m_upDownAttack;
 	std::vector<SwordPointInfo> m_boxInfo;
 	SwordPointManager* m_swordPointManager;
 

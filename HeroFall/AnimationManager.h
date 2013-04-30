@@ -18,6 +18,7 @@ public:
 	sf::Sprite* getCurrentSprite();
 	Animation* getCurrentAnimation(){return m_currentAnimation;}
 	Animation* getAnimation(std::string name);
+	bool isCurrentAnimation(std::string name);
 
 private:
 	GameObject* m_parent;

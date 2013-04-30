@@ -25,19 +25,12 @@ Player::Player(float xPos, float yPos)
 	m_meleeHitClock.restart();
 
 	m_animations = new AnimationManager(this);
-	m_animations->addAnimation("Avatar_Hit_0", 0.1f, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_hit_0", 0.1f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_run_0", 0.5f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Test_Attack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_attack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->setCurrentAnimation("Avatar_run_0");
 
 	m_hitted = false;
-
-	m_swordRect = SpriteSheetLoader::getInstance()->getSprite("Avatar", "Avatar_Sword_0_0");
-	m_swordRect->setOrigin(0.0f, 96.0f);
-	m_swordRect->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left  + m_animations->getCurrentSprite()->getGlobalBounds().width * 0.5f,
-		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height * 0.5f);
-
-	m_upDownAttack = new SwordBehaviorUpAndDown(m_swordRect, SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME);
 
 	//For attack hitboxes
 	SwordPointInfo boxInfos;
@@ -45,64 +38,71 @@ Player::Player(float xPos, float yPos)
 	boxInfos.rotation = 0.0f;
 	boxInfos.origin = sf::Vector2f(0.0f, 0.0f);
 	boxInfos.position = sf::Vector2f(54.0f, 0.0f);
-	boxInfos.sprite = m_animations->getAnimation("Test_Attack_0")->getSprite(0);
+	boxInfos.sprite = m_animations->getAnimation("Avatar_attack_0")->getSprite(0);
 	m_boxInfo.push_back(boxInfos);
 
 	boxInfos.size = sf::Vector2f(29.0f, 86.0f);
 	boxInfos.rotation = 320.0f;
 	boxInfos.origin = sf::Vector2f(14.5f, 86.0f);
 	boxInfos.position = sf::Vector2f(55.0f, 110.0f);
-	boxInfos.sprite = m_animations->getAnimation("Test_Attack_0")->getSprite(1);
+	boxInfos.sprite = m_animations->getAnimation("Avatar_attack_0")->getSprite(1);
 	m_boxInfo.push_back(boxInfos);
 
 	boxInfos.size = sf::Vector2f(14.2f, 85.0f);
 	boxInfos.rotation = 120.0f;
 	boxInfos.origin = sf::Vector2f(7.1f, 85.0f);
 	boxInfos.position = sf::Vector2f(190.0f, 130.0f);
-	boxInfos.sprite = m_animations->getAnimation("Test_Attack_0")->getSprite(2);
+	boxInfos.sprite = m_animations->getAnimation("Avatar_attack_0")->getSprite(2);
 	m_boxInfo.push_back(boxInfos);
 
 	boxInfos.size = sf::Vector2f(92.0f, 15.0f);
 	boxInfos.rotation = 0.0f;
 	boxInfos.origin = sf::Vector2f(0.0f, 7.5f);
 	boxInfos.position = sf::Vector2f(190.0f, 115.0f);
-	boxInfos.sprite = m_animations->getAnimation("Test_Attack_0")->getSprite(3);
+	boxInfos.sprite = m_animations->getAnimation("Avatar_attack_0")->getSprite(3);
 	m_boxInfo.push_back(boxInfos);
 
 	boxInfos.size = sf::Vector2f(15.0f, 105.0f);
 	boxInfos.rotation = 85.0f;
 	boxInfos.origin = sf::Vector2f(7.5f, 105.0f);
 	boxInfos.position = sf::Vector2f(190.0f, 130.0f);
-	boxInfos.sprite = m_animations->getAnimation("Test_Attack_0")->getSprite(4);
+	boxInfos.sprite = m_animations->getAnimation("Avatar_attack_0")->getSprite(4);
 	m_boxInfo.push_back(boxInfos);
 
 	boxInfos.size = sf::Vector2f(30.0f, 115.7f);
 	boxInfos.rotation = 72.0f;
 	boxInfos.origin = sf::Vector2f(15.0f, 115.7f);
 	boxInfos.position = sf::Vector2f(155.0f, 135.0f);
-	boxInfos.sprite = m_animations->getAnimation("Test_Attack_0")->getSprite(5);
+	boxInfos.sprite = m_animations->getAnimation("Avatar_attack_0")->getSprite(5);
 	m_boxInfo.push_back(boxInfos);
 
-	m_swordPointManager = new SwordPointManager(m_animations->getAnimation("Test_Attack_0"), m_boxInfo);
+	m_swordPointManager = new SwordPointManager(m_animations->getAnimation("Avatar_attack_0"), m_boxInfo);
 
 	m_isOnGround = false;
 	m_groundMarked = false;
+
+	m_hitBox = new sf::RectangleShape(sf::Vector2f(170.0f, 156.0f));
+	m_hitBox->setFillColor(sf::Color(236, 116, 4, 128));
+	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
 }
 
 Player::~Player()
 {
-	delete m_animations->getCurrentSprite();
-	delete m_swordRect;
 	delete m_animations;
+	delete m_swordPointManager;
+	delete m_hitBox;
 }
 
 void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
+	window->draw(*m_hitBox);
 
-	if(m_swordIsSwinging)
+	if(m_swordIsSwinging
+		&& m_animations->isCurrentAnimation("Avatar_attack_0"))
 	{
-		//window->draw(*d_swordPointManager->getHitbox(m_animations->getCurrentSprite()));
+		window->draw(*m_swordPointManager->getHitbox(m_animations->getCurrentSprite()));
 	}
 }
 
@@ -114,6 +114,11 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 	float m_yMove = delta * m_yVel;
 
 	m_yPos += m_yMove;
+
+	m_animations->update(m_xPos, m_yPos);
+	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
+
 	for(unsigned int a = 0; a < levelObjects.size(); a++)
 	{
 		if(collidesWith(levelObjects[a]))
@@ -126,6 +131,9 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 				m_groundMarked = true;
 			}
 			
+			m_animations->update(m_xPos, m_yPos);
+			m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+				m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
 
 			m_yVel = 0.0f;
 			break;
@@ -143,12 +151,22 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 
 			float m_xMove = delta * m_xVel;
 			m_xPos += m_xMove;
+
+			m_animations->update(m_xPos, m_yPos);
+			m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+				m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
+
 			for(unsigned int a = 0; a < levelObjects.size(); a++)
 			{
 				if(collidesWith(levelObjects[a]))
 				{
 					m_xPos -= m_xMove;
 					m_xVel = 0.0f;
+
+					m_animations->update(m_xPos, m_yPos);
+					m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+						m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
+
 					break;
 				}
 			}
@@ -160,12 +178,22 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 
 			float m_xMove = delta * m_xVel;
 			m_xPos += m_xMove;
+
+			m_animations->update(m_xPos, m_yPos);
+			m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+				m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
+
 			for(unsigned int a = 0; a < levelObjects.size(); a++)
 			{
 				if(collidesWith(levelObjects[a]))
 				{
 					m_xPos -= m_xMove;
 					m_xVel = 0.0f;
+
+					m_animations->update(m_xPos, m_yPos);
+					m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+						m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
+
 					break;
 				}
 			}
@@ -175,21 +203,30 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 	{
 		float m_xMove = delta * m_xVel;
 		m_xPos += m_xMove;
+
+		m_animations->update(m_xPos, m_yPos);
+		m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
+
 		for(unsigned int a = 0; a < levelObjects.size(); a++)
 		{
 			if(collidesWith(levelObjects[a]))
 			{
 				m_xPos -= m_xMove;
 				m_xVel = 0.0f;
+
+				m_animations->update(m_xPos, m_yPos);
+				m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+					m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
+		
 				break;
 			}
 		}
 	}
 
-	//m_animations->getCurrentSprite()->setPosition(m_xPos, m_yPos);
 	m_animations->update(m_xPos, m_yPos);
-	m_swordRect->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left  + m_animations->getCurrentSprite()->getGlobalBounds().width * 0.5f,
-		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height * 0.5f);
+	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + 18.0f);
 }
 
 void Player::increaseSpeed(float xVel, float yVel)
@@ -206,10 +243,12 @@ bool Player::collidesWith(LevelObject* levelObject)
 		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
 		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
 
-		return(!(otherXPos > m_xPos + m_animations->getCurrentSprite()->getGlobalBounds().width
-			|| otherXPos + otherSize.x < m_xPos
-			|| otherYPos > m_yPos + m_animations->getCurrentSprite()->getGlobalBounds().height
-			|| otherYPos + otherSize.y < m_yPos));
+		std::cout << (m_hitBox->getGlobalBounds().top + m_hitBox->getGlobalBounds().height) << "\t" << otherYPos << std::endl;
+
+		return(!(otherXPos > m_hitBox->getGlobalBounds().left + m_hitBox->getGlobalBounds().width
+			|| otherXPos + otherSize.x < m_hitBox->getGlobalBounds().left
+			|| otherYPos > m_hitBox->getGlobalBounds().top + m_hitBox->getGlobalBounds().height
+			|| otherYPos + otherSize.y < m_hitBox->getGlobalBounds().top));
 	}
 
 	return false;
@@ -242,15 +281,16 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		else if(enemies->at(a)->getType() == ENEMY_TROLL)
 		{
 			EnemyTroll* tEnemy = ((EnemyTroll*)enemies->at(a));
-			if(m_swordRect->getGlobalBounds().intersects(tEnemy->getGlobalBounds())
-				&& m_swordIsSwinging
-				&& !m_swordHasHittedEnemy)
+			if(m_swordIsSwinging && !m_swordHasHittedEnemy && m_animations->isCurrentAnimation("Avatar_attack_0"))
 			{
-				enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
-				m_swordHasHittedEnemy = true;
+				if(m_swordPointManager->getHitbox(m_animations->getCurrentSprite())->getGlobalBounds().intersects(tEnemy->getHitBox()))
+				{
+					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
+					m_swordHasHittedEnemy = true;
+				}
 			}
 
-			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(tEnemy->getGlobalBounds()))
+			if(m_hitBox->getGlobalBounds().intersects(tEnemy->getHitBox()))
 			{
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_TROLL_TO_PLAYER);
 			}
@@ -280,9 +320,8 @@ void Player::swingSword()
 	m_swordIsSwinging = true;
 	m_swordHasHittedEnemy = false;
 	m_swordClock.restart();
-	m_animations->setCurrentAnimation("Test_Attack_0");
+	m_animations->setCurrentAnimation("Avatar_attack_0");
 	AudioMixer::getInstance()->playSound("Sword_swings", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
-	m_upDownAttack->restart();
 }
 
 void Player::update(float delta)
@@ -297,10 +336,8 @@ void Player::update(float delta)
 
 	if(m_swordIsSwinging)
 	{
-		m_upDownAttack->update();
 		if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
 		{
-			m_swordRect->setRotation(0.0f);
 			m_swordIsSwinging = false;
 			m_animations->setCurrentAnimation("Avatar_run_0");
 		}
@@ -330,7 +367,7 @@ void Player::takeDamage(float damage)
 	{
 		m_meleeHitClock.restart();
 		m_health -= damage;
-		m_animations->setCurrentAnimation("Avatar_Hit_0");
+		m_animations->setCurrentAnimation("Avatar_hit_0");
 		AudioMixer::getInstance()->playSound("Hurt_2", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 
 		m_hitted = true;

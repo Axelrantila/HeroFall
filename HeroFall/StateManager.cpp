@@ -16,8 +16,7 @@ StateManager::StateManager()
 	m_window->setMouseCursorVisible(false);
 	m_window->setFramerateLimit(60);
 
-	//Preload resources
-	SpriteSheetLoader::getInstance()->getSheet("Background");
+	loadResources();
 
 	m_states.push_back(new Menus());
 
@@ -46,9 +45,6 @@ void StateManager::run()
 	{
 		m_deltaTime = m_clock.getElapsedTime().asSeconds();
 		m_clock.restart();
-
-		//Print FPS
-		std::cout << (1.0f / m_deltaTime) << std::endl;
 
 		//Handle events
 		sf::Event windowEvent;
@@ -139,4 +135,18 @@ void StateManager::sendInputToCurrentState(sf::Event windowEvent)
 void StateManager::addState(StateType state)
 {
 	m_statesToAdd.push_back(state);
+}
+
+void StateManager::loadResources()
+{
+	SpriteSheetLoader::getInstance()->getSheet("Airship");
+	SpriteSheetLoader::getInstance()->getSheet("Avatar");
+	SpriteSheetLoader::getInstance()->getSheet("Background");
+	SpriteSheetLoader::getInstance()->getSheet("DBG");
+	SpriteSheetLoader::getInstance()->getSheet("Hero");
+	SpriteSheetLoader::getInstance()->getSheet("MenuButtons");
+	SpriteSheetLoader::getInstance()->getSheet("Test");
+	SpriteSheetLoader::getInstance()->getSheet("Troll");
+
+	AudioMixer::getInstance()->playSound("phaser");
 }

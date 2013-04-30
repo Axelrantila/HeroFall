@@ -16,12 +16,15 @@ EnemyTroll::EnemyTroll(float xPos, float yPos)
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Troll_Walk_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("Troll_Hit_0", 0.1f, m_xPos, m_yPos);
+	m_animations->addAnimation("Troll_Hit_0", 0.225f, m_xPos, m_yPos);
 	m_animations->setCurrentAnimation("Troll_Walk_0");
 
 	m_hitted = false;
 	m_meleeHitTime = SettingsManager::getSettings()->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
 	m_hitClock.restart();
+
+	m_hitBoxTest =  new sf::RectangleShape(sf::Vector2f(231.0f, 330.0f));
+	m_hitBoxTest->setFillColor(sf::Color(64, 224, 208, 128));
 }
 
 
@@ -29,12 +32,16 @@ EnemyTroll::~EnemyTroll()
 {
 	delete m_animations;
 	delete m_sprite;
+	delete m_hitBoxTest;
 }
 
 void EnemyTroll::update(float delta)
 {
 	m_sprite->setPosition(m_xPos, m_yPos);
 	m_animations->update(m_xPos, m_yPos);
+
+	m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 60.0f,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + 45.0f);
 
 	if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
 	{
@@ -47,11 +54,12 @@ void EnemyTroll::draw(sf::RenderWindow* window)
 {
 	//window->draw(*m_sprite);
 	window->draw(*m_animations->getCurrentSprite());
+	window->draw(*m_hitBoxTest);
 }
 
-sf::FloatRect EnemyTroll::getGlobalBounds()
+sf::FloatRect EnemyTroll::getHitBox()
 {
-	return m_animations->getCurrentSprite()->getGlobalBounds();
+	return m_hitBoxTest->getGlobalBounds();
 }
 
 bool EnemyTroll::collidesWith(LevelObject* levelObject)

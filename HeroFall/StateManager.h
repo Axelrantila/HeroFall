@@ -25,6 +25,8 @@ public:
 	void addState(StateType state);
 	void sendInputToCurrentState(sf::Event windowEvent);
 
+	void loadResources();
+
 private:
 	bool m_running;
 	std::vector<State*> m_states;

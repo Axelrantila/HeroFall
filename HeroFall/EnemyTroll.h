@@ -16,7 +16,7 @@ public:
 	void update(float delta);
 	void draw(sf::RenderWindow* window);
 
-	sf::FloatRect getGlobalBounds();
+	sf::FloatRect getHitBox();
 
 	bool collidesWith(LevelObject* levelObject);
 	void takeDamage(float damage);
@@ -28,6 +28,8 @@ private:
 	sf::Clock m_hitClock;
 	float m_meleeHitTime;
 	bool m_hitted;
+
+	sf::RectangleShape* m_hitBoxTest;
 };
 
 #endif

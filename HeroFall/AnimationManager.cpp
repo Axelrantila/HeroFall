@@ -65,3 +65,17 @@ Animation* AnimationManager::getAnimation(std::string name)
 
 	return nullptr;
 }
+
+bool AnimationManager::isCurrentAnimation(std::string name)
+{
+	for(std::map<std::string, Animation*>::iterator it = m_animations.begin(); it != m_animations.end(); ++it)
+	{
+		if(it->first == name
+			&& it->second == m_currentAnimation)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
