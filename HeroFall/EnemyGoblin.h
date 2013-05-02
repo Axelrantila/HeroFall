@@ -18,11 +18,16 @@ public:
 
 	sf::Vector2f getBombSpawnPoint();
 
+	bool shouldSpawnBomb();
+
 private:
 	float m_xPos0;
 	float m_xPos1;
 
 	AnimationManager* m_animations;
+
+	sf::Clock m_clock;
+	float m_bombSpawnTime;
 };
 
 #endif

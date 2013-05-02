@@ -1,4 +1,5 @@
 #include "AudioMixer.h"
+#include "EnemyBomb.h"
 #include "EnemyPlaceholder.h"
 #include "EnemyTroll.h"
 #include "InputManager.h"
@@ -247,6 +248,15 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			}
 		}
 		
+		//Bomb
+		else if(enemies->at(a)->getType() == ENEMY_BOMB)
+		{
+			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(((EnemyBomb*)enemies->at(a))->getGlobalBounds()))
+			{
+				m_isDead = true;
+			}
+		}
+
 		//Delete any dead enemies
 		if(enemies->at(a)->isDead())
 		{

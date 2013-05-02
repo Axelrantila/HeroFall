@@ -105,6 +105,18 @@ void LevelManager::update(float deltaTime)
 	//Update the camera's view
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y / 3.5f);
+
+	//Add bombs
+	for(unsigned int a = 0; a < m_enemies->size(); a++)
+	{
+		if(m_enemies->at(a)->getType() == ENEMY_GOBLIN)
+		{
+			if(((EnemyGoblin*)m_enemies->at(a))->shouldSpawnBomb())
+			{
+				m_enemies->push_back(new EnemyBomb(((EnemyGoblin*)m_enemies->at(a))));
+			}
+		}
+	}
 }
 
 void LevelManager::updatePlayerSpeed()

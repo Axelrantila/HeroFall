@@ -13,6 +13,11 @@ public:
 	~EnemyBomb();
 
 	void move(float delta, std::vector<LevelObject*> levelObjects);
+	void update(float delta){}
+	void draw(sf::RenderWindow* window);
+	bool collidesWith(LevelObject* levelObject){return false;}
+
+	sf::FloatRect getGlobalBounds();
 
 private:
 	EnemyGoblin* m_parent;

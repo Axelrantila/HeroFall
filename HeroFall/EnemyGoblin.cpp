@@ -14,6 +14,9 @@ EnemyGoblin::EnemyGoblin(float xPos, float yPos, float health, float travelDista
 
 	m_xVel = 1000.0f;
 	m_yVel = 0.0f;
+
+	m_bombSpawnTime = 5.0f;
+	m_clock.restart();
 }
 
 
@@ -61,4 +64,15 @@ sf::Vector2f EnemyGoblin::getBombSpawnPoint()
 {
 	return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left + m_animations->getCurrentSprite()->getGlobalBounds().width / 2.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height);
+}
+
+bool EnemyGoblin::shouldSpawnBomb()
+{
+	if(m_clock.getElapsedTime().asSeconds() >= m_bombSpawnTime)
+	{
+		m_clock.restart();
+		return true;
+	}
+
+	return false;
 }
