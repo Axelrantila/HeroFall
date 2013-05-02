@@ -143,9 +143,10 @@ void StateManager::loadResources()
 	SpriteSheetLoader::getInstance()->getSheet("Avatar");
 	SpriteSheetLoader::getInstance()->getSheet("Background");
 	SpriteSheetLoader::getInstance()->getSheet("DBG");
+	SpriteSheetLoader::getInstance()->getSheet("Level");
 	SpriteSheetLoader::getInstance()->getSheet("Hero");
 	SpriteSheetLoader::getInstance()->getSheet("MenuButtons");
-	SpriteSheetLoader::getInstance()->getSheet("Test");
+	//SpriteSheetLoader::getInstance()->getSheet("Test");
 	SpriteSheetLoader::getInstance()->getSheet("Troll");
 
 	AudioMixer::getInstance()->playSound("phaser");

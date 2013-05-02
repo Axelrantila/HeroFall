@@ -10,25 +10,24 @@ LevelManager::LevelManager(sf::View* view)
 {
 	m_view = view;
 	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 2160.0f, 1200.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(1200.0f, 2060.0f, 1800.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(2800.0f, 1500.0f, 1200.0f, 100.0f, sf::Color::Magenta)); //Platform
-	m_levelObjects.push_back(new LevelObjectRectangle(3400.0f, 2200.0f, 2200.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(5600.0f, 2100.0f, 600.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(6200.0f, 2100.0f, 1400.0f, 100.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(7600.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(8160.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(1250.0f, 2060.0f, 1800.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(2850.0f, 1500.0f, 1200.0f, 100.0f, sf::Color::Magenta)); //Platform
+	m_levelObjects.push_back(new LevelObjectRectangle(3450.0f, 2200.0f, 2200.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(5650.0f, 2100.0f, 600.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(6250.0f, 2100.0f, 1400.0f, 100.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(7650.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(8360.0f, 1600.0f, 1000.0f, 500.0f, sf::Color::Magenta));
 	m_player = new Player(200.0f, 1950.0f);
 
 	levelBlock1 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block1");
-	levelBlock1->setPosition(0.0f, 2160.0f);
-	/*levelBlock2 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block2");
+	levelBlock2 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block2");
 	levelBlock3 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block3");
 	levelBlock4 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block4");
 	levelBlock5 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block5");
 	levelBlock6 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block6");
 	levelBlock7 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block7");
-	levelBlock8 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block8");*/
+	levelBlock8 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block8");
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
 	d_bg1 = d_bg;
