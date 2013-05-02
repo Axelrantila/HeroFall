@@ -29,9 +29,9 @@ Menus::Menus()
 	Credits->Move(sf::Vector2f(0.0f, (float)Credits->m_standard->getTextureRect().height + 50));
 
 	Quit = new UIButton();
-	Quit->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Quit");
-	Quit->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Quit_lit");
-	Quit->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Quit");
+	Quit->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Exit");
+	Quit->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Exit_lit");
+	Quit->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Exit");
 	Quit->SetPosition(sf::Vector2f(Credits->m_standard->getPosition()));
 	Quit->Move(sf::Vector2f(0.0f, (float)Quit->m_standard->getTextureRect().height + 50));
 }

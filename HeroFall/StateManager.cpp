@@ -146,7 +146,4 @@ void StateManager::addState(StateType state)
 
 void StateManager::loadResources()
 {
-	SpriteSheetLoader::getInstance()->getSheet("DBG");
-	SpriteSheetLoader::getInstance()->getSheet("LoadingScreen");
-	SpriteSheetLoader::getInstance()->getSheet("MenuButtons");
 }
