@@ -36,6 +36,7 @@ public:
 private:
 	AnimationManager* m_animations;
 	sf::RectangleShape* m_hitBox;
+	std::vector<sf::RectangleShape*> m_swordBoxes;
 
 	bool m_swordIsSwinging;
 	bool m_swordHasHittedEnemy;
@@ -49,8 +50,9 @@ private:
 
 	bool m_isOnGround;
 	bool m_groundMarked;
-
 	bool m_isIdle;
+
+	void updateBoxes();
 };
 
 #endif

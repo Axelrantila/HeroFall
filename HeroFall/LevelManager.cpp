@@ -18,7 +18,7 @@ LevelManager::LevelManager(sf::View* view)
 	m_levelObjects.push_back(new LevelObjectRectangle(7550.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(8410.0f, 1600.0f, 1050.0f, 500.0f, sf::Color::Magenta));
-	m_player = new Player(200.0f, 1950.0f);
+	m_player = new Player(200.0f, 1700.0f);
 
 	levelBlock1 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block1");
 	levelBlock2 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block2");

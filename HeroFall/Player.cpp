@@ -37,16 +37,19 @@ Player::Player(float xPos, float yPos)
 	m_animations->setCurrentAnimation("Avatar_Idle_0");
 
 	m_hitted = false;
-
 	m_isOnGround = false;
 	m_groundMarked = false;
+	m_isIdle = false;
 
 	m_hitBox = new sf::RectangleShape(sf::Vector2f(115.0f, 170.0f));
 	m_hitBox->setFillColor(sf::Color(236, 116, 4, 128));
 	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
 
-	m_isIdle = false;
+	sf::RectangleShape* tempBox = new sf::RectangleShape(sf::Vector2f(115.0f, 50.0f));
+	tempBox->setFillColor(sf::Color(255, 0, 0, 128));
+
+	m_swordBoxes.push_back(tempBox);
 }
 
 Player::~Player()
@@ -60,9 +63,9 @@ void Player::draw(sf::RenderWindow* window)
 	window->draw(*m_animations->getCurrentSprite());
 	window->draw(*m_hitBox);
 
-	if(m_swordIsSwinging
-		&& m_animations->isCurrentAnimation("Avatar_Attack_0"))
+	if(m_swordIsSwinging)
 	{
+		window->draw(*m_swordBoxes[0]);
 	}
 }
 
@@ -75,9 +78,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 
 	m_yPos += m_yMove;
 
-	m_animations->update(m_xPos, m_yPos);
-	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-		m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+	updateBoxes();
 
 	for(unsigned int a = 0; a < levelObjects.size(); a++)
 	{
@@ -91,9 +92,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 				m_groundMarked = true;
 			}
 			
-			m_animations->update(m_xPos, m_yPos);
-			m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-				m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+			updateBoxes();
 
 			m_yVel = 0.0f;
 			break;
@@ -112,9 +111,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 			float m_xMove = delta * m_xVel;
 			m_xPos += m_xMove;
 
-			m_animations->update(m_xPos, m_yPos);
-			m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-				m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+			updateBoxes();
 
 			for(unsigned int a = 0; a < levelObjects.size(); a++)
 			{
@@ -123,9 +120,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 					m_xPos -= m_xMove;
 					m_xVel = 0.0f;
 
-					m_animations->update(m_xPos, m_yPos);
-					m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-						m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);;
+					updateBoxes();
 
 					break;
 				}
@@ -139,9 +134,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 			float m_xMove = delta * m_xVel;
 			m_xPos += m_xMove;
 
-			m_animations->update(m_xPos, m_yPos);
-			m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-				m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+			updateBoxes();
 
 			for(unsigned int a = 0; a < levelObjects.size(); a++)
 			{
@@ -150,9 +143,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 					m_xPos -= m_xMove;
 					m_xVel = 0.0f;
 
-					m_animations->update(m_xPos, m_yPos);
-					m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-						m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+					updateBoxes();
 
 					break;
 				}
@@ -164,9 +155,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 		float m_xMove = delta * m_xVel;
 		m_xPos += m_xMove;
 
-		m_animations->update(m_xPos, m_yPos);
-		m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-			m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+		updateBoxes();
 
 		for(unsigned int a = 0; a < levelObjects.size(); a++)
 		{
@@ -175,18 +164,14 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 				m_xPos -= m_xMove;
 				m_xVel = 0.0f;
 
-				m_animations->update(m_xPos, m_yPos);
-				m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-					m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+				updateBoxes();
 		
 				break;
 			}
 		}
 	}
 
-	m_animations->update(m_xPos, m_yPos);
-	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
-		m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+	updateBoxes();
 }
 
 void Player::increaseSpeed(float xVel, float yVel)
@@ -222,11 +207,11 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			EnemyPlaceholder* tEnemy = ((EnemyPlaceholder*)enemies->at(a));
 			if(m_swordIsSwinging && !m_swordHasHittedEnemy)
 			{
-				/*if(m_swordPointManager->getHitbox(m_animations->getCurrentSprite())->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
+				if(m_swordBoxes[0]->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER);
 					m_swordHasHittedEnemy = true;
-				}*/
+				}
 			}
 
 			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
@@ -241,11 +226,11 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			EnemyTroll* tEnemy = ((EnemyTroll*)enemies->at(a));
 			if(m_swordIsSwinging && !m_swordHasHittedEnemy && m_animations->isCurrentAnimation("Avatar_Attack_0"))
 			{
-				/*if(m_swordPointManager->getHitbox(m_animations->getCurrentSprite())->getGlobalBounds().intersects(tEnemy->getHitBox()))
+				if(m_swordBoxes[0]->getGlobalBounds().intersects(tEnemy->getHitBox()))
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
 					m_swordHasHittedEnemy = true;
-				}*/
+				}
 			}
 
 			if(m_hitBox->getGlobalBounds().intersects(tEnemy->getHitBox()))
@@ -354,4 +339,14 @@ void Player::takeDamage(float damage)
 		if(m_health <= 0.0f)
 		{m_isDead = true;}
 	}
+}
+
+void Player::updateBoxes()
+{
+	m_animations->update(m_xPos, m_yPos);
+	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120.0f,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
+
+	m_swordBoxes[0]->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 200.0f,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + 160.0f);
 }
