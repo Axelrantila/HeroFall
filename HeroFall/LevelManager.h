@@ -37,6 +37,8 @@ private:
 	sf::Sprite* levelBlock3;
 	sf::Sprite* levelBlock4;
 	sf::Sprite* levelBlock5;
+	sf::Sprite* levelBlock5_1;
+	sf::Sprite* levelBlock5_2;
 	sf::Sprite* levelBlock6;
 	sf::Sprite* levelBlock7;
 	sf::Sprite* levelBlock8;

@@ -9,28 +9,36 @@
 LevelManager::LevelManager(sf::View* view)
 {
 	m_view = view;
-	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 2160.0f, 1200.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(1250.0f, 2060.0f, 1800.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(2850.0f, 1500.0f, 1200.0f, 100.0f, sf::Color::Magenta)); //Platform
-	m_levelObjects.push_back(new LevelObjectRectangle(3450.0f, 2200.0f, 2200.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(5650.0f, 2100.0f, 600.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(6250.0f, 2100.0f, 1400.0f, 100.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(7650.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 2160.0f, 1250.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(1250.0f, 2060.0f, 2000.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(3000.0f, 1500.0f, 1250.0f, 100.0f, sf::Color::Magenta)); //Platform
+	m_levelObjects.push_back(new LevelObjectRectangle(3650.0f, 2200.0f, 2250.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(5650.0f, 2100.0f, 500.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(6150.0f, 2100.0f, 1450.0f, 100.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(7550.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(8360.0f, 1600.0f, 1000.0f, 500.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(8410.0f, 1600.0f, 1050.0f, 500.0f, sf::Color::Magenta));
 	m_player = new Player(200.0f, 1950.0f);
 
 	levelBlock1 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block1");
 	levelBlock2 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block2");
 	levelBlock3 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block3");
+	levelBlock3->setPosition(5650.0f, 2100.0f);
 	levelBlock4 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block4");
-	levelBlock5 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block5");
+	levelBlock5 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block5"));
+	levelBlock5->setPosition(0.0f, 2160.0f);
+	levelBlock5_1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block5"));
+	levelBlock5_1->setPosition(1250.0f, 2060.0f);
+	levelBlock5_2 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block5"));
+	levelBlock5_2->setPosition(3650.0f, 2200.0f);
 	levelBlock6 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block6");
+	levelBlock6->setPosition(12550.0f, 2100.0f);
 	levelBlock7 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block7");
 	levelBlock8 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block8");
+	levelBlock8->setPosition(7550.0f, 2100.0f);
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
-	d_bg1 = d_bg;
+	d_bg1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0"));
 	d_bg->setPosition(0.0f, 0.0f);
 	d_bg1->setPosition(8160.0f, 0.0f);
 
@@ -59,13 +67,19 @@ void LevelManager::draw(sf::RenderWindow* window)
 	window->setView(*m_view);
 
 	window->draw(*d_bg);
+	window->draw(*d_bg1);
 	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
 		{m_levelObjects[a]->draw(window);}
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
 	m_player->draw(window);
 
-	window->draw(*levelBlock1);
+	window->draw(*levelBlock5);
+	window->draw(*levelBlock3);
+	window->draw(*levelBlock5_1);
+	window->draw(*levelBlock5_2);
+	window->draw(*levelBlock8);
+	window->draw(*levelBlock6);
 }
 
 void LevelManager::update(float deltaTime)
