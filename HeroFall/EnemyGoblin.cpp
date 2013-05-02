@@ -76,3 +76,8 @@ bool EnemyGoblin::shouldSpawnBomb()
 
 	return false;
 }
+
+sf::FloatRect EnemyGoblin::getGlobalBounds()
+{
+	return m_animations->getCurrentSprite()->getGlobalBounds();
+}

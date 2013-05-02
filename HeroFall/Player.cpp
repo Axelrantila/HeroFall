@@ -1,5 +1,6 @@
 #include "AudioMixer.h"
 #include "EnemyBomb.h"
+#include "EnemyGoblin.h"
 #include "EnemyPlaceholder.h"
 #include "EnemyTroll.h"
 #include "InputManager.h"
@@ -70,12 +71,12 @@ Player::~Player()
 void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	window->draw(*m_hitBox);
+	/*window->draw(*m_hitBox);
 
 	if(m_swordIsSwinging)
 	{
 		window->draw(*m_swordBoxes[m_currentAttack]);
-	}
+	}*/
 }
 
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)
@@ -254,6 +255,18 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(((EnemyBomb*)enemies->at(a))->getGlobalBounds()))
 			{
 				m_isDead = true;
+			}
+		}
+
+		else if(enemies->at(a)->getType() == ENEMY_GOBLIN)
+		{
+			if(m_swordIsSwinging && !m_swordHasHittedEnemy)
+			{
+				if(((EnemyGoblin*)enemies->at(a))->getGlobalBounds().intersects
+					(m_animations->getCurrentSprite()->getGlobalBounds()))
+				{
+					enemies->at(a)->takeDamage(1.0f);
+				}
 			}
 		}
 

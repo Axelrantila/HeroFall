@@ -1,0 +1,12 @@
+wSheet=930
+hSheet=270
+wSprite=310
+hSprite=90
+MainMenuButtons_Credits
+MainMenuButtons_Credits_lit
+MainMenuButtons_Exit
+MainMenuButtons_Exit_lit
+MainMenuButtons_Options
+MainMenuButtons_Options_lit
+MainMenuButtons_Play
+MainMenuButtons_Play_lit

@@ -17,8 +17,8 @@ public:
 	void move(float delta, std::vector<LevelObject*> levelObjects);
 
 	sf::Vector2f getBombSpawnPoint();
-
 	bool shouldSpawnBomb();
+	sf::FloatRect getGlobalBounds();
 
 private:
 	float m_xPos0;
