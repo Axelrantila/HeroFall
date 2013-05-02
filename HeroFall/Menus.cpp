@@ -6,32 +6,32 @@ Menus::Menus()
 {
 	tracker = 0;
 	currentState = MAIN;
-	background = SpriteSheetLoader::getInstance()->getSprite ("DBG", "DBG_0");
+	background = SpriteSheetLoader::getInstance()->getSprite ("MainMenuBG", "MainMenuBG_0");
 
 	Play = new UIButton();
-	Play->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Audio");
-	Play->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
-	Play->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
+	Play->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play");
+	Play->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play_lit");
+	Play->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play");
 	Play->Center(sf::Vector2f(800, 800));
 	Play->Move(sf::Vector2f(0.0f, -(float)Play->m_standard->getTextureRect().height - 50));
 
 	Options = new UIButton();
-	Options->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Controls");
-	Options->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_ControlsSelected");
-	Options->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_ControlsSelected");
+	Options->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options");
+	Options->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options_lit");
+	Options->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options");
 	Options->Center(sf::Vector2f(800, 800));
 
 	Credits = new UIButton();
-	Credits->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_MainMenu");
-	Credits->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_MainMenuSelected");
-	Credits->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_MainMenuSelected");
+	Credits->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Credits");
+	Credits->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Credits_lit");
+	Credits->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Credits");
 	Credits->SetPosition(sf::Vector2f(Options->m_standard->getPosition()));
 	Credits->Move(sf::Vector2f(0.0f, (float)Credits->m_standard->getTextureRect().height + 50));
 
 	Quit = new UIButton();
-	Quit->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Video");
-	Quit->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_VideoSelected");
-	Quit->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_VideoSelected");
+	Quit->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Quit");
+	Quit->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Quit_lit");
+	Quit->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Quit");
 	Quit->SetPosition(sf::Vector2f(Credits->m_standard->getPosition()));
 	Quit->Move(sf::Vector2f(0.0f, (float)Quit->m_standard->getTextureRect().height + 50));
 }
