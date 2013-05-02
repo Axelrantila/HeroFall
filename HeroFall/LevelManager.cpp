@@ -9,15 +9,15 @@
 LevelManager::LevelManager(sf::View* view)
 {
 	m_view = view;
-	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 2160.0f, 1250.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(1250.0f, 2060.0f, 2000.0f, 10000.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 2160.0f, 1250.0f, 10000.0f, sf::Color::Transparent));
+	m_levelObjects.push_back(new LevelObjectRectangle(1250.0f, 2060.0f, 2000.0f, 10000.0f, sf::Color::Transparent));
 	//m_levelObjects.push_back(new LevelObjectRectangle(3000.0f, 1500.0f, 1250.0f, 100.0f, sf::Color::Magenta)); //Platform
-	m_levelObjects.push_back(new LevelObjectRectangle(3650.0f, 2200.0f, 2250.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(5650.0f, 2100.0f, 500.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(6150.0f, 2100.0f, 1450.0f, 115.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(7550.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(8410.0f, 1600.0f, 1050.0f, 500.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(3650.0f, 2200.0f, 2250.0f, 10000.0f, sf::Color::Transparent));
+	m_levelObjects.push_back(new LevelObjectRectangle(5650.0f, 2100.0f, 500.0f, 10000.0f, sf::Color::Transparent));
+	m_levelObjects.push_back(new LevelObjectRectangle(6150.0f, 2100.0f, 1450.0f, 115.0f, sf::Color::Transparent));
+	m_levelObjects.push_back(new LevelObjectRectangle(7550.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Transparent));
+	m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Transparent));
+	m_levelObjects.push_back(new LevelObjectRectangle(8410.0f, 1600.0f, 1050.0f, 500.0f, sf::Color::Transparent));
 	m_player = new Player(200.0f, 1850.0f);
 
 	levelBlock1 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block1");
