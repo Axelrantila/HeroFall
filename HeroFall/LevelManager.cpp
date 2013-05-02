@@ -16,10 +16,14 @@ LevelManager::LevelManager(sf::View* view)
 	m_levelObjects.push_back(new LevelObjectRectangle(5650.0f, 2100.0f, 500.0f, 10000.0f, sf::Color::Transparent));
 	m_levelObjects.push_back(new LevelObjectRectangle(6150.0f, 2100.0f, 1450.0f, 115.0f, sf::Color::Transparent));
 	m_levelObjects.push_back(new LevelObjectRectangle(7550.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Transparent));
-	m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Transparent));
-	m_levelObjects.push_back(new LevelObjectRectangle(8410.0f, 1600.0f, 1050.0f, 500.0f, sf::Color::Transparent));
-	m_player = new Player(200.0f, 1850.0f);
+	//m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Transparent));
+	//m_levelObjects.push_back(new LevelObjectRectangle(8450.0f, 1600.0f, 3000.0f, 300.0f, sf::Color::Magenta));
+	m_player = new Player(200.0f, 1899.0f);
 
+	levelHouse = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("House", "House_Placeholder"));
+	levelHouse->setPosition(8210.0f, 930.0f);
+	levelBridge = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Bridge", "Bridge_0"));
+	levelBridge->setPosition(6150.0f, 2100.0f);
 	levelBlock1 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block1");
 	levelBlock2 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block2");
 	levelBlock3 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block3");
@@ -43,9 +47,9 @@ LevelManager::LevelManager(sf::View* view)
 	d_bg1->setPosition(8160.0f, 0.0f);
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyTroll(2600.0f, 1605.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(5200.0f, 1500.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(7000.0f, 1500.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(2600.0f, 1679.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(5200.0f, 1819.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(7000.0f, 1719.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(0.0f, 1000.0f, 1.0f, 1500.0f));
 }
 
@@ -72,8 +76,9 @@ void LevelManager::draw(sf::RenderWindow* window)
 		{m_levelObjects[a]->draw(window);}
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
+	window->draw(*levelHouse);
 	m_player->draw(window);
-
+	window->draw(*levelBridge);
 	window->draw(*levelBlock5);
 	window->draw(*levelBlock3);
 	window->draw(*levelBlock5_1);

@@ -42,6 +42,8 @@ private:
 	sf::Sprite* levelBlock6;
 	sf::Sprite* levelBlock7;
 	sf::Sprite* levelBlock8;
+	sf::Sprite* levelHouse;
+	sf::Sprite* levelBridge;
 };
 
 #endif
