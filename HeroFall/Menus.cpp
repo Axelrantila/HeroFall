@@ -12,14 +12,14 @@ Menus::Menus()
 	Play->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play");
 	Play->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play_lit");
 	Play->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play");
-	Play->Center(sf::Vector2f(1440, 900));
+	Play->Center(sf::Vector2f(1920, 1080));
 	Play->Move(sf::Vector2f(0.0f, -(float)Play->m_standard->getTextureRect().height - 50));
 
 	Options = new UIButton();
 	Options->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options");
 	Options->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options_lit");
 	Options->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options");
-	Options->Center(sf::Vector2f(1440, 900));
+	Options->Center(sf::Vector2f(1920, 1080));
 
 	Credits = new UIButton();
 	Credits->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Credits");

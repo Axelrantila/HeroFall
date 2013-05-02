@@ -15,10 +15,11 @@ StateManager::StateManager()
 		SettingsManager::getSettings()->FRAME_TITLE);
 	m_window->setMouseCursorVisible(false);
 	m_window->setFramerateLimit(60);
+	m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
 
 	loadResources();
 
-	m_states.push_back(new Menus());
+	addState(new Menus());
 
 	m_deltaTime = 0.0f;
 	m_clock.restart();
@@ -97,7 +98,9 @@ void StateManager::run()
 			while(!m_statesToAdd.empty())
 			{
 				if(m_statesToAdd[0] == STATE_MENUS)
-				{m_states.push_back(new Menus());}
+				{
+					m_states.push_back(new Menus());
+				}
 
 				else if(m_statesToAdd[0] == STATE_GAME)
 				{
