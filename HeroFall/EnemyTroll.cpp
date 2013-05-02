@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-EnemyTroll::EnemyTroll(float xPos, float yPos)
+EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	:Enemy(ENEMY_TROLL, xPos, yPos, SettingsManager::getSettings()->ENEMY_TROLL_HEALTH)
 {
 	m_sprite = SpriteSheetLoader::getInstance()->getSprite("Troll", "Troll_Walk_0_0");
@@ -25,6 +25,9 @@ EnemyTroll::EnemyTroll(float xPos, float yPos)
 
 	m_hitBoxTest =  new sf::RectangleShape(sf::Vector2f(231.0f, 330.0f));
 	m_hitBoxTest->setFillColor(sf::Color(64, 224, 208, 128));
+
+	m_view = view;
+	m_seen = false;
 }
 
 
@@ -47,6 +50,19 @@ void EnemyTroll::update(float delta)
 	{
 		m_hitted  = false;
 		m_animations->setCurrentAnimation("Troll_Walk_0");
+	}
+
+	//Check if the enemy has been seen
+	if(!m_seen)
+	{
+		sf::FloatRect viewField(
+		m_view->getCenter().x - m_view->getSize().x / 2.0f
+		,m_view->getCenter().y - m_view->getSize().x / 2.0f
+		,m_view->getSize().x
+		,m_view->getSize().y);
+
+		if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(viewField))
+		{m_seen = true;}
 	}
 }
 
@@ -94,5 +110,13 @@ void EnemyTroll::takeDamage(float damage)
 		//Check if character is dead
 		if(m_health <= 0.0f)
 		{m_isDead = true;}
+	}
+}
+
+void EnemyTroll::move(float delta, std::vector<LevelObject*> levelObjects)
+{
+	if(m_seen)
+	{
+		Enemy::move(delta, levelObjects);
 	}
 }

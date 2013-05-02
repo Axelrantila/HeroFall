@@ -5,6 +5,8 @@
 #include "LevelObjectRectangle.h"
 #include "Player.h"
 #include "SpriteSheetLoader.h"
+#include "Util.h"
+
 #include <iostream>
 #include <math.h>
 
@@ -51,6 +53,8 @@ Player::Player(float xPos, float yPos)
 	tempBox = new sf::RectangleShape(sf::Vector2f(109.0f, 58.0f));
 	tempBox->setFillColor(sf::Color(64, 128, 255, 128));
 	m_swordBoxes.push_back(tempBox);
+
+	m_currentAttack = 0;
 }
 
 Player::~Player()
@@ -69,7 +73,7 @@ void Player::draw(sf::RenderWindow* window)
 
 	if(m_swordIsSwinging)
 	{
-		window->draw(*m_swordBoxes[1]);
+		window->draw(*m_swordBoxes[m_currentAttack]);
 	}
 }
 
@@ -211,7 +215,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			EnemyPlaceholder* tEnemy = ((EnemyPlaceholder*)enemies->at(a));
 			if(m_swordIsSwinging && !m_swordHasHittedEnemy)
 			{
-				if(m_swordBoxes[1]->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
+				if(m_swordBoxes[m_currentAttack]->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER);
 					m_swordHasHittedEnemy = true;
@@ -228,9 +232,9 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		else if(enemies->at(a)->getType() == ENEMY_TROLL)
 		{
 			EnemyTroll* tEnemy = ((EnemyTroll*)enemies->at(a));
-			if(m_swordIsSwinging && !m_swordHasHittedEnemy && m_animations->isCurrentAnimation("Avatar_Attack_1"))
+			if(m_swordIsSwinging && !m_swordHasHittedEnemy )
 			{
-				if(m_swordBoxes[1]->getGlobalBounds().intersects(tEnemy->getHitBox()))
+				if(m_swordBoxes[m_currentAttack]->getGlobalBounds().intersects(tEnemy->getHitBox()))
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
 					m_swordHasHittedEnemy = true;
@@ -267,7 +271,9 @@ void Player::swingSword()
 	m_swordIsSwinging = true;
 	m_swordHasHittedEnemy = false;
 	m_swordClock.restart();
-	m_animations->setCurrentAnimation("Avatar_Attack_1");
+	m_currentAttack = (unsigned int)(Util::getInstance()->getRandomFloat(0, (float)m_swordBoxes.size()) - 0.1f);
+
+	m_animations->setCurrentAnimation("Avatar_Attack_" + Util::getInstance()->toString(m_currentAttack));
 	AudioMixer::getInstance()->playSound("Sword_swings", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 }
 

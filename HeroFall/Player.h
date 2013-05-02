@@ -42,6 +42,7 @@ private:
 	bool m_swordHasHittedEnemy;
 	sf::Clock m_swordClock;
 	float m_targetSwingTime;
+	unsigned int m_currentAttack;
 
 	bool m_markedForHalt;
 	sf::Clock m_meleeHitClock;

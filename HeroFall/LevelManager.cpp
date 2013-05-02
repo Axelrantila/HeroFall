@@ -43,9 +43,9 @@ LevelManager::LevelManager(sf::View* view)
 	d_bg1->setPosition(8160.0f, 0.0f);
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyTroll(2600.0f, 1605.0f));
-	m_enemies->push_back(new EnemyTroll(5200.0f, 1500.0f));
-	m_enemies->push_back(new EnemyTroll(7000.0f, 1500.0f));
+	m_enemies->push_back(new EnemyTroll(2600.0f, 1605.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(5200.0f, 1500.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(7000.0f, 1500.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(0.0f, 1000.0f, 1.0f, 1500.0f));
 }
 
