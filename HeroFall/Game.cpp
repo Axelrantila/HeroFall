@@ -12,7 +12,7 @@ Game::Game()
 {
 	m_view = new sf::View(
 		sf::Vector2f(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X / 2.0f, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y / 2.0f),
-		sf::Vector2f((float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X * 1.0f, (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y * 1.0f));
+		sf::Vector2f((float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X * 2.0f, (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y * 2.0f));
 	m_levelManager = new LevelManager(m_view);
 
 
