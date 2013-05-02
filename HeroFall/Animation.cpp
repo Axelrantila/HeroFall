@@ -51,6 +51,7 @@ void Animation::play()
 {
 	m_playing = true;
 	m_stopped = false;
+	m_currentFrame = 0;
 	m_clock.restart();
 }
 

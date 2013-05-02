@@ -6,8 +6,8 @@ InputManager::InputManager()
 	m_keyFunctions.insert(stringKeyPair("P1_MOVE_LEFT", sf::Keyboard::A));
 	m_keyFunctions.insert(stringKeyPair("P1_MOVE_DOWN", sf::Keyboard::S));
 	m_keyFunctions.insert(stringKeyPair("P1_MOVE_RIGHT", sf::Keyboard::D));
-	m_keyFunctions.insert(stringKeyPair("P1_ATTACK_1", sf::Keyboard::Q));
-	m_keyFunctions.insert(stringKeyPair("P1_ATTACK_2", sf::Keyboard::E));
+	m_keyFunctions.insert(stringKeyPair("P1_ATTACK_1", sf::Keyboard::Numpad1));
+	m_keyFunctions.insert(stringKeyPair("P1_ATTACK_2", sf::Keyboard::Numpad2));
 
 	m_keysDown.insert(stringBoolPair("P1_MOVE_UP", false));
 	m_keysDown.insert(stringBoolPair("P1_MOVE_LEFT", false));

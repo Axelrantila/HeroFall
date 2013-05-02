@@ -46,7 +46,10 @@ Player::Player(float xPos, float yPos)
 
 	sf::RectangleShape* tempBox = new sf::RectangleShape(sf::Vector2f(115.0f, 50.0f));
 	tempBox->setFillColor(sf::Color(255, 0, 0, 128));
+	m_swordBoxes.push_back(tempBox);
 
+	tempBox = new sf::RectangleShape(sf::Vector2f(109.0f, 58.0f));
+	tempBox->setFillColor(sf::Color(64, 128, 255, 128));
 	m_swordBoxes.push_back(tempBox);
 }
 
@@ -54,6 +57,9 @@ Player::~Player()
 {
 	delete m_animations;
 	delete m_hitBox;
+
+	for(unsigned int a = 0; a < m_swordBoxes.size(); a++)
+	{delete m_swordBoxes[a];}
 }
 
 void Player::draw(sf::RenderWindow* window)
@@ -63,7 +69,7 @@ void Player::draw(sf::RenderWindow* window)
 
 	if(m_swordIsSwinging)
 	{
-		window->draw(*m_swordBoxes[0]);
+		window->draw(*m_swordBoxes[1]);
 	}
 }
 
@@ -205,7 +211,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			EnemyPlaceholder* tEnemy = ((EnemyPlaceholder*)enemies->at(a));
 			if(m_swordIsSwinging && !m_swordHasHittedEnemy)
 			{
-				if(m_swordBoxes[0]->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
+				if(m_swordBoxes[1]->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER);
 					m_swordHasHittedEnemy = true;
@@ -222,9 +228,9 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		else if(enemies->at(a)->getType() == ENEMY_TROLL)
 		{
 			EnemyTroll* tEnemy = ((EnemyTroll*)enemies->at(a));
-			if(m_swordIsSwinging && !m_swordHasHittedEnemy && m_animations->isCurrentAnimation("Avatar_Attack_0"))
+			if(m_swordIsSwinging && !m_swordHasHittedEnemy && m_animations->isCurrentAnimation("Avatar_Attack_1"))
 			{
-				if(m_swordBoxes[0]->getGlobalBounds().intersects(tEnemy->getHitBox()))
+				if(m_swordBoxes[1]->getGlobalBounds().intersects(tEnemy->getHitBox()))
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
 					m_swordHasHittedEnemy = true;
@@ -261,7 +267,7 @@ void Player::swingSword()
 	m_swordIsSwinging = true;
 	m_swordHasHittedEnemy = false;
 	m_swordClock.restart();
-	m_animations->setCurrentAnimation("Avatar_Attack_0");
+	m_animations->setCurrentAnimation("Avatar_Attack_1");
 	AudioMixer::getInstance()->playSound("Sword_swings", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 }
 
@@ -347,4 +353,7 @@ void Player::updateBoxes()
 
 	m_swordBoxes[0]->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 200.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 160.0f);
+
+	m_swordBoxes[1]->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 210.0f,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + 170.0f);
 }

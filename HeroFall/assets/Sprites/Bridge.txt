@@ -1,0 +1,5 @@
+wSheet=1450
+hSheet=115
+wSprite=1450
+hSprite=115
+Bridge_0
