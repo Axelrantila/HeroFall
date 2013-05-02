@@ -100,12 +100,19 @@ void StateManager::run()
 				{m_states.push_back(new Menus());}
 
 				else if(m_statesToAdd[0] == STATE_GAME)
-				{m_states.push_back(new Game());}
+				{
+					m_window->clear();
+					m_window->draw(*SpriteSheetLoader::getInstance()->getSprite("LoadingScreen", "LoadingScreen_Placeholder"));
+					m_window->display();
+
+					m_states.push_back(new Game());
+				}
 
 				else if(m_statesToAdd[0] == STATE_GAMEOVER)
 				{m_states.push_back(new GameOver());}
 
 				m_statesToAdd.pop_back();
+				m_clock.restart();
 			}
 		}
 		else
@@ -139,15 +146,7 @@ void StateManager::addState(StateType state)
 
 void StateManager::loadResources()
 {
-	SpriteSheetLoader::getInstance()->getSheet("Airship");
-	SpriteSheetLoader::getInstance()->getSheet("Avatar");
-	SpriteSheetLoader::getInstance()->getSheet("Background");
 	SpriteSheetLoader::getInstance()->getSheet("DBG");
-	SpriteSheetLoader::getInstance()->getSheet("Level");
-	SpriteSheetLoader::getInstance()->getSheet("Hero");
+	SpriteSheetLoader::getInstance()->getSheet("LoadingScreen");
 	SpriteSheetLoader::getInstance()->getSheet("MenuButtons");
-	//SpriteSheetLoader::getInstance()->getSheet("Test");
-	SpriteSheetLoader::getInstance()->getSheet("Troll");
-
-	AudioMixer::getInstance()->playSound("phaser");
 }

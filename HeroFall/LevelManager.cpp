@@ -98,7 +98,7 @@ void LevelManager::updatePlayerSpeed()
 		m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
 	}
 
-	else if(InputManager::getInstance()->isKeyDown("P1_MOVE_DOWN"))
+	else if(InputManager::getInstance()->isKeyDown("P1_MOVE_DOWN") && !m_player->isOnGround())
 	{
 		m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_DOWN);
 	}

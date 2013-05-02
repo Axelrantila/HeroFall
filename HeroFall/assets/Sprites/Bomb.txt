@@ -1,0 +1,5 @@
+wSheet=100
+hSheet=100
+wSprite=100
+hSprite=100
+Bomb_Placeholder

@@ -2,9 +2,7 @@
 #define PLAYER_H
 
 #include "AnimationManager.h"
-#include "character.h"
-#include "SwordBehaviorUpAndDown.h"
-#include "SwordPointManager.h"
+#include "Character.h"
 
 #include <SFML\Graphics.hpp>
 
@@ -49,11 +47,10 @@ private:
 	float m_meleeHitTime;
 	bool m_hitted;
 
-	std::vector<SwordPointInfo> m_boxInfo;
-	SwordPointManager* m_swordPointManager;
-
 	bool m_isOnGround;
 	bool m_groundMarked;
+
+	bool m_isIdle;
 };
 
 #endif

@@ -9,11 +9,15 @@ class EnemyBomb
 	:public Enemy
 {
 public:
-	EnemyBomb(float xPos, float yPos, EnemyGoblin* parent);
+	EnemyBomb(EnemyGoblin* parent);
 	~EnemyBomb();
+
+	void move(float delta, std::vector<LevelObject*> levelObjects);
 
 private:
 	EnemyGoblin* m_parent;
+
+	sf::Sprite* d_sprite;
 };
 
 #endif

@@ -16,6 +16,8 @@ public:
 	bool collidesWith(LevelObject* levelObject);
 	void move(float delta, std::vector<LevelObject*> levelObjects);
 
+	sf::Vector2f getBombSpawnPoint();
+
 private:
 	float m_xPos0;
 	float m_xPos1;

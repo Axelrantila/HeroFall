@@ -56,3 +56,9 @@ void EnemyGoblin::move(float delta, std::vector<LevelObject*> levelObjects)
 
 	m_xPos += m_xVel * delta;
 }
+
+sf::Vector2f EnemyGoblin::getBombSpawnPoint()
+{
+	return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left + m_animations->getCurrentSprite()->getGlobalBounds().width / 2.0f,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height);
+}
