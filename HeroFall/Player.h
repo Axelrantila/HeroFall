@@ -46,6 +46,8 @@ private:
 	std::vector<sf::RectangleShape*> m_swordBoxes;
 	sf::RectangleShape* m_shieldBox;
 
+	std::map<Animation*, sf::RectangleShape> m_swordBoxesMap;
+
 	bool m_swordIsSwinging;
 	bool m_swordHasHittedEnemy;
 	sf::Clock m_swordClock;

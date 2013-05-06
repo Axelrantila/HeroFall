@@ -50,13 +50,9 @@ Player::Player(float xPos, float yPos)
 	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
 
-	sf::RectangleShape* tempBox = new sf::RectangleShape(sf::Vector2f(115.0f, 50.0f));
-	tempBox->setFillColor(sf::Color(255, 0, 0, 128));
-	m_swordBoxes.push_back(tempBox);
-
-	tempBox = new sf::RectangleShape(sf::Vector2f(109.0f, 58.0f));
-	tempBox->setFillColor(sf::Color(64, 128, 255, 128));
-	m_swordBoxes.push_back(tempBox);
+	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_Attack_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
+	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_Attack_1"), sf::RectangleShape(sf::Vector2f(109.0f, 58.0f))));
+	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_CAttack_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
 
 	m_currentAttack = 0;
 }
@@ -65,20 +61,12 @@ Player::~Player()
 {
 	delete m_animations;
 	delete m_hitBox;
-
-	for(unsigned int a = 0; a < m_swordBoxes.size(); a++)
-	{delete m_swordBoxes[a];}
 }
 
 void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	/*window->draw(*m_hitBox);
-
-	if(m_swordIsSwinging)
-	{
-		window->draw(*m_swordBoxes[m_currentAttack]);
-	}*/
+	/*window->draw(*m_hitBox);*/
 }
 
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)
@@ -219,7 +207,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			EnemyPlaceholder* tEnemy = ((EnemyPlaceholder*)enemies->at(a));
 			if(m_swordIsSwinging && !m_swordHasHittedEnemy)
 			{
-				if(m_swordBoxes[m_currentAttack]->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
+				if(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER);
 					m_swordHasHittedEnemy = true;
@@ -239,7 +227,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			EnemyTroll* tEnemy = ((EnemyTroll*)enemies->at(a));
 			if(m_swordIsSwinging && !m_swordHasHittedEnemy )
 			{
-				if(m_swordBoxes[m_currentAttack]->getGlobalBounds().intersects(tEnemy->getHitBox()))
+				if(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().intersects(tEnemy->getHitBox()))
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
 					m_swordHasHittedEnemy = true;
@@ -255,7 +243,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		//Bomb
 		else if(enemies->at(a)->getType() == ENEMY_BOMB)
 		{
-			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(((EnemyBomb*)enemies->at(a))->getGlobalBounds())
+			if(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().intersects(((EnemyBomb*)enemies->at(a))->getGlobalBounds())
 				&& !m_isBlocking)
 			{
 				m_isDead = true;
@@ -308,7 +296,7 @@ void Player::swingSword(AttackType type)
 
 	else if(type == ATTACK_NORMAL)
 	{
-		m_currentAttack = (unsigned int)(Util::getInstance()->getRandomFloat(0, (float)m_swordBoxes.size()) - 0.1f);
+		m_currentAttack = (unsigned int)(Util::getInstance()->getRandomFloat(0, 1.99999f);
 		m_animations->setCurrentAnimation("Avatar_Attack_" + Util::getInstance()->toString(m_currentAttack));
 	}
 }
@@ -407,11 +395,22 @@ void Player::updateBoxes()
 	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
 
-	m_swordBoxes[0]->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 200.0f,
+	for(std::map<Animation*, sf::RectangleShape>::iterator it = m_swordBoxesMap.begin();
+		it != m_swordBoxesMap.end(); ++it)
+	{
+		if(it->first == m_animations->getAnimation("Avatar_Attack_0")
+			|| it->first == m_animations->getAnimation("Avatar_CAttack_0"))
+		{
+			it->second.setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 200.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 160.0f);
+		}
 
-	m_swordBoxes[1]->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 210.0f,
+		else if(it->first == m_animations->getAnimation("Avatar_Attack_1"))
+		{
+			it->second.setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 210.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 170.0f);
+		}
+	}
 }
 
 void Player::block(bool blocking)
