@@ -26,7 +26,7 @@ public:
 	virtual bool collidesWith(LevelObject* levelObject) = 0;
 	virtual float getGravityDistance(float delta);
 
-	virtual bool  isDead();
+	virtual bool isDead();
 	virtual void takeDamage(float damage);
 
 protected:

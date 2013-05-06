@@ -7,6 +7,7 @@ Character::Character(PositionType positionType, float xPos, float yPos, float he
 	m_gravityConstant = 0.0f;
 	m_xVel = 0.0f;
 	m_yVel = 0.0f;
+	m_armor = 0.0f;
 
 	m_health = health;
 	m_isDead = false;

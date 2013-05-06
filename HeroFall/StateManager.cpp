@@ -3,6 +3,7 @@
 #include "GameOver.h"
 #include "InputManager.h"
 #include "Menus.h"
+#include "ScoreManager.h"
 #include "SpriteSheetLoader.h"
 #include "StateManager.h"
 
@@ -23,6 +24,8 @@ StateManager::StateManager()
 
 	m_deltaTime = 0.0f;
 	m_clock.restart();
+
+	m_running = true;
 }
 
 
@@ -105,6 +108,7 @@ void StateManager::run()
 				else if(m_statesToAdd[0] == STATE_GAME)
 				{
 					m_window->clear();
+					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 2110.0f, 1318.75f)));
 					m_window->draw(*SpriteSheetLoader::getInstance()->getSprite("LoadingScreen", "LoadingScreen_Placeholder"));
 					m_window->display();
 
@@ -123,8 +127,15 @@ void StateManager::run()
 			m_running = false;
 		}
 
+		if(InputManager::getInstance()->d_testCombo())
+		{
+			std::cout << "C_C_C_COMBOWORKER\n";
+		}
+
 		AudioMixer::getInstance()->update();
 		InputManager::getInstance()->update();
+
+		//std::cout << ScoreManager::getInstance()->getScore() << std::endl;
 	}
 }
 

@@ -21,14 +21,14 @@ SettingsManager::~SettingsManager()
 
 bool SettingsManager::loadSettings()
 {
-	m_settings = new SettingsObject();
-
 	CSimpleIniA ini;
 	ini.SetUnicode();
 	ini.LoadFile("CONFIG.ini");
 
 	if(ini.IsEmpty())
 		{return false;}
+
+	m_settings = new SettingsObject();
 
 	m_settings->FRAME_TITLE = ini.GetValue("FRAME", "TITLE", "");
 	m_settings->FRAME_FULLSCREEN = ini.GetBoolValue("FRAME", "FULLSCREEN", false);
@@ -54,6 +54,22 @@ bool SettingsManager::loadSettings()
 
 	m_settings->ENEMY_TROLL_HEALTH = (float)ini.GetDoubleValue("ENEMY_TROLL", "HEALTH", 0);
 	m_settings->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE = (float)ini.GetDoubleValue("ENEMY_TROLL", "HIT_TIME_LIMIT_MELEE", 0);
+	m_settings->ENEMY_TROLL_SPEED_SIDE = (float)ini.GetDoubleValue("ENEMY_TROLL", "SPEED_SIDE", 0);
+	m_settings->ENEMY_TROLL_HITBOX_SIZE_X = (float)ini.GetDoubleValue("ENEMY_TROLL", "HITBOX_SIZE_X", 0);
+	m_settings->ENEMY_TROLL_HITBOX_SIZE_Y = (float)ini.GetDoubleValue("ENEMY_TROLL", "HITBOX_SIZE_Y", 0);
+	m_settings->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X = (float)ini.GetDoubleValue("ENEMY_TROLL", "HITBOX_LOCAL_POSITION_X", 0);
+	m_settings->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y = (float)ini.GetDoubleValue("ENEMY_TROLL", "HITBOX_LOCAL_POSITION_Y", 0);
+
+	m_settings->ENEMY_GOBLIN_HEALTH = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "HEALTH", 0);
+	m_settings->ENEMY_GOBLIN_SPEED_SIDE = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "SPEED_SIDE", 0);
+	m_settings->ENEMY_GOBLIN_BOMB_SPAWN_TIME = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "BOMB_SPAWN_TIME", 0);
+
+	m_settings->SCORE_KILL_TROLL = ini.GetLongValue("SCORE", "KILL_TROLL", 0);
+	m_settings->SCORE_KILL_GOBLIN = ini.GetLongValue("SCORE", "KILL_GOBLIN", 0);
+	m_settings->SCORE_KILL_SHOOTER = ini.GetLongValue("SCORE", "KILL_SHOOTER", 0);
+
+	m_settings->HIGHSCORE_NAME = ini.GetValue("HIGHSCORE", "NAME", "");
+	m_settings->HIGHSCORE_SCORE = ini.GetLongValue("HIGHSCORE", "SCORE", 0);
 
 	return true;
 }

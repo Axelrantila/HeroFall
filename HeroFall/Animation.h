@@ -33,7 +33,6 @@ private:
 	bool m_playing;
 	bool m_stopped;
 
-	float m_totalTime;
 	float m_frameTime;
 	unsigned int m_currentFrame;
 	unsigned int m_totalFrames;

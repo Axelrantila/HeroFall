@@ -1,8 +1,8 @@
 #include "EnemyGoblin.h"
+#include "SettingsManager.h"
 
-
-EnemyGoblin::EnemyGoblin(float xPos, float yPos, float health, float travelDistance)
-	:Enemy(ENEMY_GOBLIN, xPos, yPos, health)
+EnemyGoblin::EnemyGoblin(float xPos, float yPos, float travelDistance)
+	:Enemy(ENEMY_GOBLIN, xPos, yPos, SettingsManager::getSettings()->ENEMY_GOBLIN_HEALTH)
 {
 	m_xPos0 = xPos;
 	m_xPos1 = xPos + travelDistance;
@@ -12,10 +12,10 @@ EnemyGoblin::EnemyGoblin(float xPos, float yPos, float health, float travelDista
 	m_animations->addAnimation("Airship_Walk_1", 1.0f, xPos, yPos);
 	m_animations->setCurrentAnimation("Airship_Walk_0");
 
-	m_xVel = 1000.0f;
+	m_xVel = SettingsManager::getSettings()->ENEMY_GOBLIN_SPEED_SIDE;
 	m_yVel = 0.0f;
 
-	m_bombSpawnTime = 5.0f;
+	m_bombSpawnTime = SettingsManager::getSettings()->ENEMY_GOBLIN_BOMB_SPAWN_TIME;
 	m_clock.restart();
 }
 

@@ -47,6 +47,28 @@ public:
 #pragma region ENEMY_TROLL
 	float ENEMY_TROLL_HEALTH;
 	float ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
+	float ENEMY_TROLL_SPEED_SIDE;
+	float ENEMY_TROLL_HITBOX_SIZE_X;
+	float ENEMY_TROLL_HITBOX_SIZE_Y;
+	float ENEMY_TROLL_HITBOX_LOCAL_POSITION_X;
+	float ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y;
+#pragma endregion
+
+#pragma region ENEMY_GOBLIN
+	float ENEMY_GOBLIN_HEALTH;
+	float ENEMY_GOBLIN_SPEED_SIDE;
+	float ENEMY_GOBLIN_BOMB_SPAWN_TIME;
+#pragma endregion
+
+#pragma region SCORE
+	unsigned int SCORE_KILL_TROLL;
+	unsigned int SCORE_KILL_GOBLIN;
+	unsigned int SCORE_KILL_SHOOTER;
+#pragma endregion
+
+#pragma region HIGHSCORE
+	std::string HIGHSCORE_NAME;
+	unsigned int HIGHSCORE_SCORE;
 #pragma endregion
 };
 

@@ -29,6 +29,9 @@ InputManager::InputManager()
 	m_keysPressable.insert(stringBoolPair("P1_MOVE_RIGHT", true));
 	m_keysPressable.insert(stringBoolPair("P1_ATTACK_1", true));
 	m_keysPressable.insert(stringBoolPair("P1_ATTACK_2", true));
+
+	m_comboTimeLimit = 5.5f;
+	m_comboClock.restart();
 }
 
 InputManager::~InputManager()
@@ -49,6 +52,17 @@ void InputManager::update()
 	{
 		it->second = false;
 	}
+
+	for(unsigned int a = 0; a < m_comboKeys.size();)
+	{
+		if(m_comboKeys[a].timeRegistered + m_comboTimeLimit <
+			m_comboClock.getElapsedTime().asSeconds())
+		{
+			m_comboKeys.erase(m_comboKeys.begin() + a);
+		}
+		else
+		{a++;}
+	}
 }
 
 void InputManager::keyPressed(sf::Keyboard::Key key)
@@ -61,6 +75,11 @@ void InputManager::keyPressed(sf::Keyboard::Key key)
 		{
 			m_keysDown[it->first] = true;
 			m_keysPressed[it->first] = true;
+
+			ComboKeyInfo tempComboKeyInfo;
+			tempComboKeyInfo.key = key;
+			tempComboKeyInfo.timeRegistered = m_comboClock.getElapsedTime().asSeconds();
+			m_comboKeys.push_back(tempComboKeyInfo);
 		}
 	}
 }
@@ -133,6 +152,22 @@ bool InputManager::isKeyPressed(std::string function)
 		{
 			m_keysPressable[it->first] = false;
 			return m_keysPressed[it->first];
+		}
+	}
+
+	return false;
+}
+
+bool InputManager::d_testCombo()
+{
+	if(m_comboKeys.size() >= 2)
+	{
+		if(m_comboKeys[0].key == m_keyFunctions["P1_ATTACK_1"]
+		&& m_comboKeys[1].key == m_keyFunctions["P1_ATTACK_2"])
+		{
+			m_comboKeys.pop_back();
+			m_comboKeys.pop_back();
+			return true;
 		}
 	}
 

@@ -8,7 +8,7 @@ class EnemyGoblin
 	:public Enemy
 {
 public:
-	EnemyGoblin(float xPos, float yPos, float health, float travelDistance);
+	EnemyGoblin(float xPos, float yPos, float travelDistance);
 	~EnemyGoblin();
 
 	void update(float delta);

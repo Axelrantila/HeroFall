@@ -8,6 +8,12 @@
 typedef std::pair<std::string, sf::Keyboard::Key> stringKeyPair;
 typedef std::pair<std::string, bool> stringBoolPair;
 
+struct ComboKeyInfo
+{
+	float timeRegistered;
+	sf::Keyboard::Key key;
+};
+
 class InputManager
 {
 public:
@@ -22,6 +28,8 @@ public:
 	bool isKeyPressed(sf::Keyboard::Key key);
 	bool isKeyPressed(std::string function);
 
+	bool d_testCombo();
+
 	void update();
 private:
 	InputManager();
@@ -31,6 +39,11 @@ private:
 	std::map<std::string, bool> m_keysDown;
 	std::map<std::string, bool> m_keysPressed;
 	std::map<std::string, bool> m_keysPressable;
+
+	//FOR COMBOS
+	sf::Clock m_comboClock;
+	float m_comboTimeLimit;
+	std::vector<ComboKeyInfo> m_comboKeys;
 };
 
 #endif

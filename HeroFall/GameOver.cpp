@@ -5,7 +5,7 @@
 GameOver::GameOver(void)
 {
 	tracker = 0;
-	backgroundGA = SpriteSheetLoader::getInstance()->getSprite ("DBG", "DBG_0");
+	//backgroundGA = SpriteSheetLoader::getInstance()->getSprite ("DBG", "DBG_0");
 
 	Continue = new UIButton();
 	Continue->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Audio");
@@ -73,7 +73,7 @@ void GameOver::update(StateManager* stateManager, float delta)
 
 void GameOver::draw(sf::RenderWindow* window)
 {
-	window->draw(*backgroundGA);
+	//window->draw(*backgroundGA);
 	Continue->Draw(window);
 	Quit->Draw(window);
 }

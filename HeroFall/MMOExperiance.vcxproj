@@ -111,6 +111,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="SettingsObject.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="LevelObjectRectangle.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="SettingsObject.h" />
     <ClInclude Include="Sprite.h" />

@@ -68,9 +68,6 @@
     <ClCompile Include="SpriteSheetLoader.cpp">
       <Filter>Engine\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Engine\Util</Filter>
-    </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Engine\Util</Filter>
     </ClCompile>
@@ -103,6 +100,12 @@
     </ClCompile>
     <ClCompile Include="SwordPointManager.cpp">
       <Filter>Game\Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Engine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,9 +181,6 @@
     <ClInclude Include="Util.h">
       <Filter>Engine\Util</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Engine\Util</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game\States</Filter>
     </ClInclude>
@@ -210,6 +210,12 @@
     </ClInclude>
     <ClInclude Include="SwordPointManager.h">
       <Filter>Game\Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +270,9 @@
     </Filter>
     <Filter Include="Game\Characters\Player\Sword Swing Behavior">
       <UniqueIdentifier>{f3748c01-f995-4d20-9161-18273362b64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{3b60bbfb-a285-4648-af74-e7b4e5b9a90b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

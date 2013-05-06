@@ -1,6 +1,7 @@
 #include "AudioMixer.h"
 #include "EnemyTroll.h"
 #include "LevelObjectRectangle.h"
+#include "ScoreManager.h"
 #include "SpriteSheetLoader.h"
 
 #include <iostream>
@@ -12,7 +13,7 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_sprite->setPosition(xPos, yPos);
 
 	m_yVel = 0.0f;
-	m_xVel = -125.0f;
+	m_xVel = -SettingsManager::getSettings()->ENEMY_TROLL_SPEED_SIDE;
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Troll_Walk_0", 1.0f, m_xPos, m_yPos);
@@ -23,7 +24,7 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_meleeHitTime = SettingsManager::getSettings()->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
 	m_hitClock.restart();
 
-	m_hitBoxTest =  new sf::RectangleShape(sf::Vector2f(231.0f, 330.0f));
+	m_hitBoxTest =  new sf::RectangleShape(sf::Vector2f(SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_X, SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_Y));
 	m_hitBoxTest->setFillColor(sf::Color(64, 224, 208, 128));
 
 	m_view = view;
@@ -43,8 +44,8 @@ void EnemyTroll::update(float delta)
 	m_sprite->setPosition(m_xPos, m_yPos);
 	m_animations->update(m_xPos, m_yPos);
 
-	m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 60.0f,
-		m_animations->getCurrentSprite()->getGlobalBounds().top + 45.0f);
+	m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
+		m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
 
 	if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
 	{
@@ -109,7 +110,10 @@ void EnemyTroll::takeDamage(float damage)
 
 		//Check if character is dead
 		if(m_health <= 0.0f)
-		{m_isDead = true;}
+		{
+			m_isDead = true;
+			ScoreManager::getInstance()->addScore(KILL_TROLL);
+		}
 	}
 }
 
