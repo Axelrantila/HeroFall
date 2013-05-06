@@ -121,34 +121,45 @@ void LevelManager::update(float deltaTime)
 
 void LevelManager::updatePlayerSpeed()
 {
-	//Update player speed
-
-	if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") && m_player->isOnGround())
+	if(InputManager::getInstance()->isKeyDown("P1_BLOCK"))
 	{
-		AudioMixer::getInstance()->playSound("Grunt");
-		m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
-	}
-
-	else if(InputManager::getInstance()->isKeyDown("P1_MOVE_DOWN") && !m_player->isOnGround())
-	{
-		m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_DOWN);
-	}
-
-	if(InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT")
-		&& !InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT"))
-	{
-		m_player->setXSpeed(-SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
-	}
-
-	else if(InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT")
-		&& !InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT"))
-	{
-		m_player->setXSpeed(SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
+		m_player->block(true);
 	}
 
 	else
 	{
-		m_player->haltXSpeed();
+		m_player->block(false);
+
+		//Update player speed
+		if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") && m_player->isOnGround())
+		{
+			AudioMixer::getInstance()->playSound("Grunt");
+			m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
+		}
+
+		else if(InputManager::getInstance()->isKeyDown("P1_MOVE_DOWN") && !m_player->isOnGround())
+		{
+			m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_DOWN);
+		}
+
+		if(InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT")
+			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT")
+			&& m_player->isOnGround())
+		{
+			m_player->setXSpeed(-SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
+		}
+
+		else if(InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT")
+			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT")
+			&& m_player->isOnGround())
+		{
+			m_player->setXSpeed(SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
+		}
+
+		else if(m_player->isOnGround())
+		{
+			m_player->haltXSpeed();
+		}
 	}
 }
 

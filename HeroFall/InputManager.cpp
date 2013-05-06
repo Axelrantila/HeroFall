@@ -6,13 +6,15 @@ InputManager::InputManager()
 	m_keyFunctions.insert(stringKeyPair("P1_MOVE_LEFT", sf::Keyboard::A));
 	m_keyFunctions.insert(stringKeyPair("P1_MOVE_DOWN", sf::Keyboard::S));
 	m_keyFunctions.insert(stringKeyPair("P1_MOVE_RIGHT", sf::Keyboard::D));
-	m_keyFunctions.insert(stringKeyPair("P1_ATTACK_1", sf::Keyboard::Numpad1));
-	m_keyFunctions.insert(stringKeyPair("P1_ATTACK_2", sf::Keyboard::Numpad2));
+	m_keyFunctions.insert(stringKeyPair("P1_BLOCK", sf::Keyboard::H));
+	m_keyFunctions.insert(stringKeyPair("P1_ATTACK_1", sf::Keyboard::J));
+	m_keyFunctions.insert(stringKeyPair("P1_ATTACK_2", sf::Keyboard::K));
 
 	m_keysDown.insert(stringBoolPair("P1_MOVE_UP", false));
 	m_keysDown.insert(stringBoolPair("P1_MOVE_LEFT", false));
 	m_keysDown.insert(stringBoolPair("P1_MOVE_DOWN", false));
 	m_keysDown.insert(stringBoolPair("P1_MOVE_RIGHT", false));
+	m_keysDown.insert(stringBoolPair("P1_BLOCK", false));
 	m_keysDown.insert(stringBoolPair("P1_ATTACK_1", false));
 	m_keysDown.insert(stringBoolPair("P1_ATTACK_2", false));
 
@@ -20,6 +22,7 @@ InputManager::InputManager()
 	m_keysPressed.insert(stringBoolPair("P1_MOVE_LEFT", false));
 	m_keysPressed.insert(stringBoolPair("P1_MOVE_DOWN", false));
 	m_keysPressed.insert(stringBoolPair("P1_MOVE_RIGHT", false));
+	m_keysPressed.insert(stringBoolPair("P1_BLOCK", false));
 	m_keysPressed.insert(stringBoolPair("P1_ATTACK_1", false));
 	m_keysPressed.insert(stringBoolPair("P1_ATTACK_2", false));
 
@@ -27,10 +30,11 @@ InputManager::InputManager()
 	m_keysPressable.insert(stringBoolPair("P1_MOVE_LEFT", true));
 	m_keysPressable.insert(stringBoolPair("P1_MOVE_DOWN", true));
 	m_keysPressable.insert(stringBoolPair("P1_MOVE_RIGHT", true));
+	m_keysPressable.insert(stringBoolPair("P1_BLOCK", true));
 	m_keysPressable.insert(stringBoolPair("P1_ATTACK_1", true));
 	m_keysPressable.insert(stringBoolPair("P1_ATTACK_2", true));
 
-	m_comboTimeLimit = 5.5f;
+	m_comboTimeLimit = 1.0f;
 	m_comboClock.restart();
 }
 

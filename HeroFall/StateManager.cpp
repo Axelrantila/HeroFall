@@ -102,6 +102,7 @@ void StateManager::run()
 			{
 				if(m_statesToAdd[0] == STATE_MENUS)
 				{
+					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
 					m_states.push_back(new Menus());
 				}
 
@@ -111,6 +112,10 @@ void StateManager::run()
 					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 2110.0f, 1318.75f)));
 					m_window->draw(*SpriteSheetLoader::getInstance()->getSprite("LoadingScreen", "LoadingScreen_Placeholder"));
 					m_window->display();
+
+					SpriteSheetLoader::getInstance()->removeSheet("MainMenuBG");
+					SpriteSheetLoader::getInstance()->removeSheet("MainMenuButtons");
+					SpriteSheetLoader::getInstance()->removeSheet("LoadingScreen");
 
 					m_states.push_back(new Game());
 				}
@@ -127,10 +132,7 @@ void StateManager::run()
 			m_running = false;
 		}
 
-		if(InputManager::getInstance()->d_testCombo())
-		{
-			std::cout << "C_C_C_COMBOWORKER\n";
-		}
+		
 
 		AudioMixer::getInstance()->update();
 		InputManager::getInstance()->update();

@@ -9,6 +9,13 @@
 class Enemy;
 class LevelObject;
 
+//TYPES OF ATTACKS
+enum  AttackType
+{
+	ATTACK_NORMAL,
+	ATTACK_COMBO_0
+};
+
 class Player :
 	public Character
 {
@@ -27,8 +34,8 @@ public:
 	void collidesWith(std::vector<Enemy*>* enemies);
 
 	sf::Vector2f getCenter();
-	void swingSword();
-
+	void swingSword(AttackType type = ATTACK_NORMAL);
+	void block(bool blocking);
 	void takeDamage(float damage);
 
 	bool isOnGround() {return m_isOnGround;}
@@ -37,12 +44,14 @@ private:
 	AnimationManager* m_animations;
 	sf::RectangleShape* m_hitBox;
 	std::vector<sf::RectangleShape*> m_swordBoxes;
+	sf::RectangleShape* m_shieldBox;
 
 	bool m_swordIsSwinging;
 	bool m_swordHasHittedEnemy;
 	sf::Clock m_swordClock;
 	float m_targetSwingTime;
 	unsigned int m_currentAttack;
+	bool m_isBlocking;
 
 	bool m_markedForHalt;
 	sf::Clock m_meleeHitClock;

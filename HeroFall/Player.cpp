@@ -32,6 +32,7 @@ Player::Player(float xPos, float yPos)
 	m_animations->addAnimation("Avatar_Run_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Attack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Attack_1", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_CAttack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_1", 0.5f, this->m_xPos, this->m_yPos);
@@ -42,6 +43,7 @@ Player::Player(float xPos, float yPos)
 	m_isOnGround = false;
 	m_groundMarked = false;
 	m_isIdle = false;
+	m_isBlocking = false;
 
 	m_hitBox = new sf::RectangleShape(sf::Vector2f(115.0f, 170.0f));
 	m_hitBox->setFillColor(sf::Color(236, 116, 4, 128));
@@ -224,7 +226,8 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				}
 			}
 
-			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds()))
+			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(tEnemy->getRect()->getGlobalBounds())
+				&& !m_isBlocking)
 			{
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER);
 			}
@@ -243,7 +246,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				}
 			}
 
-			if(m_hitBox->getGlobalBounds().intersects(tEnemy->getHitBox()))
+			if(m_hitBox->getGlobalBounds().intersects(tEnemy->getHitBox()) && !m_isBlocking)
 			{
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_TROLL_TO_PLAYER);
 			}
@@ -252,12 +255,14 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		//Bomb
 		else if(enemies->at(a)->getType() == ENEMY_BOMB)
 		{
-			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(((EnemyBomb*)enemies->at(a))->getGlobalBounds()))
+			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(((EnemyBomb*)enemies->at(a))->getGlobalBounds())
+				&& !m_isBlocking)
 			{
 				m_isDead = true;
 			}
 		}
 
+		//Goblin
 		else if(enemies->at(a)->getType() == ENEMY_GOBLIN)
 		{
 			if(m_swordIsSwinging && !m_swordHasHittedEnemy)
@@ -289,15 +294,23 @@ sf::Vector2f Player::getCenter()
 		m_yPos + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
 }
 
-void Player::swingSword()
+void Player::swingSword(AttackType type)
 {
 	m_swordIsSwinging = true;
 	m_swordHasHittedEnemy = false;
 	m_swordClock.restart();
-	m_currentAttack = (unsigned int)(Util::getInstance()->getRandomFloat(0, (float)m_swordBoxes.size()) - 0.1f);
-
-	m_animations->setCurrentAnimation("Avatar_Attack_" + Util::getInstance()->toString(m_currentAttack));
 	AudioMixer::getInstance()->playSound("Sword_swings", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
+
+	if(type == ATTACK_COMBO_0)
+	{
+		m_animations->setCurrentAnimation("Avatar_CAttack_0");
+	}
+
+	else if(type == ATTACK_NORMAL)
+	{
+		m_currentAttack = (unsigned int)(Util::getInstance()->getRandomFloat(0, (float)m_swordBoxes.size()) - 0.1f);
+		m_animations->setCurrentAnimation("Avatar_Attack_" + Util::getInstance()->toString(m_currentAttack));
+	}
 }
 
 void Player::update(float delta)
@@ -305,7 +318,15 @@ void Player::update(float delta)
 	AudioMixer::getInstance()->setListenerPosition(m_xPos, m_yPos);
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
 
-	if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1") && !m_swordIsSwinging)
+	if(m_isBlocking){std::cout << "Blocking\n";}
+
+	//Attack animations
+	if(InputManager::getInstance()->d_testCombo())
+	{
+		swingSword(ATTACK_COMBO_0);
+	}
+	
+	else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1") && !m_swordIsSwinging)
 	{
 		swingSword();
 	}
@@ -335,7 +356,7 @@ void Player::update(float delta)
 		if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
 		{
 			m_swordIsSwinging = false;
-			m_animations->setCurrentAnimation("Avatar_Run_0");
+			m_animations->setCurrentAnimation("Avatar_Idle_0");
 		}
 	}
 
@@ -350,6 +371,12 @@ void Player::setXSpeed(float xVel)
 {
 	m_xVel = xVel;
 	m_markedForHalt = false;
+	
+	if(m_animations->getCurrentAnimation() != m_animations->getAnimation("Avatar_Run_0")
+		&& !m_swordIsSwinging)
+	{
+		m_animations->setCurrentAnimation("Avatar_Run_0");
+	}
 }
 
 void Player::haltXSpeed()
@@ -385,4 +412,9 @@ void Player::updateBoxes()
 
 	m_swordBoxes[1]->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 210.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 170.0f);
+}
+
+void Player::block(bool blocking)
+{
+	m_isBlocking = blocking;
 }

@@ -26,6 +26,8 @@ public:
 
 	sf::Sprite* getSprite(std::string sheetUniqueName, std::string spriteUniqueName);
 	sf::Sprite* getSprite(sf::Sprite* sprite, std::string sheetUniqueName, std::string spriteUniqueName);
+
+	void removeSheet(string sheetUniqueName);
 };
 
 #endif

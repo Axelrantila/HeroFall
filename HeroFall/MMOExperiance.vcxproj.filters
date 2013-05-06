@@ -95,9 +95,6 @@
     <ClCompile Include="EnemyBomb.cpp">
       <Filter>Game\Characters\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game\Characters\Player</Filter>
-    </ClCompile>
     <ClCompile Include="SwordPointManager.cpp">
       <Filter>Game\Characters\Player</Filter>
     </ClCompile>
@@ -106,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,9 +205,6 @@
     <ClInclude Include="EnemyBomb.h">
       <Filter>Game\Characters\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game\Characters\Player</Filter>
-    </ClInclude>
     <ClInclude Include="SwordPointManager.h">
       <Filter>Game\Characters\Player</Filter>
     </ClInclude>
@@ -216,6 +213,9 @@
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

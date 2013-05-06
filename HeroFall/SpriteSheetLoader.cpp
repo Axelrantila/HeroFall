@@ -88,3 +88,18 @@ SpriteSheetLoader* SpriteSheetLoader::getInstance()
 	static SpriteSheetLoader instance;
 	return &instance;
 }
+
+void SpriteSheetLoader::removeSheet(string sheetName)
+{
+	for(mapSurfacesIterator it = m_loadedSheets.begin();
+		it != m_loadedSheets.end();
+		++it)
+	{
+		if(it->first == sheetName)
+		{
+			delete it->second;
+			m_loadedSheets.erase(sheetName);
+			break;
+		}
+	}
+}
