@@ -2,6 +2,9 @@
 #define ENEMYSHOOTER_H
 
 #include "Enemy.h"
+#include "LevelObjectRectangle.h"
+
+class AnimationManager;
 
 class EnemyShooter :
 	public Enemy
@@ -9,6 +12,21 @@ class EnemyShooter :
 public:
 	EnemyShooter(float xPos, float yPos, float health);
 	~EnemyShooter();
+
+	bool canShoot();
+	sf::Vector2f getProjectileSpawnPoint();
+
+	void update(float delta);
+	void draw(sf::RenderWindow* window);
+	bool collidesWith(LevelObject* levelObject);
+	
+	sf::FloatRect getGlobalBounds();
+
+private:
+	AnimationManager* m_animations;
+
+	sf::Clock m_shootClock;
+	float m_shootTime;
 };
 
 #endif 

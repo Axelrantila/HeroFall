@@ -2,11 +2,13 @@
 #include "LevelObjectRectangle.h"
 #include "SettingsManager.h"
 
-Enemy::Enemy(EnemyType type, float xPos, float yPos, float health)
+Enemy::Enemy(EnemyType type, float xPos, float yPos, float health, sf::View* view)
 	:Character(PT_UPPER_LEFT, xPos, yPos, health)
 {
 	m_type = type;
 	m_health = health;
+	m_view = view;
+	m_seen = false;
 }
 
 

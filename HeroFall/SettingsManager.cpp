@@ -51,6 +51,8 @@ bool SettingsManager::loadSettings()
 	m_settings->DAMAGE_ENEMY_TROLL_TO_PLAYER = (float)ini.GetDoubleValue("DAMAGE", "ENEMY_TROLL_TO_PLAYER", 0);
 	m_settings->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER = (float)ini.GetDoubleValue("DAMAGE", "PLAYER_TO_ENEMY_PLACEHOLDER", 0);
 	m_settings->DAMAGE_PLAYER_TO_ENEMY_TROLL = (float)ini.GetDoubleValue("DAMAGE", "PLAYER_TO_ENEMY_TROLL", 0);
+	m_settings->DAMAGE_ENEMY_PROJECTILE_TO_PLAYER = (float)ini.GetDoubleValue("DAMAGE", "ENEMY_PROJECTILE_TO_PLAYER", 0);
+	m_settings->DAMAGE_PLAYER_TO_ENEMY_SHOOTER = (float)ini.GetDoubleValue("DAMAGE", "PLAYER_TO_ENEMY_SHOOTER", 0);
 
 	m_settings->ENEMY_TROLL_HEALTH = (float)ini.GetDoubleValue("ENEMY_TROLL", "HEALTH", 0);
 	m_settings->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE = (float)ini.GetDoubleValue("ENEMY_TROLL", "HIT_TIME_LIMIT_MELEE", 0);

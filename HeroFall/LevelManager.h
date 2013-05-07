@@ -6,6 +6,8 @@
 #include "EnemyBomb.h"
 #include "EnemyGoblin.h"
 #include "EnemyPlaceholder.h"
+#include "EnemyProjectile.h"
+#include "EnemyShooter.h"
 #include "EnemyTroll.h"
 #include "LevelObjectRectangle.h"
 #include "Player.h"

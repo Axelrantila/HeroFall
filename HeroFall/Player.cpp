@@ -2,6 +2,7 @@
 #include "EnemyBomb.h"
 #include "EnemyGoblin.h"
 #include "EnemyPlaceholder.h"
+#include "EnemyProjectile.h"
 #include "EnemyTroll.h"
 #include "InputManager.h"
 #include "LevelObjectRectangle.h"
@@ -263,6 +264,32 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			}
 		}
 
+		//Projectile
+		else if (enemies->at(a)->getType() == ENEMY_PROJECTILE)
+		{
+			if(((EnemyProjectile*)enemies->at(a))->getGlobalBounds().intersects(m_hitBox->getGlobalBounds()))
+			{
+				if(m_isBlocking)
+				{
+					enemies->at(a)->takeDamage(1.0f);
+				}
+				else
+				{
+					this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PROJECTILE_TO_PLAYER);
+				}
+			}
+		}
+
+		//Shooter
+		else if(enemies->at(a)->getType() == ENEMY_SHOOTER)
+		{
+			if(((EnemyProjectile*)enemies->at(a))->getGlobalBounds().intersects(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds()))
+			{
+				enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_SHOOTER);
+			}
+		}
+
+
 		//Delete any dead enemies
 		if(enemies->at(a)->isDead())
 		{
@@ -296,7 +323,7 @@ void Player::swingSword(AttackType type)
 
 	else if(type == ATTACK_NORMAL)
 	{
-		m_currentAttack = (unsigned int)(Util::getInstance()->getRandomFloat(0, 1.99999f);
+		m_currentAttack = (unsigned int)(Util::getInstance()->getRandomFloat(0, 1.99999f));
 		m_animations->setCurrentAnimation("Avatar_Attack_" + Util::getInstance()->toString(m_currentAttack));
 	}
 }
@@ -309,14 +336,19 @@ void Player::update(float delta)
 	if(m_isBlocking){std::cout << "Blocking\n";}
 
 	//Attack animations
-	if(InputManager::getInstance()->d_testCombo())
+	if(!m_swordIsSwinging && m_isOnGround)
 	{
-		swingSword(ATTACK_COMBO_0);
-	}
+		if(InputManager::getInstance()->d_testCombo())
+		{
+			swingSword(ATTACK_COMBO_0);
+		}
 	
-	else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1") && !m_swordIsSwinging)
-	{
-		swingSword();
+		else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1")
+			&& !m_swordIsSwinging
+			&& m_isOnGround)
+		{
+			swingSword();
+		}
 	}
 	////////////////////////////////////////////////////
 	/*

@@ -15,7 +15,7 @@ LevelManager::LevelManager(sf::View* view)
 	m_levelObjects.push_back(new LevelObjectRectangle(3650.0f, 2200.0f, 2250.0f, 10000.0f, sf::Color::Transparent));
 	m_levelObjects.push_back(new LevelObjectRectangle(5650.0f, 2100.0f, 500.0f, 10000.0f, sf::Color::Transparent));
 	m_levelObjects.push_back(new LevelObjectRectangle(6150.0f, 2100.0f, 1450.0f, 115.0f, sf::Color::Transparent));
-	m_levelObjects.push_back(new LevelObjectRectangle(7550.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Transparent));
+	m_levelObjects.push_back(new LevelObjectRectangle(7550.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Red));
 	//m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Transparent));
 	//m_levelObjects.push_back(new LevelObjectRectangle(8450.0f, 1600.0f, 3000.0f, 300.0f, sf::Color::Magenta));
 	m_player = new Player(200.0f, 1899.0f);
@@ -51,6 +51,7 @@ LevelManager::LevelManager(sf::View* view)
 	m_enemies->push_back(new EnemyTroll(5200.0f, 1819.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(7000.0f, 1719.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(10000.0f, 1000.0f, 1500.0f));
+	m_enemies->push_back(new EnemyShooter(10500.0f, 1940.0f, 100.0f));
 }
 
 LevelManager::~LevelManager()
@@ -74,10 +75,7 @@ void LevelManager::draw(sf::RenderWindow* window)
 	window->draw(*d_bg1);
 	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
 		{m_levelObjects[a]->draw(window);}
-	for(unsigned int a = 0; a < m_enemies->size(); a++)
-		{m_enemies->at(a)->draw(window);}
 	window->draw(*levelHouse);
-	m_player->draw(window);
 	window->draw(*levelBridge);
 	window->draw(*levelBlock5);
 	window->draw(*levelBlock3);
@@ -85,6 +83,10 @@ void LevelManager::draw(sf::RenderWindow* window)
 	window->draw(*levelBlock5_2);
 	window->draw(*levelBlock8);
 	window->draw(*levelBlock6);
+
+	for(unsigned int a = 0; a < m_enemies->size(); a++)
+		{m_enemies->at(a)->draw(window);}
+	m_player->draw(window);
 }
 
 void LevelManager::update(float deltaTime)
@@ -106,14 +108,22 @@ void LevelManager::update(float deltaTime)
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y / 3.5f);
 
-	//Add bombs
+	//Add bombs and projectiles
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 	{
 		if(m_enemies->at(a)->getType() == ENEMY_GOBLIN)
 		{
 			if(((EnemyGoblin*)m_enemies->at(a))->shouldSpawnBomb())
 			{
-				m_enemies->push_back(new EnemyBomb(((EnemyGoblin*)m_enemies->at(a))));
+				m_enemies->push_back(new EnemyBomb((EnemyGoblin*)m_enemies->at(a)));
+			}
+		}
+
+		else if(m_enemies->at(a)->getType() == ENEMY_SHOOTER)
+		{
+			if(((EnemyShooter*)m_enemies->at(a))->canShoot())
+			{
+				m_enemies->push_back(new EnemyProjectile((EnemyShooter*)m_enemies->at(a)));
 			}
 		}
 	}
@@ -143,15 +153,13 @@ void LevelManager::updatePlayerSpeed()
 		}
 
 		if(InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT")
-			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT")
-			&& m_player->isOnGround())
+			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT"))
 		{
 			m_player->setXSpeed(-SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
 		}
 
 		else if(InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT")
-			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT")
-			&& m_player->isOnGround())
+			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT"))
 		{
 			m_player->setXSpeed(SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
 		}

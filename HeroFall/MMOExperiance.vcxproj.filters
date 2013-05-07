@@ -107,6 +107,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyProjectile.cpp">
+      <Filter>Game\Characters\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -216,6 +219,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyProjectile.h">
+      <Filter>Game\Characters\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

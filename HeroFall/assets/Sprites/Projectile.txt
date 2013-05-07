@@ -1,0 +1,5 @@
+wSheet=50
+hSheet=50
+wSprite=50
+hSprite=50
+Projectile_Move_0_0

@@ -10,7 +10,7 @@ class EnemyTroll
 	:public Enemy
 {
 public:
-	EnemyTroll(float xPos, float yPos, sf::View* view);
+	EnemyTroll(float xPos, float yPos, sf::View* view = nullptr);
 	~EnemyTroll();
 
 	void update(float delta);
@@ -31,9 +31,6 @@ private:
 	bool m_hitted;
 
 	sf::RectangleShape* m_hitBoxTest;
-
-	sf::View* m_view;
-	bool m_seen;
 };
 
 #endif

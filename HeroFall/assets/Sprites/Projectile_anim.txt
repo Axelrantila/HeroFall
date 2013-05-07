@@ -1,0 +1,5 @@
+[Settings]
+defaultSubset=walk
+speed=0.5
+[Move0]
+Projectile_Move_0_0

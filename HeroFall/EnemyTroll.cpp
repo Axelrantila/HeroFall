@@ -7,7 +7,7 @@
 #include <iostream>
 
 EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
-	:Enemy(ENEMY_TROLL, xPos, yPos, SettingsManager::getSettings()->ENEMY_TROLL_HEALTH)
+	:Enemy(ENEMY_TROLL, xPos, yPos, SettingsManager::getSettings()->ENEMY_TROLL_HEALTH, view)
 {
 	m_sprite = SpriteSheetLoader::getInstance()->getSprite("Troll", "Troll_Walk_0_0");
 	m_sprite->setPosition(xPos, yPos);
@@ -26,9 +26,6 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 
 	m_hitBoxTest =  new sf::RectangleShape(sf::Vector2f(SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_X, SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_Y));
 	m_hitBoxTest->setFillColor(sf::Color(64, 224, 208, 128));
-
-	m_view = view;
-	m_seen = false;
 }
 
 
@@ -54,16 +51,19 @@ void EnemyTroll::update(float delta)
 	}
 
 	//Check if the enemy has been seen
-	if(!m_seen)
+	if(m_view != nullptr)
 	{
-		sf::FloatRect viewField(
-		m_view->getCenter().x - m_view->getSize().x / 2.0f
-		,m_view->getCenter().y - m_view->getSize().x / 2.0f
-		,m_view->getSize().x
-		,m_view->getSize().y);
+		if(!m_seen)
+		{
+			sf::FloatRect viewField(
+			m_view->getCenter().x - m_view->getSize().x / 2.0f
+			,m_view->getCenter().y - m_view->getSize().x / 2.0f
+			,m_view->getSize().x
+			,m_view->getSize().y);
 
-		if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(viewField))
-		{m_seen = true;}
+			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(viewField))
+			{m_seen = true;}
+		}
 	}
 }
 

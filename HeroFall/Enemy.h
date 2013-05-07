@@ -11,14 +11,15 @@ enum EnemyType
 	ENEMY_TROLL,
 	ENEMY_GOBLIN,
 	ENEMY_SHOOTER,
-	ENEMY_BOMB
+	ENEMY_BOMB,
+	ENEMY_PROJECTILE
 };
 
 class Enemy :
 	public Character
 {
 public:
-	Enemy(EnemyType type, float xPos, float yPos, float health);
+	Enemy(EnemyType type, float xPos, float yPos, float health, sf::View* view = nullptr);
 	virtual ~Enemy();
 
 	virtual void move(float delta, std::vector<LevelObject*> levelObjects);
@@ -40,6 +41,9 @@ protected:
 	float m_armor;
 
 	EnemyType m_type;
+
+	sf::View* m_view;
+	bool m_seen;
 };
 
 #endif
