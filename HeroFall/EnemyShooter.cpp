@@ -20,6 +20,7 @@ EnemyShooter::EnemyShooter(float xPos, float yPos, float health)
 
 EnemyShooter::~EnemyShooter()
 {
+	delete m_animations;
 }
 
 void EnemyShooter::update(float delta)

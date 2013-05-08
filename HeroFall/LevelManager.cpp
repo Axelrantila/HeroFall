@@ -52,6 +52,8 @@ LevelManager::LevelManager(sf::View* view)
 	m_enemies->push_back(new EnemyTroll(7000.0f, 1719.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(10000.0f, 1000.0f, 1500.0f));
 	m_enemies->push_back(new EnemyShooter(10500.0f, 1940.0f, 100.0f));
+
+	d_particles = new ParticleSystem(sf::Vector2f(400.0f, 1900.0f), 10000, PARTICLE_COLOR_RED);
 }
 
 LevelManager::~LevelManager()
@@ -65,6 +67,8 @@ LevelManager::~LevelManager()
 		delete m_enemies->at(a);
 	}
 	delete m_enemies;
+
+	delete d_particles;
 }
 
 void LevelManager::draw(sf::RenderWindow* window)
@@ -87,10 +91,14 @@ void LevelManager::draw(sf::RenderWindow* window)
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
 	m_player->draw(window);
+
+	d_particles->draw(window);
 }
 
 void LevelManager::update(float deltaTime)
 {
+	d_particles->update(deltaTime);
+
 	//Move objects and check collision between enemies and the world
 	m_player->update(deltaTime);
 	m_player->move(deltaTime, m_levelObjects);

@@ -51,6 +51,13 @@ float Util::distance(float x1, float y1, float x2, float y2)
 
 float Util::getRandomFloat(float min, float max)
 {
+	if(min > max)
+	{
+		float temp = min;
+		min = max;
+		max = temp;
+	}
+
 	boost::uniform_real<float> u(min, max);
 	boost::variate_generator<boost::mt19937&, boost::uniform_real<float>> gen(m_rng, u);
 	return gen();

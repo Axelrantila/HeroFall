@@ -20,8 +20,6 @@ public:
 	sf::FloatRect getGlobalBounds();
 
 private:
-	EnemyGoblin* m_parent;
-
 	sf::Sprite* d_sprite;
 };
 

@@ -10,6 +10,7 @@
 #include "EnemyShooter.h"
 #include "EnemyTroll.h"
 #include "LevelObjectRectangle.h"
+#include "ParticleSystem.h"
 #include "Player.h"
 
 class LevelManager
@@ -47,6 +48,8 @@ private:
 	sf::Sprite* levelBlock8;
 	sf::Sprite* levelHouse;
 	sf::Sprite* levelBridge;
+
+	ParticleSystem* d_particles;
 };
 
 #endif

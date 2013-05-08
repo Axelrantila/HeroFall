@@ -111,6 +111,8 @@
     <ClCompile Include="LevelObjectRectangle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menus.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
@@ -149,6 +151,8 @@
     <ClInclude Include="LevelObjectPlattform.h" />
     <ClInclude Include="LevelObjectRectangle.h" />
     <ClInclude Include="Menus.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="SettingsManager.h" />

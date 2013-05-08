@@ -23,7 +23,6 @@ public:
 	void takeDamage(float damage);
 
 private:
-	sf::Sprite* m_sprite;
 	AnimationManager* m_animations;
 
 	sf::Clock m_hitClock;

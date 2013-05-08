@@ -62,6 +62,10 @@ public:
 	float ENEMY_GOBLIN_BOMB_SPAWN_TIME;
 #pragma endregion
 
+#pragma region PARTICLES
+	float PARTICLES_MAX_INIT_SPEED;
+#pragma endregion
+
 #pragma region SCORE
 	unsigned int SCORE_KILL_TROLL;
 	unsigned int SCORE_KILL_GOBLIN;

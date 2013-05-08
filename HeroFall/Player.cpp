@@ -336,7 +336,7 @@ void Player::update(float delta)
 	if(m_isBlocking){std::cout << "Blocking\n";}
 
 	//Attack animations
-	if(!m_swordIsSwinging && m_isOnGround)
+	if(!m_swordIsSwinging)
 	{
 		if(InputManager::getInstance()->d_testCombo())
 		{

@@ -5,7 +5,6 @@
 EnemyBomb::EnemyBomb(EnemyGoblin* parent)
 	:Enemy(ENEMY_BOMB, parent->getBombSpawnPoint().x, parent->getBombSpawnPoint().y, 1.0f)
 {
-	m_parent = parent;
 	d_sprite = SpriteSheetLoader::getInstance()->getSprite("Bomb", "Bomb_Placeholder");
 	d_sprite->setPosition(parent->getBombSpawnPoint());
 

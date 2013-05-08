@@ -9,9 +9,6 @@
 EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	:Enemy(ENEMY_TROLL, xPos, yPos, SettingsManager::getSettings()->ENEMY_TROLL_HEALTH, view)
 {
-	m_sprite = SpriteSheetLoader::getInstance()->getSprite("Troll", "Troll_Walk_0_0");
-	m_sprite->setPosition(xPos, yPos);
-
 	m_yVel = 0.0f;
 	m_xVel = -SettingsManager::getSettings()->ENEMY_TROLL_SPEED_SIDE;
 
@@ -32,13 +29,11 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 EnemyTroll::~EnemyTroll()
 {
 	delete m_animations;
-	delete m_sprite;
 	delete m_hitBoxTest;
 }
 
 void EnemyTroll::update(float delta)
 {
-	m_sprite->setPosition(m_xPos, m_yPos);
 	m_animations->update(m_xPos, m_yPos);
 
 	m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
@@ -69,7 +64,6 @@ void EnemyTroll::update(float delta)
 
 void EnemyTroll::draw(sf::RenderWindow* window)
 {
-	//window->draw(*m_sprite);
 	window->draw(*m_animations->getCurrentSprite());
 	//window->draw(*m_hitBoxTest);
 }
@@ -87,9 +81,9 @@ bool EnemyTroll::collidesWith(LevelObject* levelObject)
 		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
 		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
 
-		return(!(otherXPos > getXPos() + m_sprite->getGlobalBounds().width
+		return(!(otherXPos > getXPos() + m_animations->getCurrentSprite()->getGlobalBounds().width
 			|| otherXPos + otherSize.x < getXPos()
-			|| otherYPos > getYPos() + m_sprite->getGlobalBounds().height
+			|| otherYPos > getYPos() + m_animations->getCurrentSprite()->getGlobalBounds().height
 			|| otherYPos + otherSize.y < getYPos()));
 	}
 

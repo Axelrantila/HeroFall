@@ -35,6 +35,18 @@ void EnemyProjectile::draw(sf::RenderWindow* window)
 
 bool EnemyProjectile::collidesWith(LevelObject* levelObject)
 {
+	if(levelObject->getLevelObjectType() == LO_RECTANGLE)
+	{
+		sf::Vector2f otherSize = ((LevelObjectRectangle*)levelObject)->getSize();
+		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
+		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
+
+		return(!(otherXPos > getXPos() + m_animations->getCurrentSprite()->getGlobalBounds().width
+			|| otherXPos + otherSize.x < getXPos()
+			|| otherYPos > getYPos() + m_animations->getCurrentSprite()->getGlobalBounds().height
+			|| otherYPos + otherSize.y < getYPos()));
+	}
+
 	return false;
 }
 

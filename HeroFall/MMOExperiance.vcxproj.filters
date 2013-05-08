@@ -110,6 +110,12 @@
     <ClCompile Include="EnemyProjectile.cpp">
       <Filter>Game\Characters\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Engine\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Engine\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -223,6 +229,12 @@
     <ClInclude Include="EnemyProjectile.h">
       <Filter>Game\Characters\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Engine\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Engine\Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
@@ -259,9 +271,6 @@
     <Filter Include="Engine\State">
       <UniqueIdentifier>{db2f34ed-25b9-410c-894d-196b5990f385}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Util">
-      <UniqueIdentifier>{fafe96a7-3aec-4c9b-8b61-ee9464d2926c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Sprite">
       <UniqueIdentifier>{dd0199b2-58b3-400e-8bc1-05c78897b8cf}</UniqueIdentifier>
     </Filter>
@@ -279,6 +288,12 @@
     </Filter>
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{3b60bbfb-a285-4648-af74-e7b4e5b9a90b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particle">
+      <UniqueIdentifier>{1daf6241-3554-46cf-b872-a8dcf790a180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Util">
+      <UniqueIdentifier>{fafe96a7-3aec-4c9b-8b61-ee9464d2926c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
