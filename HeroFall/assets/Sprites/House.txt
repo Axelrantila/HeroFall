@@ -1,5 +1,6 @@
 wSheet=2372
-hSheet=1179
+hSheet=2358
 wSprite=2372
 hSprite=1179
+House_0
 House_Placeholder

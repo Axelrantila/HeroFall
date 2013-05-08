@@ -17,6 +17,13 @@ enum  AttackType
 	ATTACK_COMBO_0
 };
 
+enum JumpStage
+{
+	JUMPING_UPWARDS,
+	JUMPING_FALLING,
+	JUMPING_LANDING
+};
+
 class Player :
 	public Character
 {
@@ -64,6 +71,9 @@ private:
 	bool m_isOnGround;
 	bool m_groundMarked;
 	bool m_isIdle;
+
+	bool m_jumping;
+	JumpStage m_currentJumpStage;
 
 	LevelManager* m_levelManager;
 

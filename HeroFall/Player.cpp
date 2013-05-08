@@ -46,6 +46,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_groundMarked = false;
 	m_isIdle = false;
 	m_isBlocking = false;
+	m_jumping = false;
 
 	m_hitBox = new sf::RectangleShape(sf::Vector2f(115.0f, 170.0f));
 	m_hitBox->setFillColor(sf::Color(236, 116, 4, 128));
@@ -57,8 +58,10 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_CAttack_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
 
 	m_currentAttack = 0;
-
 	m_levelManager = levelManager;
+
+	m_jumping = false;
+	m_currentJumpStage = JUMPING_LANDING;
 }
 
 Player::~Player()
@@ -94,6 +97,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 			{
 				m_isOnGround = true;
 				m_groundMarked = true;
+				m_jumping = false;
 			}
 			
 			updateBoxes();
@@ -103,7 +107,10 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 		}
 	}
 
-	if(!m_groundMarked){m_isOnGround = false;}
+	if(!m_groundMarked)
+	{
+		m_isOnGround = false;
+	}
 
 	if(m_markedForHalt)
 	{
@@ -182,6 +189,20 @@ void Player::increaseSpeed(float xVel, float yVel)
 {
 	m_xVel += xVel;
 	m_yVel += yVel;
+
+	if(m_yVel < 0.0f)
+	{
+		m_jumping = true;
+		m_currentJumpStage = JUMPING_UPWARDS;
+	}
+
+	else if(m_yVel > 0.0f)
+	{
+		if(m_jumping && m_currentJumpStage != JUMPING_FALLING)
+		{
+			m_currentJumpStage = JUMPING_LANDING;
+		}
+	}
 }
 
 bool Player::collidesWith(LevelObject* levelObject)
@@ -373,11 +394,42 @@ void Player::update(float delta)
 	}
 	////////////////////////////////////////////////////
 
-	//Jump
+	//Carrying
 
+	//Jump
+	if(m_jumping)
+	{
+		if(m_yVel < 0.0f)
+		{
+			m_currentJumpStage = JUMPING_UPWARDS;
+		}
+		else
+		{
+			m_currentJumpStage = JUMPING_FALLING;
+		}
+
+		////////////////////////////////////////////////////////////////
+		if(m_currentJumpStage == JUMPING_UPWARDS
+			&& !m_animations->isCurrentAnimation("Avatar_Jump_0"))
+		{
+			m_animations->setCurrentAnimation("Avatar_Jump_0");
+		}
+
+		else if(m_currentJumpStage == JUMPING_FALLING
+			&& !m_animations->isCurrentAnimation("Avatar_Jump_1"))
+		{
+			m_animations->setCurrentAnimation("Avatar_Jump_1");
+		}
+
+		else if(m_currentJumpStage == JUMPING_LANDING
+			&& !m_animations->isCurrentAnimation("Avatar_Jump_2"))
+		{
+			m_animations->setCurrentAnimation("Avatar_Jump_2");
+		}
+	}
 
 	//Idle
-	if(m_xVel == 0.0f && m_yVel == 0.0f 
+	else if(m_xVel == 0.0f && m_yVel == 0.0f 
 		&& !m_hitted && !m_swordIsSwinging && !m_isIdle
 		)
 	{
@@ -393,19 +445,27 @@ void Player::update(float delta)
 	}
 
 	/////////////////////////////////////////////////
-	if(m_swordIsSwinging)
+	else if(m_swordIsSwinging)
 	{
 		if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
 		{
 			m_swordIsSwinging = false;
-			m_animations->setCurrentAnimation("Avatar_Idle_0");
+
+			if(m_isOnGround)
+			{
+				m_animations->setCurrentAnimation("Avatar_Idle_0");
+			}
 		}
 	}
 
 	if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
 	{
 		m_hitted  = false;
-		m_animations->setCurrentAnimation("Avatar_Run_0");
+		if(m_isOnGround)
+		{
+			m_animations->setCurrentAnimation("Avatar_Run_0");
+		}
+	
 	}
 } 
 
@@ -415,7 +475,8 @@ void Player::setXSpeed(float xVel)
 	m_markedForHalt = false;
 	
 	if(m_animations->getCurrentAnimation() != m_animations->getAnimation("Avatar_Run_0")
-		&& !m_swordIsSwinging)
+		&& !m_swordIsSwinging
+		&& m_isOnGround)
 	{
 		m_animations->setCurrentAnimation("Avatar_Run_0");
 	}
