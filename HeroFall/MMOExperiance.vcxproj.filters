@@ -116,6 +116,9 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Engine\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="ComboManager.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -235,13 +238,13 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>Engine\Particle</Filter>
     </ClInclude>
+    <ClInclude Include="ComboManager.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
     <None Include="README_Includers.txt" />
-    <None Include="ENEMIES_BEHAVIOURS.txt">
-      <Filter>Game\Characters</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

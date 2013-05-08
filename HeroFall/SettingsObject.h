@@ -21,6 +21,8 @@ public:
 	unsigned int	FRAME_RESOLUTION_FULLSCREEN_Y;
 	unsigned int	FRAME_RESOLUTION_WINDOWED_X;
 	unsigned int	FRAME_RESOLUTION_WINDOWED_Y;
+	unsigned int	FRAME_VIEW_X;
+	unsigned int	FRAME_VIEW_Y;
 #pragma endregion
 
 #pragma region WORLD

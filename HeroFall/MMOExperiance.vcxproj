@@ -94,6 +94,7 @@
     <ClCompile Include="AudioLoader.cpp" />
     <ClCompile Include="AudioMixer.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="ComboManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBomb.cpp" />
     <ClCompile Include="EnemyGoblin.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="AudioLoader.h" />
     <ClInclude Include="AudioMixer.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="ComboManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBomb.h" />
     <ClInclude Include="EnemyGoblin.h" />
@@ -171,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
-    <None Include="ENEMIES_BEHAVIOURS.txt" />
     <None Include="README_Includers.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

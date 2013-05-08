@@ -36,6 +36,8 @@ bool SettingsManager::loadSettings()
 	m_settings->FRAME_RESOLUTION_FULLSCREEN_Y = ini.GetLongValue("FRAME", "RESOLUTION_FULLSCREEN_Y", 0);
 	m_settings->FRAME_RESOLUTION_WINDOWED_X = ini.GetLongValue("FRAME", "RESOLUTION_WINDOWED_X", 0);
 	m_settings->FRAME_RESOLUTION_WINDOWED_Y = ini.GetLongValue("FRAME", "RESOLUTION_WINDOWED_Y", 0);
+	m_settings->FRAME_VIEW_X = ini.GetLongValue("FRAME", "VIEW_X", 0);
+	m_settings->FRAME_VIEW_Y = ini.GetLongValue("FRAME", "VIEW_Y", 0);
 
 	m_settings->WORLD_GRAVITY = (float)ini.GetDoubleValue("WORLD", "GRAVITY", 0);
 

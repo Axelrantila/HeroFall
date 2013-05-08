@@ -21,6 +21,14 @@ EnemyProjectile::~EnemyProjectile()
 void EnemyProjectile::move(float delta, std::vector<LevelObject*> levelObjects)
 {
 	m_xPos += m_xVel * delta;
+
+	for(unsigned int a = 0; a < levelObjects.size(); a++)
+	{
+		if(collidesWith(levelObjects[a]))
+		{
+			m_isDead = true;
+		}
+	}
 }
 
 void EnemyProjectile::update(float delta)

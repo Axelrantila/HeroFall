@@ -21,11 +21,13 @@ public:
 
 	void update(float deltaTime);
 	void draw(sf::RenderWindow* window);
+	void addParticles(sf::Vector2f position, unsigned int particles, ParticleColor color = PARTICLE_COLOR_RED);
 
 	void setPlayerSpeed(float xVel, float yVel);
 	void updatePlayerSpeed();
-
 	bool playerIsDead();
+
+	void  cleanResources();
 
 private:
 	sf::View* m_view;
@@ -50,6 +52,7 @@ private:
 	sf::Sprite* levelBridge;
 
 	ParticleSystem* d_particles;
+	std::vector<ParticleSystem*> m_particles;
 };
 
 #endif

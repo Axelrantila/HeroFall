@@ -5,6 +5,7 @@
 #include "EnemyProjectile.h"
 #include "EnemyTroll.h"
 #include "InputManager.h"
+#include "LevelManager.h"
 #include "LevelObjectRectangle.h"
 #include "Player.h"
 #include "SpriteSheetLoader.h"
@@ -13,7 +14,7 @@
 #include <iostream>
 #include <math.h>
 
-Player::Player(float xPos, float yPos)
+Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	:Character(PT_UPPER_LEFT, xPos, yPos, SettingsManager::getSettings()->PLAYER_HEALTH)
 {
 	m_swordIsSwinging = false;
@@ -56,6 +57,8 @@ Player::Player(float xPos, float yPos)
 	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_CAttack_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
 
 	m_currentAttack = 0;
+
+	m_levelManager = levelManager;
 }
 
 Player::~Player()
@@ -202,7 +205,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 {
 	for(unsigned int a = 0; a < enemies->size();)
 	{
-		//ENEMY PLACEHOLDER
+#pragma region ENEMY PLACEHOLDER
 		if(enemies->at(a)->getType() == ENEMY_PLACEHOLDER)
 		{
 			EnemyPlaceholder* tEnemy = ((EnemyPlaceholder*)enemies->at(a));
@@ -221,8 +224,9 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER);
 			}
 		}
+#pragma endregion
 
-		//TROLL
+#pragma region TROLL
 		else if(enemies->at(a)->getType() == ENEMY_TROLL)
 		{
 			EnemyTroll* tEnemy = ((EnemyTroll*)enemies->at(a));
@@ -232,6 +236,9 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
 					m_swordHasHittedEnemy = true;
+					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
+						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
+						100);
 				}
 			}
 
@@ -240,7 +247,9 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_TROLL_TO_PLAYER);
 			}
 		}
-		
+#pragma endregion
+
+#pragma region BOMB
 		//Bomb
 		else if(enemies->at(a)->getType() == ENEMY_BOMB)
 		{
@@ -250,7 +259,9 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				m_isDead = true;
 			}
 		}
+#pragma endregion
 
+#pragma region GOBLIN
 		//Goblin
 		else if(enemies->at(a)->getType() == ENEMY_GOBLIN)
 		{
@@ -260,10 +271,16 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 					(m_animations->getCurrentSprite()->getGlobalBounds()))
 				{
 					enemies->at(a)->takeDamage(1.0f);
+					m_swordHasHittedEnemy = true;
+					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
+						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
+						100);
 				}
 			}
 		}
+#pragma endregion
 
+#pragma region PROJECTILE
 		//Projectile
 		else if (enemies->at(a)->getType() == ENEMY_PROJECTILE)
 		{
@@ -279,16 +296,22 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				}
 			}
 		}
+#pragma endregion
 
+#pragma region SHOOTER
 		//Shooter
 		else if(enemies->at(a)->getType() == ENEMY_SHOOTER)
 		{
 			if(((EnemyProjectile*)enemies->at(a))->getGlobalBounds().intersects(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds()))
 			{
 				enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_SHOOTER);
+				m_swordHasHittedEnemy = true;
+				m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
+					, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
+					100);
 			}
 		}
-
+#pragma endregion
 
 		//Delete any dead enemies
 		if(enemies->at(a)->isDead())
@@ -343,27 +366,26 @@ void Player::update(float delta)
 			swingSword(ATTACK_COMBO_0);
 		}
 	
-		else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1")
-			&& !m_swordIsSwinging
-			&& m_isOnGround)
+		else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1"))
 		{
 			swingSword();
 		}
 	}
 	////////////////////////////////////////////////////
-	/*
-	Idle animationssaken fungerar inte perfekt här
-	*/
 
+	//Jump
+
+
+	//Idle
 	if(m_xVel == 0.0f && m_yVel == 0.0f 
 		&& !m_hitted && !m_swordIsSwinging && !m_isIdle
-		//&& m_prevIdlePos == m_animations->getCurrentSprite()->getPosition()
 		)
 	{
 		m_animations->setCurrentAnimation("Avatar_Idle_0");
 		m_isIdle = true;
-		//std::cout << "Test\n";
 	}
+
+	//Run
 	else if(m_isIdle && (m_xVel != 0.0f || m_yVel != 0.0f))
 	{
 		m_animations->setCurrentAnimation("Avatar_Run_0");

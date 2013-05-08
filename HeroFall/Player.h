@@ -8,6 +8,7 @@
 
 class Enemy;
 class LevelObject;
+class LevelManager;
 
 //TYPES OF ATTACKS
 enum  AttackType
@@ -20,7 +21,7 @@ class Player :
 	public Character
 {
 public:
-	Player(float xPos, float yPos);
+	Player(float xPos, float yPos, LevelManager* levelManager);
 	~Player();
 
 	void increaseSpeed(float xSpeed, float ySpeed);
@@ -63,6 +64,8 @@ private:
 	bool m_isOnGround;
 	bool m_groundMarked;
 	bool m_isIdle;
+
+	LevelManager* m_levelManager;
 
 	void updateBoxes();
 };

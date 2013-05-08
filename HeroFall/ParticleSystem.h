@@ -8,12 +8,13 @@ typedef std::vector<Particle*>::iterator particlesIterator;
 class ParticleSystem
 {
 public:
-	ParticleSystem(sf::Vector2f position, unsigned int particles, ParticleColor color);
+	ParticleSystem(sf::Vector2f position, unsigned int particles, ParticleColor color = PARTICLE_COLOR_RED);
 	~ParticleSystem();
 
 	void update(float delta);
 	void draw(sf::RenderWindow* window);
 
+	bool isEmpty(){return m_particles.empty();}
 private:
 	std::vector<Particle*> m_particles;
 };
