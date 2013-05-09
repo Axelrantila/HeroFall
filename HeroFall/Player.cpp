@@ -387,25 +387,11 @@ void Player::update(float delta)
 
 	if(m_isBlocking){std::cout << "Blocking\n";}
 
-	//Attack animations
-	if(!m_swordIsSwinging)
-	{
-		if(InputManager::getInstance()->d_testCombo())
-		{
-			swingSword(ATTACK_COMBO_0);
-		}
-	
-		else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1"))
-		{
-			swingSword();
-		}
-	}
-	////////////////////////////////////////////////////
-
 	//Carrying
 
 	//Jump
-	if(m_jumping)
+	if(m_jumping
+		&& !m_swordIsSwinging)
 	{
 		if(m_yVel < 0.0f)
 		{
@@ -436,8 +422,22 @@ void Player::update(float delta)
 		}
 	}
 
+	//Attack
+	if(!m_swordIsSwinging)
+	{
+		if(InputManager::getInstance()->d_testCombo())
+		{
+			swingSword(ATTACK_COMBO_0);
+		}
+	
+		else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1"))
+		{
+			swingSword();
+		}
+	}
+
 	//Idle
-	else if(m_xVel == 0.0f && m_yVel == 0.0f 
+	if(m_xVel == 0.0f && m_yVel == 0.0f 
 		&& !m_hitted && !m_swordIsSwinging && !m_isIdle
 		)
 	{
@@ -453,7 +453,7 @@ void Player::update(float delta)
 	}
 
 	/////////////////////////////////////////////////
-	else if(m_swordIsSwinging)
+	if(m_swordIsSwinging)
 	{
 		if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
 		{
@@ -463,15 +463,21 @@ void Player::update(float delta)
 			{
 				m_animations->setCurrentAnimation("Avatar_Idle_0");
 			}
+			else
+			{
+				m_animations->setCurrentAnimation("Avatar_Jump_1");
+			}
 		}
 	}
 
-	if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
+	if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime
+		&& m_hitted
+		&& m_animations->getCurrentAnimation() != m_animations->getAnimation("Avatar_Idle_0"))
 	{
 		m_hitted  = false;
 		if(m_isOnGround)
 		{
-			m_animations->setCurrentAnimation("Avatar_Run_0");
+			m_animations->setCurrentAnimation("Avatar_Idle_0");
 		}
 	
 	}
