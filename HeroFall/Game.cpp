@@ -37,6 +37,7 @@ void Game::update(StateManager* stateManager, float delta)
 		{
 			markForDeletion();
 			AudioMixer::getInstance()->stopMusic();
+			AudioMixer::getInstance()->playMusic("Game_Over", 0.0f, 70.0f, 70.0f, false);
 			//Lägg till death screen statet här.
 			stateManager->addState(STATE_GAMEOVER);
 		}

@@ -2,6 +2,7 @@
 #include "EnemyGoblin.h"
 #include "LevelObjectRectangle.h"
 #include "SpriteSheetLoader.h"
+#include "AudioMixer.h"
 
 EnemyBomb::EnemyBomb(EnemyGoblin* parent)
 	:Enemy(ENEMY_BOMB, parent->getBombSpawnPoint().x, parent->getBombSpawnPoint().y, 1.0f)
@@ -48,6 +49,8 @@ void EnemyBomb::move(float delta, std::vector<LevelObject*> levelObjects)
 			if(collidesWith(levelObjects[a]))
 			{
 				//Spela up ljud här
+			AudioMixer::getInstance()->removeSound(this);
+			AudioMixer::getInstance()->playSound("Explosion", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 1200.0f, 70.0f, 1.0f);
 				m_bombHasBlasted = true;
 
 				m_bombBlastArea.setPosition(d_sprite->getGlobalBounds().left + d_sprite->getGlobalBounds().width / 2.0f - m_bombBlastArea.getSize().x / 2.0f
