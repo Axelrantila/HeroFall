@@ -30,6 +30,8 @@ public:
 	virtual bool isDead();
 	virtual void takeDamage(float damage);
 
+	virtual float getHealth(){return m_health;}
+
 protected:
 	float m_gravityConstant;
 	float m_xVel;

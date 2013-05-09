@@ -9,6 +9,7 @@
 #include "EnemyProjectile.h"
 #include "EnemyShooter.h"
 #include "EnemyTroll.h"
+#include "HUD.h"
 #include "LevelObjectRectangle.h"
 #include "ParticleSystem.h"
 #include "Player.h"
@@ -32,6 +33,7 @@ public:
 private:
 	sf::RenderWindow* m_window;
 	sf::View* m_view;
+	HUD* m_HUD;
 
 	Player*  m_player;
 	std::vector<LevelObject*> m_levelObjects;

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="GameObject.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -119,6 +118,10 @@
     <ClCompile Include="ComboManager.cpp">
       <Filter>Engine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -241,10 +244,9 @@
     <ClInclude Include="ComboManager.h">
       <Filter>Engine\Input</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CONFIG.ini" />
-    <None Include="ClassDiagram1.cd" />
+    <ClInclude Include="HUD.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -298,5 +300,8 @@
     <Filter Include="Engine\Util">
       <UniqueIdentifier>{fafe96a7-3aec-4c9b-8b61-ee9464d2926c}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CONFIG.ini" />
   </ItemGroup>
 </Project>

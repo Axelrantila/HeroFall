@@ -1,0 +1,5 @@
+wSheet=549
+hSheet=218
+wSprite=549
+hSprite=218
+GUI_0

@@ -1,0 +1,5 @@
+wSheet=277
+hSheet=40
+wSprite=277
+hSprite=40
+Healthbar_0

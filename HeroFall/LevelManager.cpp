@@ -24,6 +24,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
+	m_HUD = new HUD(m_view, m_player);
 	//////////////////////////////////////////
 	levelHouse = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("House", "House_0"));
 	levelHouse->setPosition(8210.0f, 930.0f);
@@ -65,6 +66,8 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 
 LevelManager::~LevelManager()
 {
+	delete m_HUD;
+
 	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
 	{delete m_levelObjects[a];}
 	delete m_player;
@@ -105,6 +108,8 @@ void LevelManager::draw(sf::RenderWindow* window)
 	{
 		m_particles[a]->draw(window);
 	}
+
+	m_HUD->draw(window);
 }
 
 void LevelManager::update(float deltaTime)
@@ -175,6 +180,9 @@ void LevelManager::update(float deltaTime)
 		if(m_enemies->at(a)->getYPos() > 5000.0f)
 		{m_enemies->at(a)->markDead();}
 	}
+
+	//Update the HUD
+	m_HUD->update();
 }
 
 void LevelManager::updatePlayerSpeed()

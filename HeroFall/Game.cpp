@@ -16,6 +16,8 @@ Game::Game(sf::RenderWindow*  window)
 		sf::Vector2f((float)SettingsManager::getSettings()->FRAME_VIEW_X, (float)SettingsManager::getSettings()->FRAME_VIEW_Y));
 	m_levelManager = new LevelManager(m_view, m_window);
 
+	m_view->getCenter();
+	m_view->getSize();
 
 	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 10.0f, 10.0f, true);
 }
