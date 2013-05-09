@@ -173,7 +173,7 @@ void LevelManager::updatePlayerSpeed()
 		//Update player speed
 		if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") && m_player->isOnGround())
 		{
-			AudioMixer::getInstance()->playSound("Grunt");
+		AudioMixer::getInstance()->playSound("Jumping_grunt");
 			m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
 		}
 
