@@ -157,7 +157,7 @@ void LevelManager::update(float deltaTime)
 			if(((EnemyGoblin*)m_enemies->at(a))->shouldSpawnBomb())
 			{
 				m_enemies->push_back(new EnemyBomb((EnemyGoblin*)m_enemies->at(a)));
-				AudioMixer::getInstance()->playSound("Bomb_falling", 0.0f, 0.0f, 100.0f, 100.0f, m_enemies->at(m_enemies->size() - 1), m_enemies->at(a)->getXPos(), m_enemies->at(a)->getYPos(), 1000.0f, 50.0f, 1.0f);
+				AudioMixer::getInstance()->playSound("Bomb_falling", 0.0f, 0.0f, 70.0f, 70.0f, m_enemies->at(m_enemies->size() - 1), m_enemies->at(a)->getXPos(), m_enemies->at(a)->getYPos(), 1000.0f, 100.0f, 1.0f);
 			}
 		}
 
