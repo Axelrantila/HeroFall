@@ -15,7 +15,7 @@ public:
 	void move(float delta, std::vector<LevelObject*> levelObjects);
 	void update(float delta){}
 	void draw(sf::RenderWindow* window);
-	bool collidesWith(LevelObject* levelObject){return false;}
+	bool collidesWith(LevelObject* levelObject);
 
 	sf::FloatRect getGlobalBounds();
 
