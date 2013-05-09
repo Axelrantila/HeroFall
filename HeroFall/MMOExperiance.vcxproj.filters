@@ -244,7 +244,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
-    <None Include="README_Includers.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

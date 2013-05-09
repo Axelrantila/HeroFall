@@ -52,7 +52,7 @@ void EnemyTroll::update(float delta)
 		{
 			sf::FloatRect viewField(
 			m_view->getCenter().x - m_view->getSize().x / 2.0f
-			,m_view->getCenter().y - m_view->getSize().x / 2.0f
+			,m_view->getCenter().y - m_view->getSize().y / 2.0f
 			,m_view->getSize().x
 			,m_view->getSize().y);
 
@@ -115,6 +115,33 @@ void EnemyTroll::move(float delta, std::vector<LevelObject*> levelObjects)
 {
 	if(m_seen)
 	{
-		Enemy::move(delta, levelObjects);
+		m_yVel += getGravityDistance(delta);
+		float yMove = delta * m_yVel;
+
+		m_yPos += yMove;
+		for(unsigned int a = 0; a < levelObjects.size(); a++)
+		{
+			if(collidesWith(levelObjects[a]))
+			{
+				m_yPos -= yMove;
+				m_yVel = 0.0f;
+				break;
+			}
+		}
+
+		if(!m_hitted)
+		{
+			float xMove = delta * m_xVel;
+			m_xPos += xMove;
+			for(unsigned int a = 0; a < levelObjects.size(); a++)
+			{
+				if(collidesWith(levelObjects[a]))
+				{
+					m_xPos -= xMove;
+					m_xVel = 0.0f;
+					break;
+				}
+			}
+		}
 	}
 }

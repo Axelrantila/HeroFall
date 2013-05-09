@@ -10,7 +10,7 @@ class EnemyShooter :
 	public Enemy
 {
 public:
-	EnemyShooter(float xPos, float yPos, float health);
+	EnemyShooter(float xPos, float yPos, float health, sf::View* view = nullptr);
 	~EnemyShooter();
 
 	bool canShoot();

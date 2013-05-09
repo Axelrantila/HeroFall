@@ -12,7 +12,7 @@ class Game
 	:public State
 {
 public:
-	Game();
+	Game(sf::RenderWindow* window);
 	~Game();
 
 	void update(StateManager* stateManager, float m_deltaTime);
@@ -21,7 +21,7 @@ public:
 
 private:
 	LevelManager* m_levelManager;
-	//sf::RenderWindow* m_window;
+	sf::RenderWindow* m_window;
 	sf::View* m_view;
 
 	//sf::Clock m_clock;

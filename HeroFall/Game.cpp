@@ -7,13 +7,14 @@
 
 #include <iostream>
 
-Game::Game()
+Game::Game(sf::RenderWindow*  window)
 	:State()
 {
+	m_window = window;
 	m_view = new sf::View(
-		sf::Vector2f(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X / 2.0f, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y / 2.0f),
+		sf::Vector2f((float)SettingsManager::getSettings()->FRAME_VIEW_X / 2.0f, (float)SettingsManager::getSettings()->FRAME_VIEW_Y / 2.0f),
 		sf::Vector2f((float)SettingsManager::getSettings()->FRAME_VIEW_X, (float)SettingsManager::getSettings()->FRAME_VIEW_Y));
-	m_levelManager = new LevelManager(m_view);
+	m_levelManager = new LevelManager(m_view, m_window);
 
 
 	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 10.0f, 10.0f, true);

@@ -1,3 +1,4 @@
+#include "SettingsManager.h"
 #include "Util.h"
 
 #include <boost\math\common_factor.hpp>
@@ -94,4 +95,9 @@ unsigned int Util::secondsToMilliSeconds(float seconds)
 {
 	//The reason for adding 0.5 seconds to the value is so that the return value gets rounded correctly
 	return (unsigned int)(seconds * 1000.0f + 0.5f);
+}
+
+float Util::jumpUpTime()
+{
+	return (abs(SettingsManager::getSettings()->PLAYER_SPEED_JUMP) / SettingsManager::getSettings()->WORLD_GRAVITY);
 }

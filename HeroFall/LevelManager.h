@@ -16,7 +16,7 @@
 class LevelManager
 {
 public:
-	LevelManager(sf::View* view);
+	LevelManager(sf::View* view, sf::RenderWindow* window);
 	~LevelManager();
 
 	void update(float deltaTime);
@@ -30,6 +30,7 @@ public:
 	void  cleanResources();
 
 private:
+	sf::RenderWindow* m_window;
 	sf::View* m_view;
 
 	Player*  m_player;
@@ -51,7 +52,9 @@ private:
 	sf::Sprite* levelHouse;
 	sf::Sprite* levelBridge;
 
-	ParticleSystem* d_particles;
+	sf::Vector2f m_cameraMove;
+	sf::Vector2f m_prevCameraCenter;
+
 	std::vector<ParticleSystem*> m_particles;
 };
 

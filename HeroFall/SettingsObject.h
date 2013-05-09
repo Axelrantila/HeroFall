@@ -64,6 +64,10 @@ public:
 	float ENEMY_GOBLIN_BOMB_SPAWN_TIME;
 #pragma endregion
 
+#pragma region ENEMY_SHOOTER
+	float ENEMY_SHOOTER_SHOOT_TIME;
+#pragma endregion
+
 #pragma region PARTICLES
 	float PARTICLES_MAX_INIT_SPEED;
 #pragma endregion

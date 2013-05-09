@@ -36,7 +36,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_animations->addAnimation("Avatar_Attack_1", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_CAttack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Jump_0", 0.5f, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_1", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_2", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->setCurrentAnimation("Avatar_Idle_0");

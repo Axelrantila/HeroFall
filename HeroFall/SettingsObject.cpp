@@ -53,6 +53,10 @@ SettingsObject::SettingsObject()
 	ENEMY_GOBLIN_BOMB_SPAWN_TIME = 1.337f;
 #pragma endregion
 
+#pragma region ENEMY_SHOOTER
+	ENEMY_SHOOTER_SHOOT_TIME = 4.0f;
+#pragma endregion
+
 #pragma region PARTICLES
 	PARTICLES_MAX_INIT_SPEED = 100;
 #pragma endregion

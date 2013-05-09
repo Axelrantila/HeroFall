@@ -9,11 +9,14 @@
 
 #include <iostream>
 
+//sf::VideoMode(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y)
+
 StateManager::StateManager()
 {
 	m_window = new sf::RenderWindow(
-		sf::VideoMode(SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_X, SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y),
-		SettingsManager::getSettings()->FRAME_TITLE);
+		sf::VideoMode(1920, 1080)
+		,SettingsManager::getSettings()->FRAME_TITLE
+		, sf::Style::Fullscreen);
 	m_window->setMouseCursorVisible(false);
 	m_window->setFramerateLimit(60);
 	m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
@@ -117,7 +120,7 @@ void StateManager::run()
 					SpriteSheetLoader::getInstance()->removeSheet("MainMenuButtons");
 					SpriteSheetLoader::getInstance()->removeSheet("LoadingScreen");
 
-					m_states.push_back(new Game());
+					m_states.push_back(new Game(m_window));
 				}
 
 				else if(m_statesToAdd[0] == STATE_GAMEOVER)

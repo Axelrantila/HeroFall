@@ -6,9 +6,11 @@
 
 #include <iostream>
 
-LevelManager::LevelManager(sf::View* view)
+LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 {
 	m_view = view;
+	m_window = window;
+
 	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 2160.0f, 1250.0f, 10000.0f, sf::Color::Transparent));
 	m_levelObjects.push_back(new LevelObjectRectangle(1250.0f, 2060.0f, 2000.0f, 10000.0f, sf::Color::Transparent));
 	//m_levelObjects.push_back(new LevelObjectRectangle(3000.0f, 1500.0f, 1250.0f, 100.0f, sf::Color::Magenta)); //Platform
@@ -19,7 +21,10 @@ LevelManager::LevelManager(sf::View* view)
 	//m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Transparent));
 	//m_levelObjects.push_back(new LevelObjectRectangle(8450.0f, 1600.0f, 3000.0f, 300.0f, sf::Color::Magenta));
 	m_player = new Player(200.0f, 1899.0f, this);
+	m_view->setCenter(m_player->getCenter().x
+		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
+	//////////////////////////////////////////
 	levelHouse = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("House", "House_0"));
 	levelHouse->setPosition(8210.0f, 930.0f);
 	levelBridge = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Bridge", "Bridge_0"));
@@ -40,18 +45,22 @@ LevelManager::LevelManager(sf::View* view)
 	levelBlock7 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block7");
 	levelBlock8 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block8");
 	levelBlock8->setPosition(7550.0f, 2100.0f);
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
 	d_bg1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0"));
 	d_bg->setPosition(0.0f, 0.0f);
 	d_bg1->setPosition(8160.0f, 0.0f);
 
+	m_prevCameraCenter =  m_view->getCenter();
+	m_cameraMove = m_view->getCenter();
+
 	m_enemies = new std::vector<Enemy*>();
 	m_enemies->push_back(new EnemyTroll(2600.0f, 1679.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(5200.0f, 1819.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(7000.0f, 1719.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(10000.0f, 1000.0f, 1500.0f));
-	m_enemies->push_back(new EnemyShooter(10500.0f, 1940.0f, 100.0f));
+	m_enemies->push_back(new EnemyShooter(10500.0f, 1940.0f, 100.0f, m_view));
 }
 
 LevelManager::~LevelManager()
@@ -76,6 +85,7 @@ void LevelManager::draw(sf::RenderWindow* window)
 
 	window->draw(*d_bg);
 	window->draw(*d_bg1);
+
 	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
 		{m_levelObjects[a]->draw(window);}
 	window->draw(*levelHouse);
@@ -125,8 +135,14 @@ void LevelManager::update(float deltaTime)
 	m_player->collidesWith(m_enemies);
 
 	//Update the camera's view
+	m_prevCameraCenter = m_view->getCenter();
+
 	m_view->setCenter(m_player->getCenter().x
-		, m_player->getCenter().y - (float)SettingsManager::getSettings()->FRAME_RESOLUTION_WINDOWED_Y / 3.5f);
+		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
+
+	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;
+	m_cameraMove *= 1.25f;
+	std::cout << m_cameraMove.x << " " << m_cameraMove.y << std::endl;
 
 	//Add bombs and projectiles
 	for(unsigned int a = 0; a < m_enemies->size(); a++)

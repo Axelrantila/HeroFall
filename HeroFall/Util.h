@@ -6,13 +6,6 @@
 
 #include <boost\random.hpp>
 
-/*
-Att inkludera i framtiden
-
-*Key press to string
-*Seconds to milliseconds
-*/
-
 class Util
 {
 public:
@@ -30,6 +23,8 @@ public:
 	unsigned int lcm(std::vector<unsigned int> numbers);
 
 	unsigned int secondsToMilliSeconds(float seconds);
+
+	float jumpUpTime();
 
 private:
 	Util();

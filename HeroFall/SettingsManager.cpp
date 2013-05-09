@@ -68,6 +68,8 @@ bool SettingsManager::loadSettings()
 	m_settings->ENEMY_GOBLIN_SPEED_SIDE = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "SPEED_SIDE", 0);
 	m_settings->ENEMY_GOBLIN_BOMB_SPAWN_TIME = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "BOMB_SPAWN_TIME", 0);
 
+	m_settings->ENEMY_SHOOTER_SHOOT_TIME = (float)ini.GetDoubleValue("ENEMY_SHOOTER", "SHOOT_TIME", 0);
+
 	m_settings->PARTICLES_MAX_INIT_SPEED = (float)ini.GetDoubleValue("PARTICLES", "MAX_INIT_SPEED", 0);
 
 	m_settings->SCORE_KILL_TROLL = ini.GetLongValue("SCORE", "KILL_TROLL", 0);
