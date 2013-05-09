@@ -101,12 +101,14 @@ void EnemyTroll::takeDamage(float damage)
 		m_hitted = true;
 
 		AudioMixer::getInstance()->playSound("Attack_hit_2", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
+		AudioMixer::getInstance()->playSound("Hurt_troll", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 
 		//Check if character is dead
 		if(m_health <= 0.0f)
 		{
 			m_isDead = true;
 			ScoreManager::getInstance()->addScore(KILL_TROLL);
+			AudioMixer::getInstance()->playSound("Death_troll", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 		}
 	}
 }
