@@ -244,6 +244,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CONFIG.ini" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

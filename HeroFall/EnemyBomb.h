@@ -18,9 +18,15 @@ public:
 	bool collidesWith(LevelObject* levelObject);
 
 	sf::FloatRect getGlobalBounds();
+	bool hasBlased(){return m_bombHasBlasted;}
 
 private:
 	sf::Sprite* d_sprite;
+
+	bool m_bombHasBlasted;
+	sf::RectangleShape m_bombBlastArea;
+	float m_bombBlastCurrentTime;
+	float m_bombBlastTotalTime;
 };
 
 #endif

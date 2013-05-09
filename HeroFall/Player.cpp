@@ -62,6 +62,8 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 
 	m_jumping = false;
 	m_currentJumpStage = JUMPING_LANDING;
+
+	m_delta = 0.0f;
 }
 
 Player::~Player()
@@ -78,6 +80,8 @@ void Player::draw(sf::RenderWindow* window)
 
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 {
+	m_delta = delta;
+
 	m_groundMarked = false;
 
 	m_yVel += getGravityDistance(delta);
@@ -274,10 +278,10 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		//Bomb
 		else if(enemies->at(a)->getType() == ENEMY_BOMB)
 		{
-			if(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().intersects(((EnemyBomb*)enemies->at(a))->getGlobalBounds())
-				&& !m_isBlocking)
+			if(((EnemyBomb*)enemies->at(a))->hasBlased()
+				&& ((EnemyBomb*)enemies->at(a))->getGlobalBounds().intersects(m_hitBox->getGlobalBounds()))
 			{
-				m_isDead = true;
+				takeDamageOverTime(100.0f, m_delta);
 			}
 		}
 #pragma endregion
@@ -374,6 +378,10 @@ void Player::swingSword(AttackType type)
 
 void Player::update(float delta)
 {
+	//Check if character is dead
+	if(m_health <= 0.0f)
+	{m_isDead = true;}
+
 	AudioMixer::getInstance()->setListenerPosition(m_xPos, m_yPos);
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
 
@@ -497,10 +505,6 @@ void Player::takeDamage(float damage)
 		AudioMixer::getInstance()->playSound("Hurt_2", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 
 		m_hitted = true;
-
-		//Check if character is dead
-		if(m_health <= 0.0f)
-		{m_isDead = true;}
 	}
 }
 
@@ -531,4 +535,9 @@ void Player::updateBoxes()
 void Player::block(bool blocking)
 {
 	m_isBlocking = blocking;
+}
+
+void Player::takeDamageOverTime(float damage, float delta)
+{
+	m_health -= (damage * delta);
 }

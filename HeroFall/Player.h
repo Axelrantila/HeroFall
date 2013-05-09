@@ -47,6 +47,8 @@ public:
 	void takeDamage(float damage);
 
 	bool isOnGround() {return m_isOnGround;}
+	void updateBoxes();
+	void takeDamageOverTime(float damage, float delta);
 
 private:
 	AnimationManager* m_animations;
@@ -71,13 +73,11 @@ private:
 	bool m_isOnGround;
 	bool m_groundMarked;
 	bool m_isIdle;
-
 	bool m_jumping;
 	JumpStage m_currentJumpStage;
 
 	LevelManager* m_levelManager;
-
-	void updateBoxes();
+	float m_delta;
 };
 
 #endif

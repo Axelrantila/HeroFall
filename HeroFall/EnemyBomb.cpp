@@ -11,6 +11,13 @@ EnemyBomb::EnemyBomb(EnemyGoblin* parent)
 
 	m_yVel = 0.0f;
 	m_xVel = 0.0f;
+
+	m_bombBlastArea.setSize(sf::Vector2f(400.0f, 400.0f));
+	m_bombBlastArea.setFillColor(sf::Color::Yellow);
+
+	m_bombHasBlasted = false;
+	m_bombBlastCurrentTime = 0.0f;
+	m_bombBlastTotalTime = 10.0f;
 }
 
 
@@ -20,30 +27,60 @@ EnemyBomb::~EnemyBomb()
 
 void EnemyBomb::move(float delta, std::vector<LevelObject*> levelObjects)
 {
-	m_yVel += getGravityDistance(delta);
-	m_yPos += m_yVel * delta;
-	d_sprite->setPosition(m_xPos, m_yPos);
-
-	for(unsigned int a = 0; a < levelObjects.size(); a++)
+	if(m_bombHasBlasted)
 	{
-		if(collidesWith(levelObjects[a]))
-		{
-			//Spela up ljud här
+		m_bombBlastCurrentTime += delta;
 
+		if(m_bombBlastCurrentTime >= m_bombBlastTotalTime)
+		{
 			m_isDead = true;
-			break;
+		}
+	}
+
+	else
+	{
+		m_yVel += getGravityDistance(delta);
+		m_yPos += m_yVel * delta;
+		d_sprite->setPosition(m_xPos, m_yPos);
+
+		for(unsigned int a = 0; a < levelObjects.size(); a++)
+		{
+			if(collidesWith(levelObjects[a]))
+			{
+				//Spela up ljud här
+				m_bombHasBlasted = true;
+
+				m_bombBlastArea.setPosition(d_sprite->getGlobalBounds().left + d_sprite->getGlobalBounds().width / 2.0f - m_bombBlastArea.getSize().x / 2.0f
+					,d_sprite->getGlobalBounds().top + d_sprite->getGlobalBounds().height - m_bombBlastArea.getSize().y);
+
+				break;
+			}
 		}
 	}
 }
 
 void EnemyBomb::draw(sf::RenderWindow* window)
 {
-	window->draw(*d_sprite);
+	if(m_bombHasBlasted)
+	{
+		window->draw(m_bombBlastArea);
+	}
+	else
+	{
+		window->draw(*d_sprite);
+	}
 }
 
 sf::FloatRect EnemyBomb::getGlobalBounds()
 {
-	return d_sprite->getGlobalBounds();
+	if(m_bombHasBlasted)
+	{
+		return m_bombBlastArea.getGlobalBounds();
+	}
+	else
+	{
+		return d_sprite->getGlobalBounds();
+	}
 }
 
 bool EnemyBomb::collidesWith(LevelObject* levelObject)
