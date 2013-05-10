@@ -14,12 +14,16 @@ public:
 	~HUD();
 
 	void update();
+	void update(float delta);
 	void draw(sf::RenderWindow* window);
 
 private:
 	sf::Sprite* m_GUI;
 	sf::Sprite* m_healthbar;
 	sf::View* m_view;
+
+	sf::Font* m_font;
+	sf::Text* m_text;
 
 	float m_playerMaxHealth;
 	Player* m_player;

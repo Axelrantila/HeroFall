@@ -1,5 +1,0 @@
-wSheet=5
-hSheet=5
-wSprite=5
-hSprite=5
-Particle_Red

@@ -15,6 +15,7 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Troll_Walk_0", 1.0f, m_xPos, m_yPos);
 	m_animations->addAnimation("Troll_Hit_0", 0.225f, m_xPos, m_yPos);
+	m_animations->addAnimation("Troll_Die_0", m_deathTime, m_xPos, m_yPos);
 	m_animations->setCurrentAnimation("Troll_Walk_0");
 
 	m_hitted = false;
@@ -34,32 +35,50 @@ EnemyTroll::~EnemyTroll()
 
 void EnemyTroll::update(float delta)
 {
-	m_animations->update(m_xPos, m_yPos);
-
-	m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
-		m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
-
-	if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
+	if(m_isDying)
 	{
-		m_hitted  = false;
-		m_animations->setCurrentAnimation("Troll_Walk_0");
-	}
-
-	//Check if the enemy has been seen
-	if(m_view != nullptr)
-	{
-		if(!m_seen)
+		std::cout << m_animations->getCurrentAnimation()->getCurrentFrame() << std::endl;
+		if(!m_animations->isCurrentAnimation("Troll_Die_0"))
 		{
-			sf::FloatRect viewField(
-			m_view->getCenter().x - m_view->getSize().x / 2.0f
-			,m_view->getCenter().y - m_view->getSize().y / 2.0f
-			,m_view->getSize().x
-			,m_view->getSize().y);
-
-			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(viewField))
-			{m_seen = true;}
+			m_dyingClock.restart();
+			m_animations->setCurrentAnimation("Troll_Die_0");
+			ScoreManager::getInstance()->addScore(KILL_TROLL);
+		}
+		else if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
+		{
+			m_isDead = true;
 		}
 	}
+
+	else
+	{
+		m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
+
+		if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
+		{
+			m_hitted  = false;
+			m_animations->setCurrentAnimation("Troll_Walk_0");
+		}
+
+		//Check if the enemy has been seen
+		if(m_view != nullptr)
+		{
+			if(!m_seen)
+			{
+				sf::FloatRect viewField(
+				m_view->getCenter().x - m_view->getSize().x / 2.0f
+				,m_view->getCenter().y - m_view->getSize().y / 2.0f
+				,m_view->getSize().x
+				,m_view->getSize().y);
+
+				if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(viewField))
+				{m_seen = true;}
+			}
+		}
+	}
+
+	m_animations->update(m_xPos, m_yPos);
 }
 
 void EnemyTroll::draw(sf::RenderWindow* window)
@@ -106,8 +125,7 @@ void EnemyTroll::takeDamage(float damage)
 		//Check if character is dead
 		if(m_health <= 0.0f)
 		{
-			m_isDead = true;
-			ScoreManager::getInstance()->addScore(KILL_TROLL);
+			m_isDying = true;
 			AudioMixer::getInstance()->playSound("Death_troll", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 		}
 	}
@@ -115,7 +133,7 @@ void EnemyTroll::takeDamage(float damage)
 
 void EnemyTroll::move(float delta, std::vector<LevelObject*> levelObjects)
 {
-	if(m_seen)
+	if(m_seen && !m_isDying)
 	{
 		m_yVel += getGravityDistance(delta);
 		float yMove = delta * m_yVel;

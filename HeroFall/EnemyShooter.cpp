@@ -1,5 +1,6 @@
 #include "AnimationManager.h"
 #include "EnemyShooter.h"
+#include "ScoreManager.h"
 #include "SettingsManager.h"
 
 EnemyShooter::EnemyShooter(float xPos, float yPos, float health, sf::View* view)
@@ -9,6 +10,7 @@ EnemyShooter::EnemyShooter(float xPos, float yPos, float health, sf::View* view)
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Shooter_Shoot_0", m_shootTime, this->getXPos(), this->getYPos());
+	m_animations->addAnimation("Shooter_Die_0", m_deathTime, this->getXPos(), this->getYPos());
 	m_animations->setCurrentAnimation("Shooter_Shoot_0");
 
 	m_xVel = 0.0f;
@@ -28,18 +30,34 @@ void EnemyShooter::update(float delta)
 {
 	m_animations->update(m_xPos, m_yPos);
 
-	if(m_view != nullptr)
+	if(m_isDying)
 	{
-		if(!m_seen)
+		if(!m_animations->isCurrentAnimation("Shooter_Die_0"))
 		{
-			sf::FloatRect viewField(
-			m_view->getCenter().x - m_view->getSize().x / 2.0f
-			,m_view->getCenter().y - m_view->getSize().y / 2.0f
-			,m_view->getSize().x
-			,m_view->getSize().y);
+			m_dyingClock.restart();
+			m_animations->setCurrentAnimation("Shooter_Die_0");
+			ScoreManager::getInstance()->addScore(KILL_SHOOTER);
+		}
+		else if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
+		{
+			m_isDead = true;
+		}
+	}
+	else
+	{
+		if(m_view != nullptr)
+		{
+			if(!m_seen)
+			{
+				sf::FloatRect viewField(
+				m_view->getCenter().x - m_view->getSize().x / 2.0f
+				,m_view->getCenter().y - m_view->getSize().y / 2.0f
+				,m_view->getSize().x
+				,m_view->getSize().y);
 
-			if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(viewField))
-			{m_seen = true;}
+				if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(viewField))
+				{m_seen = true;}
+			}
 		}
 	}
 }
@@ -68,6 +86,9 @@ bool EnemyShooter::collidesWith(LevelObject* levelObject)
 
 bool EnemyShooter::canShoot()
 {
+	if(m_isDying)
+	{return false;}
+
 	if(m_shootClock.getElapsedTime().asSeconds() >= m_shootTime)
 	{
 		m_shootClock.restart();

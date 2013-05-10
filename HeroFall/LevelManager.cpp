@@ -127,13 +127,13 @@ void LevelManager::update(float deltaTime)
 	}
 
 	//Move objects and check collision between enemies and the world
-	m_player->update(deltaTime);
 	m_player->move(deltaTime, m_levelObjects);
+	m_player->update(deltaTime);
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 	{
-		m_enemies->at(a)->update(deltaTime);
 		m_enemies->at(a)->move(deltaTime, m_levelObjects);
+		m_enemies->at(a)->update(deltaTime);
 	}
 
 	//Check collision between the enemies and the player
@@ -147,7 +147,6 @@ void LevelManager::update(float deltaTime)
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;
 	m_cameraMove *= 1.25f;
-	std::cout << m_cameraMove.x << " " << m_cameraMove.y << std::endl;
 
 	//Add bombs and projectiles
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
@@ -171,6 +170,8 @@ void LevelManager::update(float deltaTime)
 		}
 	}
 
+
+
 	//Kill any object that is too far down to be alive
 	if(m_player->getYPos() > 5000.0f)
 	{m_player->markDead();}
@@ -181,13 +182,33 @@ void LevelManager::update(float deltaTime)
 		{m_enemies->at(a)->markDead();}
 	}
 
+	//Delete any dead enemies
+	for(unsigned int a = 0; a < m_enemies->size(); a++)
+	{
+		if(m_enemies->at(a)->isDead())
+		{
+			delete m_enemies->at(a);
+			m_enemies->erase(m_enemies->begin() + a);
+		}
+		else
+		{
+			a++;
+		}
+
+	}
+
 	//Update the HUD
-	m_HUD->update();
+	m_HUD->update(deltaTime);
 }
 
 void LevelManager::updatePlayerSpeed()
 {
-	if(InputManager::getInstance()->isKeyDown("P1_BLOCK"))
+	if(m_player->isDying())
+	{
+		return;
+	}
+
+	else if(InputManager::getInstance()->isKeyDown("P1_BLOCK"))
 	{
 		m_player->block(true);
 	}

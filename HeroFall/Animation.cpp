@@ -65,16 +65,11 @@ void Animation::stop()
 	m_playing = false;
 	m_stopped = true;
 	m_currentFrame = 0;
+	m_clock.restart();
 }
 
 void Animation::update(float xPos, float yPos)
 {
-	for(unsigned int a = 0; a < m_sprites.size(); a++)
-	{m_sprites[a]->setPosition(xPos, yPos);}
-
-	m_xPos = xPos;
-	m_yPos = yPos;
-
 	if(m_clock.getElapsedTime().asSeconds() > m_frameTime)
 	{
 		m_clock.restart();
@@ -86,6 +81,11 @@ void Animation::update(float xPos, float yPos)
 		m_currentSprite = m_sprites[m_currentFrame];
 	}
 
+	for(unsigned int a = 0; a < m_sprites.size(); a++)
+	{m_sprites[a]->setPosition(xPos, yPos);}
+
+	m_xPos = xPos;
+	m_yPos = yPos;
 }
 
 sf::Sprite* Animation::getCurrentSprite()

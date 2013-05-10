@@ -1,5 +1,0 @@
-wSheet=1920
-hSheet=1080
-wSprite=1920
-hSprite=1080
-MainMenuBG_0

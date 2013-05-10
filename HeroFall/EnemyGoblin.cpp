@@ -1,4 +1,5 @@
 #include "EnemyGoblin.h"
+#include "ScoreManager.h"
 #include "SettingsManager.h"
 
 EnemyGoblin::EnemyGoblin(float xPos, float yPos, float travelDistance)
@@ -10,6 +11,7 @@ EnemyGoblin::EnemyGoblin(float xPos, float yPos, float travelDistance)
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Airship_Walk_0", 1.0f, xPos, yPos);
 	m_animations->addAnimation("Airship_Walk_1", 1.0f, xPos, yPos);
+	m_animations->addAnimation("Airship_Die_0", m_deathTime, xPos, yPos);
 	m_animations->setCurrentAnimation("Airship_Walk_0");
 
 	m_xVel = SettingsManager::getSettings()->ENEMY_GOBLIN_SPEED_SIDE;
@@ -33,6 +35,20 @@ void EnemyGoblin::draw(sf::RenderWindow* window)
 void EnemyGoblin::update(float update)
 {
 	m_animations->update(m_xPos, m_yPos);
+
+	if(m_isDying)
+	{
+		if(!m_animations->isCurrentAnimation("Airship_Die_0"))
+		{
+			m_dyingClock.restart();
+			m_animations->setCurrentAnimation("Airship_Die_0");
+			ScoreManager::getInstance()->addScore(KILL_SHOOTER);
+		}
+		else if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
+		{
+			m_isDead = true;
+		}
+	}
 }
 
 bool EnemyGoblin::collidesWith(LevelObject* levelObject)
@@ -42,6 +58,9 @@ bool EnemyGoblin::collidesWith(LevelObject* levelObject)
 
 void EnemyGoblin::move(float delta, std::vector<LevelObject*> levelObjects)
 {
+	if(m_isDying)
+	{return;}
+
 	m_yPos += m_yVel * delta;
 
 	if(m_xVel > 0.0f
@@ -68,6 +87,8 @@ sf::Vector2f EnemyGoblin::getBombSpawnPoint()
 
 bool EnemyGoblin::shouldSpawnBomb()
 {
+	if(m_isDying){return false;}
+
 	if(m_clock.getElapsedTime().asSeconds() >= m_bombSpawnTime)
 	{
 		m_clock.restart();

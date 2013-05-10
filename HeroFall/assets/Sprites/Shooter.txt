@@ -1,7 +1,8 @@
-wSheet=600
+wSheet=720
 hSheet=960
 wSprite=120
 hSprite=160
+Shooter_Die_0_0
 Shooter_Shoot_0_0
 Shooter_Shoot_0_1
 Shooter_Shoot_0_10

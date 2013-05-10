@@ -5,7 +5,9 @@
 
 enum ParticleColor
 {
-	PARTICLE_COLOR_RED
+	PARTICLE_COLOR_RED,
+	PARTICLE_COLOR_BLOOD,
+	PARTICLE_COLOR_FIRE
 };
 
 class Particle

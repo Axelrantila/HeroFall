@@ -11,11 +11,16 @@ Particle::Particle(sf::Vector2f position, ParticleColor color)
 	m_velocity.y = Util::getInstance()->getRandomFloat(-SettingsManager::getSettings()->PARTICLES_MAX_INIT_SPEED, SettingsManager::getSettings()->PARTICLES_MAX_INIT_SPEED);
 
 	m_gravity.x = Util::getInstance()->getRandomFloat(-SettingsManager::getSettings()->WORLD_GRAVITY, SettingsManager::getSettings()->WORLD_GRAVITY);
-	m_gravity.y = Util::getInstance()->getRandomFloat(0.0f, SettingsManager::getSettings()->WORLD_GRAVITY);
+	m_gravity.y = Util::getInstance()->getRandomFloat(-SettingsManager::getSettings()->WORLD_GRAVITY, SettingsManager::getSettings()->WORLD_GRAVITY);
 
 	if(color == PARTICLE_COLOR_RED)
 	{
 		m_sprite = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Particle", "Particle_Red"));
+	}
+
+	else if(color == PARTICLE_COLOR_BLOOD)
+	{
+		m_sprite = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Particle", "Particle_Blood"));
 	}
 
 	m_timeElapsed = 0.0f;

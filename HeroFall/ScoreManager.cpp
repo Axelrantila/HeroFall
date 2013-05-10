@@ -23,4 +23,13 @@ void ScoreManager::addScore(KillEnum type)
 	{
 		m_totalScore += SettingsManager::getSettings()->SCORE_KILL_TROLL;
 	}
+	else if(type == KILL_GOBLIN)
+	{
+		m_totalScore += SettingsManager::getSettings()->SCORE_KILL_GOBLIN;
+	}
+
+	else if(type == KILL_SHOOTER)
+	{
+		m_totalScore += SettingsManager::getSettings()->SCORE_KILL_SHOOTER;
+	}
 }

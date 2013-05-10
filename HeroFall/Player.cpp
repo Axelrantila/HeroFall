@@ -39,6 +39,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_animations->addAnimation("Avatar_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_1", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_2", 0.5f, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_Die_0", m_deathTime, this->m_xPos, this->m_yPos);
 	m_animations->setCurrentAnimation("Avatar_Idle_0");
 
 	m_hitted = false;
@@ -228,8 +229,10 @@ bool Player::collidesWith(LevelObject* levelObject)
 
 void Player::collidesWith(std::vector<Enemy*>* enemies)
 {
-	for(unsigned int a = 0; a < enemies->size();)
+	for(unsigned int a = 0; a < enemies->size(); a++)
 	{
+		if(enemies->at(a)->isDying()){continue;}
+
 #pragma region ENEMY PLACEHOLDER
 		if(enemies->at(a)->getType() == ENEMY_PLACEHOLDER)
 		{
@@ -263,7 +266,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 					m_swordHasHittedEnemy = true;
 					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
-						100);
+						100, PARTICLE_COLOR_BLOOD);
 				}
 			}
 
@@ -337,17 +340,6 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			}
 		}
 #pragma endregion
-
-		//Delete any dead enemies
-		if(enemies->at(a)->isDead())
-		{
-			delete enemies->at(a);
-			enemies->erase(enemies->begin() + a);
-		}
-		else
-		{
-			a++;
-		}
 	}
 }
 
@@ -378,108 +370,121 @@ void Player::swingSword(AttackType type)
 
 void Player::update(float delta)
 {
-	//Check if character is dead
-	if(m_health <= 0.0f)
-	{m_isDead = true;}
-
 	AudioMixer::getInstance()->setListenerPosition(m_xPos, m_yPos);
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
 
-	if(m_isBlocking){std::cout << "Blocking\n";}
-
-	//Carrying
-
-	//Jump
-	if(m_jumping
-		&& !m_swordIsSwinging)
+	//Check if character is dead
+	if(m_health <= 0.0f && !m_isDying)
 	{
-		if(m_yVel < 0.0f)
-		{
-			m_currentJumpStage = JUMPING_UPWARDS;
-		}
-		else
-		{
-			m_currentJumpStage = JUMPING_FALLING;
-		}
-
-		////////////////////////////////////////////////////////////////
-		if(m_currentJumpStage == JUMPING_UPWARDS
-			&& !m_animations->isCurrentAnimation("Avatar_Jump_0"))
-		{
-			m_animations->setCurrentAnimation("Avatar_Jump_0");
-		}
-
-		else if(m_currentJumpStage == JUMPING_FALLING
-			&& !m_animations->isCurrentAnimation("Avatar_Jump_1"))
-		{
-			m_animations->setCurrentAnimation("Avatar_Jump_1");
-		}
-
-		else if(m_currentJumpStage == JUMPING_LANDING
-			&& !m_animations->isCurrentAnimation("Avatar_Jump_2"))
-		{
-			m_animations->setCurrentAnimation("Avatar_Jump_2");
-		}
+		m_isDying = true;
+		m_animations->setCurrentAnimation("Avatar_Die_0");
+		m_dyingClock.restart();
 	}
-
-	//Attack
-	if(!m_swordIsSwinging)
-	{
-		if(InputManager::getInstance()->d_testCombo())
-		{
-			swingSword(ATTACK_COMBO_0);
-		}
 	
-		else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1"))
+	if(m_isDying)
+	{
+		if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
 		{
-			swingSword();
+			m_isDead = true;
 		}
 	}
-
-	//Idle
-	if(m_xVel == 0.0f && m_yVel == 0.0f 
-		&& !m_hitted && !m_swordIsSwinging && !m_isIdle
-		)
+	else
 	{
-		m_animations->setCurrentAnimation("Avatar_Idle_0");
-		m_isIdle = true;
-	}
+		if(m_isBlocking){std::cout << "Blocking\n";}
 
-	//Run
-	else if(m_isIdle && (m_xVel != 0.0f || m_yVel != 0.0f))
-	{
-		m_animations->setCurrentAnimation("Avatar_Run_0");
-		m_isIdle = false;
-	}
-
-	/////////////////////////////////////////////////
-	if(m_swordIsSwinging)
-	{
-		if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
+		//Jump
+		if(m_jumping
+			&& !m_swordIsSwinging
+			&& !m_hitted)
 		{
-			m_swordIsSwinging = false;
+			if(m_yVel < 0.0f)
+			{
+				m_currentJumpStage = JUMPING_UPWARDS;
+			}
+			else
+			{
+				m_currentJumpStage = JUMPING_FALLING;
+			}
 
+			////////////////////////////////////////////////////////////////
+			if(m_currentJumpStage == JUMPING_UPWARDS
+				&& !m_animations->isCurrentAnimation("Avatar_Jump_0"))
+			{
+				m_animations->setCurrentAnimation("Avatar_Jump_0");
+			}
+
+			else if(m_currentJumpStage == JUMPING_FALLING
+				&& !m_animations->isCurrentAnimation("Avatar_Jump_1"))
+			{
+				m_animations->setCurrentAnimation("Avatar_Jump_1");
+			}
+
+			else if(m_currentJumpStage == JUMPING_LANDING
+				&& !m_animations->isCurrentAnimation("Avatar_Jump_2"))
+			{
+				m_animations->setCurrentAnimation("Avatar_Jump_2");
+			}
+		}
+
+		//Attack
+		if(!m_swordIsSwinging)
+		{
+			if(InputManager::getInstance()->d_testCombo())
+			{
+				swingSword(ATTACK_COMBO_0);
+			}
+	
+			else if(InputManager::getInstance()->isKeyDown("P1_ATTACK_1"))
+			{
+				swingSword();
+			}
+		}
+
+		//Idle
+		if(m_xVel == 0.0f && m_yVel == 0.0f 
+			&& !m_hitted && !m_swordIsSwinging && !m_isIdle
+			)
+		{
+			m_animations->setCurrentAnimation("Avatar_Idle_0");
+			m_isIdle = true;
+		}
+
+		//Run
+		else if(m_isIdle && (m_xVel != 0.0f || m_yVel != 0.0f))
+		{
+			m_animations->setCurrentAnimation("Avatar_Run_0");
+			m_isIdle = false;
+		}
+
+		/////////////////////////////////////////////////
+		if(m_swordIsSwinging)
+		{
+			if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
+			{
+				m_swordIsSwinging = false;
+
+				if(m_isOnGround)
+				{
+					m_animations->setCurrentAnimation("Avatar_Idle_0");
+				}
+				else
+				{
+					m_animations->setCurrentAnimation("Avatar_Jump_1");
+				}
+			}
+		}
+
+		if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime
+			&& m_hitted
+			&& m_animations->getCurrentAnimation() != m_animations->getAnimation("Avatar_Idle_0"))
+		{
+			m_hitted  = false;
 			if(m_isOnGround)
 			{
 				m_animations->setCurrentAnimation("Avatar_Idle_0");
 			}
-			else
-			{
-				m_animations->setCurrentAnimation("Avatar_Jump_1");
-			}
-		}
-	}
-
-	if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime
-		&& m_hitted
-		&& m_animations->getCurrentAnimation() != m_animations->getAnimation("Avatar_Idle_0"))
-	{
-		m_hitted  = false;
-		if(m_isOnGround)
-		{
-			m_animations->setCurrentAnimation("Avatar_Idle_0");
-		}
 	
+		}
 	}
 } 
 

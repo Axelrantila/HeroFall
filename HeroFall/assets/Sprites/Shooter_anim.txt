@@ -1,6 +1,8 @@
 [Settings]
 defaultSubset=walk
 speed=0.5
+[Die0]
+Shooter_Die_0_0
 [Shoot0]
 Shooter_Shoot_0_0
 Shooter_Shoot_0_1

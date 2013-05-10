@@ -3,6 +3,8 @@
 
 #include "gameobject.h"
 
+#include <SFML\System\Clock.hpp>
+
 class LevelObject;
 namespace sf{class RenderWindow;};
 
@@ -27,9 +29,10 @@ public:
 	virtual float getGravityDistance(float delta);
 
 	virtual void markDead(){m_isDead = true;}
-	virtual bool isDead();
-	virtual void takeDamage(float damage);
+	virtual bool isDead(){return m_isDead;}
+	virtual bool isDying(){return m_isDying;}
 
+	virtual void takeDamage(float damage);
 	virtual float getHealth(){return m_health;}
 
 protected:
@@ -37,7 +40,11 @@ protected:
 	float m_xVel;
 	float m_yVel;
 
+	bool m_isDying;
 	bool m_isDead;
+	float m_deathTime;
+	sf::Clock m_dyingClock;
+
 	float m_health;
 	float m_armor;
 };

@@ -120,6 +120,8 @@ void StateManager::run()
 					SpriteSheetLoader::getInstance()->removeSheet("MainMenuButtons");
 					SpriteSheetLoader::getInstance()->removeSheet("LoadingScreen");
 
+					ScoreManager::getInstance()->resetScore();
+
 					m_states.push_back(new Game(m_window));
 				}
 

@@ -18,7 +18,7 @@ EnemyBomb::EnemyBomb(EnemyGoblin* parent)
 
 	m_bombHasBlasted = false;
 	m_bombBlastCurrentTime = 0.0f;
-	m_bombBlastTotalTime = 10.0f;
+	m_bombBlastTotalTime = SettingsManager::getSettings()->ENEMY_GOBLIN_BOMB_SPAWN_TIME;
 }
 
 

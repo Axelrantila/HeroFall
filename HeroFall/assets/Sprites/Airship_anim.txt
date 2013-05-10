@@ -1,6 +1,8 @@
 [Settings]
 defaultSubset=walk
 speed=0.5
+[Die0]
+Airship_Die_0_0
 [Walk0]
 Airship_Walk_0_0
 [Walk1]
