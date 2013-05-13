@@ -46,6 +46,18 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	levelBlock7 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block7");
 	levelBlock8 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block8");
 	levelBlock8->setPosition(7550.0f, 2100.0f);
+
+	/*
+	m_vector sf::sprite*
+
+	sf::Sprite* tempSprite = getSprite0();
+	tempSprite->sättPosition
+	m_vector->push_back(tempSprite);
+
+	tempSprite = getSprite1();
+	tempSprite->sättPosition
+	m_vector->push_back(tempSprite);
+	*/
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");

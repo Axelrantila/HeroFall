@@ -110,7 +110,7 @@ void StateManager::run()
 				else if(m_statesToAdd[0] == STATE_GAME)
 				{
 					m_window->clear();
-					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 2110.0f, 1318.75f)));
+					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
 					m_window->draw(*SpriteSheetLoader::getInstance()->getSprite("LoadingScreen", "LoadingScreen"));
 					m_window->display();
 
@@ -124,7 +124,10 @@ void StateManager::run()
 				}
 
 				else if(m_statesToAdd[0] == STATE_GAMEOVER)
-				{m_states.push_back(new GameOver());}
+				{
+					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
+					m_states.push_back(new GameOver());
+				}
 
 				m_statesToAdd.pop_back();
 				m_clock.restart();
