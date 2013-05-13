@@ -176,6 +176,7 @@ bool InputManager::d_testCombo()
 			{
 				m_comboKeys.erase(m_comboKeys.begin() + a);
 				m_comboKeys.erase(m_comboKeys.begin() + a);
+				ComboManager::getInstance()->reset();
 				return true;
 			}
 		}

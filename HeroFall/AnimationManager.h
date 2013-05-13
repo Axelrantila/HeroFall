@@ -11,7 +11,7 @@ public:
 	AnimationManager(GameObject* parent);
 	~AnimationManager();
 
-	void addAnimation(std::string name, float totalTime, float xPos, float yPos);
+	void addAnimation(std::string name, float totalTime, float xPos, float yPos, bool shouldLockAtEnd = false);
 	void setCurrentAnimation(std::string name);
 	void update(float xPos, float yPos);
 

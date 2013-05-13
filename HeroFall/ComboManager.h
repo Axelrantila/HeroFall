@@ -10,6 +10,7 @@ public:
 
 	void increaseComboMeter();
 	void update();
+	void reset(){m_comboMeter = 0;}
 	unsigned int getComboMeter(){return m_comboMeter;}
 	bool canActivateCombo(){return m_comboMeter >= 3;}
 

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-Animation::Animation(GameObject* parent, std::string name, float totalTime, float xPos, float yPos)
+Animation::Animation(GameObject* parent, std::string name, float totalTime, float xPos, float yPos, bool shouldLockAtEnd)
 {
 	m_parent = parent;
 
@@ -39,6 +39,8 @@ Animation::Animation(GameObject* parent, std::string name, float totalTime, floa
 
 	m_xPos = xPos;
 	m_yPos = yPos;
+
+	m_shouldLockAtEnd = shouldLockAtEnd;
 }
 
 Animation::~Animation()
@@ -70,12 +72,18 @@ void Animation::stop()
 
 void Animation::update(float xPos, float yPos)
 {
-	if(m_clock.getElapsedTime().asSeconds() > m_frameTime)
+	if(m_shouldLockAtEnd && m_currentFrame == m_totalFrames - 1)
+	{
+	}
+
+	else if(m_clock.getElapsedTime().asSeconds() > m_frameTime)
 	{
 		m_clock.restart();
 		
 		if(m_currentFrame == m_totalFrames - 1)
-		{m_currentFrame = 0;}
+		{
+			m_currentFrame = 0;
+		}
 		else{m_currentFrame++;}
 
 		m_currentSprite = m_sprites[m_currentFrame];

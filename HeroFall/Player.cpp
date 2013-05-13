@@ -37,7 +37,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_animations->addAnimation("Avatar_CAttack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Jump_1", 0.5f, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_Jump_1", 0.5f, this->m_xPos, this->m_yPos, true);
 	m_animations->addAnimation("Avatar_Jump_2", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Die_0", m_deathTime, this->m_xPos, this->m_yPos);
 	m_animations->setCurrentAnimation("Avatar_Idle_0");
@@ -263,7 +263,15 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			{
 				if(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().intersects(tEnemy->getHitBox()))
 				{
-					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
+					if(m_animations->getCurrentAnimation()->getName() == "Avatar_CAttack_0")
+					{
+						enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL * 1.25f);
+					}
+					else
+					{
+						enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
+					}
+
 					m_swordHasHittedEnemy = true;
 					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),

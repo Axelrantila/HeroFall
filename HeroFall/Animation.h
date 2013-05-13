@@ -10,7 +10,7 @@ class GameObject;
 class Animation
 {
 public:
-	Animation(GameObject* parent, std::string name, float totalTime, float xPos, float yPos);
+	Animation(GameObject* parent, std::string name, float totalTime, float xPos, float yPos, bool shouldLockAtEnd = false);
 	~Animation();
 
 	void play();
@@ -36,6 +36,7 @@ private:
 	float m_frameTime;
 	unsigned int m_currentFrame;
 	unsigned int m_totalFrames;
+	bool m_shouldLockAtEnd;
 
 	sf::Sprite* m_currentSprite;
 	std::vector<sf::Sprite*> m_sprites;

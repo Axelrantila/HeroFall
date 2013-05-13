@@ -11,9 +11,9 @@ AnimationManager::~AnimationManager()
 {
 }
 
-void AnimationManager::addAnimation(std::string name, float totalTime, float xPos, float yPos)
+void AnimationManager::addAnimation(std::string name, float totalTime, float xPos, float yPos, bool shouldLockAtEnd)
 {
-	m_animations.insert(std::pair<std::string, Animation*>(name, new Animation(m_parent, name, totalTime, xPos, yPos)));
+	m_animations.insert(std::pair<std::string, Animation*>(name, new Animation(m_parent, name, totalTime, xPos, yPos, shouldLockAtEnd)));
 }
 
 void AnimationManager::setCurrentAnimation(std::string name)
