@@ -7,9 +7,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
-      <Filter>Game\Level</Filter>
-    </ClCompile>
     <ClCompile Include="LevelObject.cpp">
       <Filter>Game\Level</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Game\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -129,9 +129,6 @@
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Game\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelManager.h">
-      <Filter>Game\Level</Filter>
     </ClInclude>
     <ClInclude Include="LevelObject.h">
       <Filter>Game\Level</Filter>
@@ -246,6 +243,9 @@
     </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Game\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
