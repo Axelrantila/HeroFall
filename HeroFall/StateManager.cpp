@@ -113,7 +113,7 @@ void StateManager::run()
 				{
 					m_window->clear();
 					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 2110.0f, 1318.75f)));
-					m_window->draw(*SpriteSheetLoader::getInstance()->getSprite("LoadingScreen", "LoadingScreen_Placeholder"));
+					m_window->draw(*SpriteSheetLoader::getInstance()->getSprite("LoadingScreen", "LoadingScreen"));
 					m_window->display();
 
 					SpriteSheetLoader::getInstance()->removeSheet("MainMenuBG");

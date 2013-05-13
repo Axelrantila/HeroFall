@@ -5,14 +5,14 @@
 GameOver::GameOver(void)
 {
 	tracker = 0;
-	//backgroundGA = SpriteSheetLoader::getInstance()->getSprite ("DBG", "DBG_0");
+	backgroundGA = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "GameOverScreen");
 
 	Continue = new UIButton();
 	Continue->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Audio");
 	Continue->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
 	Continue->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
-	Continue->Center(sf::Vector2f(800, 800));
-	Continue->Move(sf::Vector2f(0.0f, (float)Continue->m_standard->getTextureRect().height + 50));
+	Continue->Center(sf::Vector2f(1980, 1020));
+	Continue->Move(sf::Vector2f(0.0f, (float)Continue->m_standard->getTextureRect().height + 150));
 
 	Quit = new UIButton();
 	Quit->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Video");
@@ -73,7 +73,7 @@ void GameOver::update(StateManager* stateManager, float delta)
 
 void GameOver::draw(sf::RenderWindow* window)
 {
-	//window->draw(*backgroundGA);
+	window->draw(*backgroundGA);
 	Continue->Draw(window);
 	Quit->Draw(window);
 }
