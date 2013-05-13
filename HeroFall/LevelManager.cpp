@@ -11,13 +11,24 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_view = view;
 	m_window = window;
 
-	m_levelObjects.push_back(new LevelObjectRectangle(2585.0f, 1710.0f, 1250.0f, 10000.0f, sf::Color::Magenta));
-	m_player = new Player(2600.0f, 1300.0f, this);
+	m_levelObjects.push_back(new LevelObjectRectangle(2630.0f, 1710.0f, 1360.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(4310.0f, 1670.0f, 1200.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(5460.0f, 1210.0f, 160.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(6080.0f, 1480.0f, 1000.0f, 200.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(6080.0f, 1100.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(6360.0f, 1100.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(6670.0f, 980.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(7270.0f, 1480.0f, 2380.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(7700.0f, 840.0f, 1510.0f, 100.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(9900.0f, 1500.0f, 1700.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(11830.0f, 1500.0f, 1000.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(13140.0f, 1710.0f, 1350.0f, 300.0f, sf::Color::Magenta));
+	m_player = new Player(2700.0f, 1300.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
 	m_HUD = new HUD(m_view, m_player);
-
+#pragma region Level
 	sf::Sprite* tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain0", "Mountain0_0");
 	tempSprite->setPosition(0.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
@@ -44,16 +55,21 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	d_bg1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0"));
 	d_bg->setPosition(0.0f, 0.0f);
 	d_bg1->setPosition(8160.0f, 0.0f);
-
+#pragma endregion
 	m_prevCameraCenter =  m_view->getCenter();
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyTroll(2600.0f, 1679.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(5200.0f, 1819.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(7000.0f, 1719.0f, m_view));
-	m_enemies->push_back(new EnemyGoblin(10000.0f, 1000.0f, 1500.0f));
-	m_enemies->push_back(new EnemyShooter(10500.0f, 1940.0f, 100.0f, m_view));
+	//m_enemies->push_back(new EnemyTroll(5460.0f, 1250.0f, m_view));
+	//m_enemies->push_back(new EnemyShooter(7000.0f, 1300.0f, 100.0f, m_view));
+	//m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
+	//m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
+	//m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(11350.0f, 1100.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyGoblin(11830.0f, 300.0f, 2000.0f));
 }
 
 LevelManager::~LevelManager()
@@ -81,10 +97,17 @@ void LevelManager::draw(sf::RenderWindow* window)
 	window->draw(*d_bg);
 	window->draw(*d_bg1);
 
+<<<<<<< HEAD
 	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
 	{
 			window->draw(*m_backgroundSprites[a]);
 	}
+=======
+
+
+	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
+		{window->draw(*m_backgroundSprites[a]);}
+>>>>>>> Level
 		
 	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
 		{m_levelObjects[a]->draw(window);}
@@ -134,9 +157,9 @@ void LevelManager::update(float deltaTime)
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
-	if(m_view->getCenter().y < 1800.0f)
+	if(m_view->getCenter().y < 1200.0f)
 	{
-		m_view->setCenter(m_view->getCenter().x, 1800.0f);
+		m_view->setCenter(m_view->getCenter().x, 1200.0f);
 	}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;

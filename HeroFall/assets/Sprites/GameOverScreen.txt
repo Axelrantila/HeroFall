@@ -1,5 +1,8 @@
-wSheet=1920
-hSheet=1080
-wSprite=1920
-hSprite=1080
-GameOverScreen
+wSheet=1092
+hSheet=228
+wSprite=546
+hSprite=114
+Continue
+Continue_lit
+Main_Menu
+Main_Menu_lit

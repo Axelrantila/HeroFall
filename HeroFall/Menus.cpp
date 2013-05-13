@@ -9,22 +9,22 @@ Menus::Menus()
 	background = SpriteSheetLoader::getInstance()->getSprite ("MainMenuBG", "MainMenuBG_0");
 
 	Play = new UIButton();
-	Play->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play");
-	Play->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play_lit");
-	Play->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Play");
+	Play->m_standard = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Play");
+	Play->m_selected = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Play_lit");
+	Play->m_down = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Play");
 	Play->Center(sf::Vector2f(1920, 1080));
 	Play->Move(sf::Vector2f(0.0f, -(float)Play->m_standard->getTextureRect().height - 50));
 
 	Options = new UIButton();
-	Options->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options");
-	Options->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options_lit");
-	Options->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Options");
+	Options->m_standard = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Options");
+	Options->m_selected = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Options_lit");
+	Options->m_down = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Options");
 	Options->Center(sf::Vector2f(1920, 1080));
 
 	Credits = new UIButton();
-	Credits->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Credits");
-	Credits->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Credits_lit");
-	Credits->m_down = SpriteSheetLoader::getInstance()->getSprite ("MainMenuButtons", "MainMenuButtons_Credits");
+	Credits->m_standard = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Credits");
+	Credits->m_selected = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Credits_lit");
+	Credits->m_down = SpriteSheetLoader::getInstance()->getSprite ("Start menu", "Credits");
 	Credits->SetPosition(sf::Vector2f(Options->m_standard->getPosition()));
 	Credits->Move(sf::Vector2f(0.0f, (float)Credits->m_standard->getTextureRect().height + 50));
 

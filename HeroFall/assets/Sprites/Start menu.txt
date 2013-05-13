@@ -1,0 +1,12 @@
+wSheet=930
+hSheet=270
+wSprite=310
+hSprite=90
+Credits
+Credits_lit
+Exit
+Exit_lit
+Options
+Options_lit
+Play
+Play_lit

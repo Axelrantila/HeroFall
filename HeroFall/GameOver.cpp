@@ -5,19 +5,19 @@
 GameOver::GameOver(void)
 {
 	tracker = 0;
-	backgroundGA = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "GameOverScreen");
+	backgroundGA = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreenBG", "GameOverScreenBG");
 
 	Continue = new UIButton();
-	Continue->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Audio");
-	Continue->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
-	Continue->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_AudioSelected");
+	Continue->m_standard = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "Continue");
+	Continue->m_selected = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "Continue_lit");
+	Continue->m_down = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "Continue");
 	Continue->Center(sf::Vector2f(1980, 1020));
 	Continue->Move(sf::Vector2f(0.0f, (float)Continue->m_standard->getTextureRect().height + 150));
 
 	Quit = new UIButton();
-	Quit->m_standard = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_Video");
-	Quit->m_selected = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_VideoSelected");
-	Quit->m_down = SpriteSheetLoader::getInstance()->getSprite ("MenuButtons", "MenuButtons_VideoSelected");
+	Quit->m_standard = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "Main_Menu");
+	Quit->m_selected = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "Main_Menu_lit");
+	Quit->m_down = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "Main_Menu");
 	Quit->SetPosition(sf::Vector2f(Continue->m_standard->getPosition()));
 	Quit->Move(sf::Vector2f(0.0f, (float)Quit->m_standard->getTextureRect().height + 50));
 }
