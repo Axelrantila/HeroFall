@@ -11,54 +11,34 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_view = view;
 	m_window = window;
 
-	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 2160.0f, 1250.0f, 10000.0f, sf::Color::Transparent));
-	m_levelObjects.push_back(new LevelObjectRectangle(1250.0f, 2060.0f, 2000.0f, 10000.0f, sf::Color::Transparent));
-	//m_levelObjects.push_back(new LevelObjectRectangle(3000.0f, 1500.0f, 1250.0f, 100.0f, sf::Color::Magenta)); //Platform
-	m_levelObjects.push_back(new LevelObjectRectangle(3650.0f, 2200.0f, 2250.0f, 10000.0f, sf::Color::Transparent));
-	m_levelObjects.push_back(new LevelObjectRectangle(5650.0f, 2100.0f, 500.0f, 10000.0f, sf::Color::Transparent));
-	m_levelObjects.push_back(new LevelObjectRectangle(6150.0f, 2100.0f, 1450.0f, 115.0f, sf::Color::Transparent));
-	m_levelObjects.push_back(new LevelObjectRectangle(7550.0f, 2100.0f, 7000.0f, 10000.0f, sf::Color::Transparent));
-	//m_levelObjects.push_back(new LevelObjectRectangle(8210.0f, 1800.0f, 200.0f, 50.0f, sf::Color::Transparent));
-	//m_levelObjects.push_back(new LevelObjectRectangle(8450.0f, 1600.0f, 3000.0f, 300.0f, sf::Color::Magenta));
-	m_player = new Player(200.0f, 1899.0f, this);
+	m_levelObjects.push_back(new LevelObjectRectangle(2585.0f, 1710.0f, 1250.0f, 10000.0f, sf::Color::Magenta));
+	m_player = new Player(2600.0f, 1300.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
 	m_HUD = new HUD(m_view, m_player);
-	//////////////////////////////////////////
-	levelHouse = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("House", "House_0"));
-	levelHouse->setPosition(8210.0f, 930.0f);
-	levelBridge = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Bridge", "Bridge_0"));
-	levelBridge->setPosition(6150.0f, 2100.0f);
-	levelBlock1 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block1");
-	levelBlock2 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block2");
-	levelBlock3 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block3");
-	levelBlock3->setPosition(5650.0f, 2100.0f);
-	levelBlock4 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block4");
-	levelBlock5 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block5"));
-	levelBlock5->setPosition(0.0f, 2160.0f);
-	levelBlock5_1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block5"));
-	levelBlock5_1->setPosition(1250.0f, 2060.0f);
-	levelBlock5_2 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block5"));
-	levelBlock5_2->setPosition(3650.0f, 2200.0f);
-	levelBlock6 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block6");
-	levelBlock6->setPosition(12550.0f, 2100.0f);
-	levelBlock7 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block7");
-	levelBlock8 = SpriteSheetLoader::getInstance()->getSprite("Level", "Level_Grass_block8");
-	levelBlock8->setPosition(7550.0f, 2100.0f);
 
-	/*
-	m_vector sf::sprite*
-
-	sf::Sprite* tempSprite = getSprite0();
-	tempSprite->sättPosition
-	m_vector->push_back(tempSprite);
-
-	tempSprite = getSprite1();
-	tempSprite->sättPosition
-	m_vector->push_back(tempSprite);
-	*/
-	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	sf::Sprite* tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain0", "Mountain0_0");
+	tempSprite->setPosition(0.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain1", "Mountain1_0");
+	tempSprite->setPosition(4096.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain2", "Mountain2_0");
+	tempSprite->setPosition(5764.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain3", "Mountain3_0");
+	tempSprite->setPosition(7176.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain4", "Mountain4_0");
+	tempSprite->setPosition(9690.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain5", "Mountain5_0");
+	tempSprite->setPosition(11694.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain6", "Mountain6_0");
+	tempSprite->setPosition(13011.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
 	d_bg1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0"));
@@ -101,16 +81,13 @@ void LevelManager::draw(sf::RenderWindow* window)
 	window->draw(*d_bg);
 	window->draw(*d_bg1);
 
+
+
+	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+		{window->draw(*m_backgroundSprites[a]);}
+		
 	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
 		{m_levelObjects[a]->draw(window);}
-	window->draw(*levelHouse);
-	window->draw(*levelBridge);
-	window->draw(*levelBlock5);
-	window->draw(*levelBlock3);
-	window->draw(*levelBlock5_1);
-	window->draw(*levelBlock5_2);
-	window->draw(*levelBlock8);
-	window->draw(*levelBlock6);
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
