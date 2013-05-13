@@ -235,7 +235,7 @@ void LevelManager::updatePlayerSpeed()
 			m_player->setXSpeed(SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
 		}
 
-		else if(m_player->isOnGround())
+		else //if(m_player->isOnGround())
 		{
 			m_player->haltXSpeed();
 		}
