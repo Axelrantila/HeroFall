@@ -81,10 +81,10 @@ void LevelManager::draw(sf::RenderWindow* window)
 	window->draw(*d_bg);
 	window->draw(*d_bg1);
 
-
-
-	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-		{window->draw(*m_backgroundSprites[a]);}
+	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
+	{
+			window->draw(*m_backgroundSprites[a]);
+	}
 		
 	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
 		{m_levelObjects[a]->draw(window);}

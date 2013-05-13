@@ -51,6 +51,7 @@ SettingsObject::SettingsObject()
 	ENEMY_GOBLIN_HEALTH = 1.0f;
 	ENEMY_GOBLIN_SPEED_SIDE = 1000.0f;
 	ENEMY_GOBLIN_BOMB_SPAWN_TIME = 1.337f;
+	ENEMY_GOBLIN_BOMB_AOE_DURATION = 7.7f;
 #pragma endregion
 
 #pragma region ENEMY_SHOOTER

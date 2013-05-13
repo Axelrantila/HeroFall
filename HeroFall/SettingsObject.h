@@ -62,6 +62,7 @@ public:
 	float ENEMY_GOBLIN_HEALTH;
 	float ENEMY_GOBLIN_SPEED_SIDE;
 	float ENEMY_GOBLIN_BOMB_SPAWN_TIME;
+	float ENEMY_GOBLIN_BOMB_AOE_DURATION;
 #pragma endregion
 
 #pragma region ENEMY_SHOOTER

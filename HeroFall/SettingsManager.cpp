@@ -67,6 +67,7 @@ bool SettingsManager::loadSettings()
 	m_settings->ENEMY_GOBLIN_HEALTH = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "HEALTH", 0);
 	m_settings->ENEMY_GOBLIN_SPEED_SIDE = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "SPEED_SIDE", 0);
 	m_settings->ENEMY_GOBLIN_BOMB_SPAWN_TIME = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "BOMB_SPAWN_TIME", 0);
+	m_settings->ENEMY_GOBLIN_BOMB_AOE_DURATION = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "BOMB_AOE_DURATION", 0);
 
 	m_settings->ENEMY_SHOOTER_SHOOT_TIME = (float)ini.GetDoubleValue("ENEMY_SHOOTER", "SHOOT_TIME", 0);
 
