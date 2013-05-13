@@ -3,7 +3,6 @@
 
 ComboManager::ComboManager(void)
 {
-	m_comboMeter = 0.0f;
 }
 
 
@@ -17,15 +16,16 @@ ComboManager* ComboManager::getInstance()
 	return &instance;
 }
 
-void ComboManager::update(float delta)
-{
-	m_comboMeter -= delta;
-
-	if(m_comboMeter < 0.0f)
-		{m_comboMeter = 0.0f;}
-}
-
 void ComboManager::increaseComboMeter()
 {
-	m_comboMeter += 2.5f;
+	m_clock.restart();
+	m_comboMeter++;
+}
+
+void ComboManager::update()
+{
+	if(m_clock.getElapsedTime().asSeconds() > 3.0f)
+	{
+		m_comboMeter = 0;
+	}
 }

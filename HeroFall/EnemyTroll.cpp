@@ -35,16 +35,17 @@ EnemyTroll::~EnemyTroll()
 
 void EnemyTroll::update(float delta)
 {
+	m_animations->update(m_xPos, m_yPos);
+
 	if(m_isDying)
 	{
-		std::cout << m_animations->getCurrentAnimation()->getCurrentFrame() << std::endl;
 		if(!m_animations->isCurrentAnimation("Troll_Die_0"))
 		{
 			m_dyingClock.restart();
 			m_animations->setCurrentAnimation("Troll_Die_0");
 			ScoreManager::getInstance()->addScore(KILL_TROLL);
 		}
-		else if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
+		if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
 		{
 			m_isDead = true;
 		}
@@ -77,8 +78,6 @@ void EnemyTroll::update(float delta)
 			}
 		}
 	}
-
-	m_animations->update(m_xPos, m_yPos);
 }
 
 void EnemyTroll::draw(sf::RenderWindow* window)
@@ -115,7 +114,7 @@ void EnemyTroll::takeDamage(float damage)
 	{
 		m_hitClock.restart();
 		m_health -= damage;
-		m_animations->setCurrentAnimation("Troll_Hit_0");
+		
 
 		m_hitted = true;
 
@@ -127,6 +126,11 @@ void EnemyTroll::takeDamage(float damage)
 		{
 			m_isDying = true;
 			AudioMixer::getInstance()->playSound("Death_troll", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
+		}
+
+		else
+		{
+			m_animations->setCurrentAnimation("Troll_Hit_0");
 		}
 	}
 }

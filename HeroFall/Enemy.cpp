@@ -9,6 +9,10 @@ Enemy::Enemy(EnemyType type, float xPos, float yPos, float health, sf::View* vie
 	m_health = health;
 	m_view = view;
 	m_seen = false;
+
+	m_xVel = 0.0f;
+	m_yVel = 0.0f;
+	m_armor = 0.0f;
 }
 
 

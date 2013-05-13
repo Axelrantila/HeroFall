@@ -1,19 +1,24 @@
 #ifndef COMBOMANAGER_H
 #define COMBOMANAGER_H
 
+#include <SFML\System\Clock.hpp>
+
 class ComboManager
 {
 public:
 	static ComboManager* getInstance();
 
+	void increaseComboMeter();
+	void update();
+	unsigned int getComboMeter(){return m_comboMeter;}
+	bool canActivateCombo(){return m_comboMeter >= 3;}
+
 private:
 	ComboManager();
 	~ComboManager();
 
-	void increaseComboMeter();
-	void update(float delta);
-
-	float m_comboMeter;
+	sf::Clock m_clock;
+	unsigned int m_comboMeter;
 };
 
 #endif

@@ -67,6 +67,8 @@ void InputManager::update()
 		else
 		{a++;}
 	}
+
+	ComboManager::getInstance()->update();
 }
 
 void InputManager::keyPressed(sf::Keyboard::Key key)
@@ -164,14 +166,18 @@ bool InputManager::isKeyPressed(std::string function)
 
 bool InputManager::d_testCombo()
 {
-	if(m_comboKeys.size() >= 2)
+	if(m_comboKeys.size() >= 2
+		&& ComboManager::getInstance()->canActivateCombo())
 	{
-		if(m_comboKeys[0].key == m_keyFunctions["P1_ATTACK_1"]
-		&& m_comboKeys[1].key == m_keyFunctions["P1_ATTACK_2"])
+		for(unsigned int a = 0; a < m_comboKeys.size() - 1; a++)
 		{
-			m_comboKeys.pop_back();
-			m_comboKeys.pop_back();
-			return true;
+			if(m_comboKeys[a].key == m_keyFunctions["P1_ATTACK_1"]
+			&& m_comboKeys[a+1].key == m_keyFunctions["P1_ATTACK_2"])
+			{
+				m_comboKeys.erase(m_comboKeys.begin() + a);
+				m_comboKeys.erase(m_comboKeys.begin() + a);
+				return true;
+			}
 		}
 	}
 

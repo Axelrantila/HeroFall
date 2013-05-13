@@ -3,3 +3,5 @@ defaultSubset=walk
 speed=0.5
 [Move0]
 Projectile_Move_0_0
+[Move1]
+Projectile_Move_1_0

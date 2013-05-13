@@ -23,9 +23,6 @@ private:
 	LevelManager* m_levelManager;
 	sf::RenderWindow* m_window;
 	sf::View* m_view;
-
-	//sf::Clock m_clock;
-	//float m_deltaTime;
 };
 
 #endif

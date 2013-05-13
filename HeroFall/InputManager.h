@@ -1,9 +1,9 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
-#include <SFML/Window.hpp>
-
+#include "ComboManager.h"
 #include <map>
+#include <SFML/Window.hpp>
 
 typedef std::pair<std::string, sf::Keyboard::Key> stringKeyPair;
 typedef std::pair<std::string, bool> stringBoolPair;

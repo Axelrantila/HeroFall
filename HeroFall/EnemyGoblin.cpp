@@ -44,7 +44,7 @@ void EnemyGoblin::update(float update)
 			m_animations->setCurrentAnimation("Airship_Die_0");
 			ScoreManager::getInstance()->addScore(KILL_SHOOTER);
 		}
-		else if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
+		if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
 		{
 			m_isDead = true;
 		}

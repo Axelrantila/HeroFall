@@ -58,8 +58,8 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 
 	m_enemies = new std::vector<Enemy*>();
 	m_enemies->push_back(new EnemyTroll(2600.0f, 1679.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(5200.0f, 1819.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(7000.0f, 1719.0f, m_view));
+	//m_enemies->push_back(new EnemyTroll(5200.0f, 1819.0f, m_view));
+	//m_enemies->push_back(new EnemyTroll(7000.0f, 1719.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(10000.0f, 1000.0f, 1500.0f));
 	m_enemies->push_back(new EnemyShooter(10500.0f, 1940.0f, 100.0f, m_view));
 }
@@ -128,22 +128,27 @@ void LevelManager::update(float deltaTime)
 
 	//Move objects and check collision between enemies and the world
 	m_player->move(deltaTime, m_levelObjects);
-	m_player->update(deltaTime);
-
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
-	{
-		m_enemies->at(a)->move(deltaTime, m_levelObjects);
-		m_enemies->at(a)->update(deltaTime);
-	}
+		{m_enemies->at(a)->move(deltaTime, m_levelObjects);}
 
 	//Check collision between the enemies and the player
 	m_player->collidesWith(m_enemies);
+
+	//Update
+	m_player->update(deltaTime);
+	for(unsigned int a = 0; a < m_enemies->size(); a++)
+	{m_enemies->at(a)->update(deltaTime);}
 
 	//Update the camera's view
 	m_prevCameraCenter = m_view->getCenter();
 
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
+
+	if(m_view->getCenter().y < 1800.0f)
+	{
+		m_view->setCenter(m_view->getCenter().x, 1800.0f);
+	}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;
 	m_cameraMove *= 1.25f;
@@ -183,7 +188,7 @@ void LevelManager::update(float deltaTime)
 	}
 
 	//Delete any dead enemies
-	for(unsigned int a = 0; a < m_enemies->size(); a++)
+	for(unsigned int a = 0; a < m_enemies->size();)
 	{
 		if(m_enemies->at(a)->isDead())
 		{

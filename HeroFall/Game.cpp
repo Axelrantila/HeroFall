@@ -44,6 +44,9 @@ void Game::update(StateManager* stateManager, float delta)
 			//Lägg till death screen statet här.
 			if(ScoreManager::getInstance()->getScore() > SettingsManager::getSettings()->HIGHSCORE_SCORE)
 			{
+				SettingsManager::getSettings()->HIGHSCORE_SCORE = ScoreManager::getInstance()->getScore();
+				SettingsManager::getInstance()->saveSettings();
+
 				stateManager->addState(STATE_GAME);
 
 			}

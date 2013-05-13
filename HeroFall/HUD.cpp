@@ -1,3 +1,4 @@
+#include "ComboManager.h"
 #include "HUD.h"
 #include "ScoreManager.h"
 #include "SpriteSheetLoader.h"
@@ -42,7 +43,9 @@ void HUD::update()
 
 void HUD::update(float delta)
 {
-	m_text->setString(Util::getInstance()->toString(ScoreManager::getInstance()->getScore()) + "\t" + Util::getInstance()->toString(1.0f/delta));
+	m_text->setString(Util::getInstance()->toString(ScoreManager::getInstance()->getScore())
+		+ "\t" + Util::getInstance()->toString(ComboManager::getInstance()->getComboMeter())
+		+ "\t" + Util::getInstance()->toString(1.0f/delta));
 	update();
 }
 

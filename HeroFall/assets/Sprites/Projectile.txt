@@ -1,5 +1,6 @@
 wSheet=50
-hSheet=50
+hSheet=100
 wSprite=50
 hSprite=50
 Projectile_Move_0_0
+Projectile_Move_1_0

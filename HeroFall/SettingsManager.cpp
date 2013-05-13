@@ -84,6 +84,20 @@ bool SettingsManager::loadSettings()
 
 bool SettingsManager::saveSettings()
 {
+	
+	CSimpleIniA ini;
+	ini.SetUnicode();
+	ini.LoadFile("CONFIG.ini");
+
+	if(ini.IsEmpty())
+		{return false;}
+
+	ini.SetValue("HIGHSCORE", "NAME", m_settings->HIGHSCORE_NAME.c_str());
+	ini.SetLongValue("HIGHSCORE", "SCORE", m_settings->HIGHSCORE_SCORE);
+
+	//Save the file
+	if(ini.SaveFile("CONFIG.ini") < 0)
+		{return false;}
 	return true;
 }
 

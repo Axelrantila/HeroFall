@@ -3,6 +3,8 @@
 #include "ScoreManager.h"
 #include "SettingsManager.h"
 
+#include <iostream>
+
 EnemyShooter::EnemyShooter(float xPos, float yPos, float health, sf::View* view)
 	:Enemy(ENEMY_SHOOTER, xPos, yPos, health, view)
 {
@@ -38,7 +40,8 @@ void EnemyShooter::update(float delta)
 			m_animations->setCurrentAnimation("Shooter_Die_0");
 			ScoreManager::getInstance()->addScore(KILL_SHOOTER);
 		}
-		else if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
+
+		if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
 		{
 			m_isDead = true;
 		}

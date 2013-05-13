@@ -18,6 +18,12 @@ void AnimationManager::addAnimation(std::string name, float totalTime, float xPo
 
 void AnimationManager::setCurrentAnimation(std::string name)
 {
+	if(m_currentAnimation != nullptr)
+	{
+		if(name == m_currentAnimation->getName())
+		{return;}
+	}
+
 	for(std::map<std::string, Animation*>::iterator it = m_animations.begin();
 		it != m_animations.end(); ++it)
 	{

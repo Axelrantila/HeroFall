@@ -243,6 +243,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				{
 					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_PLACEHOLDER);
 					m_swordHasHittedEnemy = true;
+					ComboManager::getInstance()->increaseComboMeter();
 				}
 			}
 
@@ -267,6 +268,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
 						100, PARTICLE_COLOR_BLOOD);
+					ComboManager::getInstance()->increaseComboMeter();
 				}
 			}
 
@@ -284,7 +286,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			if(((EnemyBomb*)enemies->at(a))->hasBlased()
 				&& ((EnemyBomb*)enemies->at(a))->getGlobalBounds().intersects(m_hitBox->getGlobalBounds()))
 			{
-				takeDamageOverTime(100.0f, m_delta);
+				takeDamageOverTime(50.0f, m_delta);
 			}
 		}
 #pragma endregion
@@ -303,6 +305,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
 						100);
+					ComboManager::getInstance()->increaseComboMeter();
 				}
 			}
 		}
@@ -337,6 +340,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 					, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
 					100);
+				ComboManager::getInstance()->increaseComboMeter();
 			}
 		}
 #pragma endregion
@@ -390,7 +394,7 @@ void Player::update(float delta)
 	}
 	else
 	{
-		if(m_isBlocking){std::cout << "Blocking\n";}
+		if(m_isBlocking){}
 
 		//Jump
 		if(m_jumping

@@ -1,0 +1,5 @@
+wSheet=1668
+hSheet=2048
+wSprite=1668
+hSprite=2048
+Mountain1_0
