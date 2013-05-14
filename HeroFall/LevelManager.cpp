@@ -60,11 +60,11 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	//m_enemies->push_back(new EnemyTroll(5460.0f, 1250.0f, m_view));
-	//m_enemies->push_back(new EnemyShooter(7000.0f, 1300.0f, 100.0f, m_view));
-	//m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
-	//m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
-	//m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(5460.0f, 1250.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(7000.0f, 1300.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
+	m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
+	m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(11350.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
@@ -97,20 +97,11 @@ void LevelManager::draw(sf::RenderWindow* window)
 	window->draw(*d_bg);
 	window->draw(*d_bg1);
 
-<<<<<<< HEAD
-	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
-	{
-			window->draw(*m_backgroundSprites[a]);
-	}
-=======
-
-
 	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
 		{window->draw(*m_backgroundSprites[a]);}
->>>>>>> Level
 		
-	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-		{m_levelObjects[a]->draw(window);}
+	//for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+	//	{m_levelObjects[a]->draw(window);}
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}

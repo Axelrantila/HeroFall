@@ -20,7 +20,7 @@ Game::Game(sf::RenderWindow*  window)
 	m_view->getCenter();
 	m_view->getSize();
 
-	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 10.0f, 10.0f, true);
+	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 15.0f, 15.0f, true);
 }
 
 
