@@ -20,7 +20,14 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_levelObjects.push_back(new LevelObjectRectangle(6670.0f, 980.0f, 50.0f, 10.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(7270.0f, 1480.0f, 2380.0f, 300.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(7700.0f, 840.0f, 1510.0f, 100.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(8690.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(8905.0f, 300.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(9195.0f, 300.0f, 50.0f, 10.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(9900.0f, 1500.0f, 1700.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(10390.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(10765.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(11060.0f, 840.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(11560.0f, 840.0f, 50.0f, 10.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(11830.0f, 1500.0f, 1000.0f, 300.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(13140.0f, 1710.0f, 1350.0f, 300.0f, sf::Color::Magenta));
 	m_player = new Player(2700.0f, 1300.0f, this);
@@ -76,8 +83,8 @@ LevelManager::~LevelManager()
 {
 	delete m_HUD;
 
-	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-	{delete m_levelObjects[a];}
+	//for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+	//{delete m_levelObjects[a];}
 	delete m_player;
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
@@ -100,8 +107,8 @@ void LevelManager::draw(sf::RenderWindow* window)
 	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
 		{window->draw(*m_backgroundSprites[a]);}
 		
-	//for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-	//	{m_levelObjects[a]->draw(window);}
+	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+		{m_levelObjects[a]->draw(window);}
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
@@ -148,10 +155,10 @@ void LevelManager::update(float deltaTime)
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
-	if(m_view->getCenter().y < 1200.0f)
-	{
-		m_view->setCenter(m_view->getCenter().x, 1200.0f);
-	}
+	//if(m_view->getCenter().y < 1200.0f)
+	//{
+	//	m_view->setCenter(m_view->getCenter().x, 1200.0f);
+	//}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;
 	m_cameraMove *= 1.25f;
