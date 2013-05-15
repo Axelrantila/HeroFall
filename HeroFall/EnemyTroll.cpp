@@ -28,7 +28,7 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_hitBoxTest->setFillColor(sf::Color(64, 224, 208, 128));
 
 	m_currentAIState = TROLL_AI_WALKING_FORWARD;
-	m_AIChangeLimit = 5.0f;
+	m_AIChangeLimit = SettingsManager::getSettings()->ENEMY_TROLL_AI_CHANGE_LIMIT_TIME;
 
 	m_hitClock.restart();
 	m_AIStateClock.restart();
@@ -88,7 +88,7 @@ void EnemyTroll::update(float delta)
 void EnemyTroll::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	//window->draw(*m_hitBoxTest);
+	window->draw(*m_hitBoxTest);
 }
 
 sf::FloatRect EnemyTroll::getHitBox()
@@ -199,7 +199,7 @@ void EnemyTroll::updateState(Player* player)
 
 		float distance = Util::getInstance()->distance(player->getXPos(), player->getYPos(), m_xPos, m_yPos);
 
-		if(distance < 350.0f
+		if(distance < SettingsManager::getSettings()->ENEMY_TROLL_AI_WALKING_BACKWARDS_DISTANCE_LIMIT
 			&& m_currentAIState == TROLL_AI_WALKING_FORWARD)
 		{
 			newAIState = TROLL_AI_WALKING_BACKWARD;

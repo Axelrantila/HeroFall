@@ -13,7 +13,7 @@ EnemyBomb::EnemyBomb(EnemyGoblin* parent)
 	m_yVel = 0.0f;
 	m_xVel = 0.0f;
 
-	m_bombBlastArea.setSize(sf::Vector2f(400.0f, 400.0f));
+	m_bombBlastArea.setSize(sf::Vector2f(SettingsManager::getSettings()->ENEMY_GOBLIN_BOMB_BLAST_AREA_SIZE, SettingsManager::getSettings()->ENEMY_GOBLIN_BOMB_BLAST_AREA_SIZE));
 	m_bombBlastArea.setFillColor(sf::Color::Yellow);
 
 	m_bombHasBlasted = false;

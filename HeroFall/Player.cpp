@@ -429,7 +429,9 @@ void Player::update(float delta)
 	}
 	else
 	{
-		if(m_isBlocking){}
+		if(m_isBlocking)
+		{
+		}
 
 		//Jump
 		if(m_jumping
@@ -458,11 +460,11 @@ void Player::update(float delta)
 				m_animations->setCurrentAnimation("Avatar_Jump_1");
 			}
 
-			else if(m_currentJumpStage == JUMPING_LANDING
+			/*else if(m_currentJumpStage == JUMPING_LANDING
 				&& !m_animations->isCurrentAnimation("Avatar_Jump_2"))
 			{
 				m_animations->setCurrentAnimation("Avatar_Jump_2");
-			}
+			}*/
 		}
 
 		//Attack

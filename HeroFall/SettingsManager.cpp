@@ -63,13 +63,18 @@ bool SettingsManager::loadSettings()
 	m_settings->ENEMY_TROLL_HITBOX_SIZE_Y = (float)ini.GetDoubleValue("ENEMY_TROLL", "HITBOX_SIZE_Y", 0);
 	m_settings->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X = (float)ini.GetDoubleValue("ENEMY_TROLL", "HITBOX_LOCAL_POSITION_X", 0);
 	m_settings->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y = (float)ini.GetDoubleValue("ENEMY_TROLL", "HITBOX_LOCAL_POSITION_Y", 0);
+	m_settings->ENEMY_TROLL_AI_CHANGE_LIMIT_TIME = (float)ini.GetDoubleValue("ENEMY_TROLL", "AI_CHANGE_LIMIT_TIME", 0);
+	m_settings->ENEMY_TROLL_AI_WALKING_BACKWARDS_DISTANCE_LIMIT = (float)ini.GetDoubleValue("ENEMY_TROLL", "AI_WALKING_BACKWARDS_DISTANCE_LIMIT", 0);
 
 	m_settings->ENEMY_GOBLIN_HEALTH = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "HEALTH", 0);
 	m_settings->ENEMY_GOBLIN_SPEED_SIDE = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "SPEED_SIDE", 0);
 	m_settings->ENEMY_GOBLIN_BOMB_SPAWN_TIME = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "BOMB_SPAWN_TIME", 0);
 	m_settings->ENEMY_GOBLIN_BOMB_AOE_DURATION = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "BOMB_AOE_DURATION", 0);
+	m_settings->ENEMY_GOBLIN_BOMB_BLAST_AREA_SIZE = (float)ini.GetDoubleValue ("ENEMY_GOBLIN", "BOMB_BLAST_AREA_SIZE", 0);
 
 	m_settings->ENEMY_SHOOTER_SHOOT_TIME = (float)ini.GetDoubleValue("ENEMY_SHOOTER", "SHOOT_TIME", 0);
+	m_settings->ENEMY_SHOOTER_PROJECTILE_PARTICLE_SPAWN_TIME = (float)ini.GetDoubleValue("ENEMY_SHOOTER", "PROJECTILE_PARTICLE_SPAWN_TIME", 0);
+	m_settings->ENEMY_SHOOTER_PROJETILE_SPEED = (float)ini.GetDoubleValue("ENEMY_SHOOTER", "PROJETILE_SPEED", 0);
 
 	m_settings->PARTICLES_MAX_INIT_SPEED = (float)ini.GetDoubleValue("PARTICLES", "MAX_INIT_SPEED", 0);
 

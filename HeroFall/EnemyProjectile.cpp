@@ -2,11 +2,12 @@
 #include "EnemyProjectile.h"
 #include "EnemyShooter.h"
 #include "LevelManager.h"
+#include "SettingsManager.h"
 
 EnemyProjectile::EnemyProjectile(EnemyShooter* parent, LevelManager* levelManager = nullptr)
 	:Enemy(ENEMY_PROJECTILE, parent->getProjectileSpawnPoint().x, parent->getProjectileSpawnPoint().y, 1)
 {
-	m_xVel = -400.0f;
+	m_xVel = -SettingsManager::getSettings()->ENEMY_SHOOTER_PROJETILE_SPEED;
 	m_yVel = 0.0f;
 
 	m_animations = new AnimationManager(this);
@@ -16,7 +17,7 @@ EnemyProjectile::EnemyProjectile(EnemyShooter* parent, LevelManager* levelManage
 	m_levelManager = levelManager;
 
 
-	m_particleSpawnTime = 0.10f;
+	m_particleSpawnTime = SettingsManager::getSettings()->ENEMY_SHOOTER_PROJECTILE_PARTICLE_SPAWN_TIME;
 	m_clock.restart();
 }
 
