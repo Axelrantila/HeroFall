@@ -1,15 +1,17 @@
 #ifndef ENEMYPROJECTILE_H
 #define ENEMYPROJECTILE_H
 
-#include "AnimationManager.h"
 #include "Enemy.h"
-#include "EnemyShooter.h"
+
+class AnimationManager;
+class EnemyShooter;
+class LevelManager;
 
 class EnemyProjectile
 	:public Enemy
 {
 public:
-	EnemyProjectile(EnemyShooter* parent);
+	EnemyProjectile(EnemyShooter* parent, LevelManager* levelManager);
 	~EnemyProjectile();
 
 	void move(float delta, std::vector<LevelObject*> levelObjects);
@@ -21,6 +23,9 @@ public:
 
 private:
 	AnimationManager* m_animations;
+	LevelManager* m_levelManager;
+	sf::Clock m_clock;
+	float m_particleSpawnTime;
 };
 
 #endif

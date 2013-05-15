@@ -23,6 +23,11 @@ Particle::Particle(sf::Vector2f position, ParticleColor color)
 		m_sprite = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Particle", "Particle_Blood"));
 	}
 
+	else if(color == PARTICLE_COLOR_FIRE)
+	{
+		m_sprite = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Particle", "Particle_Fire"));
+	}
+
 	m_timeElapsed = 0.0f;
 	m_timeLimit = Util::getInstance()->getRandomFloat(1.0f, 5.0f);
 }

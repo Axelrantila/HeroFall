@@ -279,9 +279,6 @@
     <Filter Include="Engine\Sprite">
       <UniqueIdentifier>{dd0199b2-58b3-400e-8bc1-05c78897b8cf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Settings">
-      <UniqueIdentifier>{0be70ffa-aa88-4289-bcd0-06eecbdadbb7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\States">
       <UniqueIdentifier>{8a67f8fc-8572-4234-97f5-eebb53a560c5}</UniqueIdentifier>
     </Filter>
@@ -299,6 +296,9 @@
     </Filter>
     <Filter Include="Engine\Util">
       <UniqueIdentifier>{fafe96a7-3aec-4c9b-8b61-ee9464d2926c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Settings">
+      <UniqueIdentifier>{0be70ffa-aa88-4289-bcd0-06eecbdadbb7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

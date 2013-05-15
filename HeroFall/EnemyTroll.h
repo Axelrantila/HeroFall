@@ -6,6 +6,15 @@
 
 #include <SFML\Graphics.hpp>
 
+class Player;
+
+enum TrollAIState
+{
+	TROLL_AI_WALKING_FORWARD,
+	TROLL_AI_WALKING_BACKWARD,
+	TROLL_AI_ATTACK_0
+};
+
 class EnemyTroll
 	:public Enemy
 {
@@ -14,10 +23,12 @@ public:
 	~EnemyTroll();
 
 	void update(float delta);
+	void updateState(Player* player);
 	void draw(sf::RenderWindow* window);
 	void move(float delta, std::vector<LevelObject*> levelObjects);
 
 	sf::FloatRect getHitBox();
+	sf::Vector2f getCenter();
 
 	bool collidesWith(LevelObject* levelObject);
 	void takeDamage(float damage);
@@ -30,6 +41,10 @@ private:
 	bool m_hitted;
 
 	sf::RectangleShape* m_hitBoxTest;
+
+	TrollAIState m_currentAIState;
+	sf::Clock m_AIStateClock;
+	float m_AIChangeLimit;
 };
 
 #endif

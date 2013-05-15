@@ -47,7 +47,12 @@ std::string Util::toString(float number)
 
 float Util::distance(float x1, float y1, float x2, float y2)
 {
-	return sqrt(pow(x2 - x1, 2) * pow(y2 - y1, 2));
+	return  sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
+}
+
+float Util::distance(sf::Vector2f pointA, sf::Vector2f pointB)
+{
+	return distance(pointA.x, pointA.y, pointB.x, pointB.y);
 }
 
 float Util::getRandomFloat(float min, float max)

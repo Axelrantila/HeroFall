@@ -67,11 +67,11 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyTroll(5460.0f, 1250.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(7000.0f, 1300.0f, 100.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
-	m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
-	m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
+	//m_enemies->push_back(new EnemyTroll(5460.0f, 1250.0f, m_view));
+	//m_enemies->push_back(new EnemyShooter(7000.0f, 1300.0f, 100.0f, m_view));
+	//m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
+	//m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
+	//m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(11350.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
@@ -83,8 +83,8 @@ LevelManager::~LevelManager()
 {
 	delete m_HUD;
 
-	//for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-	//{delete m_levelObjects[a];}
+	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+	{delete m_levelObjects[a];}
 	delete m_player;
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
@@ -104,11 +104,13 @@ void LevelManager::draw(sf::RenderWindow* window)
 	window->draw(*d_bg);
 	window->draw(*d_bg1);
 
+
+
 	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
 		{window->draw(*m_backgroundSprites[a]);}
 		
-	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-		{m_levelObjects[a]->draw(window);}
+	//for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+	//	{m_levelObjects[a]->draw(window);}
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
@@ -179,7 +181,7 @@ void LevelManager::update(float deltaTime)
 		{
 			if(((EnemyShooter*)m_enemies->at(a))->canShoot())
 			{
-				m_enemies->push_back(new EnemyProjectile((EnemyShooter*)m_enemies->at(a)));
+				m_enemies->push_back(new EnemyProjectile((EnemyShooter*)m_enemies->at(a), this));
 				AudioMixer::getInstance()->playSound("Attack_shaman", 0.0f, 0.0f, 100.0f, 100.0f, m_enemies->at(a)->getXPos(), m_enemies->at(a)->getYPos(), 10.0f, 0.0f, 1.0f);
 			}
 		}

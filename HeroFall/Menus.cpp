@@ -64,11 +64,11 @@ void Menus::update(StateManager* stateManager, float delta)
 			stateManager->addState(STATE_GAME);
 		}
 		Options->Update(delta);
-		if ( Options->Pressed() )
-			{ currentState = OPTIONS; }
+		//if ( Options->Pressed() )
+		//	{ currentState = OPTIONS; }
 		Credits->Update(delta);
-		if ( Credits->Pressed() )
-			{ currentState = CREDITS; }
+		//if ( Credits->Pressed() )
+		//	{ currentState = CREDITS; }
 		Quit->Update(delta);
 		if ( Quit->Pressed() )
 		{

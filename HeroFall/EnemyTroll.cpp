@@ -1,8 +1,10 @@
 #include "AudioMixer.h"
 #include "EnemyTroll.h"
 #include "LevelObjectRectangle.h"
+#include "Player.h"
 #include "ScoreManager.h"
 #include "SpriteSheetLoader.h"
+#include "Util.h"
 
 #include <iostream>
 
@@ -14,16 +16,22 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Troll_Walk_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("Troll_Hit_0", 0.225f, m_xPos, m_yPos);
+	m_animations->addAnimation("Troll_Hit_0", 1.0f, m_xPos, m_yPos);
 	m_animations->addAnimation("Troll_Die_0", m_deathTime, m_xPos, m_yPos);
 	m_animations->setCurrentAnimation("Troll_Walk_0");
 
 	m_hitted = false;
 	m_meleeHitTime = SettingsManager::getSettings()->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
-	m_hitClock.restart();
+	
 
 	m_hitBoxTest =  new sf::RectangleShape(sf::Vector2f(SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_X, SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_Y));
 	m_hitBoxTest->setFillColor(sf::Color(64, 224, 208, 128));
+
+	m_currentAIState = TROLL_AI_WALKING_FORWARD;
+	m_AIChangeLimit = 5.0f;
+
+	m_hitClock.restart();
+	m_AIStateClock.restart();
 }
 
 
@@ -39,29 +47,24 @@ void EnemyTroll::update(float delta)
 
 	if(m_isDying)
 	{
-		if(!m_animations->isCurrentAnimation("Troll_Die_0"))
-		{
-			m_dyingClock.restart();
-			m_animations->setCurrentAnimation("Troll_Die_0");
-			ScoreManager::getInstance()->addScore(KILL_TROLL);
-		}
 		if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
 		{
 			m_isDead = true;
 		}
 	}
 
-	else
+	else if(m_currentAIState == TROLL_AI_WALKING_FORWARD || m_currentAIState == TROLL_AI_WALKING_BACKWARD)
 	{
 		m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
 			m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
 
+		
 		if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
 		{
 			m_hitted  = false;
 			m_animations->setCurrentAnimation("Troll_Walk_0");
 		}
-
+		
 		//Check if the enemy has been seen
 		if(m_view != nullptr)
 		{
@@ -74,7 +77,9 @@ void EnemyTroll::update(float delta)
 				,m_view->getSize().y);
 
 				if(m_animations->getCurrentSprite()->getGlobalBounds().intersects(viewField))
-				{m_seen = true;}
+				{
+					m_seen = true;
+				}
 			}
 		}
 	}
@@ -115,7 +120,6 @@ void EnemyTroll::takeDamage(float damage)
 		m_hitClock.restart();
 		m_health -= damage;
 		
-
 		m_hitted = true;
 
 		AudioMixer::getInstance()->playSound("Attack_hit_2", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
@@ -126,6 +130,9 @@ void EnemyTroll::takeDamage(float damage)
 		{
 			m_isDying = true;
 			AudioMixer::getInstance()->playSound("Death_troll", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
+			m_dyingClock.restart();
+			m_animations->setCurrentAnimation("Troll_Die_0");
+			ScoreManager::getInstance()->addScore(KILL_TROLL);
 		}
 
 		else
@@ -137,35 +144,83 @@ void EnemyTroll::takeDamage(float damage)
 
 void EnemyTroll::move(float delta, std::vector<LevelObject*> levelObjects)
 {
-	if(m_seen && !m_isDying)
+#pragma region Forward/Backward
+	if(m_currentAIState == TROLL_AI_WALKING_FORWARD || m_currentAIState == TROLL_AI_WALKING_BACKWARD)
 	{
-		m_yVel += getGravityDistance(delta);
-		float yMove = delta * m_yVel;
-
-		m_yPos += yMove;
-		for(unsigned int a = 0; a < levelObjects.size(); a++)
+		if(m_seen && !m_isDying)
 		{
-			if(collidesWith(levelObjects[a]))
-			{
-				m_yPos -= yMove;
-				m_yVel = 0.0f;
-				break;
-			}
-		}
+			m_yVel += getGravityDistance(delta);
+			float yMove = delta * m_yVel;
 
-		if(!m_hitted)
-		{
-			float xMove = delta * m_xVel;
-			m_xPos += xMove;
+			m_yPos += yMove;
 			for(unsigned int a = 0; a < levelObjects.size(); a++)
 			{
 				if(collidesWith(levelObjects[a]))
 				{
-					m_xPos -= xMove;
-					m_xVel = 0.0f;
+					m_yPos -= yMove;
+					m_yVel = 0.0f;
 					break;
 				}
 			}
+
+			if(!m_hitted)
+			{
+				float xMove = delta * m_xVel;
+				m_xPos += xMove;
+				for(unsigned int a = 0; a < levelObjects.size(); a++)
+				{
+					if(collidesWith(levelObjects[a]))
+					{
+						m_xPos -= xMove;
+						m_xVel = 0.0f;
+						break;
+					}
+				}
+			}
 		}
+	}
+#pragma endregion
+}
+
+sf::Vector2f EnemyTroll::getCenter()
+{
+	return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left + m_animations->getCurrentSprite()->getGlobalBounds().width/2.0f,
+		m_animations->getCurrentSprite()->getGlobalBounds().left + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
+}
+
+void EnemyTroll::updateState(Player* player)
+{
+	std::cout << Util::getInstance()->distance(player->getXPos(), player->getYPos(), m_xPos, m_yPos) << std::endl;
+
+	//Look at what the next state should be
+	if(m_AIStateClock.getElapsedTime().asSeconds() > m_AIChangeLimit)
+	{
+		TrollAIState newAIState = TROLL_AI_WALKING_FORWARD;
+
+		float distance = Util::getInstance()->distance(player->getXPos(), player->getYPos(), m_xPos, m_yPos);
+
+		if(distance < 350.0f
+			&& m_currentAIState == TROLL_AI_WALKING_FORWARD)
+		{
+			newAIState = TROLL_AI_WALKING_BACKWARD;
+		}
+		else if(m_currentAIState == TROLL_AI_WALKING_BACKWARD)
+		{
+			newAIState = TROLL_AI_WALKING_FORWARD;
+		}
+
+		
+		//Set the new state
+		if(m_currentAIState == newAIState)
+		{return;}
+
+		if((m_currentAIState == TROLL_AI_WALKING_FORWARD && newAIState == TROLL_AI_WALKING_BACKWARD)
+			|| (m_currentAIState == TROLL_AI_WALKING_BACKWARD && newAIState == TROLL_AI_WALKING_FORWARD))
+		{
+			m_xVel *= -1.0f;
+		}
+
+		m_currentAIState = newAIState;
+		m_AIStateClock.restart();
 	}
 }

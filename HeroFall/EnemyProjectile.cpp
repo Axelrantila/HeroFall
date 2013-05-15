@@ -1,7 +1,9 @@
+#include "AnimationManager.h"
 #include "EnemyProjectile.h"
+#include "EnemyShooter.h"
+#include "LevelManager.h"
 
-
-EnemyProjectile::EnemyProjectile(EnemyShooter* parent)
+EnemyProjectile::EnemyProjectile(EnemyShooter* parent, LevelManager* levelManager = nullptr)
 	:Enemy(ENEMY_PROJECTILE, parent->getProjectileSpawnPoint().x, parent->getProjectileSpawnPoint().y, 1)
 {
 	m_xVel = -400.0f;
@@ -10,6 +12,12 @@ EnemyProjectile::EnemyProjectile(EnemyShooter* parent)
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Projectile_Move_0", 1.0f, m_xPos, m_yPos);
 	m_animations->setCurrentAnimation("Projectile_Move_0");
+
+	m_levelManager = levelManager;
+
+
+	m_particleSpawnTime = 0.10f;
+	m_clock.restart();
 }
 
 
@@ -34,6 +42,18 @@ void EnemyProjectile::move(float delta, std::vector<LevelObject*> levelObjects)
 void EnemyProjectile::update(float delta)
 {
 	m_animations->update(this->m_xPos, this->m_yPos);
+
+	if(m_clock.getElapsedTime().asSeconds() > m_particleSpawnTime)
+	{
+		m_levelManager->addParticles(sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left + m_animations->getCurrentSprite()->getGlobalBounds().width/2,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2), 1, PARTICLE_COLOR_FIRE);
+		m_clock.restart();
+	}
+
+	if(m_isDying)
+	{
+		m_isDead = true;
+	}
 }
 
 void EnemyProjectile::draw(sf::RenderWindow* window)

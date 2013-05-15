@@ -34,6 +34,7 @@ Animation::Animation(GameObject* parent, std::string name, float totalTime, floa
 	m_currentFrame = 0;
 	m_totalFrames = m_sprites.size();
 	m_frameTime = totalTime / (float)(m_totalFrames);
+	m_totalTime = totalTime;
 	m_playing = false;
 	m_stopped = false;
 
@@ -78,15 +79,21 @@ void Animation::update(float xPos, float yPos)
 
 	else if(m_clock.getElapsedTime().asSeconds() > m_frameTime)
 	{
-		m_clock.restart();
-		
-		if(m_currentFrame == m_totalFrames - 1)
+		float m_totalDeltaTime = m_clock.getElapsedTime().asSeconds();
+
+		while(m_totalDeltaTime > m_frameTime)
 		{
-			m_currentFrame = 0;
+			if(m_currentFrame == m_totalFrames - 1)
+			{
+				m_currentFrame = 0;
+			}
+			else{m_currentFrame++;}
+
+			m_totalDeltaTime -= m_frameTime;
 		}
-		else{m_currentFrame++;}
 
 		m_currentSprite = m_sprites[m_currentFrame];
+		m_clock.restart();
 	}
 
 	for(unsigned int a = 0; a < m_sprites.size(); a++)

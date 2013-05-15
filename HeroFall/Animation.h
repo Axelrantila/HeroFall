@@ -22,6 +22,7 @@ public:
 	sf::Sprite* getCurrentSprite();
 	sf::Sprite* getSprite(unsigned int index);
 	unsigned int getCurrentFrame();
+	unsigned int getMaxFrameNr(){return m_totalFrames-1;}
 
 	std::string getName() {return m_spriteBaseName;}
 
@@ -34,6 +35,7 @@ private:
 	bool m_stopped;
 
 	float m_frameTime;
+	float m_totalTime;
 	unsigned int m_currentFrame;
 	unsigned int m_totalFrames;
 	bool m_shouldLockAtEnd;

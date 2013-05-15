@@ -34,7 +34,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_animations->addAnimation("Avatar_Run_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Attack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Attack_1", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_CAttack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_Combo_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Jump_1", 0.5f, this->m_xPos, this->m_yPos, true);
@@ -56,7 +56,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 
 	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_Attack_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
 	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_Attack_1"), sf::RectangleShape(sf::Vector2f(109.0f, 58.0f))));
-	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_CAttack_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
+	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_Combo_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
 
 	m_currentAttack = 0;
 	m_levelManager = levelManager;
@@ -76,7 +76,12 @@ Player::~Player()
 void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	/*window->draw(*m_hitBox);*/
+	window->draw(*m_hitBox);
+
+	if(m_swordIsSwinging)
+	{
+		window->draw(m_swordBoxesMap[m_animations->getCurrentAnimation()]);
+	}
 }
 
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)
@@ -259,11 +264,14 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		else if(enemies->at(a)->getType() == ENEMY_TROLL)
 		{
 			EnemyTroll* tEnemy = ((EnemyTroll*)enemies->at(a));
+
+			tEnemy->updateState(this);
+
 			if(m_swordIsSwinging && !m_swordHasHittedEnemy )
 			{
 				if(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().intersects(tEnemy->getHitBox()))
 				{
-					if(m_animations->getCurrentAnimation()->getName() == "Avatar_CAttack_0")
+					if(m_animations->getCurrentAnimation()->getName() == "Avatar_Combo_0")
 					{
 						enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL * 1.25f);
 					}
@@ -296,6 +304,15 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			{
 				takeDamageOverTime(50.0f, m_delta);
 			}
+
+			/*
+			Block projectiles here
+
+
+
+
+
+			*/
 		}
 #pragma endregion
 
@@ -327,7 +344,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			{
 				if(m_isBlocking)
 				{
-					enemies->at(a)->takeDamage(1.0f);
+					enemies->at(a)->markDead();
 				}
 				else
 				{
@@ -370,7 +387,7 @@ void Player::swingSword(AttackType type)
 
 	if(type == ATTACK_COMBO_0)
 	{
-		m_animations->setCurrentAnimation("Avatar_CAttack_0");
+		m_animations->setCurrentAnimation("Avatar_Combo_0");
 	}
 
 	else if(type == ATTACK_NORMAL)
@@ -384,6 +401,16 @@ void Player::update(float delta)
 {
 	AudioMixer::getInstance()->setListenerPosition(m_xPos, m_yPos);
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
+
+
+	//std::cout << m_animations->getCurrentAnimation()->getName() << " " << m_animations->getCurrentAnimation()->getCurrentFrame() << std::endl;
+
+	/*if(m_swordIsSwinging)
+	{
+		std::cout << Util::getInstance()->toString(m_swordClock.getElapsedTime().asSeconds() / m_targetSwingTime * (float)m_animations->getCurrentAnimation()->getMaxFrameNr()) << "\t"
+			<< m_animations->getCurrentAnimation()->getCurrentFrame() << "/" << m_animations->getCurrentAnimation()->getMaxFrameNr()
+			<< std::endl;
+	}*/
 
 	//Check if character is dead
 	if(m_health <= 0.0f && !m_isDying)
@@ -541,7 +568,7 @@ void Player::updateBoxes()
 		it != m_swordBoxesMap.end(); ++it)
 	{
 		if(it->first == m_animations->getAnimation("Avatar_Attack_0")
-			|| it->first == m_animations->getAnimation("Avatar_CAttack_0"))
+			|| it->first == m_animations->getAnimation("Avatar_Combo_0"))
 		{
 			it->second.setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 200.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 160.0f);
