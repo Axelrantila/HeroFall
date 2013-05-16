@@ -72,7 +72,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	//m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
 	//m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
 	//m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
-	//m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(11350.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_view));
@@ -234,7 +234,12 @@ void LevelManager::updatePlayerSpeed()
 		m_player->block(false);
 
 		//Update player speed
-		if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") && m_player->isOnGround())
+		if(m_player->blocking())
+		{
+			m_player->setXPos(0.0f);
+		}
+
+		else if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP") && m_player->isOnGround())
 		{
 		AudioMixer::getInstance()->playSound("Jumping_grunt");
 			m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
@@ -246,13 +251,15 @@ void LevelManager::updatePlayerSpeed()
 		}
 
 		if(InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT")
-			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT"))
+			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT")
+			&& !m_player->blocking())
 		{
 			m_player->setXSpeed(-SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
 		}
 
 		else if(InputManager::getInstance()->isKeyDown("P1_MOVE_RIGHT")
-			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT"))
+			&& !InputManager::getInstance()->isKeyDown("P1_MOVE_LEFT")
+			&& !m_player->blocking())
 		{
 			m_player->setXSpeed(SettingsManager::getSettings()->PLAYER_SPEED_SIDE);
 		}

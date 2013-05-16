@@ -87,14 +87,10 @@ void Player::draw(sf::RenderWindow* window)
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 {
 	m_delta = delta;
-
 	m_groundMarked = false;
-
 	m_yVel += getGravityDistance(delta);
 	float m_yMove = delta * m_yVel;
-
 	m_yPos += m_yMove;
-
 	updateBoxes();
 
 	for(unsigned int a = 0; a < levelObjects.size(); a++)
@@ -122,7 +118,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 		m_isOnGround = false;
 	}
 
-	if(m_markedForHalt)
+	if(m_markedForHalt && !m_isBlocking)
 	{
 		if(m_xVel > 0.0f)
 		{
@@ -171,7 +167,7 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 			}
 		}
 	}
-	else
+	else if(!m_isBlocking)
 	{
 		float m_xMove = delta * m_xVel;
 		m_xPos += m_xMove;
