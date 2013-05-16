@@ -65,6 +65,8 @@ bool SettingsManager::loadSettings()
 	m_settings->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y = (float)ini.GetDoubleValue("ENEMY_TROLL", "HITBOX_LOCAL_POSITION_Y", 0);
 	m_settings->ENEMY_TROLL_AI_CHANGE_LIMIT_TIME = (float)ini.GetDoubleValue("ENEMY_TROLL", "AI_CHANGE_LIMIT_TIME", 0);
 	m_settings->ENEMY_TROLL_AI_WALKING_BACKWARDS_DISTANCE_LIMIT = (float)ini.GetDoubleValue("ENEMY_TROLL", "AI_WALKING_BACKWARDS_DISTANCE_LIMIT", 0);
+	m_settings->ENEMY_TROLL_ATTACK_STAGE_1_TIME = (float)ini.GetDoubleValue("ENEMY_TROLL", "ATTACK_STAGE_1_TIME", 0);
+	m_settings->ENEMY_TROLL_ATTACK_STAGE_2_TIME = (float)ini.GetDoubleValue("ENEMY_TROLL", "ATTACK_STAGE_2_TIME", 0);
 
 	m_settings->ENEMY_GOBLIN_HEALTH = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "HEALTH", 0);
 	m_settings->ENEMY_GOBLIN_SPEED_SIDE = (float)ini.GetDoubleValue("ENEMY_GOBLIN", "SPEED_SIDE", 0);

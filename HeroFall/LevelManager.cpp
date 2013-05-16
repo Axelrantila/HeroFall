@@ -72,7 +72,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	//m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
 	//m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
 	//m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
+	//m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(11350.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_view));
@@ -163,7 +163,6 @@ void LevelManager::update(float deltaTime)
 	//}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;
-	m_cameraMove *= 1.25f;
 
 	//Add bombs and projectiles
 	for(unsigned int a = 0; a < m_enemies->size(); a++)

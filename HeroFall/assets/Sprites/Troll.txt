@@ -2,6 +2,8 @@ wSheet=3888
 hSheet=3420
 wSprite=432
 hSprite=380
+Troll_Attack_0_0
+Troll_Attack_1_0
 Troll_Die_0_0
 Troll_Die_0_1
 Troll_Die_0_10

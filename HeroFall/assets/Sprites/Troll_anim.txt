@@ -1,6 +1,10 @@
 [Settings]
 defaultSubset=walk
 speed=0.5
+[Attack0]
+Troll_Attack_0_0
+[Attack1]
+Troll_Attack_1_0
 [Die0]
 Troll_Die_0_0
 Troll_Die_0_1
