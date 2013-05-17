@@ -10,24 +10,6 @@
     <ClCompile Include="LevelObject.cpp">
       <Filter>Game\Level</Filter>
     </ClCompile>
-    <ClCompile Include="LevelObjectRectangle.cpp">
-      <Filter>Game\Level\LevelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelObjectPlattform.cpp">
-      <Filter>Game\Level\LevelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyGoblin.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyPlaceholder.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyShooter.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyTroll.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
@@ -80,19 +62,16 @@
       <Filter>Game\States</Filter>
     </ClCompile>
     <ClCompile Include="SwordBehavior.cpp">
-      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
+      <Filter>Old\Player\Sword Swing Behavior</Filter>
     </ClCompile>
     <ClCompile Include="SwordBehaviorUpAndDown.cpp">
-      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
+      <Filter>Old\Player\Sword Swing Behavior</Filter>
     </ClCompile>
     <ClCompile Include="SwordBehaviorFireRush.cpp">
-      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBomb.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
+      <Filter>Old\Player\Sword Swing Behavior</Filter>
     </ClCompile>
     <ClCompile Include="SwordPointManager.cpp">
-      <Filter>Game\Characters\Player</Filter>
+      <Filter>Old\Player</Filter>
     </ClCompile>
     <ClCompile Include="ScoreManager.cpp">
       <Filter>Engine\Util</Filter>
@@ -102,9 +81,6 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyProjectile.cpp">
-      <Filter>Game\Characters\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
       <Filter>Engine\Particle</Filter>
@@ -122,6 +98,33 @@
     <ClCompile Include="LevelManager.cpp">
       <Filter>Game\Level</Filter>
     </ClCompile>
+    <ClCompile Include="LevelObjectPlattform.cpp">
+      <Filter>Old</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelObjectRectangle.cpp">
+      <Filter>Game\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyGoblin.cpp">
+      <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyShooter.cpp">
+      <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTroll.cpp">
+      <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBomb.cpp">
+      <Filter>Game\Characters\Enemies\Secondary</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyProjectile.cpp">
+      <Filter>Game\Characters\Enemies\Secondary</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyPlaceholder.cpp">
+      <Filter>Old</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBase.cpp">
+      <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -132,24 +135,6 @@
     </ClInclude>
     <ClInclude Include="LevelObject.h">
       <Filter>Game\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelObjectRectangle.h">
-      <Filter>Game\Level\LevelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelObjectPlattform.h">
-      <Filter>Game\Level\LevelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyTroll.h">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyGoblin.h">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyPlaceholder.h">
-      <Filter>Game\Characters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyShooter.h">
-      <Filter>Game\Characters\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Characters</Filter>
@@ -206,19 +191,16 @@
       <Filter>Game\States</Filter>
     </ClInclude>
     <ClInclude Include="SwordBehavior.h">
-      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
+      <Filter>Old\Player\Sword Swing Behavior</Filter>
     </ClInclude>
     <ClInclude Include="SwordBehaviorUpAndDown.h">
-      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
+      <Filter>Old\Player\Sword Swing Behavior</Filter>
     </ClInclude>
     <ClInclude Include="SwordBehaviorFireRush.h">
-      <Filter>Game\Characters\Player\Sword Swing Behavior</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBomb.h">
-      <Filter>Game\Characters\Enemies</Filter>
+      <Filter>Old\Player\Sword Swing Behavior</Filter>
     </ClInclude>
     <ClInclude Include="SwordPointManager.h">
-      <Filter>Game\Characters\Player</Filter>
+      <Filter>Old\Player</Filter>
     </ClInclude>
     <ClInclude Include="ScoreManager.h">
       <Filter>Engine\Util</Filter>
@@ -228,9 +210,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyProjectile.h">
-      <Filter>Game\Characters\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>Engine\Particle</Filter>
@@ -247,6 +226,33 @@
     <ClInclude Include="LevelManager.h">
       <Filter>Game\Level</Filter>
     </ClInclude>
+    <ClInclude Include="LevelObjectPlattform.h">
+      <Filter>Old</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelObjectRectangle.h">
+      <Filter>Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGoblin.h">
+      <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyShooter.h">
+      <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTroll.h">
+      <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBomb.h">
+      <Filter>Game\Characters\Enemies\Secondary</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyProjectile.h">
+      <Filter>Game\Characters\Enemies\Secondary</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyPlaceholder.h">
+      <Filter>Old</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBase.h">
+      <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -260,9 +266,6 @@
     </Filter>
     <Filter Include="Game\Level">
       <UniqueIdentifier>{f1c2c9e2-13e5-407d-8a89-3600caf37c43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Level\LevelObjects">
-      <UniqueIdentifier>{86502288-26f5-49f3-80b8-29be4f681350}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Characters\Enemies">
       <UniqueIdentifier>{86996a7b-6cf1-4c5b-9e75-51a46df2050f}</UniqueIdentifier>
@@ -282,12 +285,6 @@
     <Filter Include="Game\States">
       <UniqueIdentifier>{8a67f8fc-8572-4234-97f5-eebb53a560c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Characters\Player">
-      <UniqueIdentifier>{7415e2a1-1bbb-451e-b826-5d7e7c86ce8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Characters\Player\Sword Swing Behavior">
-      <UniqueIdentifier>{f3748c01-f995-4d20-9161-18273362b64c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{3b60bbfb-a285-4648-af74-e7b4e5b9a90b}</UniqueIdentifier>
     </Filter>
@@ -299,6 +296,21 @@
     </Filter>
     <Filter Include="Engine\Settings">
       <UniqueIdentifier>{0be70ffa-aa88-4289-bcd0-06eecbdadbb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Old">
+      <UniqueIdentifier>{16547dc1-d75a-4b65-b1db-b717474966c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Old\Player">
+      <UniqueIdentifier>{7415e2a1-1bbb-451e-b826-5d7e7c86ce8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Old\Player\Sword Swing Behavior">
+      <UniqueIdentifier>{f3748c01-f995-4d20-9161-18273362b64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Characters\Enemies\Secondary">
+      <UniqueIdentifier>{1ddf7d75-96f5-4a07-9bc6-707b1d826a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Characters\Enemies\Primary">
+      <UniqueIdentifier>{44d223a7-68ff-47be-a1b3-acb6c7b4887d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

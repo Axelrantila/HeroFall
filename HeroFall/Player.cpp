@@ -1,4 +1,5 @@
 #include "AudioMixer.h"
+#include "EnemyBase.h"
 #include "EnemyBomb.h"
 #include "EnemyGoblin.h"
 #include "EnemyPlaceholder.h"
@@ -355,11 +356,28 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 
 #pragma region SHOOTER
 		//Shooter
-		else if(enemies->at(a)->getType() == ENEMY_SHOOTER)
+		else if(enemies->at(a)->getType() == ENEMY_SHOOTER
+			&& m_swordIsSwinging && !m_swordHasHittedEnemy)
 		{
 			if(((EnemyProjectile*)enemies->at(a))->getGlobalBounds().intersects(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds()))
 			{
 				enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_SHOOTER);
+				m_swordHasHittedEnemy = true;
+				m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
+					, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
+					100);
+				ComboManager::getInstance()->increaseComboMeter();
+			}
+		}
+#pragma endregion
+
+#pragma region BASE
+		else if(enemies->at(a)->getType() == ENEMY_BASE
+			&& m_swordIsSwinging && !m_swordHasHittedEnemy)
+		{
+			if(((EnemyBase*)enemies->at(a))->getHitBox().intersects(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds()))
+			{
+				enemies->at(a)->takeDamage(1.0f);
 				m_swordHasHittedEnemy = true;
 				m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 					, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
@@ -373,8 +391,8 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 
 sf::Vector2f Player::getCenter()
 {
-	return sf::Vector2f(m_xPos + m_animations->getCurrentSprite()->getGlobalBounds().width/2.0f,
-		m_yPos + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
+	return sf::Vector2f(m_hitBox->getGlobalBounds().left + m_hitBox->getGlobalBounds().width/2.0f,
+		m_hitBox->getGlobalBounds().top + m_hitBox->getGlobalBounds().height/2.0f);
 }
 
 void Player::swingSword(AttackType type)

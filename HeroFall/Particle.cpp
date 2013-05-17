@@ -3,7 +3,7 @@
 #include "SpriteSheetLoader.h"
 #include "Util.h"
 
-Particle::Particle(sf::Vector2f position, ParticleColor color)
+Particle::Particle(sf::Vector2f position, ParticleColor color, float timeLimit)
 {
 	m_position = position;
 
@@ -29,7 +29,7 @@ Particle::Particle(sf::Vector2f position, ParticleColor color)
 	}
 
 	m_timeElapsed = 0.0f;
-	m_timeLimit = Util::getInstance()->getRandomFloat(1.0f, 5.0f);
+	m_timeLimit = Util::getInstance()->getRandomFloat(1.0f, timeLimit);
 }
 
 Particle::~Particle()

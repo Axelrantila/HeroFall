@@ -1,11 +1,15 @@
 #include "AnimationManager.h"
 #include "EnemyShooter.h"
+#include "Player.h"
 #include "ScoreManager.h"
 #include "SettingsManager.h"
+#include "Util.h"
 
 #include <iostream>
 
-EnemyShooter::EnemyShooter(float xPos, float yPos, float health, sf::View* view)
+const float PI = 3.14159265f;
+
+EnemyShooter::EnemyShooter(float xPos, float yPos, float health, Player* player, sf::View* view)
 	:Enemy(ENEMY_SHOOTER, xPos, yPos, health, view)
 {
 	m_shootTime = SettingsManager::getSettings()->ENEMY_SHOOTER_SHOOT_TIME;
@@ -20,6 +24,8 @@ EnemyShooter::EnemyShooter(float xPos, float yPos, float health, sf::View* view)
 
 	m_seen = false;
 	m_shootClock.restart();
+	m_canShoot = true;
+	m_player = player;
 }
 
 
@@ -62,6 +68,11 @@ void EnemyShooter::update(float delta)
 				{m_seen = true;}
 			}
 		}
+
+		if(m_animations->getCurrentAnimation()->getCurrentFrame() != 20)
+		{
+			m_canShoot = true;
+		}
 	}
 }
 
@@ -92,7 +103,7 @@ bool EnemyShooter::canShoot()
 	if(m_isDying)
 	{return false;}
 
-	if(m_shootClock.getElapsedTime().asSeconds() >= m_shootTime)
+	/*if(m_shootClock.getElapsedTime().asSeconds() >= m_shootTime)
 	{
 		m_shootClock.restart();
 
@@ -100,6 +111,13 @@ bool EnemyShooter::canShoot()
 		{
 			return true;
 		}
+	}*/
+
+	if(m_animations->getCurrentAnimation()->getCurrentFrame() == 20
+		&& m_seen && m_canShoot)
+	{
+		m_canShoot = false;
+		return true;
 	}
 
 	return false;
@@ -107,11 +125,42 @@ bool EnemyShooter::canShoot()
 
 sf::Vector2f EnemyShooter::getProjectileSpawnPoint()
 {
-	return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left - 50.0f,
+	return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left - 20.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
 }
 
 sf::FloatRect EnemyShooter::getGlobalBounds()
 {
 	return m_animations->getCurrentSprite()->getGlobalBounds();
+}
+
+sf::Vector2f EnemyShooter::getProjectileSpeed()
+{
+	float dY = 0.0f;
+	float y1 = m_player->getCenter().y;
+	float y2 = m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f;
+	dY = y2-y1;
+
+	float dX = 0.0f;
+	float x1 = m_player->getCenter().x;
+	float x2 =  m_animations->getCurrentSprite()->getGlobalBounds().left - 20.0f;
+	dX = x2-x1;
+
+	float angle = atan(dY/dX);
+	std::cout << dX << "\t" << dY << std::endl;
+	std::cout << Util::getInstance()->toString(angle * 180.0f / PI) << std::endl;
+
+	sf::Vector2f projectileSpeed;
+	projectileSpeed.x = SettingsManager::getSettings()->ENEMY_SHOOTER_PROJETILE_SPEED * cos(angle);
+	projectileSpeed.y = SettingsManager::getSettings()->ENEMY_SHOOTER_PROJETILE_SPEED * sin(angle);
+	
+	if(dX > 0 && dY > 0)
+	{
+		projectileSpeed.x *= -1;
+		projectileSpeed.y *= -1;
+	}
+
+	return projectileSpeed;
+		//Cos x
+		//-sin y
 }

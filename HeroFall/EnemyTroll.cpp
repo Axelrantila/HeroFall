@@ -129,7 +129,7 @@ void EnemyTroll::update(float delta)
 void EnemyTroll::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	//window->draw(*m_hitBoxTest);
+	window->draw(*m_hitBoxTest);
 }
 
 sf::FloatRect EnemyTroll::getHitBox()
@@ -231,17 +231,6 @@ sf::Vector2f EnemyTroll::getCenter()
 
 void EnemyTroll::updateState(Player* player)
 {
-	std::cout << m_attackClock.getElapsedTime().asSeconds() << std::endl;
-
-	if(m_attackClock.getElapsedTime().asSeconds() > m_attackStage1Time)
-	{
-		std::cout << "Test0\n";
-		if(m_currentAIState == TROLL_AI_ATTACK_0)
-		{
-			std::cout << "Test1\n";
-		}
-	}
-
 	//Attack stage 0
 	if(m_currentAIState == TROLL_AI_ATTACK_0
 		&& m_attackClock.getElapsedTime().asSeconds() > m_attackStage1Time)

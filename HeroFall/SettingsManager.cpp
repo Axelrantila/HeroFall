@@ -78,6 +78,11 @@ bool SettingsManager::loadSettings()
 	m_settings->ENEMY_SHOOTER_PROJECTILE_PARTICLE_SPAWN_TIME = (float)ini.GetDoubleValue("ENEMY_SHOOTER", "PROJECTILE_PARTICLE_SPAWN_TIME", 0);
 	m_settings->ENEMY_SHOOTER_PROJETILE_SPEED = (float)ini.GetDoubleValue("ENEMY_SHOOTER", "PROJETILE_SPEED", 0);
 
+	m_settings->ENEMY_BASE_HEALTH = (float)ini.GetDoubleValue("ENEMY_BASE", "HEALTH", 0);
+	m_settings->ENEMY_BASE_SPEED_BASE = (float)ini.GetDoubleValue("ENEMY_BASE", "SPEED_BASE", 0);
+	m_settings->ENEMY_BASE_SPEED_MIN_MULTIPLIER = (float)ini.GetDoubleValue("ENEMY_BASE", "SPEED_MIN_MULTIPLIER", 0);
+	m_settings->ENEMY_BASE_SPEED_MAX_MULTIPLIER = (float)ini.GetDoubleValue("ENEMY_BASE", "SPEED_MAX_MULTIPLIER", 0);
+
 	m_settings->PARTICLES_MAX_INIT_SPEED = (float)ini.GetDoubleValue("PARTICLES", "MAX_INIT_SPEED", 0);
 
 	m_settings->SCORE_KILL_TROLL = ini.GetLongValue("SCORE", "KILL_TROLL", 0);

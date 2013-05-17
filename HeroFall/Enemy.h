@@ -12,7 +12,8 @@ enum EnemyType
 	ENEMY_GOBLIN,
 	ENEMY_SHOOTER,
 	ENEMY_BOMB,
-	ENEMY_PROJECTILE
+	ENEMY_PROJECTILE,
+	ENEMY_BASE
 };
 
 class Enemy :
@@ -31,7 +32,7 @@ public:
 
 	EnemyType getType(){return m_type;}
 
-	bool collidesWith(LevelObject* levelObject) = 0;
+	virtual bool collidesWith(LevelObject* levelObject) = 0;
 
 protected:
 	float m_xVel;

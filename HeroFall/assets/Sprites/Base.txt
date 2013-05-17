@@ -1,0 +1,5 @@
+wSheet=150
+hSheet=250
+wSprite=150
+hSprite=250
+Base_Walk_0_0

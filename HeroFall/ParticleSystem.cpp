@@ -1,11 +1,11 @@
 #include "ParticleSystem.h"
 #include "Util.h"
 
-ParticleSystem::ParticleSystem(sf::Vector2f position, unsigned int particles, ParticleColor color)
+ParticleSystem::ParticleSystem(sf::Vector2f position, unsigned int particles, ParticleColor color, float timeLimit)
 {
 	for(unsigned int a = 0; a < particles; a++)
 	{
-		m_particles.push_back(new Particle(position, color));
+		m_particles.push_back(new Particle(position, color, timeLimit));
 	}
 }
 
