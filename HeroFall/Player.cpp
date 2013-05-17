@@ -40,6 +40,9 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_animations->addAnimation("Avatar_Jump_1", 0.5f, this->m_xPos, this->m_yPos, true);
 	m_animations->addAnimation("Avatar_Jump_2", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("Avatar_Die_0", m_deathTime, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_Block_0", 1.0f, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("Avatar_Block_1", 1.0f, this->m_xPos, this->m_yPos);
+
 	m_animations->setCurrentAnimation("Avatar_Idle_0");
 
 	m_hitted = false;
@@ -425,8 +428,10 @@ void Player::update(float delta)
 	}
 	else
 	{
-		if(m_isBlocking)
+		if(m_isBlocking && m_isOnGround)
 		{
+			m_animations->setCurrentAnimation("Avatar_Block_1");
+
 		}
 
 		//Jump
