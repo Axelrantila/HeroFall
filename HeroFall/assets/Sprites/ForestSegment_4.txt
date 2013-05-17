@@ -1,0 +1,5 @@
+wSheet=1852
+hSheet=2048
+wSprite=1852
+hSprite=2048
+ForestSegment_4

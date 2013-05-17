@@ -11,51 +11,67 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_view = view;
 	m_window = window;
 
-	m_levelObjects.push_back(new LevelObjectRectangle(2630.0f, 1710.0f, 1360.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(4310.0f, 1670.0f, 1200.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(5460.0f, 1210.0f, 160.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(6080.0f, 1480.0f, 1000.0f, 200.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(6080.0f, 1100.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(6360.0f, 1100.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(6670.0f, 980.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(7270.0f, 1480.0f, 2380.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(7700.0f, 840.0f, 1510.0f, 100.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(8690.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(8905.0f, 300.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(9195.0f, 300.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(9900.0f, 1500.0f, 1700.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(10390.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(10765.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(11060.0f, 840.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(11560.0f, 840.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(11830.0f, 1500.0f, 1000.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(13140.0f, 1710.0f, 1350.0f, 300.0f, sf::Color::Magenta));
-	m_player = new Player(2700.0f, 1300.0f, this);
+	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 1750.0f, 5000.0f, 200.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(4600.0f, 1650.0f, 6500.0f, 200.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(10630.0f, 1710.0f, 1360.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(12310.0f, 1670.0f, 1200.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(13460.0f, 1210.0f, 160.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(14080.0f, 1480.0f, 1000.0f, 200.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(14080.0f, 1100.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(14360.0f, 1100.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(14670.0f, 980.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(15270.0f, 1480.0f, 2380.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(15700.0f, 840.0f, 1510.0f, 100.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(16690.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(16905.0f, 300.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(17195.0f, 300.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(17900.0f, 1500.0f, 1700.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(18390.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(18765.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(19060.0f, 840.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(19560.0f, 840.0f, 50.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(19830.0f, 1500.0f, 1000.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(21140.0f, 1710.0f, 1350.0f, 300.0f, sf::Color::Magenta));
+	m_player = new Player(100.0f, 1500.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
 	m_HUD = new HUD(m_view, m_player);
-#pragma region Level
-	sf::Sprite* tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain0", "Mountain0_0");
+#pragma region LevelForest
+	sf::Sprite* tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_1");
 	tempSprite->setPosition(0.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_2");
+	tempSprite->setPosition(2000.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_3");
+	tempSprite->setPosition(4000.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment_4", "ForestSegment_4");
+	tempSprite->setPosition(6000.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+#pragma endregion
+#pragma region LevelMountains
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain0", "Mountain0_0");
+	tempSprite->setPosition(8000.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain1", "Mountain1_0");
-	tempSprite->setPosition(4096.0f, 0.0f);
+	tempSprite->setPosition(12096.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain2", "Mountain2_0");
-	tempSprite->setPosition(5764.0f, 0.0f);
+	tempSprite->setPosition(13764.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain3", "Mountain3_0");
-	tempSprite->setPosition(7176.0f, 0.0f);
+	tempSprite->setPosition(15176.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain4", "Mountain4_0");
-	tempSprite->setPosition(9690.0f, 0.0f);
+	tempSprite->setPosition(17690.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain5", "Mountain5_0");
-	tempSprite->setPosition(11694.0f, 0.0f);
+	tempSprite->setPosition(19694.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain6", "Mountain6_0");
-	tempSprite->setPosition(13011.0f, 0.0f);
+	tempSprite->setPosition(21011.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
@@ -67,16 +83,19 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	//m_enemies->push_back(new EnemyTroll(5460.0f, 1250.0f, m_view));
-	//m_enemies->push_back(new EnemyShooter(7000.0f, 1300.0f, 100.0f, m_view));
-	//m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
-	//m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
-	//m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(11350.0f, 1100.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_view));
-	m_enemies->push_back(new EnemyGoblin(11830.0f, 300.0f, 2000.0f));
+	m_enemies->push_back(new EnemyTroll(2200.0f, 1300.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(5000.0f, 1250.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(6000.0f, 1250.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(5460.0f, 1250.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(7000.0f, 1300.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
+	m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
+	m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(19000.0f, 1100.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(19350.0f, 1100.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(19830.0f, 1200.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(20780.0f, 1200.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyGoblin(21830.0f, 300.0f, 2000.0f));
 }
 
 LevelManager::~LevelManager()

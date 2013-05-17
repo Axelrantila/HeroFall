@@ -1,0 +1,7 @@
+wSheet=4000
+hSheet=4096
+wSprite=2000
+hSprite=2048
+ForestSegment_1
+ForestSegment_2
+ForestSegment_3
