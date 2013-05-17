@@ -1,6 +1,7 @@
 #include "AnimationManager.h"
 #include "EnemyBase.h"
 #include "LevelObjectRectangle.h"
+#include "Player.h"
 #include "SettingsManager.h"
 #include "Util.h"
 
@@ -20,6 +21,10 @@ EnemyBase::EnemyBase(float xPos, float yPos, sf::View* view)
 	m_isDead = false;
 	m_deathTime = 1.0f;
 	m_timeDead = 0.0f;
+
+	m_currentState = BASE_AI_WALKING_FORWARD;
+	m_AIChangeLimit = 5.0f;
+	m_AIStateClock.restart();
 }
 
 
@@ -130,4 +135,18 @@ sf::Vector2f EnemyBase::getCenter()
 {
 	return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left + m_animations->getCurrentSprite()->getGlobalBounds().width/2.0f,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
+}
+
+void EnemyBase::updateState(Player* player)
+{
+	if(m_AIStateClock.getElapsedTime().asSeconds() > m_AIChangeLimit)
+	{
+		m_AIStateClock.restart();
+
+		if((player->getCenter().x > this->getCenter().x && m_xVel < 0)
+			|| (player->getCenter().x < this->getCenter().x && m_xVel > 0))
+		{
+			m_xVel *= -1;
+		}
+	}
 }

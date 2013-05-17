@@ -14,10 +14,10 @@
       <Filter>Game\Characters</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
-      <Filter>Engine\Animation</Filter>
+      <Filter>Engine\Graphics\Animation</Filter>
     </ClCompile>
     <ClCompile Include="AnimationManager.cpp">
-      <Filter>Engine\Animation</Filter>
+      <Filter>Engine\Graphics\Animation</Filter>
     </ClCompile>
     <ClCompile Include="AudioAssetsPathLoader.cpp">
       <Filter>Engine\Audio</Filter>
@@ -38,13 +38,13 @@
       <Filter>Engine\State</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\Sprite</Filter>
+      <Filter>Engine\Graphics\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheet.cpp">
-      <Filter>Engine\Sprite</Filter>
+      <Filter>Engine\Graphics\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheetLoader.cpp">
-      <Filter>Engine\Sprite</Filter>
+      <Filter>Engine\Graphics\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Engine\Util</Filter>
@@ -83,10 +83,10 @@
       <Filter>Game\Characters</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
-      <Filter>Engine\Particle</Filter>
+      <Filter>Engine\Graphics\Particle</Filter>
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Engine\Particle</Filter>
+      <Filter>Engine\Graphics\Particle</Filter>
     </ClCompile>
     <ClCompile Include="ComboManager.cpp">
       <Filter>Engine\Input</Filter>
@@ -125,6 +125,9 @@
     <ClCompile Include="EnemyBase.cpp">
       <Filter>Game\Characters\Enemies\Primary</Filter>
     </ClCompile>
+    <ClCompile Include="PopupImageManager.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -140,10 +143,10 @@
       <Filter>Game\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Engine\Animation</Filter>
+      <Filter>Engine\Graphics\Animation</Filter>
     </ClInclude>
     <ClInclude Include="AnimationManager.h">
-      <Filter>Engine\Animation</Filter>
+      <Filter>Engine\Graphics\Animation</Filter>
     </ClInclude>
     <ClInclude Include="AudioMixer.h">
       <Filter>Engine\Audio</Filter>
@@ -167,13 +170,13 @@
       <Filter>Engine\State</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheetLoader.h">
-      <Filter>Engine\Sprite</Filter>
+      <Filter>Engine\Graphics\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Engine\Sprite</Filter>
+      <Filter>Engine\Graphics\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheet.h">
-      <Filter>Engine\Sprite</Filter>
+      <Filter>Engine\Graphics\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Engine\Util</Filter>
@@ -212,10 +215,10 @@
       <Filter>Game\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
-      <Filter>Engine\Particle</Filter>
+      <Filter>Engine\Graphics\Particle</Filter>
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
-      <Filter>Engine\Particle</Filter>
+      <Filter>Engine\Graphics\Particle</Filter>
     </ClInclude>
     <ClInclude Include="ComboManager.h">
       <Filter>Engine\Input</Filter>
@@ -253,6 +256,9 @@
     <ClInclude Include="EnemyBase.h">
       <Filter>Game\Characters\Enemies\Primary</Filter>
     </ClInclude>
+    <ClInclude Include="PopupImageManager.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -270,26 +276,17 @@
     <Filter Include="Game\Characters\Enemies">
       <UniqueIdentifier>{86996a7b-6cf1-4c5b-9e75-51a46df2050f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Animation">
-      <UniqueIdentifier>{d297d6f6-9552-4ac8-90da-19b902c8b5ac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Audio">
       <UniqueIdentifier>{9b2a3daf-812a-4919-8b54-c76297870287}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\State">
       <UniqueIdentifier>{db2f34ed-25b9-410c-894d-196b5990f385}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Sprite">
-      <UniqueIdentifier>{dd0199b2-58b3-400e-8bc1-05c78897b8cf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\States">
       <UniqueIdentifier>{8a67f8fc-8572-4234-97f5-eebb53a560c5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{3b60bbfb-a285-4648-af74-e7b4e5b9a90b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Particle">
-      <UniqueIdentifier>{1daf6241-3554-46cf-b872-a8dcf790a180}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Util">
       <UniqueIdentifier>{fafe96a7-3aec-4c9b-8b61-ee9464d2926c}</UniqueIdentifier>
@@ -311,6 +308,18 @@
     </Filter>
     <Filter Include="Game\Characters\Enemies\Primary">
       <UniqueIdentifier>{44d223a7-68ff-47be-a1b3-acb6c7b4887d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics">
+      <UniqueIdentifier>{6ceeff4a-07da-43b7-a498-eb1420fc5d7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Animation">
+      <UniqueIdentifier>{d297d6f6-9552-4ac8-90da-19b902c8b5ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Particle">
+      <UniqueIdentifier>{1daf6241-3554-46cf-b872-a8dcf790a180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Sprite">
+      <UniqueIdentifier>{dd0199b2-58b3-400e-8bc1-05c78897b8cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

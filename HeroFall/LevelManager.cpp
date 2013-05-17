@@ -99,8 +99,11 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 
 	for(int a = 0; a < 100; a++)
 	{
-		m_enemies->push_back(new EnemyBase(3700.0f, 1300.0f, m_view));
+		//m_enemies->push_back(new EnemyBase(3700.0f, 1300.0f, m_view));
 	}
+
+	m_popupImages = new PopupImageManager();
+	m_popupImages->addImage("Base", "Base_Walk_0_0", sf::Vector2f(3700.0f, 1300.0f), sf::Vector2f(0.0f, -25.0f), 2.0f);
 }
 
 LevelManager::~LevelManager()
@@ -119,6 +122,8 @@ LevelManager::~LevelManager()
 
 	for(unsigned int a = 0; a < m_particles.size(); a++)
 	{delete m_particles[a];}
+
+	delete m_popupImages;
 }
 
 void LevelManager::draw(sf::RenderWindow* window)
@@ -145,6 +150,7 @@ void LevelManager::draw(sf::RenderWindow* window)
 		m_particles[a]->draw(window);
 	}
 
+	m_popupImages->draw(window);
 	m_HUD->draw(window);
 }
 
@@ -211,8 +217,6 @@ void LevelManager::update(float deltaTime)
 		}
 	}
 
-
-
 	//Kill any object that is too far down to be alive
 	if(m_player->getYPos() > 5000.0f)
 	{m_player->markDead();}
@@ -240,6 +244,9 @@ void LevelManager::update(float deltaTime)
 
 	//Update the HUD
 	m_HUD->update(deltaTime);
+
+	//Update popupImages
+	m_popupImages->update(deltaTime);
 }
 
 void LevelManager::updatePlayerSpeed()

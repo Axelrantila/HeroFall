@@ -15,6 +15,7 @@
 #include "LevelObjectRectangle.h"
 #include "ParticleSystem.h"
 #include "Player.h"
+#include "PopupImageManager.h"
 
 class LevelManager
 {
@@ -49,6 +50,7 @@ private:
 	sf::Vector2f m_prevCameraCenter;
 
 	std::vector<ParticleSystem*> m_particles;
+	PopupImageManager* m_popupImages;
 };
 
 #endif

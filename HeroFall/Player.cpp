@@ -304,15 +304,6 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			{
 				takeDamageOverTime(50.0f, m_delta);
 			}
-
-			/*
-			Block projectiles here
-
-
-
-
-
-			*/
 		}
 #pragma endregion
 
@@ -372,10 +363,12 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 #pragma endregion
 
 #pragma region BASE
-		else if(enemies->at(a)->getType() == ENEMY_BASE
-			&& m_swordIsSwinging && !m_swordHasHittedEnemy)
+		else if(enemies->at(a)->getType() == ENEMY_BASE)
 		{
-			if(((EnemyBase*)enemies->at(a))->getHitBox().intersects(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds()))
+			((EnemyBase*)enemies->at(a))->updateState(this);
+
+			if(((EnemyBase*)enemies->at(a))->getHitBox().intersects(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds())
+				&& m_swordIsSwinging && !m_swordHasHittedEnemy)
 			{
 				enemies->at(a)->takeDamage(1.0f);
 				m_swordHasHittedEnemy = true;
@@ -383,6 +376,11 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 					, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
 					100);
 				ComboManager::getInstance()->increaseComboMeter();
+			}
+
+			if(m_hitBox->getGlobalBounds().intersects(((EnemyBase*)enemies->at(a))->getHitBox()))
+			{
+				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_BASE_TO_PLAYER);
 			}
 		}
 #pragma endregion
