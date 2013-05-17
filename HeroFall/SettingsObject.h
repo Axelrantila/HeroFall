@@ -76,6 +76,13 @@ public:
 	float ENEMY_SHOOTER_PROJETILE_SPEED;
 #pragma endregion
 
+#pragma region ENEMY_BASE
+	float ENEMY_BASE_HEALTH;
+	float ENEMY_BASE_SPEED_BASE;
+	float ENEMY_BASE_SPEED_MIN_MULTIPLIER;
+	float ENEMY_BASE_SPEED_MAX_MULTIPLIER;
+#pragma endregion
+
 #pragma region PARTICLES
 	float PARTICLES_MAX_INIT_SPEED;
 #pragma endregion

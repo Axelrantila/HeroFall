@@ -13,7 +13,7 @@ enum ParticleColor
 class Particle
 {
 public:
-	Particle(sf::Vector2f position, ParticleColor color);
+	Particle(sf::Vector2f position, ParticleColor color, float timeLimit = 5.0f);
 	~Particle();
 
 	void update(float delta);

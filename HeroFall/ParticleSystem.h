@@ -8,7 +8,7 @@ typedef std::vector<Particle*>::iterator particlesIterator;
 class ParticleSystem
 {
 public:
-	ParticleSystem(sf::Vector2f position, unsigned int particles, ParticleColor color = PARTICLE_COLOR_RED);
+	ParticleSystem(sf::Vector2f position, unsigned int particles, ParticleColor color = PARTICLE_COLOR_RED, float timeLimit = 5.0f);
 	~ParticleSystem();
 
 	void update(float delta);

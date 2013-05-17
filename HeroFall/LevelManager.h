@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
+#include "EnemyBase.h"
 #include "EnemyBomb.h"
 #include "EnemyGoblin.h"
 #include "EnemyPlaceholder.h"
@@ -23,7 +24,7 @@ public:
 
 	void update(float deltaTime);
 	void draw(sf::RenderWindow* window);
-	void addParticles(sf::Vector2f position, unsigned int particles, ParticleColor color = PARTICLE_COLOR_RED);
+	void addParticles(sf::Vector2f position, unsigned int particles, ParticleColor color = PARTICLE_COLOR_RED, float timeLimit = 5.0f);
 
 	void setPlayerSpeed(float xVel, float yVel);
 	void updatePlayerSpeed();

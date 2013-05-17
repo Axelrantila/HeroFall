@@ -65,6 +65,13 @@ SettingsObject::SettingsObject()
 	ENEMY_SHOOTER_PROJETILE_SPEED = 350.0f;
 #pragma endregion
 
+#pragma region ENEMY_BASE
+	ENEMY_BASE_HEALTH = 10.0f;
+	ENEMY_BASE_SPEED_BASE = 250.0f;
+	ENEMY_BASE_SPEED_MIN_MULTIPLIER = 0.85f;
+	ENEMY_BASE_SPEED_MAX_MULTIPLIER = 1.15f;
+#pragma endregion
+
 #pragma region PARTICLES
 	PARTICLES_MAX_INIT_SPEED = 100;
 #pragma endregion

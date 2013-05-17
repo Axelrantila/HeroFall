@@ -1,0 +1,5 @@
+[Settings]
+defaultSubset=walk
+speed=0.5
+[Walk0]
+Base_Walk_0_0

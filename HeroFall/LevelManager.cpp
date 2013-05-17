@@ -74,9 +74,14 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	//m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(11000.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(11350.0f, 1100.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_player, m_view));
 	m_enemies->push_back(new EnemyGoblin(11830.0f, 300.0f, 2000.0f));
+
+	for(int a = 0; a < 100; a++)
+	{
+		m_enemies->push_back(new EnemyBase(3700.0f, 1300.0f, m_view));
+	}
 }
 
 LevelManager::~LevelManager()
@@ -157,10 +162,11 @@ void LevelManager::update(float deltaTime)
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
-	//if(m_view->getCenter().y < 1200.0f)
-	//{
-	//	m_view->setCenter(m_view->getCenter().x, 1200.0f);
-	//}
+	//Set max view
+	if(m_view->getCenter().y - m_view->getSize().y / 2.0f < 0)
+	{
+		m_view->setCenter(m_view->getCenter().x, m_view->getSize().y/2.0f);
+	}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;
 
@@ -245,7 +251,7 @@ void LevelManager::updatePlayerSpeed()
 			m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
 		}
 
-		else if(InputManager::getInstance()->isKeyDown("P1_MOVE_DOWN") && !m_player->isOnGround())
+		else if((InputManager::getInstance()->isKeyDown("P1_MOVE_DOWN") || !InputManager::getInstance()->isKeyDown("P1_MOVE_UP"))&& !m_player->isOnGround())
 		{
 			m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_DOWN);
 		}
@@ -276,9 +282,9 @@ bool LevelManager::playerIsDead()
 	return m_player->isDead();
 }
 
-void LevelManager::addParticles(sf::Vector2f position, unsigned int particles, ParticleColor color)
+void LevelManager::addParticles(sf::Vector2f position, unsigned int particles, ParticleColor color, float timeLimit)
 {
-	m_particles.push_back(new ParticleSystem(position, particles, color));
+	m_particles.push_back(new ParticleSystem(position, particles, color, timeLimit));
 }
 
 void LevelManager::cleanResources()
