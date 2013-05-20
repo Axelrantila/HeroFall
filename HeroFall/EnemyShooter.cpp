@@ -139,12 +139,12 @@ sf::Vector2f EnemyShooter::getProjectileSpeed()
 	float dY = 0.0f;
 	float y1 = m_player->getCenter().y;
 	float y2 = m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f;
-	dY = y2-y1;
+	dY = y1-y2;
 
 	float dX = 0.0f;
 	float x1 = m_player->getCenter().x;
 	float x2 =  m_animations->getCurrentSprite()->getGlobalBounds().left - 20.0f;
-	dX = x2-x1;
+	dX = x1-x2;
 
 	float angle = atan(dY/dX);
 	std::cout << dX << "\t" << dY << std::endl;
@@ -153,10 +153,17 @@ sf::Vector2f EnemyShooter::getProjectileSpeed()
 	sf::Vector2f projectileSpeed;
 	projectileSpeed.x = SettingsManager::getSettings()->ENEMY_SHOOTER_PROJETILE_SPEED * cos(angle);
 	projectileSpeed.y = SettingsManager::getSettings()->ENEMY_SHOOTER_PROJETILE_SPEED * sin(angle);
-	
-	if(dX > 0 && dY > 0)
+
+	//Correct the angle
+	if((projectileSpeed.x > 0.0f && dX < 0.0f)
+		 || (projectileSpeed.x < 0.0f && dX > 0.0f))
 	{
 		projectileSpeed.x *= -1;
+	}
+
+	if((projectileSpeed.y > 0.0f && dY < 0.0f)
+		 || (projectileSpeed.y < 0.0f && dY > 0.0f))
+	{
 		projectileSpeed.y *= -1;
 	}
 
