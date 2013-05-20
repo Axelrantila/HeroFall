@@ -12,27 +12,14 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_window = window;
 
 	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 1750.0f, 5000.0f, 200.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(4600.0f, 1650.0f, 6500.0f, 200.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(10630.0f, 1710.0f, 1360.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(12310.0f, 1670.0f, 1200.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(13460.0f, 1210.0f, 160.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(14080.0f, 1480.0f, 1000.0f, 200.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(14080.0f, 1100.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(14360.0f, 1100.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(14670.0f, 980.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(15270.0f, 1480.0f, 2380.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(15700.0f, 840.0f, 1510.0f, 100.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(16690.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(16905.0f, 300.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(17195.0f, 300.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(17900.0f, 1500.0f, 1700.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(18390.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(18765.0f, 440.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(19060.0f, 840.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(19560.0f, 840.0f, 50.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(19830.0f, 1500.0f, 1000.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(21140.0f, 1710.0f, 1350.0f, 300.0f, sf::Color::Magenta));
-	m_player = new Player(100.0f, 1500.0f, this);
+	m_levelObjects.push_back(new LevelObjectRectangle(4600.0f, 1650.0f, 5200.0f, 200.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(8800.0f, 1480.0f, 9500.0f, 200.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(9650.0f, 1180.0f, 280.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(10450.0f, 1170.0f, 555.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(14700.0f, 1170.0f, 555.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(14975.0f, 1000.0f, 260.0f, 10.0f, sf::Color::Magenta));
+
+	m_player = new Player(100.0f, 1200.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
@@ -52,26 +39,38 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_backgroundSprites.push_back(tempSprite);
 #pragma endregion
 #pragma region LevelMountains
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain0", "Mountain0_0");
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_01", "Mountain_01");
 	tempSprite->setPosition(8000.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain1", "Mountain1_0");
-	tempSprite->setPosition(12096.0f, 0.0f);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_01", "ForeGround1");
+	tempSprite->setPosition(8000.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain2", "Mountain2_0");
-	tempSprite->setPosition(13764.0f, 0.0f);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_02", "Mountain_02");
+	tempSprite->setPosition(10328.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain3", "Mountain3_0");
-	tempSprite->setPosition(15176.0f, 0.0f);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_02", "ForeGround2");
+	tempSprite->setPosition(10328.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain4", "Mountain4_0");
-	tempSprite->setPosition(17690.0f, 0.0f);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_03", "Mountain_03");
+	tempSprite->setPosition(14131.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain5", "Mountain5_0");
-	tempSprite->setPosition(19694.0f, 0.0f);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_03", "ForeGround3");
+	tempSprite->setPosition(14131.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Mountain6", "Mountain6_0");
-	tempSprite->setPosition(21011.0f, 0.0f);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_04", "Mountain_04");
+	tempSprite->setPosition(16254.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_04", "ForeGround4");
+	tempSprite->setPosition(16254.0f, 0.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Bridge_01", "Bridge_01");
+	tempSprite->setPosition(9880.0f, 1400.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Bridge_02", "Bridge_02");
+	tempSprite->setPosition(12400.0f, 1400.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Bridge_03", "Bridge_03");
+	tempSprite->setPosition(15700.0f, 1400.0f);
 	m_backgroundSprites.push_back(tempSprite);
 
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
@@ -83,19 +82,23 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyTroll(2200.0f, 1300.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(1800.0f, 1300.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(4000.0f, 1300.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(5000.0f, 1250.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyTroll(6000.0f, 1250.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(13460.0f, 1250.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(15000.0f, 1300.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyTroll(17000.0f, 1090.0f, m_view));
-	m_enemies->push_back(new EnemyGoblin(15500.0f, -200.0f, 1500.0f));
-	m_enemies->push_back(new EnemyShooter(17550.0f, 1300.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyTroll(19000.0f, 1100.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(19350.0f, 1100.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_view));
-	m_enemies->push_back(new EnemyGoblin(21830.0f, 300.0f, 2000.0f));
+	m_enemies->push_back(new EnemyTroll(6200.0f, 1250.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(6500.0f, 1250.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyTroll(10080.0f, 1080.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(9650.0f, 960.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyShooter(10850.0f, 960.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyTroll(12480.0f, 1080.0f, m_view));
+	m_enemies->push_back(new EnemyGoblin(11000.0f, 200.0f, 1500.0f));
+	m_enemies->push_back(new EnemyTroll(13880.0f, 1080.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(14000.0f, 960.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyGoblin(14400.0f, 200.0f, 1500.0f));
+	m_enemies->push_back(new EnemyShooter(14700.0f, 960.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyShooter(15200.0f, 780.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyTroll(17000.0f, 1080.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(17400.0f, 1080.0f, m_view));
 
 	for(int a = 0; a < 100; a++)
 	{
