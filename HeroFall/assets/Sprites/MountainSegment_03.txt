@@ -1,0 +1,6 @@
+wSheet=2323
+hSheet=4096
+wSprite=2323
+hSprite=2048
+ForeGround3
+Mountain_03

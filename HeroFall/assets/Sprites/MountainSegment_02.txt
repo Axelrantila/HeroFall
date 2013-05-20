@@ -1,0 +1,6 @@
+wSheet=2903
+hSheet=4096
+wSprite=2903
+hSprite=2048
+ForeGround2
+Mountain_02

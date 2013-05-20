@@ -86,15 +86,15 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_enemies->push_back(new EnemyTroll(2200.0f, 1300.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(5000.0f, 1250.0f, 100.0f, m_player, m_view));
 	m_enemies->push_back(new EnemyTroll(6000.0f, 1250.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(5460.0f, 1250.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(7000.0f, 1300.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyTroll(9000.0f, 1090.0f, m_view));
-	m_enemies->push_back(new EnemyGoblin(7500.0f, -200.0f, 1500.0f));
-	m_enemies->push_back(new EnemyShooter(9550.0f, 1300.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyTroll(13460.0f, 1250.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(15000.0f, 1300.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyTroll(17000.0f, 1090.0f, m_view));
+	m_enemies->push_back(new EnemyGoblin(15500.0f, -200.0f, 1500.0f));
+	m_enemies->push_back(new EnemyShooter(17550.0f, 1300.0f, 100.0f, m_player, m_view));
 	m_enemies->push_back(new EnemyTroll(19000.0f, 1100.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(19350.0f, 1100.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_player, m_view));
+	m_enemies->push_back(new EnemyShooter(11830.0f, 1200.0f, 100.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(12780.0f, 1200.0f, 100.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(21830.0f, 300.0f, 2000.0f));
 
 	for(int a = 0; a < 100; a++)
