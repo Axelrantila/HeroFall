@@ -81,8 +81,6 @@ void EnemyTroll::update(float delta)
 #pragma region FORWARD/BACKWARD
 	else if(m_currentAIState == TROLL_AI_WALKING_FORWARD || m_currentAIState == TROLL_AI_WALKING_BACKWARD)
 	{	
-		if(m_animations->getCurrentAnimation()->getName() != "Troll_Walk_0")
-			&& !m_hitted)
 		//Check if the enemy has been seen
 		if(m_view != nullptr)
 		{
