@@ -1,0 +1,5 @@
+wSheet=2173
+hSheet=688
+wSprite=2173
+hSprite=688
+Bridge_02_middleground

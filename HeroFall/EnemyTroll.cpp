@@ -130,7 +130,7 @@ void EnemyTroll::update(float delta)
 void EnemyTroll::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	window->draw(*m_hitBoxTest);
+	//window->draw(*m_hitBoxTest);
 }
 
 sf::FloatRect EnemyTroll::getHitBox()

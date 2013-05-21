@@ -1,0 +1,5 @@
+wSheet=1358
+hSheet=50
+wSprite=1358
+hSprite=50
+Bridge_03_foreground

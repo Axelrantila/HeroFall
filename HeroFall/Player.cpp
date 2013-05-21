@@ -117,12 +117,12 @@ Player::~Player()
 void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	window->draw(*m_hitBox);
+	/*window->draw(*m_hitBox);
 
 	if(m_swordIsSwinging)
 	{
 		window->draw(m_swordBoxesMap[m_animations->getCurrentAnimation()]);
-	}
+	}*/
 }
 
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)

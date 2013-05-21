@@ -46,6 +46,7 @@ private:
 	sf::Sprite* d_bg1;
 
 	std::vector<sf::Sprite*> m_backgroundSprites;
+	std::vector<sf::Sprite*> m_foregroundSprites;
 	sf::Vector2f m_cameraMove;
 	sf::Vector2f m_prevCameraCenter;
 
