@@ -13,6 +13,12 @@ enum DamageType
 	DT_MELEE
 };
 
+enum CharacterDirection
+{
+	DIR_LEFT,
+	DIR_RIGHT
+};
+
 class Character :
 	public GameObject
 {
@@ -47,6 +53,8 @@ protected:
 
 	float m_health;
 	float m_armor;
+
+	CharacterDirection m_direction;
 };
 
 #endif

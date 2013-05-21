@@ -33,6 +33,7 @@ public:
 
 	bool collidesWith(LevelObject* levelObject);
 	void takeDamage(float damage);
+	sf::FloatRect getAttackHitbox();
 
 private:
 	AnimationManager* m_animations;

@@ -147,8 +147,6 @@ sf::Vector2f EnemyShooter::getProjectileSpeed()
 	dX = x1-x2;
 
 	float angle = atan(dY/dX);
-	std::cout << dX << "\t" << dY << std::endl;
-	std::cout << Util::getInstance()->toString(angle * 180.0f / PI) << std::endl;
 
 	sf::Vector2f projectileSpeed;
 	projectileSpeed.x = SettingsManager::getSettings()->ENEMY_SHOOTER_PROJETILE_SPEED * cos(angle);

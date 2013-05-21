@@ -34,7 +34,7 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_animations->addAnimation("Troll_Hit_0", 1.0f, m_xPos, m_yPos);
 	m_animations->addAnimation("Troll_Die_0", m_deathTime, m_xPos, m_yPos);
 	m_animations->addAnimation("Troll_Attack_0", m_attackStage1Time, m_xPos, m_yPos);
-	m_animations->addAnimation("Troll_Attack_1", m_attackStage2Time, m_xPos, m_yPos);
+	//m_animations->addAnimation("Troll_Attack_1", m_attackStage2Time, m_xPos, m_yPos);
 	m_animations->setCurrentAnimation("Troll_Walk_0");
 
 	m_hitted = false;
@@ -76,7 +76,8 @@ void EnemyTroll::update(float delta)
 #pragma region FORWARD/BACKWARD
 	else if(m_currentAIState == TROLL_AI_WALKING_FORWARD || m_currentAIState == TROLL_AI_WALKING_BACKWARD)
 	{	
-		if(m_animations->getCurrentAnimation()->getName() != "Troll_Walk_0")
+		if(m_animations->getCurrentAnimation()->getName() != "Troll_Walk_0"
+			&& !m_hitted)
 		{
 			m_animations->setCurrentAnimation("Troll_Walk_0");
 		}
@@ -118,10 +119,10 @@ void EnemyTroll::update(float delta)
 
 	else if(m_currentAIState == TROLL_AI_ATTACK_1)
 	{
-		if(m_animations->getCurrentAnimation()->getName() != "Troll_Attack_1")
+		/*if(m_animations->getCurrentAnimation()->getName() != "Troll_Attack_1")
 		{
 			m_animations->setCurrentAnimation("Troll_Attack_1");
-		}
+		}*/
 	}
 #pragma endregion
 }
@@ -235,7 +236,7 @@ void EnemyTroll::updateState(Player* player)
 	if(m_currentAIState == TROLL_AI_ATTACK_0
 		&& m_attackClock.getElapsedTime().asSeconds() > m_attackStage1Time)
 	{
-		m_currentAIState = TROLL_AI_ATTACK_1;
+		m_currentAIState = TROLL_AI_WALKING_FORWARD;
 		m_attackClock.restart();
 	}
 	//Attack stage 1
@@ -253,7 +254,8 @@ void EnemyTroll::updateState(Player* player)
 		float distance = Util::getInstance()->distance(player->getXPos(), player->getYPos(), m_xPos, m_yPos);
 
 		if(distance < SettingsManager::getSettings()->ENEMY_TROLL_AI_WALKING_BACKWARDS_DISTANCE_LIMIT
-			&& m_currentAIState == TROLL_AI_WALKING_FORWARD)
+			&& m_currentAIState == TROLL_AI_WALKING_FORWARD
+			&& !m_hitted)
 		{
 			newAIState = TROLL_AI_ATTACK_0;
 			m_attackClock.restart();
@@ -274,5 +276,21 @@ void EnemyTroll::updateState(Player* player)
 
 		m_currentAIState = newAIState;
 		m_AIStateClock.restart();
+	}
+}
+
+sf::FloatRect EnemyTroll::getAttackHitbox()
+{
+	if(!m_animations->isCurrentAnimation("Troll_Attack_0")
+		|| (m_animations->isCurrentAnimation("Troll_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 9 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
+	{
+		return sf::FloatRect(-10000.0f, -10000.0f, 0.1f, 0.1f);
+	}
+
+	else
+	{
+		return sf::FloatRect(m_animations->getCurrentSprite()->getPosition().x + 10.0f,
+			m_animations->getCurrentSprite()->getPosition().y + 275.0f,
+			185.0f, 160.0f);
 	}
 }

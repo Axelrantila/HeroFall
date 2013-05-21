@@ -15,17 +15,6 @@ Animation::Animation(GameObject* parent, std::string name, float totalTime, floa
 	//Load all sprites into the vector
 	std::ifstream in("assets/Sprites/" + m_sheetName + "_anim.txt");
 
-	m_sprites.clear();
-	if(m_sheetName == "GoblinBomb")
-	{
-		std::cout << "Test1\n";
-	}
-
-	if(m_spriteBaseName == "GoblinBomb_falling_0")
-	{
-		std::cout << "Test2\n";
-	}
-
 	if(in.is_open())
 	{
 		while(!in.eof())

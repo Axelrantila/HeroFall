@@ -13,6 +13,8 @@ Character::Character(PositionType positionType, float xPos, float yPos, float he
 	m_isDead = false;
 	m_isDying = false;
 	m_deathTime = 1.0f;
+
+	m_direction = DIR_LEFT;
 }
 
 
