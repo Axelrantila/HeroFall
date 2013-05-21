@@ -54,7 +54,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_04", "Mountain_04");
 	tempSprite->setPosition(16254.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("01Middleground", "Bridge_01_middleground");
+	/*tempSprite = SpriteSheetLoader::getInstance()->getSprite("01Middleground", "Bridge_01_middleground");
 	tempSprite->setPosition(9850.0f, 1370.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("02Middleground", "Bridge_02_middleground");
@@ -62,7 +62,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("03Middleground", "Bridge_03_middleground");
 	tempSprite->setPosition(15640.0f, 1365.0f);
-	m_backgroundSprites.push_back(tempSprite);
+	m_backgroundSprites.push_back(tempSprite);*/
 #pragma region ForeGround
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_01", "ForeGround1");
 	tempSprite->setPosition(8000.0f, 0.0f);
@@ -76,7 +76,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_04", "ForeGround4");
 	tempSprite->setPosition(16254.0f, 0.0f);
 	m_foregroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("03Foreground", "Bridge_03_foreground");
+	/*tempSprite = SpriteSheetLoader::getInstance()->getSprite("03Foreground", "Bridge_03_foreground");
 	tempSprite->setPosition(15640.0f, 1365.0f);
 	m_foregroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("02Foreground", "Bridge_02_foreground");
@@ -84,13 +84,13 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_foregroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("01Foreground", "Bridge_01_foreground");
 	tempSprite->setPosition(9850.0f, 1370.0f);
-	m_foregroundSprites.push_back(tempSprite);
+	m_foregroundSprites.push_back(tempSprite);*/
 #pragma endregion
 
-	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
+	/*d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
 	d_bg1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0"));
 	d_bg->setPosition(0.0f, 0.0f);
-	d_bg1->setPosition(8160.0f, 0.0f);
+	d_bg1->setPosition(8160.0f, 0.0f);*/
 #pragma endregion
 	m_prevCameraCenter =  m_view->getCenter();
 	m_cameraMove = m_view->getCenter();
@@ -147,8 +147,8 @@ void LevelManager::draw(sf::RenderWindow* window)
 {
 	window->setView(*m_view);
 
-	window->draw(*d_bg);
-	window->draw(*d_bg1);
+	/*window->draw(*d_bg);
+	window->draw(*d_bg1);*/
 
 
 
