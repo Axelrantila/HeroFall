@@ -19,6 +19,7 @@ StateManager::StateManager()
 		,sf::Style::Fullscreen);
 	m_window->setMouseCursorVisible(false);
 	m_window->setVerticalSyncEnabled(true);
+	//m_window->setFramerateLimit(60);
 	m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
 
 	addState(new Menus());
@@ -114,9 +115,7 @@ void StateManager::run()
 					m_window->draw(*SpriteSheetLoader::getInstance()->getSprite("LoadingScreen", "LoadingScreen"));
 					m_window->display();
 
-					SpriteSheetLoader::getInstance()->removeSheet("MainMenuBG");
-					SpriteSheetLoader::getInstance()->removeSheet("MainMenuButtons");
-					SpriteSheetLoader::getInstance()->removeSheet("LoadingScreen");
+					//SpriteSheetLoader::getInstance()->removeAllSheets();
 
 					ScoreManager::getInstance()->resetScore();
 

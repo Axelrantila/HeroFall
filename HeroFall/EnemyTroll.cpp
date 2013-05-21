@@ -30,12 +30,15 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_attackStage2Time = SettingsManager::getSettings()->ENEMY_TROLL_ATTACK_STAGE_2_TIME;
 
 	m_animations = new AnimationManager(this);
-	m_animations->addAnimation("Troll_Walk_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("Troll_Hit_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("Troll_Die_0", m_deathTime, m_xPos, m_yPos);
-	m_animations->addAnimation("Troll_Attack_0", m_attackStage1Time, m_xPos, m_yPos);
-	//m_animations->addAnimation("Troll_Attack_1", m_attackStage2Time, m_xPos, m_yPos);
-	m_animations->setCurrentAnimation("Troll_Walk_0");
+	m_animations->addAnimation("TrollR_Walk_0", 1.0f, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollR_Hit_0", 1.0f, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollR_Die_0", m_deathTime, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollR_Attack_0", m_attackStage1Time, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollL_Walk_0", 1.0f, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollL_Hit_0", 1.0f, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollL_Die_0", m_deathTime, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollL_Attack_0", m_attackStage1Time, m_xPos, m_yPos);
+	m_animations->setCurrentAnimation("TrollR_Walk_0");
 
 	m_hitted = false;
 	m_meleeHitTime = SettingsManager::getSettings()->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
@@ -50,6 +53,8 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_hitClock.restart();
 	m_AIStateClock.restart();
 	m_attackClock.restart();
+
+	m_direction = DIR_RIGHT;
 }
 
 
@@ -76,18 +81,8 @@ void EnemyTroll::update(float delta)
 #pragma region FORWARD/BACKWARD
 	else if(m_currentAIState == TROLL_AI_WALKING_FORWARD || m_currentAIState == TROLL_AI_WALKING_BACKWARD)
 	{	
-		if(m_animations->getCurrentAnimation()->getName() != "Troll_Walk_0"
+		if(m_animations->getCurrentAnimation()->getName() != "Troll_Walk_0")
 			&& !m_hitted)
-		{
-			m_animations->setCurrentAnimation("Troll_Walk_0");
-		}
-
-		if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
-		{
-			m_hitted  = false;
-			m_animations->setCurrentAnimation("Troll_Walk_0");
-		}
-		
 		//Check if the enemy has been seen
 		if(m_view != nullptr)
 		{
@@ -105,23 +100,64 @@ void EnemyTroll::update(float delta)
 				}
 			}
 		}
+		//Facing left
+		if(m_direction == DIR_LEFT)
+		{
+			if(!m_animations->isCurrentAnimation("TrollL_Walk_0")
+			&& !m_hitted)
+			{
+				m_animations->setCurrentAnimation("TrollL_Walk_0");
+			}
+
+			if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
+			{
+				m_hitted  = false;
+				m_animations->setCurrentAnimation("TrollL_Walk_0");
+			}
+			}
+
+		//Facing right
+		else if (m_direction == DIR_RIGHT)
+		{
+			if(!m_animations->isCurrentAnimation("TrollR_Walk_0")
+			&& !m_hitted)
+			{
+				m_animations->setCurrentAnimation("TrollR_Walk_0");
+			}
+
+			if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
+			{
+				m_hitted  = false;
+				m_animations->setCurrentAnimation("TrollR_Walk_0");
+			}
+		}
 	}
 #pragma endregion
 
 #pragma region ATTACK
 	else if(m_currentAIState == TROLL_AI_ATTACK_0)
 	{
-		if(m_animations->getCurrentAnimation()->getName() != "Troll_Attack_0")
+		if(m_direction == DIR_LEFT)
 		{
-			m_animations->setCurrentAnimation("Troll_Attack_0");
+			if(m_animations->getCurrentAnimation()->getName() != "TrollL_Attack_0")
+			{
+				m_animations->setCurrentAnimation("TrollL_Attack_0");
+			}
+		}
+		else if(m_direction == DIR_RIGHT)
+		{
+			if(m_animations->getCurrentAnimation()->getName() != "TrollR_Attack_0")
+			{
+				m_animations->setCurrentAnimation("TrollR_Attack_0");
+			}
 		}
 	}
 
 	else if(m_currentAIState == TROLL_AI_ATTACK_1)
 	{
-		/*if(m_animations->getCurrentAnimation()->getName() != "Troll_Attack_1")
+		/*if(m_animations->getCurrentAnimation()->getName() != "TrollR_Attack_1")
 		{
-			m_animations->setCurrentAnimation("Troll_Attack_1");
+			m_animations->setCurrentAnimation("TrollR_Attack_1");
 		}*/
 	}
 #pragma endregion
@@ -161,7 +197,6 @@ void EnemyTroll::takeDamage(float damage)
 	{
 		m_hitClock.restart();
 		m_health -= damage;
-		
 		m_hitted = true;
 
 		AudioMixer::getInstance()->playSound("Attack_hit_2", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
@@ -173,13 +208,29 @@ void EnemyTroll::takeDamage(float damage)
 			m_isDying = true;
 			AudioMixer::getInstance()->playSound("Death_troll", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 			m_dyingClock.restart();
-			m_animations->setCurrentAnimation("Troll_Die_0");
+			
 			ScoreManager::getInstance()->addScore(KILL_TROLL);
+
+			if(m_direction == DIR_LEFT)
+			{
+				m_animations->setCurrentAnimation("TrollL_Die_0");
+			}
+			else if(m_direction == DIR_RIGHT)
+			{
+				m_animations->setCurrentAnimation("TrollR_Die_0");
+			}
 		}
 
 		else
 		{
-			m_animations->setCurrentAnimation("Troll_Hit_0");
+			if(m_direction == DIR_LEFT)
+			{
+				m_animations->setCurrentAnimation("TrollL_Hit_0");
+			}
+			else if(m_direction == DIR_RIGHT)
+			{
+				m_animations->setCurrentAnimation("TrollR_Hit_0");
+			}
 		}
 	}
 }
@@ -253,25 +304,29 @@ void EnemyTroll::updateState(Player* player)
 		TrollAIState newAIState = TROLL_AI_WALKING_FORWARD;
 		float distance = Util::getInstance()->distance(player->getXPos(), player->getYPos(), m_xPos, m_yPos);
 
-		if(distance < SettingsManager::getSettings()->ENEMY_TROLL_AI_WALKING_BACKWARDS_DISTANCE_LIMIT
-			&& m_currentAIState == TROLL_AI_WALKING_FORWARD
-			&& !m_hitted)
+		if(abs(distance) < SettingsManager::getSettings()->ENEMY_TROLL_AI_WALKING_BACKWARDS_DISTANCE_LIMIT
+			&& !m_hitted
+			&&
+				((player->getXPos() > m_hitBoxTest->getGlobalBounds().left && m_direction == DIR_LEFT)
+				|| (player->getXPos() < m_hitBoxTest->getGlobalBounds().left && m_direction == DIR_RIGHT)))
 		{
 			newAIState = TROLL_AI_ATTACK_0;
 			m_attackClock.restart();
 		}
 
-		//Walk forwards
-		else if(m_currentAIState == TROLL_AI_WALKING_BACKWARD)
+		//////////////////////////////////////////////////////////////////////
+		else if(player->getXPos() > m_hitBoxTest->getGlobalBounds().left
+			&& m_direction == DIR_RIGHT)
 		{
-			newAIState = TROLL_AI_WALKING_FORWARD;
-		}
-
-		
-		if((m_currentAIState == TROLL_AI_WALKING_FORWARD && newAIState == TROLL_AI_WALKING_BACKWARD)
-			|| (m_currentAIState == TROLL_AI_WALKING_BACKWARD && newAIState == TROLL_AI_WALKING_FORWARD))
-		{
+			m_direction = DIR_LEFT;
 			m_xVel *= -1.0f;
+			std::cout << "Test1\n";
+		}
+		else if(m_direction == DIR_LEFT)
+		{
+			m_direction = DIR_RIGHT;
+			m_xVel *= -1.0f;
+			std::cout << "Test2";
 		}
 
 		m_currentAIState = newAIState;
@@ -281,10 +336,16 @@ void EnemyTroll::updateState(Player* player)
 
 sf::FloatRect EnemyTroll::getAttackHitbox()
 {
-	if(!m_animations->isCurrentAnimation("Troll_Attack_0")
-		|| (m_animations->isCurrentAnimation("Troll_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 9 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
+	if(!m_animations->isCurrentAnimation("TrollR_Attack_0")
+		|| (m_animations->isCurrentAnimation("TrollR_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 9 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
 	{
 		return sf::FloatRect(-10000.0f, -10000.0f, 0.1f, 0.1f);
+	}
+
+	else if(!m_animations->isCurrentAnimation("TrollL_Attack_0")
+		|| (m_animations->isCurrentAnimation("TrollL_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 9 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
+	{
+		return sf::FloatRect(-10000.0f, -10000.0f, 1.0f, 1.0f);
 	}
 
 	else

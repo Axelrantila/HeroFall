@@ -42,9 +42,6 @@ private:
 	std::vector<LevelObject*> m_levelObjects;
 	std::vector<Enemy*>* m_enemies;
 
-	sf::Sprite* d_bg;
-	sf::Sprite* d_bg1;
-
 	std::vector<sf::Sprite*> m_backgroundSprites;
 	std::vector<sf::Sprite*> m_foregroundSprites;
 	sf::Vector2f m_cameraMove;

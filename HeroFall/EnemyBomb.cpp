@@ -22,6 +22,7 @@ EnemyBomb::EnemyBomb(EnemyGoblin* parent)
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("GoblinBomb_falling_0", 1.0f, m_xPos, m_yPos);
+	m_animations->addAnimation("Explosion_Exploding_0", SettingsManager::getSettings()->ENEMY_GOBLIN_BOMB_AOE_DURATION, m_xPos, m_yPos);
 	m_animations->setCurrentAnimation("GoblinBomb_falling_0");
 }
 
@@ -33,6 +34,11 @@ EnemyBomb::~EnemyBomb()
 void EnemyBomb::update(float delta)
 {
 	m_animations->update(m_xPos, m_yPos);
+
+	if(m_bombHasBlasted)
+	{
+		m_animations->getCurrentAnimation()->getCurrentSprite()->setPosition(m_bombBlastArea.getGlobalBounds().left, m_bombBlastArea.getGlobalBounds().top);
+	}
 }
 
 void EnemyBomb::move(float delta, std::vector<LevelObject*> levelObjects)
@@ -62,6 +68,8 @@ void EnemyBomb::move(float delta, std::vector<LevelObject*> levelObjects)
 				AudioMixer::getInstance()->playSound("Explosion_1", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 1200.0f, 10.0f, 1.0f);
 				m_bombHasBlasted = true;
 
+				m_animations->setCurrentAnimation("Explosion_Exploding_0");
+
 				m_bombBlastArea.setPosition(m_sprite->getGlobalBounds().left + m_sprite->getGlobalBounds().width / 2.0f - m_bombBlastArea.getSize().x / 2.0f
 					,m_sprite->getGlobalBounds().top + m_sprite->getGlobalBounds().height - m_bombBlastArea.getSize().y);
 
@@ -73,14 +81,7 @@ void EnemyBomb::move(float delta, std::vector<LevelObject*> levelObjects)
 
 void EnemyBomb::draw(sf::RenderWindow* window)
 {
-	if(m_bombHasBlasted)
-	{
-		window->draw(m_bombBlastArea);	
-	}
-	else
-	{
-		window->draw(*m_animations->getCurrentSprite());
-	}
+	window->draw(*m_animations->getCurrentSprite());
 }
 
 sf::FloatRect EnemyBomb::getGlobalBounds()

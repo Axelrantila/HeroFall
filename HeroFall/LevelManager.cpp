@@ -6,6 +6,7 @@
 
 #include <iostream>
 
+
 LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 {
 	m_view = view;
@@ -24,8 +25,10 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
 	m_HUD = new HUD(m_view, m_player);
+
+	sf::Sprite* tempSprite;
 #pragma region LevelForest
-	sf::Sprite* tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_1");
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_1");
 	tempSprite->setPosition(0.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_2");
@@ -157,7 +160,6 @@ void LevelManager::draw(sf::RenderWindow* window)
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
-
 	m_player->draw(window);
 
 	for(unsigned int a = 0; a < m_foregroundSprites.size(); a++)

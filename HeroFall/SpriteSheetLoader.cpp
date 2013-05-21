@@ -103,3 +103,15 @@ void SpriteSheetLoader::removeSheet(string sheetName)
 		}
 	}
 }
+
+void SpriteSheetLoader::removeAllSheets()
+{
+	for(mapSurfacesIterator it = m_loadedSheets.begin();
+		it != m_loadedSheets.end();
+		++it)
+	{
+			delete it->second;
+	}
+
+	m_loadedSheets.clear();
+}
