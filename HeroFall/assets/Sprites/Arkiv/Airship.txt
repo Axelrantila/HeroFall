@@ -1,6 +1,0 @@
-wSheet=1077
-hSheet=1512
-wSprite=1077
-hSprite=756
-Airship_Walk_0_0
-Airship_Walk_1_0

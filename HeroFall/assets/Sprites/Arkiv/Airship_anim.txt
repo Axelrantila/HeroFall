@@ -1,7 +1,0 @@
-[Settings]
-defaultSubset=walk
-speed=0.5
-[Walk0]
-Airship_Walk_0_0
-[Walk1]
-Airship_Walk_1_0

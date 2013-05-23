@@ -1,19 +1,21 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include <map>
 #include <SFML\Graphics.hpp>
 #include <string>
 #include <vector>
 
-class GameObject;
+#include "Character.h"
+#include "CharacterDirection.h"
 
 class Animation
 {
 public:
-	Animation(GameObject* parent, std::string name, float totalTime, float xPos, float yPos, bool shouldLockAtEnd = false);
+	Animation(Character* parent, std::string name, float totalTime, float xPos, float yPos, bool shouldLockAtEnd = false);
 	~Animation();
 
-	void play();
+	void play(CharacterDirection direction = DIR_NONE);
 	void pause();
 	void stop();
 
@@ -27,7 +29,13 @@ public:
 	std::string getName() {return m_spriteBaseName;}
 
 private:
-	GameObject* m_parent;
+	Character* m_parent;
+	CharacterDirection m_standardDirection;
+
+	bool m_mirrored;
+	sf::Vector2f m_mirroredOffsetPosition;
+	std::map<sf::Sprite*, bool> m_mirroredImages;
+
 	std::string m_sheetName;
 	std::string m_spriteBaseName;
 	

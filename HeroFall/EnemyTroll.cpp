@@ -8,21 +8,12 @@
 
 #include <iostream>
 
-/*
-IDEER HUR ATTACKANIMATIONERNA SKALL FUNGERA
-
-Trollet kollar avståndet.
-
-Om avståndet är tillräckligt nära:
-Spela upp attackanimationen steg ett
-Under en viss del av animationen så ska man kunna hämnta ut en hitbox för trollets vapnet
-När attackanimationen steg 1 har spelats upp så ska en fryssas en tag
-Sen spelas attackanimationens andra steg up
-*/ 
-
 EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	:Enemy(ENEMY_TROLL, xPos, yPos, SettingsManager::getSettings()->ENEMY_TROLL_HEALTH, view)
 {
+	m_normalDirection = DIR_LEFT;
+	m_direction = DIR_LEFT;
+
 	m_yVel = 0.0f;
 	m_xVel = -SettingsManager::getSettings()->ENEMY_TROLL_SPEED_SIDE;
 
@@ -30,31 +21,28 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_attackStage2Time = SettingsManager::getSettings()->ENEMY_TROLL_ATTACK_STAGE_2_TIME;
 
 	m_animations = new AnimationManager(this);
-	m_animations->addAnimation("TrollR_Walk_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("TrollR_Hit_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("TrollR_Die_0", m_deathTime, m_xPos, m_yPos);
-	m_animations->addAnimation("TrollR_Attack_0", m_attackStage1Time, m_xPos, m_yPos);
-	m_animations->addAnimation("TrollL_Walk_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("TrollL_Hit_0", 1.0f, m_xPos, m_yPos);
-	m_animations->addAnimation("TrollL_Die_0", m_deathTime, m_xPos, m_yPos);
-	m_animations->addAnimation("TrollL_Attack_0", m_attackStage1Time, m_xPos, m_yPos);
-	m_animations->setCurrentAnimation("TrollR_Walk_0");
+	m_animations->addAnimation("TrollLWalk_Walk_0", 1.0f, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollLHit_Hit_0", 1.0f, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollLDie_Die_0", m_deathTime, m_xPos, m_yPos);
+	m_animations->addAnimation("TrollLAttack_Attack_0", m_attackStage1Time, m_xPos, m_yPos);
+	m_animations->setCurrentAnimation("TrollLWalk_Walk_0");
 
 	m_hitted = false;
 	m_meleeHitTime = SettingsManager::getSettings()->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
 	
-
 	m_hitBoxTest =  new sf::RectangleShape(sf::Vector2f(SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_X, SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_Y));
 	m_hitBoxTest->setFillColor(sf::Color(64, 224, 208, 128));
 
 	m_currentAIState = TROLL_AI_WALKING_FORWARD;
 	m_AIChangeLimit = SettingsManager::getSettings()->ENEMY_TROLL_AI_CHANGE_LIMIT_TIME;
 
+	m_isATroll = true;
+
 	m_hitClock.restart();
 	m_AIStateClock.restart();
 	m_attackClock.restart();
 
-	m_direction = DIR_RIGHT;
+	d_attackBox.setFillColor(sf::Color::Cyan);
 }
 
 
@@ -67,8 +55,17 @@ EnemyTroll::~EnemyTroll()
 void EnemyTroll::update(float delta)
 {
 	m_animations->update(m_xPos, m_yPos);
-	m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
+
+	if(m_direction == DIR_LEFT)
+	{
+		m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
 			m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
+	}
+	else if(m_direction == DIR_RIGHT)
+	{
+		m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X * 0.5f,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
+	}
 
 	if(m_isDying)
 	{
@@ -98,36 +95,16 @@ void EnemyTroll::update(float delta)
 				}
 			}
 		}
-		//Facing left
-		if(m_direction == DIR_LEFT)
+
+		if(!m_hitted)
 		{
-			if(!m_animations->isCurrentAnimation("TrollL_Walk_0")
-			&& !m_hitted)
-			{
-				m_animations->setCurrentAnimation("TrollL_Walk_0");
-			}
+			m_animations->setCurrentAnimation("TrollLWalk_Walk_0", m_direction);
+		}
 
-			if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
-			{
-				m_hitted  = false;
-				m_animations->setCurrentAnimation("TrollL_Walk_0");
-			}
-			}
-
-		//Facing right
-		else if (m_direction == DIR_RIGHT)
+		else if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
 		{
-			if(!m_animations->isCurrentAnimation("TrollR_Walk_0")
-			&& !m_hitted)
-			{
-				m_animations->setCurrentAnimation("TrollR_Walk_0");
-			}
-
-			if(m_hitClock.getElapsedTime().asSeconds() >= m_meleeHitTime && m_hitted)
-			{
-				m_hitted  = false;
-				m_animations->setCurrentAnimation("TrollR_Walk_0");
-			}
+			m_hitted  = false;
+			m_animations->setCurrentAnimation("TrollLWalk_Walk_0", m_direction);
 		}
 	}
 #pragma endregion
@@ -135,28 +112,7 @@ void EnemyTroll::update(float delta)
 #pragma region ATTACK
 	else if(m_currentAIState == TROLL_AI_ATTACK_0)
 	{
-		if(m_direction == DIR_LEFT)
-		{
-			if(m_animations->getCurrentAnimation()->getName() != "TrollL_Attack_0")
-			{
-				m_animations->setCurrentAnimation("TrollL_Attack_0");
-			}
-		}
-		else if(m_direction == DIR_RIGHT)
-		{
-			if(m_animations->getCurrentAnimation()->getName() != "TrollR_Attack_0")
-			{
-				m_animations->setCurrentAnimation("TrollR_Attack_0");
-			}
-		}
-	}
-
-	else if(m_currentAIState == TROLL_AI_ATTACK_1)
-	{
-		/*if(m_animations->getCurrentAnimation()->getName() != "TrollR_Attack_1")
-		{
-			m_animations->setCurrentAnimation("TrollR_Attack_1");
-		}*/
+		m_animations->setCurrentAnimation("TrollLAttack_Attack_0", m_direction);
 	}
 #pragma endregion
 }
@@ -164,7 +120,8 @@ void EnemyTroll::update(float delta)
 void EnemyTroll::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	//window->draw(*m_hitBoxTest);
+	window->draw(*m_hitBoxTest);
+	window->draw(d_attackBox);
 }
 
 sf::FloatRect EnemyTroll::getHitBox()
@@ -209,26 +166,12 @@ void EnemyTroll::takeDamage(float damage)
 			
 			ScoreManager::getInstance()->addScore(KILL_TROLL);
 
-			if(m_direction == DIR_LEFT)
-			{
-				m_animations->setCurrentAnimation("TrollL_Die_0");
-			}
-			else if(m_direction == DIR_RIGHT)
-			{
-				m_animations->setCurrentAnimation("TrollR_Die_0");
-			}
+			m_animations->setCurrentAnimation("TrollLDie_Die_0", m_direction);
 		}
 
 		else
 		{
-			if(m_direction == DIR_LEFT)
-			{
-				m_animations->setCurrentAnimation("TrollL_Hit_0");
-			}
-			else if(m_direction == DIR_RIGHT)
-			{
-				m_animations->setCurrentAnimation("TrollR_Hit_0");
-			}
+			m_animations->setCurrentAnimation("TrollLHit_Hit_0", m_direction);
 		}
 	}
 }
@@ -282,11 +225,13 @@ sf::Vector2f EnemyTroll::getCenter()
 void EnemyTroll::updateState(Player* player)
 {
 	//Attack stage 0
-	if(m_currentAIState == TROLL_AI_ATTACK_0
-		&& m_attackClock.getElapsedTime().asSeconds() > m_attackStage1Time)
+	if(m_currentAIState == TROLL_AI_ATTACK_0)
 	{
-		m_currentAIState = TROLL_AI_WALKING_FORWARD;
-		m_attackClock.restart();
+		if(m_attackClock.getElapsedTime().asSeconds() > m_attackStage1Time)
+		{
+			m_currentAIState = TROLL_AI_WALKING_FORWARD;
+			m_attackClock.restart();
+		}
 	}
 	//Attack stage 1
 	else if(m_currentAIState == TROLL_AI_ATTACK_1
@@ -300,31 +245,30 @@ void EnemyTroll::updateState(Player* player)
 	else if(m_AIStateClock.getElapsedTime().asSeconds() > m_AIChangeLimit)
 	{
 		TrollAIState newAIState = TROLL_AI_WALKING_FORWARD;
-		float distance = Util::getInstance()->distance(player->getXPos(), player->getYPos(), m_xPos, m_yPos);
+		float distance = Util::getInstance()->distance(player->getCenter(), this->getCenter());
 
 		if(abs(distance) < SettingsManager::getSettings()->ENEMY_TROLL_AI_WALKING_BACKWARDS_DISTANCE_LIMIT
 			&& !m_hitted
 			&&
-				((player->getXPos() > m_hitBoxTest->getGlobalBounds().left && m_direction == DIR_LEFT)
-				|| (player->getXPos() < m_hitBoxTest->getGlobalBounds().left && m_direction == DIR_RIGHT)))
+				((player->getXPos() < m_hitBoxTest->getGlobalBounds().left && m_direction == DIR_LEFT)
+				|| (player->getXPos() > m_hitBoxTest->getGlobalBounds().left && m_direction == DIR_RIGHT)))
 		{
 			newAIState = TROLL_AI_ATTACK_0;
 			m_attackClock.restart();
 		}
 
 		//////////////////////////////////////////////////////////////////////
-		else if(player->getXPos() > m_hitBoxTest->getGlobalBounds().left
+		else if(player->getXPos() < m_hitBoxTest->getGlobalBounds().left
 			&& m_direction == DIR_RIGHT)
 		{
 			m_direction = DIR_LEFT;
 			m_xVel *= -1.0f;
-			std::cout << "Test1\n";
 		}
-		else if(m_direction == DIR_LEFT)
+		else if(player->getXPos() > m_hitBoxTest->getGlobalBounds().left
+			&&m_direction == DIR_LEFT)
 		{
 			m_direction = DIR_RIGHT;
 			m_xVel *= -1.0f;
-			std::cout << "Test2";
 		}
 
 		m_currentAIState = newAIState;
@@ -334,22 +278,33 @@ void EnemyTroll::updateState(Player* player)
 
 sf::FloatRect EnemyTroll::getAttackHitbox()
 {
-	if(!m_animations->isCurrentAnimation("TrollR_Attack_0")
-		|| (m_animations->isCurrentAnimation("TrollR_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 9 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
-	{
-		return sf::FloatRect(-10000.0f, -10000.0f, 0.1f, 0.1f);
-	}
-
-	else if(!m_animations->isCurrentAnimation("TrollL_Attack_0")
-		|| (m_animations->isCurrentAnimation("TrollL_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 9 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
+	if(!m_animations->isCurrentAnimation("TrollLAttack_Attack_0")
+		|| (m_animations->isCurrentAnimation("TrollLAttack_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 9 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
 	{
 		return sf::FloatRect(-10000.0f, -10000.0f, 1.0f, 1.0f);
 	}
 
+	else if(m_direction == DIR_LEFT)
+	{
+		sf::FloatRect rect(m_animations->getCurrentSprite()->getGlobalBounds().left + 10.0f,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + 275.0f,
+			185.0f, 160.0f);
+		
+		d_attackBox.setPosition(rect.left, rect.top);
+		d_attackBox.setSize(sf::Vector2f(rect.width, rect.height));
+
+		return rect;
+	}
+
 	else
 	{
-		return sf::FloatRect(m_animations->getCurrentSprite()->getPosition().x + 10.0f,
-			m_animations->getCurrentSprite()->getPosition().y + 275.0f,
+		sf::FloatRect rect(m_animations->getCurrentSprite()->getGlobalBounds().left + 460.0f,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + 275.0f,
 			185.0f, 160.0f);
+
+		d_attackBox.setPosition(rect.left, rect.top);
+		d_attackBox.setSize(sf::Vector2f(rect.width, rect.height));
+
+		return rect;
 	}
 }

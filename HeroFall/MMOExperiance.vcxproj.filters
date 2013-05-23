@@ -259,6 +259,9 @@
     <ClInclude Include="PopupImageManager.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterDirection.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

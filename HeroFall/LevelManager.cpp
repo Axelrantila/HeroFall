@@ -20,7 +20,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_levelObjects.push_back(new LevelObjectRectangle(14700.0f, 1170.0f, 555.0f, 10.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(14975.0f, 1000.0f, 260.0f, 10.0f, sf::Color::Magenta));
 
-	m_player = new Player(14000.0f, 1000.0f, this);
+	m_player = new Player(0.0f, 1000.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
@@ -95,9 +95,9 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_prevCameraCenter =  m_view->getCenter();
 	m_cameraMove = m_view->getCenter();
 
-	/*m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyTroll(1800.0f, 1300.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(4000.0f, 1300.0f, m_view));
+	m_enemies = new std::vector<Enemy*>();
+	m_enemies->push_back(new EnemyTroll(1800.0f, 1200.0f, m_view));
+	/*m_enemies->push_back(new EnemyTroll(4000.0f, 1300.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(5000.0f, 1250.0f, 100.0f, m_player, m_view));
 	m_enemies->push_back(new EnemyTroll(6200.0f, 1250.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(6500.0f, 1250.0f, 100.0f, m_player, m_view));

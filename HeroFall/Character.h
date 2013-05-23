@@ -1,6 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include "CharacterDirection.h"
 #include "gameobject.h"
 
 #include <SFML\System\Clock.hpp>
@@ -13,11 +14,7 @@ enum DamageType
 	DT_MELEE
 };
 
-enum CharacterDirection
-{
-	DIR_LEFT,
-	DIR_RIGHT
-};
+
 
 class Character :
 	public GameObject
@@ -41,6 +38,10 @@ public:
 	virtual void takeDamage(float damage);
 	virtual float getHealth(){return m_health;}
 
+	virtual CharacterDirection getNormalDirection(){return m_normalDirection;}
+
+
+	bool isATroll(){return m_isATroll;}
 protected:
 	float m_gravityConstant;
 	float m_xVel;
@@ -55,6 +56,10 @@ protected:
 	float m_armor;
 
 	CharacterDirection m_direction;
+	CharacterDirection m_previousDirection;
+	CharacterDirection m_normalDirection;
+
+	bool m_isATroll;
 };
 
 #endif

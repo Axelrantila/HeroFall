@@ -1,7 +1,0 @@
-wSheet=652
-hSheet=760
-wSprite=326
-hSprite=380
-Troll_Hit_0_0
-Troll_Hit_0_1
-Troll_Walk_0_0

@@ -1,7 +1,7 @@
 #include "AnimationManager.h"
 #include "GameObject.h"
 
-AnimationManager::AnimationManager(GameObject* parent)
+AnimationManager::AnimationManager(Character* parent)
 {
 	m_parent = parent;
 	m_currentAnimation = nullptr;
@@ -16,11 +16,12 @@ void AnimationManager::addAnimation(std::string name, float totalTime, float xPo
 	m_animations.insert(std::pair<std::string, Animation*>(name, new Animation(m_parent, name, totalTime, xPos, yPos, shouldLockAtEnd)));
 }
 
-void AnimationManager::setCurrentAnimation(std::string name)
+void AnimationManager::setCurrentAnimation(std::string name, CharacterDirection direction)
 {
 	if(m_currentAnimation != nullptr)
 	{
-		if(name == m_currentAnimation->getName())
+		if(name == m_currentAnimation->getName()
+			&& direction == m_currentDirection)
 		{return;}
 	}
 
@@ -33,9 +34,11 @@ void AnimationManager::setCurrentAnimation(std::string name)
 			{m_currentAnimation->stop();}
 
 			m_currentAnimation = it->second;
-			m_currentAnimation->play();
+			m_currentAnimation->play(direction);
 		}
 	}
+
+	m_currentDirection = direction;
 }
 
 sf::Sprite* AnimationManager::getCurrentSprite()

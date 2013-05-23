@@ -8,11 +8,11 @@
 class AnimationManager
 {
 public:
-	AnimationManager(GameObject* parent);
+	AnimationManager(Character* parent);
 	~AnimationManager();
 
 	void addAnimation(std::string name, float totalTime, float xPos, float yPos, bool shouldLockAtEnd = false);
-	void setCurrentAnimation(std::string name);
+	void setCurrentAnimation(std::string name, CharacterDirection direction = DIR_NONE);
 	void update(float xPos, float yPos);
 
 	sf::Sprite* getCurrentSprite();
@@ -21,10 +21,12 @@ public:
 	bool isCurrentAnimation(std::string name);
 
 private:
-	GameObject* m_parent;
+	Character* m_parent;
 
 	std::map<std::string, Animation*> m_animations;
 	Animation* m_currentAnimation;
+
+	CharacterDirection m_currentDirection;
 };
 
 #endif

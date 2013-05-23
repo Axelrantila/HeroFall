@@ -15,6 +15,9 @@ Character::Character(PositionType positionType, float xPos, float yPos, float he
 	m_deathTime = 1.0f;
 
 	m_direction = DIR_LEFT;
+	m_normalDirection = DIR_LEFT;
+
+	m_isATroll = false;
 }
 
 

@@ -53,6 +53,7 @@ private:
 	sf::Clock m_attackClock;
 	float m_attackStage1Time;
 	float m_attackStage2Time;
+	sf::RectangleShape d_attackBox;
 };
 
 #endif

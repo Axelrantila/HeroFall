@@ -1,0 +1,13 @@
+[Settings]
+defaultSubset=walk
+speed=0.5
+[Jump1]
+AvatarRJump1_Jump_1_0
+AvatarRJump1_Jump_1_1
+AvatarRJump1_Jump_1_2
+AvatarRJump1_Jump_1_3
+AvatarRJump1_Jump_1_4
+AvatarRJump1_Jump_1_5
+AvatarRJump1_Jump_1_6
+AvatarRJump1_Jump_1_7
+AvatarRJump1_Jump_1_8
