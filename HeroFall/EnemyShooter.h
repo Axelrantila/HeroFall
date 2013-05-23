@@ -11,7 +11,7 @@ class EnemyShooter :
 	public Enemy
 {
 public:
-	EnemyShooter(float xPos, float yPos, float health, Player* m_player, sf::View* view = nullptr);
+	EnemyShooter(float xPos, float yPos, float health, Player* player, CharacterDirection direction, sf::View* view = nullptr);
 	~EnemyShooter();
 
 	bool canShoot();

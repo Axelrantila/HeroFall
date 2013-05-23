@@ -187,43 +187,25 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyTroll(1800.0f, 1200.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(4000.0f, 1200.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(5000.0f, 1150.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyTroll(6200.0f, 1150.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(6500.0f, 1250.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyShooter(9600.0f, 800.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyShooter(10500.0f, 800.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyTroll(12400.0f, 900.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(1800.0f, 1250.0f, m_view));
+	/*m_enemies->push_back(new EnemyTroll(4000.0f, 1300.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(5000.0f, 1250.0f, 100.0f, m_player, DIR_RIGHT, m_view));
+	m_enemies->push_back(new EnemyTroll(6200.0f, 1250.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(6500.0f, 1250.0f, 100.0f, m_player, DIR_LEFT, m_view));
+	m_enemies->push_back(new EnemyTroll(10080.0f, 1080.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(9650.0f, 960.0f, 100.0f, m_player, DIR_LEFT, m_view));
+	m_enemies->push_back(new EnemyShooter(10850.0f, 960.0f, 100.0f, m_player, DIR_LEFT, m_view));
+	m_enemies->push_back(new EnemyTroll(12480.0f, 1080.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(11000.0f, 200.0f, 1500.0f));
-	m_enemies->push_back(new EnemyTroll(13900.0f, 900.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(13800.0f, 800.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyGoblin(15200.0f, 0.0f, 1500.0f));
-	m_enemies->push_back(new EnemyShooter(14640.0f, 600.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyShooter(14900.0f, 400.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyTroll(17000.0f, 900.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(17400.0f, 900.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(20600.0f, 1640.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(21320.0f, 1200.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyShooter(21880.0f, 1200.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyGoblin(21500.0f, 0.0f, 1800.0f));
-	m_enemies->push_back(new EnemyTroll(24800.0f, 1700.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(25540.0f, 1300.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyTroll(27600.0f, 1700.0f, m_view));
-	m_enemies->push_back(new EnemyShooter(26680.0f, 1000.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyShooter(27420.0f, 1200.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyShooter(27400.0f, 600.0f, 100.0f, m_player, m_view));
-	m_enemies->push_back(new EnemyShooter(28880.0f, 1200.0f, 100.0f, m_player, m_view));
-
-	for(int a = 0; a < 100; a++)
-	{
-		//m_enemies->push_back(new EnemyBase(3700.0f, 1300.0f, m_view));
-	}
+	m_enemies->push_back(new EnemyTroll(13880.0f, 1080.0f, m_view));
+	m_enemies->push_back(new EnemyShooter(14000.0f, 960.0f, 100.0f, m_player, DIR_LEFT, m_view));
+	m_enemies->push_back(new EnemyGoblin(14400.0f, 200.0f, 1500.0f));
+	m_enemies->push_back(new EnemyShooter(14700.0f, 960.0f, 100.0f, m_player, DIR_LEFT, m_view));
+	m_enemies->push_back(new EnemyShooter(15200.0f, 780.0f, 100.0f, m_player, DIR_LEFT, m_view));
+	m_enemies->push_back(new EnemyTroll(17000.0f, 1080.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(17400.0f, 1080.0f, m_view));*/
 
 	m_popupImages = new PopupImageManager();
-	m_popupImages->addImage("Base", "Base_Walk_0_0", sf::Vector2f(3700.0f, 1300.0f), sf::Vector2f(0.0f, -25.0f), 2.0f);
-
-	std::cout << "TestFinal\n";
 }
 
 LevelManager::~LevelManager()

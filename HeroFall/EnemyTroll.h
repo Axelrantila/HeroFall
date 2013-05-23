@@ -42,7 +42,7 @@ private:
 	sf::Clock m_hitClock;
 	float m_meleeHitTime;
 	bool m_hitted;
-	sf::RectangleShape* m_hitBoxTest;
+	sf::RectangleShape* m_hitBox;
 
 	//AI
 	TrollAIState m_currentAIState;
@@ -54,6 +54,8 @@ private:
 	float m_attackStage1Time;
 	float m_attackStage2Time;
 	sf::RectangleShape d_attackBox;
+
+	void updateHitBox();
 };
 
 #endif

@@ -30,8 +30,8 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_hitted = false;
 	m_meleeHitTime = SettingsManager::getSettings()->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
 	
-	m_hitBoxTest =  new sf::RectangleShape(sf::Vector2f(SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_X, SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_Y));
-	m_hitBoxTest->setFillColor(sf::Color(64, 224, 208, 128));
+	m_hitBox =  new sf::RectangleShape(sf::Vector2f(SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_X, SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_SIZE_Y));
+	m_hitBox->setFillColor(sf::Color(64, 224, 208, 128));
 
 	m_currentAIState = TROLL_AI_WALKING_FORWARD;
 	m_AIChangeLimit = SettingsManager::getSettings()->ENEMY_TROLL_AI_CHANGE_LIMIT_TIME;
@@ -49,23 +49,14 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 EnemyTroll::~EnemyTroll()
 {
 	delete m_animations;
-	delete m_hitBoxTest;
+	delete m_hitBox;
 }
 
 void EnemyTroll::update(float delta)
 {
 	m_animations->update(m_xPos, m_yPos);
 
-	if(m_direction == DIR_LEFT)
-	{
-		m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
-			m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
-	}
-	else if(m_direction == DIR_RIGHT)
-	{
-		m_hitBoxTest->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X * 0.5f,
-			m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
-	}
+	updateHitBox();
 
 	if(m_isDying)
 	{
@@ -120,13 +111,13 @@ void EnemyTroll::update(float delta)
 void EnemyTroll::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	window->draw(*m_hitBoxTest);
+	window->draw(*m_hitBox);
 	window->draw(d_attackBox);
 }
 
 sf::FloatRect EnemyTroll::getHitBox()
 {
-	return m_hitBoxTest->getGlobalBounds();
+	return m_hitBox->getGlobalBounds();
 }
 
 bool EnemyTroll::collidesWith(LevelObject* levelObject)
@@ -137,10 +128,10 @@ bool EnemyTroll::collidesWith(LevelObject* levelObject)
 		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
 		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
 
-		return(!(otherXPos > getXPos() + m_animations->getCurrentSprite()->getGlobalBounds().width
-			|| otherXPos + otherSize.x < getXPos()
-			|| otherYPos > getYPos() + m_animations->getCurrentSprite()->getGlobalBounds().height
-			|| otherYPos + otherSize.y < getYPos()));
+		return(!(otherXPos > m_hitBox->getGlobalBounds().left + m_hitBox->getGlobalBounds().width
+			|| otherXPos + otherSize.x < m_hitBox->getGlobalBounds().left
+			|| otherYPos > m_hitBox->getGlobalBounds().top + m_hitBox->getGlobalBounds().height
+			|| otherYPos + otherSize.y < m_hitBox->getGlobalBounds().top));
 	}
 
 	return false;
@@ -185,28 +176,33 @@ void EnemyTroll::move(float delta, std::vector<LevelObject*> levelObjects)
 		{
 			m_yVel += getGravityDistance(delta);
 			float yMove = delta * m_yVel;
-
 			m_yPos += yMove;
+			updateHitBox();
 			for(unsigned int a = 0; a < levelObjects.size(); a++)
 			{
 				if(collidesWith(levelObjects[a]))
 				{
 					m_yPos -= yMove;
 					m_yVel = 0.0f;
+					updateHitBox();
 					break;
 				}
 			}
+
+			
 
 			if(!m_hitted)
 			{
 				float xMove = delta * m_xVel;
 				m_xPos += xMove;
+				updateHitBox();
 				for(unsigned int a = 0; a < levelObjects.size(); a++)
 				{
 					if(collidesWith(levelObjects[a]))
 					{
 						m_xPos -= xMove;
 						m_xVel = 0.0f;
+						updateHitBox();
 						break;
 					}
 				}
@@ -250,21 +246,21 @@ void EnemyTroll::updateState(Player* player)
 		if(abs(distance) < SettingsManager::getSettings()->ENEMY_TROLL_AI_WALKING_BACKWARDS_DISTANCE_LIMIT
 			&& !m_hitted
 			&&
-				((player->getXPos() < m_hitBoxTest->getGlobalBounds().left && m_direction == DIR_LEFT)
-				|| (player->getXPos() > m_hitBoxTest->getGlobalBounds().left && m_direction == DIR_RIGHT)))
+				((player->getXPos() < m_hitBox->getGlobalBounds().left && m_direction == DIR_LEFT)
+				|| (player->getXPos() > m_hitBox->getGlobalBounds().left && m_direction == DIR_RIGHT)))
 		{
 			newAIState = TROLL_AI_ATTACK_0;
 			m_attackClock.restart();
 		}
 
 		//////////////////////////////////////////////////////////////////////
-		else if(player->getXPos() < m_hitBoxTest->getGlobalBounds().left
+		else if(player->getXPos() < m_hitBox->getGlobalBounds().left
 			&& m_direction == DIR_RIGHT)
 		{
 			m_direction = DIR_LEFT;
 			m_xVel *= -1.0f;
 		}
-		else if(player->getXPos() > m_hitBoxTest->getGlobalBounds().left
+		else if(player->getXPos() > m_hitBox->getGlobalBounds().left
 			&&m_direction == DIR_LEFT)
 		{
 			m_direction = DIR_RIGHT;
@@ -306,5 +302,21 @@ sf::FloatRect EnemyTroll::getAttackHitbox()
 		d_attackBox.setSize(sf::Vector2f(rect.width, rect.height));
 
 		return rect;
+	}
+}
+
+void EnemyTroll::updateHitBox()
+{
+	m_animations->update(m_xPos, m_yPos);
+
+	if(m_direction == DIR_LEFT)
+	{
+		m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
+	}
+	else if(m_direction == DIR_RIGHT)
+	{
+		m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_X * 0.5f,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + SettingsManager::getSettings()->ENEMY_TROLL_HITBOX_LOCAL_POSITION_Y);
 	}
 }

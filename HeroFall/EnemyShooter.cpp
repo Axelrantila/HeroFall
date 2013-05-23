@@ -9,15 +9,18 @@
 
 const float PI = 3.14159265f;
 
-EnemyShooter::EnemyShooter(float xPos, float yPos, float health, Player* player, sf::View* view)
+EnemyShooter::EnemyShooter(float xPos, float yPos, float health, Player* player, CharacterDirection direction, sf::View* view)
 	:Enemy(ENEMY_SHOOTER, xPos, yPos, health, view)
 {
 	m_shootTime = SettingsManager::getSettings()->ENEMY_SHOOTER_SHOOT_TIME;
 
+	m_normalDirection = DIR_LEFT;
+	m_direction = direction;
+
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Shooter_Shoot_0", m_shootTime, this->getXPos(), this->getYPos());
 	m_animations->addAnimation("Shooter_Die_0", m_deathTime, this->getXPos(), this->getYPos());
-	m_animations->setCurrentAnimation("Shooter_Shoot_0");
+	m_animations->setCurrentAnimation("Shooter_Shoot_0", m_direction);
 
 	m_xVel = 0.0f;
 	m_yVel = 0.0f;
@@ -43,7 +46,7 @@ void EnemyShooter::update(float delta)
 		if(!m_animations->isCurrentAnimation("Shooter_Die_0"))
 		{
 			m_dyingClock.restart();
-			m_animations->setCurrentAnimation("Shooter_Die_0");
+			m_animations->setCurrentAnimation("Shooter_Die_0", m_direction);
 			ScoreManager::getInstance()->addScore(KILL_SHOOTER);
 		}
 
@@ -125,8 +128,16 @@ bool EnemyShooter::canShoot()
 
 sf::Vector2f EnemyShooter::getProjectileSpawnPoint()
 {
-	return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left - 20.0f,
-		m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
+	if(m_direction == DIR_LEFT)
+	{
+		return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left - 20.0f,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
+	}
+	else
+	{
+		return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left + m_animations->getCurrentSprite()->getGlobalBounds().width - 20.0f,
+			m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
+	}
 }
 
 sf::FloatRect EnemyShooter::getGlobalBounds()
@@ -166,6 +177,4 @@ sf::Vector2f EnemyShooter::getProjectileSpeed()
 	}
 
 	return projectileSpeed;
-		//Cos x
-		//-sin y
 }
