@@ -1,0 +1,5 @@
+wSheet=75
+hSheet=205
+wSprite=75
+hSprite=205
+Banner_02

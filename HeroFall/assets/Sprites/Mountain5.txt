@@ -1,5 +1,0 @@
-wSheet=1317
-hSheet=2048
-wSprite=1317
-hSprite=2048
-Mountain5_0

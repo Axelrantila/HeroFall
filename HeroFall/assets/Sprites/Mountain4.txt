@@ -1,5 +1,0 @@
-wSheet=2004
-hSheet=2048
-wSprite=2004
-hSprite=2048
-Mountain4_0

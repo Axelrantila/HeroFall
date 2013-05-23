@@ -1,0 +1,5 @@
+wSheet=277
+hSheet=512
+wSprite=277
+hSprite=512
+Foreground_03_2
