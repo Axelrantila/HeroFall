@@ -1,5 +1,5 @@
-wSheet=277
-hSheet=40
-wSprite=277
-hSprite=40
+wSheet=274
+hSheet=37
+wSprite=274
+hSprite=37
 Healthbar_0

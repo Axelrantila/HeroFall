@@ -20,6 +20,7 @@ public:
 private:
 	sf::Sprite* m_GUI;
 	sf::Sprite* m_healthbar;
+	sf::Sprite* m_combobar;
 	sf::View* m_view;
 
 	sf::Font* m_font;

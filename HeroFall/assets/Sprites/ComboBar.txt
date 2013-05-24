@@ -1,0 +1,6 @@
+wSheet=234
+hSheet=168
+wSprite=234
+hSprite=84
+ComboBar_0
+ComboBar_1

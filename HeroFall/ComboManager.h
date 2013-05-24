@@ -13,6 +13,7 @@ public:
 	void reset(){m_comboMeter = 0;}
 	unsigned int getComboMeter(){return m_comboMeter;}
 	bool canActivateCombo(){return m_comboMeter >= 3;}
+	float getComboPercentage() {return (((float)(m_comboMeter))/3.0f);}
 
 private:
 	ComboManager();

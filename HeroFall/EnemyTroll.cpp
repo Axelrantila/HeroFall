@@ -20,6 +20,12 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_attackStage1Time = SettingsManager::getSettings()->ENEMY_TROLL_ATTACK_STAGE_1_TIME;
 	m_attackStage2Time = SettingsManager::getSettings()->ENEMY_TROLL_ATTACK_STAGE_2_TIME;
 
+	//Ugly hack to fix some frameratedrop issues
+	SpriteSheetLoader::getInstance()->getSheet("TrollLWalk");
+	SpriteSheetLoader::getInstance()->getSheet("TrollLDie");
+	SpriteSheetLoader::getInstance()->getSheet("TrollLHit");
+	SpriteSheetLoader::getInstance()->getSheet("TrollLAttack");
+
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("TrollLWalk_Walk_0", 1.0f, m_xPos, m_yPos);
 	m_animations->addAnimation("TrollLHit_Hit_0", 1.0f, m_xPos, m_yPos);

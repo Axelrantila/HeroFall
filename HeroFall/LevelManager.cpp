@@ -63,7 +63,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_levelObjects.push_back(new LevelObjectRectangle(35820.0f, 3670.0f, 1000.0f, 600.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(35820.0f, 3570.0f, 100.0f, 100.0f, sf::Color::Magenta));
 
-	m_player = new Player(14000.0f, 1000.0f, this);
+	m_player = new Player(0.0f, 1000.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
@@ -71,7 +71,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 
 	sf::Sprite* tempSprite;
 #pragma region LevelForest
-	/*tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_1");
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_1");
 	tempSprite->setPosition(0.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "ForestSegment_2");
@@ -82,10 +82,10 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment_4", "ForestSegment_4");
 	tempSprite->setPosition(6000.0f, 0.0f);
-	m_backgroundSprites.push_back(tempSprite);*/
+	m_backgroundSprites.push_back(tempSprite);
 #pragma endregion
 #pragma region LevelMountains
-	/*tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_01", "Mountain_01");
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_01", "Mountain_01");
 	tempSprite->setPosition(8000.0f, 0.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_02", "Mountain_02");
@@ -93,10 +93,10 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_03", "Mountain_03");
 	tempSprite->setPosition(14131.0f, 20.0f);
-	m_backgroundSprites.push_back(tempSprite);*/
-	/*tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_04", "Mountain_04");
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_04", "Mountain_04");
 	tempSprite->setPosition(14131.0f, 0.0f);
-	m_backgroundSprites.push_back(tempSprite);*/
+	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Banner_02", "Banner_02");
 	tempSprite->setPosition(9840.0f, 1210.0f);
 	m_backgroundSprites.push_back(tempSprite);
