@@ -63,7 +63,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_levelObjects.push_back(new LevelObjectRectangle(35820.0f, 3670.0f, 1000.0f, 600.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(35820.0f, 3570.0f, 100.0f, 100.0f, sf::Color::Magenta));
 
-	m_player = new Player(0.0f, 1000.0f, this);
+	m_player = new Player(200.0f, 1000.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
@@ -181,7 +181,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
 	d_bg1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0"));
 	d_bg->setPosition(0.0f, 0.0f);
-	d_bg1->setPosition(8160.0f, 0.0f);*/
+	d_bg1->setPosition(8160.0f, 0.0f);
 #pragma endregion
 	m_prevCameraCenter =  m_view->getCenter();
 	m_cameraMove = m_view->getCenter();
