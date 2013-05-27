@@ -51,6 +51,9 @@ public:
 	void updateBoxes();
 	void takeDamageOverTime(float damage, float delta);
 
+	void knockedBack();
+	bool isKnockedBack() {return m_knockedBack;}
+
 private:
 	AnimationManager* m_animations;
 	sf::RectangleShape* m_hitBox;
@@ -79,6 +82,7 @@ private:
 
 	LevelManager* m_levelManager;
 	float m_delta;
+	bool m_knockedBack;
 };
 
 #endif

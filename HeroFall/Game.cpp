@@ -32,29 +32,29 @@ Game::~Game()
 
 void Game::update(StateManager* stateManager, float delta)
 {
-		//Update
-		m_levelManager->updatePlayerSpeed();
-		m_levelManager->update(delta);
+	//Update
+	m_levelManager->updatePlayerSpeed();
+	m_levelManager->update(delta);
 
-		if(m_levelManager->playerIsDead())
+	if(m_levelManager->playerIsDead())
+	{
+		markForDeletion();
+		AudioMixer::getInstance()->stopMusic();
+		AudioMixer::getInstance()->playMusic("Game_Over", 0.0f, 70.0f, 70.0f, false);
+		//Lägg till death screen statet här.
+		if(ScoreManager::getInstance()->getScore() > SettingsManager::getSettings()->HIGHSCORE_SCORE)
 		{
-			markForDeletion();
-			AudioMixer::getInstance()->stopMusic();
-			AudioMixer::getInstance()->playMusic("Game_Over", 0.0f, 70.0f, 70.0f, false);
-			//Lägg till death screen statet här.
-			if(ScoreManager::getInstance()->getScore() > SettingsManager::getSettings()->HIGHSCORE_SCORE)
-			{
-				SettingsManager::getSettings()->HIGHSCORE_SCORE = ScoreManager::getInstance()->getScore();
-				SettingsManager::getInstance()->saveSettings();
+			SettingsManager::getSettings()->HIGHSCORE_SCORE = ScoreManager::getInstance()->getScore();
+			SettingsManager::getInstance()->saveSettings();
 
-				stateManager->addState(STATE_GAME);
+			stateManager->addState(STATE_GAME);
 
-			}
-			else
-			{
-				stateManager->addState(STATE_GAMEOVER);
-			}
 		}
+		else
+		{
+			stateManager->addState(STATE_GAMEOVER);
+		}
+	}
 }
 
 void Game::draw(sf::RenderWindow* window)

@@ -31,7 +31,8 @@ EnemyTroll::EnemyTroll(float xPos, float yPos, sf::View* view)
 	m_animations->addAnimation("TrollLHit_Hit_0", 1.0f, m_xPos, m_yPos);
 	m_animations->addAnimation("TrollLDie_Die_0", m_deathTime, m_xPos, m_yPos);
 	m_animations->addAnimation("TrollLAttack_Attack_0", m_attackStage1Time, m_xPos, m_yPos);
-	m_animations->setCurrentAnimation("TrollLWalk_Walk_0");
+
+	m_animations->setCurrentAnimation("TrollLWalk_Walk_0", DIR_LEFT);
 
 	m_hitted = false;
 	m_meleeHitTime = SettingsManager::getSettings()->ENEMY_TROLL_HIT_TIME_LIMIT_MELEE;
@@ -60,8 +61,6 @@ EnemyTroll::~EnemyTroll()
 
 void EnemyTroll::update(float delta)
 {
-	m_animations->update(m_xPos, m_yPos);
-
 	updateHitBox();
 
 	if(m_isDying)
@@ -109,16 +108,18 @@ void EnemyTroll::update(float delta)
 #pragma region ATTACK
 	else if(m_currentAIState == TROLL_AI_ATTACK_0)
 	{
-		m_animations->setCurrentAnimation("TrollLAttack_Attack_0", m_direction);
+		//m_animations->setCurrentAnimation("TrollLAttack_Attack_0", m_direction);
 	}
 #pragma endregion
+
+	m_animations->update(m_xPos, m_yPos);
 }
 
 void EnemyTroll::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	window->draw(*m_hitBox);
-	window->draw(d_attackBox);
+	//window->draw(*m_hitBox);
+	//window->draw(d_attackBox);
 }
 
 sf::FloatRect EnemyTroll::getHitBox()
@@ -256,6 +257,7 @@ void EnemyTroll::updateState(Player* player)
 				|| (player->getXPos() > m_hitBox->getGlobalBounds().left && m_direction == DIR_RIGHT)))
 		{
 			newAIState = TROLL_AI_ATTACK_0;
+			m_animations->setCurrentAnimation("TrollLAttack_Attack_0", m_direction);
 			m_attackClock.restart();
 		}
 

@@ -52,9 +52,10 @@ private:
 	std::vector<sf::Sprite*> m_sprites;
 
 	sf::Clock m_clock;
-
 	float m_xPos;
 	float m_yPos;
+
+	bool m_wasStarted;
 };
 
 #endif

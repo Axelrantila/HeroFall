@@ -1,6 +1,8 @@
 #include "AnimationManager.h"
 #include "GameObject.h"
 
+#include <iostream>
+
 AnimationManager::AnimationManager(Character* parent)
 {
 	m_parent = parent;

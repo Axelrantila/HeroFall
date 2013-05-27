@@ -48,6 +48,8 @@ Animation::Animation(Character* parent, std::string name, float totalTime, float
 	m_yPos = yPos;
 
 	m_shouldLockAtEnd = shouldLockAtEnd;
+
+	m_wasStarted = false;
 }
 
 Animation::~Animation()
@@ -71,6 +73,9 @@ void Animation::play(CharacterDirection direction)
 	m_playing = true;
 	m_stopped = false;
 	m_currentFrame = 0;
+
+	m_wasStarted = true;
+
 	m_clock.restart();
 }
 
@@ -92,6 +97,13 @@ void Animation::update(float xPos, float yPos)
 	//////////////////////////////////////////////////////////////////
 	if(m_shouldLockAtEnd && m_currentFrame == m_totalFrames - 1)
 	{
+	}
+
+	else if(m_wasStarted)
+	{
+		m_wasStarted = false;
+		m_currentFrame = 0;
+		m_clock.restart();
 	}
 
 	else if(m_clock.getElapsedTime().asSeconds() > m_frameTime)

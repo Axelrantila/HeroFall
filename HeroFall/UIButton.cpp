@@ -26,7 +26,7 @@ UIButton::~UIButton(void)
 void UIButton::Update( float delta )
 {
 	bPressed = false;
-	if (CURRENT_STATE == SELECTED && InputManager::getInstance()->isKeyPressed("P1_ATTACK_1"))
+	if (CURRENT_STATE == SELECTED && InputManager::getInstance()->isKeyPressed("P1_BLOCK"))
 	{ bPressed = true; }
 }
 

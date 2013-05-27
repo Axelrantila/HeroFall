@@ -107,7 +107,7 @@ float Util::jumpUpTime()
 	return (abs(SettingsManager::getSettings()->PLAYER_SPEED_JUMP) / SettingsManager::getSettings()->WORLD_GRAVITY);
 }
 
-float Util::getCapedCalue(float value, float cap)
+float Util::getCapedValue(float value, float cap)
 {
 	if(value >= cap)
 	{

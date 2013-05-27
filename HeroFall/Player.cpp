@@ -34,44 +34,18 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_normalDirection = DIR_RIGHT;
 
 	m_animations = new AnimationManager(this);
-	/*m_animations->addAnimation("Avatar_Hit_0", 0.225f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Run_0", 0.5f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Attack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Attack_1", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Combo_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Jump_1", 0.5f, this->m_xPos, this->m_yPos, true);
-	m_animations->addAnimation("Avatar_Jump_2", 0.5f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Die_0", m_deathTime, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Block_0", 1.0f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("Avatar_Block_1", 1.0f, this->m_xPos, this->m_yPos);
-	m_animations->setCurrentAnimation("Avatar_Idle_0");_*/
-
-	/*m_animations->addAnimation("AvatarL_Attack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Attack_1", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Block_0", 1.0f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Block_1", 1.0f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Combo_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Die_0", m_deathTime, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Hit_0", 0.25f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Jump_1", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Jump_2", 0.5f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Jump_3", 0.5f, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarL_Running_0", 0.65f, this->m_xPos, this->m_yPos);*/
-
 	m_animations->addAnimation("AvatarRAttack0_Attack_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRAttack1_Attack_1", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRBlock_Block_0", 1.0f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRCombo_Combo_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRDie_Die_0", m_deathTime, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarRHit_Hit_0", 0.25f, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("AvatarRHit_Hit_0", 0.455f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRIdle_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRJump0_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRJump1_Jump_1", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRRunning_Running_0", 0.65f, this->m_xPos, this->m_yPos);
+
+	
 
 	m_animations->setCurrentAnimation("AvatarRIdle_Idle_0");
 
@@ -87,16 +61,9 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 120,
 		m_animations->getCurrentSprite()->getGlobalBounds().top + 75.0f);
 
-	//m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("AvatarL_Attack_1"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
-	//m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("AvatarL_Attack_0"), sf::RectangleShape(sf::Vector2f(95.0f, 70.0f))));
-	//m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("AvatarL_Combo_0"), sf::RectangleShape(sf::Vector2f(95.0f, 85.0f))));
 	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("AvatarRAttack1_Attack_1"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
 	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("AvatarRAttack0_Attack_0"), sf::RectangleShape(sf::Vector2f(95.0f, 70.0f))));
 	m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("AvatarRCombo_Combo_0"), sf::RectangleShape(sf::Vector2f(95.0f, 85.0f))));
-
-	//m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_Attack_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
-	//m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_Attack_1"), sf::RectangleShape(sf::Vector2f(109.0f, 58.0f))));
-	//m_swordBoxesMap.insert(std::pair<Animation*, sf::RectangleShape>(m_animations->getAnimation("Avatar_Combo_0"), sf::RectangleShape(sf::Vector2f(115.0f, 50.0f))));
 
 	m_currentAttack = 0;
 	m_levelManager = levelManager;
@@ -105,6 +72,8 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_currentJumpStage = JUMPING_LANDING;
 
 	m_delta = 0.0f;
+
+	m_knockedBack = false;
 	
 }
 
@@ -117,12 +86,12 @@ Player::~Player()
 void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	window->draw(*m_hitBox);
+	/*window->draw(*m_hitBox);
 	
 	if(m_swordIsSwinging)
 	{
 		window->draw(m_swordBoxesMap[m_animations->getCurrentAnimation()]);
-	}
+	}*/
 }
 
 void Player::move(float delta, std::vector<LevelObject*> levelObjects)
@@ -159,75 +128,113 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 		m_isOnGround = false;
 	}
 
-	if(m_markedForHalt && !m_isBlocking)
+	/*
+
+	Set the x-speed
+
+	*/
+
+	if(m_knockedBack)
 	{
-		if(m_xVel > 0.0f)
+		if(m_direction == DIR_LEFT)
 		{
-			m_xVel -= SettingsManager::getSettings()->PLAYER_SPEED_SIDE_HALTING * delta;
-			if(m_xVel < 0.0f){m_xVel = 0.0f;}
+			m_xVel -= delta * SettingsManager::getSettings()->PLAYER_KNOCKBACK_SPEED_X_DECREASE;
 
-			float m_xMove = delta * m_xVel;
-			m_xPos += m_xMove;
-
-			updateBoxes();
-
-			for(unsigned int a = 0; a < levelObjects.size(); a++)
+			if(m_xVel <= 0.0f)
 			{
-				if(collidesWith(levelObjects[a]))
-				{
-					m_xPos -= m_xMove;
-					m_xVel = 0.0f;
-
-					updateBoxes();
-
-					break;
-				}
-			}
-		}
-		else
-		{
-			m_xVel += SettingsManager::getSettings()->PLAYER_SPEED_SIDE_HALTING * delta;
-			if(m_xVel > 0.0f){m_xVel = 0.0f;}
-
-			float m_xMove = delta * m_xVel;
-			m_xPos += m_xMove;
-
-			updateBoxes();
-
-			for(unsigned int a = 0; a < levelObjects.size(); a++)
-			{
-				if(collidesWith(levelObjects[a]))
-				{
-					m_xPos -= m_xMove;
-					m_xVel = 0.0f;
-
-					updateBoxes();
-
-					break;
-				}
-			}
-		}
-	}
-	else if(!m_isBlocking)
-	{
-		float m_xMove = delta * m_xVel;
-		m_xPos += m_xMove;
-
-		updateBoxes();
-
-		for(unsigned int a = 0; a < levelObjects.size(); a++)
-		{
-			if(collidesWith(levelObjects[a]))
-			{
-				m_xPos -= m_xMove;
 				m_xVel = 0.0f;
+				m_knockedBack = false;
+			}
+		}
+
+		else if(m_direction == DIR_RIGHT)
+		{
+			m_xVel += delta * SettingsManager::getSettings()->PLAYER_KNOCKBACK_SPEED_X_DECREASE;
+
+			if(m_xVel >= 0.0f)
+			{
+				m_xVel = 0.0f;
+				m_knockedBack = false;
+			}
+		}
+
+		m_xPos += m_xVel * delta;
+		updateBoxes();
+	}
+	else
+	{
+		if(m_markedForHalt && !m_isBlocking)
+		{
+			if(m_xVel > 0.0f)
+			{
+				m_xVel -= SettingsManager::getSettings()->PLAYER_SPEED_SIDE_HALTING * delta;
+				if(m_xVel < 0.0f){m_xVel = 0.0f;}
+
+				float m_xMove = delta * m_xVel;
+				m_xPos += m_xMove;
 
 				updateBoxes();
+
+				for(unsigned int a = 0; a < levelObjects.size(); a++)
+				{
+					if(collidesWith(levelObjects[a]))
+					{
+						m_xPos -= m_xMove;
+						m_xVel = 0.0f;
+
+						updateBoxes();
+
+						break;
+					}
+				}
+			}
+			else
+			{
+				m_xVel += SettingsManager::getSettings()->PLAYER_SPEED_SIDE_HALTING * delta;
+				if(m_xVel > 0.0f){m_xVel = 0.0f;}
+
+				float m_xMove = delta * m_xVel;
+				m_xPos += m_xMove;
+
+				updateBoxes();
+
+				for(unsigned int a = 0; a < levelObjects.size(); a++)
+				{
+					if(collidesWith(levelObjects[a]))
+					{
+						m_xPos -= m_xMove;
+						m_xVel = 0.0f;
+
+						updateBoxes();
+
+						break;
+					}
+				}
+			}
+		}
+		else if(!m_isBlocking)
+		{
+			float m_xMove = delta * m_xVel;
+			m_xPos += m_xMove;
+
+			updateBoxes();
+
+			for(unsigned int a = 0; a < levelObjects.size(); a++)
+			{
+				if(collidesWith(levelObjects[a]))
+				{
+					m_xPos -= m_xMove;
+					m_xVel = 0.0f;
+
+					updateBoxes();
 		
-				break;
+					break;
+				}
 			}
 		}
 	}
+
+	
 
 	updateBoxes();
 }
@@ -326,7 +333,13 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			}
 
 			if(m_hitBox->getGlobalBounds().intersects(tEnemy->getHitBox())
-				|| m_hitBox->getGlobalBounds().intersects(tEnemy->getAttackHitbox()))
+				&& !m_knockedBack)
+			{
+				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_TROLL_TO_PLAYER);
+				knockedBack();
+			}
+
+			else if(m_hitBox->getGlobalBounds().intersects(tEnemy->getAttackHitbox()))
 			{
 				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_TROLL_TO_PLAYER);
 			}
@@ -456,7 +469,7 @@ void Player::update(float delta)
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
 
 
-	//std::cout << m_animations->getCurrentAnimation()->getName() << " " << m_animations->getCurrentAnimation()->getCurrentFrame() << std::endl;
+	std::cout << m_animations->getCurrentAnimation()->getName() << std::endl;
 
 	/*if(m_swordIsSwinging)
 	{
@@ -529,15 +542,14 @@ void Player::update(float delta)
 
 		//Idle
 		if(m_xVel == 0.0f && m_yVel == 0.0f 
-			&& !m_hitted && !m_swordIsSwinging && !m_isIdle
-			)
+			&& !m_hitted && !m_swordIsSwinging && !m_isIdle && !m_knockedBack)
 		{	
 			m_animations->setCurrentAnimation("AvatarRIdle_Idle_0", m_direction);
 			m_isIdle = true;
 		}
 
 		//Run
-		else if(m_isIdle && (m_xVel != 0.0f || m_yVel != 0.0f))
+		else if(m_isIdle && (m_xVel != 0.0f || m_yVel != 0.0f) && !m_knockedBack)
 		{
 			m_animations->setCurrentAnimation("AvatarRRunning_Running_0", m_direction);
 			m_isIdle = false;
@@ -546,7 +558,8 @@ void Player::update(float delta)
 		/////////////////////////////////////////////////
 		if(m_swordIsSwinging)
 		{
-			if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime)
+			if(m_swordClock.getElapsedTime().asSeconds() >= m_targetSwingTime
+				&& !m_knockedBack)
 			{
 				m_swordIsSwinging = false;
 
@@ -562,7 +575,7 @@ void Player::update(float delta)
 		}
 
 		if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime
-			&& m_hitted
+			&& m_hitted && !m_knockedBack
 			&& (m_animations->getCurrentAnimation() != m_animations->getAnimation("AvatarRIdle_Idle_0")))
 		{
 			m_hitted  = false;
@@ -579,6 +592,8 @@ void Player::setXSpeed(float xVel)
 	m_xVel = xVel;
 	m_markedForHalt = false;
 
+	if(m_knockedBack){return;}
+
 	if(xVel > 0.0f)
 	{
 		m_direction = DIR_RIGHT;
@@ -589,7 +604,8 @@ void Player::setXSpeed(float xVel)
 	}
 	
 	if(!m_swordIsSwinging
-		&& m_isOnGround)
+		&& m_isOnGround
+		&& !m_knockedBack)
 	{	
 		m_animations->setCurrentAnimation("AvatarRRunning_Running_0", m_direction);
 	}
@@ -705,4 +721,21 @@ void Player::block(bool blocking)
 void Player::takeDamageOverTime(float damage, float delta)
 {
 	m_health -= (damage * delta);
+}
+
+void Player::knockedBack()
+{
+	m_knockedBack = true;
+
+	if(m_direction == DIR_LEFT)
+	{
+		m_xVel = SettingsManager::getSettings()->PLAYER_KNOCKBACK_SPEED_X_INIT;
+	}
+
+	else if(m_direction == DIR_RIGHT)
+	{
+		m_xVel = -1.0f * SettingsManager::getSettings()->PLAYER_KNOCKBACK_SPEED_X_INIT;
+	}
+
+	m_yVel = -1 * SettingsManager::getSettings()->PLAYER_KNOCKBACK_SPEED_Y;
 }

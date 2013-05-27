@@ -28,6 +28,7 @@ void ParticleSystem::update(float delta)
 
 		if((*it)->isDead())
 		{
+			delete (*it);
 			it = m_particles.erase(it);
 		}
 		else

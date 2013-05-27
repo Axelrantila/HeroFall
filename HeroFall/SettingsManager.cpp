@@ -48,6 +48,9 @@ bool SettingsManager::loadSettings()
 	m_settings->PLAYER_HEALTH = (float)ini.GetDoubleValue("PLAYER", "HEALTH", 0);
 	m_settings->PLAYER_SWORD_SWING_TIME = (float)ini.GetDoubleValue("PLAYER", "SWORD_SWING_TIME", 0);
 	m_settings->PLAYER_HIT_TIME_LIMIT_MELEE = (float)ini.GetDoubleValue("PLAYER", "HIT_TIME_LIMIT_MELEE", 0);
+	m_settings->PLAYER_KNOCKBACK_SPEED_X_INIT = (float)ini.GetDoubleValue("PLAYER", "KNOCKBACK_SPEED_X_INIT", 0);
+	m_settings->PLAYER_KNOCKBACK_SPEED_X_DECREASE = (float)ini.GetDoubleValue("PLAYER", "KNOCKBACK_SPEED_X_DECREASE", 0);
+	m_settings->PLAYER_KNOCKBACK_SPEED_Y = (float)ini.GetDoubleValue("PLAYER", "KNOCKBACK_SPEED_Y", 0);
 
 	m_settings->DAMAGE_ENEMY_PLACEHOLDER_TO_PLAYER = (float)ini.GetDoubleValue("DAMAGE", "ENEMY_PLACEHOLDER_TO_PLAYER", 0);
 	m_settings->DAMAGE_ENEMY_TROLL_TO_PLAYER = (float)ini.GetDoubleValue("DAMAGE", "ENEMY_TROLL_TO_PLAYER", 0);

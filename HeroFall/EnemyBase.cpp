@@ -10,7 +10,7 @@ EnemyBase::EnemyBase(float xPos, float yPos, sf::View* view)
 {
 	m_yVel = 0.0f;
 	m_xVel = -SettingsManager::getSettings()->ENEMY_BASE_SPEED_BASE 
-		*Util::getInstance()->getRandomFloat(SettingsManager::getSettings()->ENEMY_BASE_SPEED_MIN_MULTIPLIER, SettingsManager::getSettings()->ENEMY_BASE_SPEED_MAX_MULTIPLIER);
+		* Util::getInstance()->getRandomFloat(SettingsManager::getSettings()->ENEMY_BASE_SPEED_MIN_MULTIPLIER, SettingsManager::getSettings()->ENEMY_BASE_SPEED_MAX_MULTIPLIER);
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Base_Walk_0", 1.0f, xPos, yPos);

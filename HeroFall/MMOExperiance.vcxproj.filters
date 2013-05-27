@@ -128,6 +128,10 @@
     <ClCompile Include="PopupImageManager.cpp">
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Preloader.cpp" />
+    <ClCompile Include="GameOverVictory.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -261,6 +265,10 @@
     </ClInclude>
     <ClInclude Include="CharacterDirection.h">
       <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Preloader.h" />
+    <ClInclude Include="GameOverVictory.h">
+      <Filter>Game\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

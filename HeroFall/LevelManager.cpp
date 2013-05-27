@@ -63,7 +63,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_levelObjects.push_back(new LevelObjectRectangle(35820.0f, 3670.0f, 1000.0f, 600.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(35820.0f, 3570.0f, 100.0f, 100.0f, sf::Color::Magenta));
 
-	m_player = new Player(28400.0f, 1000.0f, this);
+	m_player = new Player(0.0f, 1000.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
@@ -178,7 +178,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_foregroundSprites.push_back(tempSprite);
 #pragma endregion
 
-	/*d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
+	d_bg = SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0");
 	d_bg1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Background", "Background_0"));
 	d_bg->setPosition(0.0f, 0.0f);
 	d_bg1->setPosition(8160.0f, 0.0f);*/
@@ -253,16 +253,16 @@ void LevelManager::draw(sf::RenderWindow* window)
 {
 	window->setView(*m_view);
 
-	/*window->draw(*d_bg);
-	window->draw(*d_bg1);*/
+	window->draw(*d_bg);
+	window->draw(*d_bg1);
 
 
 
 	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
 		{window->draw(*m_backgroundSprites[a]);}
 		
-	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-		{m_levelObjects[a]->draw(window);}
+	//for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+	//	{m_levelObjects[a]->draw(window);}
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
@@ -381,6 +381,11 @@ void LevelManager::updatePlayerSpeed()
 	if(m_player->isDying())
 	{
 		return;
+	}
+
+	else if(m_player->isKnockedBack())
+	{
+		m_player->block(false);
 	}
 
 	else if(InputManager::getInstance()->isKeyDown("P1_BLOCK"))

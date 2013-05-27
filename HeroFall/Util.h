@@ -28,7 +28,7 @@ public:
 
 	float jumpUpTime();
 
-	float getCapedCalue(float value, float cap);
+	float getCapedValue(float value, float cap);
 
 private:
 	Util();
