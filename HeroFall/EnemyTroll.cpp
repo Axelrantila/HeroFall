@@ -108,10 +108,11 @@ void EnemyTroll::update(float delta)
 #pragma region ATTACK
 	else if(m_currentAIState == TROLL_AI_ATTACK_0)
 	{
-		//m_animations->setCurrentAnimation("TrollLAttack_Attack_0", m_direction);
+		m_animations->setCurrentAnimation("TrollLAttack_Attack_0", m_direction);
 	}
 #pragma endregion
 
+	std::cout << m_animations->getCurrentAnimation()->getName() << "\t" << m_animations->getCurrentAnimation()->getCurrentFrame() << std::endl;
 	m_animations->update(m_xPos, m_yPos);
 }
 

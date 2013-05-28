@@ -50,6 +50,7 @@ Animation::Animation(Character* parent, std::string name, float totalTime, float
 	m_shouldLockAtEnd = shouldLockAtEnd;
 
 	m_wasStarted = false;
+	m_totalDeltaTime = 0.0f;
 }
 
 Animation::~Animation()
@@ -103,37 +104,38 @@ void Animation::update(float xPos, float yPos)
 	{
 		m_wasStarted = false;
 		m_currentFrame = 0;
+		m_currentSprite = m_sprites[m_currentFrame];
+		m_totalDeltaTime = 0.0f;
 		m_clock.restart();
 	}
 
-	else if(m_clock.getElapsedTime().asSeconds() > m_frameTime)
+	else
 	{
-		float m_totalDeltaTime = m_clock.getElapsedTime().asSeconds();
-
+		m_totalDeltaTime += m_clock.getElapsedTime().asSeconds();
+		m_clock.restart();
+		
 		while(m_totalDeltaTime >= m_frameTime)
 		{
 			m_currentFrame++;
 			if(m_currentFrame == m_totalFrames)
-			{
-				m_currentFrame = 0;
-			}
+				{m_currentFrame = 0;}
 
 			m_totalDeltaTime -= m_frameTime;
 		}
 
 		m_currentSprite = m_sprites[m_currentFrame];
-		m_clock.restart();
 	}
 	/////////////////////////////////////////////////////////////
 	if(m_mirrored)
 	{
 		xPos += m_mirroredOffsetPosition.x;
-
+		
 		if(!m_mirroredImages[m_currentSprite])
 		{
 			m_mirroredImages[m_currentSprite] = true;
 			m_currentSprite->setScale(-1.0f, 1.0f);
 		}
+
 		if(m_parent->isATroll())
 		{
 			xPos += 50.0f;

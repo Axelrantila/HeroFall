@@ -214,7 +214,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_enemies->push_back(new EnemyTroll(24900.0f, 1820.0f, m_view));
 	m_enemies->push_back(new EnemyGoblin(24400.0f, 200.0f, 1500.0f));
 	m_enemies->push_back(new EnemyShooter(26680.0f, 700.0f, 100.0f, m_player, DIR_LEFT, m_view));
-	//m_enemies->push_back(new EnemyBase(26000.0f, 200.0f, m_view));
+	m_enemies->push_back(new EnemyBase(26000.0f, 200.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(27380.0f, 700.0f, 100.0f, m_player, DIR_LEFT, m_view));
 	m_enemies->push_back(new EnemyShooter(27820.0f, 700.0f, 100.0f, m_player, DIR_RIGHT, m_view));
 	m_enemies->push_back(new EnemyTroll(27700.0f, 1820.0f, m_view));
@@ -314,6 +314,11 @@ void LevelManager::update(float deltaTime)
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
+	if(m_view->getCenter().x - m_view->getSize().x / 2.0f < 0.0f)
+	{
+		m_view->setCenter(m_view->getSize().x / 2.0f, m_view->getCenter().y);
+	}
+
 	//Set max view
 	if(m_view->getCenter().y - m_view->getSize().y / 2.0f < 0)
 	{
@@ -409,7 +414,8 @@ void LevelManager::updatePlayerSpeed()
 			m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_JUMP);
 		}
 
-		else if((InputManager::getInstance()->isKeyDown("P1_MOVE_DOWN") || !InputManager::getInstance()->isKeyDown("P1_MOVE_UP"))&& !m_player->isOnGround())
+		else if((InputManager::getInstance()->isKeyDown("P1_MOVE_DOWN") || !InputManager::getInstance()->isKeyDown("P1_MOVE_UP"))
+			&& !m_player->isOnGround())
 		{
 			m_player->increaseSpeed(0.0f, SettingsManager::getSettings()->PLAYER_SPEED_DOWN);
 		}

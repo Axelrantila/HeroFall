@@ -367,7 +367,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				if(((EnemyGoblin*)enemies->at(a))->getGlobalBounds().intersects
 					(m_animations->getCurrentSprite()->getGlobalBounds()))
 				{
-					enemies->at(a)->takeDamage(1.0f);
+					enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_GOBLIN);
 					m_swordHasHittedEnemy = true;
 					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
@@ -384,14 +384,11 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		{
 			if(((EnemyProjectile*)enemies->at(a))->getGlobalBounds().intersects(m_hitBox->getGlobalBounds()))
 			{
-				if(m_isBlocking)
-				{
-					enemies->at(a)->markDead();
-				}
-				else
+				if(!m_isBlocking)
 				{
 					this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PROJECTILE_TO_PLAYER);
 				}
+				enemies->at(a)->markDead();
 			}
 		}
 #pragma endregion
@@ -446,6 +443,8 @@ sf::Vector2f Player::getCenter()
 
 void Player::swingSword(AttackType type)
 {
+	if(m_hitted){return;}
+
 	m_swordIsSwinging = true;
 	m_swordHasHittedEnemy = false;
 	m_swordClock.restart();
@@ -469,7 +468,7 @@ void Player::update(float delta)
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
 
 
-	std::cout << m_animations->getCurrentAnimation()->getName() << std::endl;
+	
 
 	/*if(m_swordIsSwinging)
 	{
@@ -574,6 +573,11 @@ void Player::update(float delta)
 			}
 		}
 
+		if(m_hitted)
+		{
+			m_animations->setCurrentAnimation("AvatarRHit_Hit_0", m_direction);
+		}
+
 		if(m_meleeHitClock.getElapsedTime().asSeconds() >= m_meleeHitTime
 			&& m_hitted && !m_knockedBack
 			&& (m_animations->getCurrentAnimation() != m_animations->getAnimation("AvatarRIdle_Idle_0")))
@@ -589,10 +593,10 @@ void Player::update(float delta)
 
 void Player::setXSpeed(float xVel)
 {
+	if(m_knockedBack){return;}
+
 	m_xVel = xVel;
 	m_markedForHalt = false;
-
-	if(m_knockedBack){return;}
 
 	if(xVel > 0.0f)
 	{
@@ -605,7 +609,8 @@ void Player::setXSpeed(float xVel)
 	
 	if(!m_swordIsSwinging
 		&& m_isOnGround
-		&& !m_knockedBack)
+		&& !m_knockedBack
+		&& !m_hitted)
 	{	
 		m_animations->setCurrentAnimation("AvatarRRunning_Running_0", m_direction);
 	}

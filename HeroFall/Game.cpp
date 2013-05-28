@@ -20,6 +20,8 @@ Game::Game(sf::RenderWindow*  window)
 	m_view->getCenter();
 	m_view->getSize();
 
+	sf::sleep(sf::seconds(6.0f));
+
 	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 15.0f, 15.0f, true);
 }
 
@@ -33,8 +35,9 @@ Game::~Game()
 void Game::update(StateManager* stateManager, float delta)
 {
 	//Update
-	m_levelManager->updatePlayerSpeed();
 	m_levelManager->update(delta);
+	m_levelManager->updatePlayerSpeed();
+	
 
 	if(m_levelManager->playerIsDead())
 	{

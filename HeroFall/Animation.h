@@ -48,6 +48,8 @@ private:
 	unsigned int m_totalFrames;
 	bool m_shouldLockAtEnd;
 
+	float m_totalDeltaTime;
+
 	sf::Sprite* m_currentSprite;
 	std::vector<sf::Sprite*> m_sprites;
 
