@@ -284,7 +284,7 @@ void EnemyTroll::updateState(Player* player)
 sf::FloatRect EnemyTroll::getAttackHitbox()
 {
 	if(!m_animations->isCurrentAnimation("TrollLAttack_Attack_0")
-		|| (m_animations->isCurrentAnimation("TrollLAttack_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 9 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
+		|| (m_animations->isCurrentAnimation("TrollLAttack_Attack_0") && m_animations->getCurrentAnimation()->getCurrentFrame() < 7 && m_animations->getCurrentAnimation()->getCurrentFrame() > 37))
 	{
 		return sf::FloatRect(-10000.0f, -10000.0f, 1.0f, 1.0f);
 	}

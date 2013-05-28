@@ -31,7 +31,9 @@ public:
 	void updatePlayerSpeed();
 	bool playerIsDead();
 
-	void  cleanResources();
+	void cleanResources();
+
+	void addPopupImage(std::string sheetName, std::string spriteName, sf::Vector2f position, sf::Vector2f speed, float maxTime);
 
 private:
 	sf::RenderWindow* m_window;

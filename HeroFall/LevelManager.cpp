@@ -486,3 +486,8 @@ void LevelManager::cleanResources()
 	if(shootersAlive == 0)
 	{SpriteSheetLoader::getInstance()->removeSheet("Shooter");}
 }
+
+void LevelManager::addPopupImage(std::string sheetName, std::string spriteName, sf::Vector2f position, sf::Vector2f speed, float maxTime)
+{
+	m_popupImages->addImage(sheetName, spriteName, position, speed, maxTime);
+}

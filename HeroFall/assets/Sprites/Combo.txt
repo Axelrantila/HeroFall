@@ -1,0 +1,5 @@
+wSheet=1612
+hSheet=164
+wSprite=1612
+hSprite=164
+Combo_0

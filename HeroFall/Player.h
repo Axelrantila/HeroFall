@@ -83,6 +83,8 @@ private:
 	LevelManager* m_levelManager;
 	float m_delta;
 	bool m_knockedBack;
+	float m_comboTimeLimit;
+	sf::Clock m_comboTimeClock;
 };
 
 #endif

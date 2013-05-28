@@ -50,7 +50,7 @@ void Game::update(StateManager* stateManager, float delta)
 			SettingsManager::getSettings()->HIGHSCORE_SCORE = ScoreManager::getInstance()->getScore();
 			SettingsManager::getInstance()->saveSettings();
 
-			stateManager->addState(STATE_GAME);
+			stateManager->addState(STATE_GAMEOVER);
 
 		}
 		else

@@ -17,10 +17,10 @@ StateManager::StateManager()
 	m_window = new sf::RenderWindow(
 		sf::VideoMode(1920, 1080)
 		,SettingsManager::getSettings()->FRAME_TITLE
-		,sf::Style::Fullscreen);
+		,sf::Style::Default);
 	m_window->setMouseCursorVisible(false);
 	//m_window->setVerticalSyncEnabled(true);
-	m_window->setFramerateLimit(60);
+	//m_window->setFramerateLimit(60);
 	m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
 
 	addState(new Menus());

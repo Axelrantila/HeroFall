@@ -28,7 +28,6 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_markedForHalt = false;
 
 	m_meleeHitTime = SettingsManager::getSettings()->PLAYER_HIT_TIME_LIMIT_MELEE;
-	m_meleeHitClock.restart();
 
 	m_direction = DIR_RIGHT;
 	m_normalDirection = DIR_RIGHT;
@@ -70,11 +69,12 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 
 	m_jumping = false;
 	m_currentJumpStage = JUMPING_LANDING;
-
 	m_delta = 0.0f;
-
 	m_knockedBack = false;
-	
+	m_comboTimeLimit = 3.0f;
+
+	m_meleeHitClock.restart();
+	m_comboTimeClock.restart();
 }
 
 Player::~Player()
@@ -98,9 +98,11 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 {
 	m_delta = delta;
 	m_groundMarked = false;
+
 	m_yVel += getGravityDistance(delta);
 	float m_yMove = delta * m_yVel;
 	m_yPos += m_yMove;
+	
 	updateBoxes();
 
 	for(unsigned int a = 0; a < levelObjects.size(); a++)
@@ -158,7 +160,39 @@ void Player::move(float delta, std::vector<LevelObject*> levelObjects)
 			}
 		}
 
-		m_xPos += m_xVel * delta;
+		float m_xMove = delta * m_xVel;
+		m_xPos += m_xMove;
+
+		for(unsigned int a = 0; a < levelObjects.size(); a++)
+		{
+			if(m_xVel == 0)
+			{
+				while(collidesWith(levelObjects[a]))
+				{
+					if(m_direction == DIR_LEFT)
+					{
+						m_xPos -= 1;
+					}
+					else if(m_direction == DIR_RIGHT)
+					{
+						m_xPos += 1;
+					}
+
+					updateBoxes();
+				}
+			}
+
+			else if(collidesWith(levelObjects[a]))
+			{
+				m_xPos -= m_xMove;
+				m_xVel = 0.0f;
+
+				updateBoxes();
+
+				break;
+			}
+		}
+
 		updateBoxes();
 	}
 	else
@@ -322,13 +356,13 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 					else
 					{
 						enemies->at(a)->takeDamage(SettingsManager::getSettings()->DAMAGE_PLAYER_TO_ENEMY_TROLL);
+						ComboManager::getInstance()->increaseComboMeter();
 					}
 
 					m_swordHasHittedEnemy = true;
 					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
 						100, PARTICLE_COLOR_BLOOD);
-					ComboManager::getInstance()->increaseComboMeter();
 				}
 			}
 
@@ -466,9 +500,13 @@ void Player::update(float delta)
 {
 	AudioMixer::getInstance()->setListenerPosition(m_xPos, m_yPos);
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
-
-
 	
+	if(m_comboTimeClock.getElapsedTime().asSeconds() >= m_comboTimeLimit
+		&& ComboManager::getInstance()->canActivateCombo())
+	{
+		m_levelManager->addPopupImage("Combo", "Combo_0", sf::Vector2f(m_xPos, m_yPos - 100), sf::Vector2f(0.0, -30.0f), 2.0f);
+		m_comboTimeClock.restart();
+	}
 
 	/*if(m_swordIsSwinging)
 	{
