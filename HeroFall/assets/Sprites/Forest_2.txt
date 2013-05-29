@@ -1,0 +1,5 @@
+wSheet=7852
+hSheet=1880
+wSprite=7852
+hSprite=1880
+Forest_2

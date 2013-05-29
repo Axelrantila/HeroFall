@@ -1,0 +1,5 @@
+wSheet=2745
+hSheet=2212
+wSprite=2745
+hSprite=2212
+TownSegment_03

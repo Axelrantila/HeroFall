@@ -1,5 +1,6 @@
 wSheet=554
-hSheet=836
+hSheet=1672
 wSprite=554
 hSprite=836
-Foreground_03
+Foreground_03_legs
+Foreground_03_Top

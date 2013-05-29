@@ -35,6 +35,8 @@ public:
 
 	void addPopupImage(std::string sheetName, std::string spriteName, sf::Vector2f position, sf::Vector2f speed, float maxTime);
 
+	Player* getPlayer() {return m_player;}
+
 private:
 	sf::RenderWindow* m_window;
 	sf::View* m_view;
@@ -48,6 +50,7 @@ private:
 	std::vector<sf::Sprite*> m_foregroundSprites;
 	sf::Sprite* d_bg;
 	sf::Sprite* d_bg1;
+	sf::Sprite* d_bg2;
 
 	sf::Vector2f m_cameraMove;
 	sf::Vector2f m_prevCameraCenter;

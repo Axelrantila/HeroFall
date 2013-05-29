@@ -5,6 +5,7 @@
 #include "SettingsManager.h"
 #include "SpriteSheetLoader.h"
 #include "Util.h"
+#include "Player.h"
 
 #include <iostream>
 
@@ -58,6 +59,9 @@ void Game::update(StateManager* stateManager, float delta)
 			stateManager->addState(STATE_GAMEOVER);
 		}
 	}
+	
+	/*if(m_levelManager->getPlayer()->getXPos() > 36320)
+	{ stateManager->addState(STATE_GAMEOVER_VICTORY); }*/
 }
 
 void Game::draw(sf::RenderWindow* window)

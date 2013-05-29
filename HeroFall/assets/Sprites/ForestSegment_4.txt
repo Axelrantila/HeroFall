@@ -1,5 +1,5 @@
-wSheet=1852
-hSheet=2048
-wSprite=1852
-hSprite=2048
-ForestSegment_4
+wSheet=992
+hSheet=915
+wSprite=992
+hSprite=915
+forestSegment_4_bridge_back

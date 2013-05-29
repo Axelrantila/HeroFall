@@ -1,0 +1,5 @@
+wSheet=4952
+hSheet=2400
+wSprite=4952
+hSprite=2400
+TownSegment_05_temp2

@@ -1,0 +1,5 @@
+wSheet=2021
+hSheet=2018
+wSprite=2021
+hSprite=2018
+TownSegment_08

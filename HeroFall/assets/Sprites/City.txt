@@ -1,0 +1,5 @@
+wSheet=8000
+hSheet=4000
+wSprite=8000
+hSprite=4000
+City
