@@ -86,9 +86,9 @@ Player::~Player()
 void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
-	/*window->draw(*m_hitBox);
+	//window->draw(*m_hitBox);
 	
-	if(m_swordIsSwinging)
+	/*if(m_swordIsSwinging)
 	{
 		window->draw(m_swordBoxesMap[m_animations->getCurrentAnimation()]);
 	}*/
@@ -680,12 +680,12 @@ void Player::updateBoxes()
 	//Hitboxes
 	if(m_direction == DIR_LEFT)
 	{
-		m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 160.0f,
+		m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 150.0f,
 			m_animations->getCurrentSprite()->getGlobalBounds().top + 150.0f);
 	}
 	else if(m_direction == DIR_RIGHT)
 	{
-		m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 180.0f,
+		m_hitBox->setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 160.0f,
 			m_animations->getCurrentSprite()->getGlobalBounds().top + 150.0f);
 	}
 	

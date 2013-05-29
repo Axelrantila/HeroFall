@@ -122,15 +122,17 @@
     <ClCompile Include="EnemyPlaceholder.cpp">
       <Filter>Old</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBase.cpp">
-      <Filter>Game\Characters\Enemies\Primary</Filter>
-    </ClCompile>
     <ClCompile Include="PopupImageManager.cpp">
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Preloader.cpp" />
     <ClCompile Include="GameOverVictory.cpp">
       <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Preloader.cpp">
+      <Filter>Old</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBase.cpp">
+      <Filter>Old</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,18 +259,20 @@
     <ClInclude Include="EnemyPlaceholder.h">
       <Filter>Old</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBase.h">
-      <Filter>Game\Characters\Enemies\Primary</Filter>
-    </ClInclude>
     <ClInclude Include="PopupImageManager.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="CharacterDirection.h">
       <Filter>Game\Characters</Filter>
     </ClInclude>
-    <ClInclude Include="Preloader.h" />
     <ClInclude Include="GameOverVictory.h">
       <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Preloader.h">
+      <Filter>Old</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBase.h">
+      <Filter>Old</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
