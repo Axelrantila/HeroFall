@@ -1,0 +1,5 @@
+wSheet=8686
+hSheet=2048
+wSprite=8686
+hSprite=2048
+City_2

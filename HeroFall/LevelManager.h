@@ -51,6 +51,7 @@ private:
 	sf::Sprite* d_bg;
 	sf::Sprite* d_bg1;
 	sf::Sprite* d_bg2;
+	sf::Sprite* d_bg3;
 
 	sf::Vector2f m_cameraMove;
 	sf::Vector2f m_prevCameraCenter;
