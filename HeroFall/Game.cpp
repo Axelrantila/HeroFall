@@ -24,6 +24,7 @@ Game::Game(sf::RenderWindow*  window)
 	sf::sleep(sf::seconds(6.0f));
 
 	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 15.0f, 15.0f, true);
+	ScoreManager::getInstance()->resetScore();
 }
 
 
@@ -56,8 +57,8 @@ void Game::update(StateManager* stateManager, float delta)
 		}
 	}
 	
-	/*if(m_levelManager->getPlayer()->getXPos() > 36320)
-	{ stateManager->addState(STATE_GAMEOVER_VICTORY); }*/
+	else if(m_levelManager->getPlayer()->getXPos() > 36320)
+	{ stateManager->addState(STATE_GAMEOVER_VICTORY); }
 }
 
 void Game::draw(sf::RenderWindow* window)

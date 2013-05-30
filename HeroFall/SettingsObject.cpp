@@ -85,6 +85,7 @@ SettingsObject::SettingsObject()
 	SCORE_KILL_TROLL = 100;
 	SCORE_KILL_GOBLIN = 200;
 	SCORE_KILL_SHOOTER = 300;
+	SCORE_TIME_LIMIT = 300.0f;
 #pragma endregion
 
 #pragma region HIGHSCORE

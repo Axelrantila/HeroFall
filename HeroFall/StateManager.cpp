@@ -118,8 +118,6 @@ void StateManager::run()
 
 					//SpriteSheetLoader::getInstance()->removeAllSheets();
 
-					ScoreManager::getInstance()->resetScore();
-
 					m_states.push_back(new Game(m_window));
 				}
 

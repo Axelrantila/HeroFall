@@ -1,6 +1,8 @@
 #ifndef SCOREMANAGER_H
 #define SCOREMANAGER_H
 
+#include <SFML\System\Clock.hpp>
+
 enum KillEnum
 {
 	KILL_TROLL,
@@ -15,13 +17,17 @@ public:
 
 	void addScore(KillEnum type);
 	unsigned int getScore(){return m_totalScore;}
-	void resetScore(){m_totalScore = 0;}
+	void resetScore();
+
+	unsigned int getVictoryScore();
 
 private:
 	ScoreManager();
 	~ScoreManager();
 
 	unsigned int m_totalScore;
+
+	sf::Clock m_clock;
 };
 
 #endif

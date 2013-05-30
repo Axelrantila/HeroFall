@@ -4,6 +4,7 @@
 ScoreManager::ScoreManager()
 {
 	m_totalScore = 0;
+	m_clock.restart();
 }
 
 
@@ -32,4 +33,19 @@ void ScoreManager::addScore(KillEnum type)
 	{
 		m_totalScore += SettingsManager::getSettings()->SCORE_KILL_SHOOTER;
 	}
+}
+
+unsigned int ScoreManager::getVictoryScore()
+{
+	unsigned int score = getScore();
+
+	score += (unsigned int)(SettingsManager::getSettings()->SCORE_TIME_LIMIT - m_clock.getElapsedTime().asSeconds());
+
+	return score;
+}
+
+void ScoreManager::resetScore()
+{
+	m_totalScore = 0;
+	m_clock.restart();
 }
