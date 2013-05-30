@@ -1,5 +1,5 @@
-wSheet=8000
-hSheet=4000
-wSprite=8000
-hSprite=4000
+wSheet=0
+hSheet=0
+wSprite=0
+hSprite=0
 City

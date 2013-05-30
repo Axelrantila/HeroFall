@@ -33,37 +33,38 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_levelObjects.push_back(new LevelObjectRectangle(18950.0f, 1600.0f, 1000.0f, 100.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(20300.0f, 1970.0f, 1170.0f, 300.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(21470.0f, 2270.0f, 5000.0f, 300.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(23700.0f, 2170.0f, 300.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(22770.0f, 2040.0f, 250.0f, 300.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(21760.0f, 1620.0f, 180.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(22000.0f, 1240.0f, 920.0f, 500.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(22970.0f, 1560.0f, 100.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(23170.0f, 1280.0f, 1580.0f, 200.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(23270.0f, 1800.0f, 100.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(22000.0f, 1240.0f, 920.0f, 300.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(22920.0f, 1500.0f, 140.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(23170.0f, 1240.0f, 1580.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(23280.0f, 1250.0f, 1300.0f, 400.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(23100.0f, 1780.0f, 180.0f, 10.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(25060.0f, 1500.0f, 1140.0f, 200.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(25300.0f, 880.0f, 640.0f, 100.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(26420.0f, 2070.0f, 4700.0f, 300.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(29100.0f, 1300.0f, 1780.0f, 200.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(27030.0f, 1870.0f, 200.0f, 200.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(27830.0f, 1890.0f, 200.0f, 180.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(27630.0f, 1690.0f, 200.0f, 10.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(28030.0f, 1470.0f, 200.0f, 600.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(27470.0f, 1700.0f, 200.0f, 10.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(28060.0f, 1500.0f, 200.0f, 600.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(31090.0f, 2380.0f, 200.0f, 300.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(31290.0f, 2680.0f, 500.0f, 10.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(31680.0f, 2070.0f, 2000.0f, 600.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(31680.0f, 1970.0f, 100.0f, 100.0f, sf::Color::Magenta));
 
-	m_player = new Player(200.0f, 800.0f, this);
+	m_player = new Player(22200.0f, 800.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
 	m_HUD = new HUD(m_view, m_player);
 
-	d_bg = SpriteSheetLoader::getInstance()->getSprite("Forest", "Forest_1");
+	d_bg = SpriteSheetLoader::getInstance()->getSprite("Forest", "Forest");
 	d_bg1 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("Mountain", "Mountain"));
 	d_bg2 = new sf::Sprite(*SpriteSheetLoader::getInstance()->getSprite("City", "City"));
 	d_bg->setPosition(0.0f, 0.0f);
 	d_bg1->setPosition(5580.0f, 0.0f);
-	d_bg2->setPosition(13883.0f, 0.0f);
+	d_bg2->setPosition(16370.0f, 0.0f);
 
 	sf::Sprite* tempSprite;
 #pragma region LevelMountains
@@ -211,6 +212,18 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("TownSegment_05", "TownSegment_05_temp2");
 	tempSprite->setPosition(21471.0f, 800.0f);
 	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("townSegment_bjalke", "townSegment_bjalke_mirror");
+	tempSprite->setPosition(21850.0f, 1500.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("townSegment_bjalke", "townSegment_bjalke_short");
+	tempSprite->setPosition(22850.0f, 1500.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("townSegment_bjalke", "townSegment_bjalke_short_mirror");
+	tempSprite->setPosition(23030.0f, 1780.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("TownSegment_box", "townSegment_box");
+	tempSprite->setPosition(22471.0f, 2000.0f);
+	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("TownSegment_06", "TownSegment_06");
 	tempSprite->setPosition(26423.0f, 960.0f);
 	m_backgroundSprites.push_back(tempSprite);
@@ -290,8 +303,7 @@ void LevelManager::draw(sf::RenderWindow* window)
 
 	window->draw(*d_bg);
 	window->draw(*d_bg1);
-
-
+	window->draw(*d_bg2);
 
 	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
 		{window->draw(*m_backgroundSprites[a]);}

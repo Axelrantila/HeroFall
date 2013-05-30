@@ -1,0 +1,5 @@
+wSheet=571
+hSheet=326
+wSprite=571
+hSprite=326
+townSegment_box

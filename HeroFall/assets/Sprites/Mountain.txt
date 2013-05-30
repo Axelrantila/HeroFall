@@ -1,5 +1,5 @@
-wSheet=8303
-hSheet=1934
-wSprite=8303
-hSprite=1934
+wSheet=10790
+hSheet=2048
+wSprite=10790
+hSprite=2048
 Mountain

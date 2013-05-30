@@ -1,0 +1,8 @@
+wSheet=568
+hSheet=204
+wSprite=284
+hSprite=102
+townSegment_bjalke
+townSegment_bjalke_mirror
+townSegment_bjalke_short
+townSegment_bjalke_short_mirror
