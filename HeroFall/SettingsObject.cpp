@@ -89,7 +89,11 @@ SettingsObject::SettingsObject()
 
 #pragma region HIGHSCORE
 	HIGHSCORE_NAME = "";
+	HIGHSCORE2_NAME = "";
+	HIGHSCORE3_NAME = "";
 	HIGHSCORE_SCORE = 1;
+	HIGHSCORE2_SCORE = 2;
+	HIGHSCORE3_SCORE = 3;
 #pragma endregion
 }
 

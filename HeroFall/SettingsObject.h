@@ -100,7 +100,12 @@ public:
 
 #pragma region HIGHSCORE
 	std::string HIGHSCORE_NAME;
+	std::string HIGHSCORE2_NAME;
+	std::string HIGHSCORE3_NAME;
+
 	unsigned int HIGHSCORE_SCORE;
+	unsigned int HIGHSCORE2_SCORE;
+	unsigned int HIGHSCORE3_SCORE;
 #pragma endregion
 };
 

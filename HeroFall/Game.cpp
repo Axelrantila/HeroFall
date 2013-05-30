@@ -46,13 +46,9 @@ void Game::update(StateManager* stateManager, float delta)
 		AudioMixer::getInstance()->stopMusic();
 		AudioMixer::getInstance()->playMusic("Game_Over", 0.0f, 70.0f, 70.0f, false);
 		//Lägg till death screen statet här.
-		if(ScoreManager::getInstance()->getScore() > SettingsManager::getSettings()->HIGHSCORE_SCORE)
+		if(ScoreManager::getInstance()->getScore() > SettingsManager::getSettings()->HIGHSCORE3_SCORE)
 		{
-			SettingsManager::getSettings()->HIGHSCORE_SCORE = ScoreManager::getInstance()->getScore();
-			SettingsManager::getInstance()->saveSettings();
-
-			stateManager->addState(STATE_GAMEOVER);
-
+			stateManager->addState(STATE_GAMEOVER_VICTORY);
 		}
 		else
 		{

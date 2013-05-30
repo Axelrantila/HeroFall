@@ -95,7 +95,11 @@ bool SettingsManager::loadSettings()
 	m_settings->SCORE_KILL_SHOOTER = ini.GetLongValue("SCORE", "KILL_SHOOTER", 0);
 
 	m_settings->HIGHSCORE_NAME = ini.GetValue("HIGHSCORE", "NAME", "");
+	m_settings->HIGHSCORE2_NAME = ini.GetValue("HIGHSCORE2", "NAME", "");
+	m_settings->HIGHSCORE3_NAME = ini.GetValue("HIGHSCORE3", "NAME", "");
 	m_settings->HIGHSCORE_SCORE = ini.GetLongValue("HIGHSCORE", "SCORE", 0);
+	m_settings->HIGHSCORE2_SCORE = ini.GetLongValue("HIGHSCORE2", "SCORE", 0);
+	m_settings->HIGHSCORE3_SCORE = ini.GetLongValue("HIGHSCORE3", "SCORE", 0);
 
 	return true;
 }
@@ -112,6 +116,10 @@ bool SettingsManager::saveSettings()
 
 	ini.SetValue("HIGHSCORE", "NAME", m_settings->HIGHSCORE_NAME.c_str());
 	ini.SetLongValue("HIGHSCORE", "SCORE", m_settings->HIGHSCORE_SCORE);
+	ini.SetValue("HIGHSCORE2", "NAME", m_settings->HIGHSCORE2_NAME.c_str());
+	ini.SetLongValue("HIGHSCORE2", "SCORE", m_settings->HIGHSCORE2_SCORE);
+	ini.SetValue("HIGHSCORE3", "NAME", m_settings->HIGHSCORE3_NAME.c_str());
+	ini.SetLongValue("HIGHSCORE3", "SCORE", m_settings->HIGHSCORE3_SCORE);
 
 	//Save the file
 	if(ini.SaveFile("CONFIG.ini") < 0)
