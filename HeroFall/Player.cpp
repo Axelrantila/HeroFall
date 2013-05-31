@@ -38,7 +38,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_animations->addAnimation("AvatarRBlock_Block_0", 1.0f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRCombo_Combo_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRDie_Die_0", m_deathTime, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarRHit_Hit_0", 0.455f, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("AvatarRHit_Hit_0", SettingsManager::getSettings()->PLAYER_HIT_TIME_LIMIT_MELEE, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRIdle_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRJump0_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRJump1_Jump_1", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
@@ -72,6 +72,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_delta = 0.0f;
 	m_knockedBack = false;
 	m_comboTimeLimit = 3.0f;
+	m_comboPopupLimit = 1.5f * m_comboTimeLimit;
 
 	m_meleeHitClock.restart();
 	m_comboTimeClock.restart();
@@ -362,14 +363,13 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 					m_swordHasHittedEnemy = true;
 					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
-						100, PARTICLE_COLOR_BLOOD);
+						30, PARTICLE_COLOR_BLOOD,  2.5f);
 				}
 			}
 
 			if(m_hitBox->getGlobalBounds().intersects(tEnemy->getHitBox())
 				&& !m_knockedBack)
 			{
-				this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_TROLL_TO_PLAYER);
 				knockedBack();
 			}
 
@@ -405,7 +405,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 					m_swordHasHittedEnemy = true;
 					m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 						, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
-						100);
+						30, PARTICLE_COLOR_BLOOD,  2.5f);
 					ComboManager::getInstance()->increaseComboMeter();
 				}
 			}
@@ -416,12 +416,24 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 		//Projectile
 		else if (enemies->at(a)->getType() == ENEMY_PROJECTILE)
 		{
-			if(((EnemyProjectile*)enemies->at(a))->getGlobalBounds().intersects(m_hitBox->getGlobalBounds()))
+			EnemyProjectile* tEnemy = ((EnemyProjectile*)enemies->at(a));
+			if(tEnemy->getGlobalBounds().intersects(m_hitBox->getGlobalBounds()))
 			{
+				std::cout << m_xPos << "\t" << tEnemy->getXPos() << std::endl;
+
 				if(!m_isBlocking)
 				{
 					this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PROJECTILE_TO_PLAYER);
 				}
+				else if(m_isBlocking && m_hitBox->getGlobalBounds().left < tEnemy->getXPos() && m_direction == DIR_LEFT)
+				{
+					this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PROJECTILE_TO_PLAYER);
+				}
+				else if(m_isBlocking && m_hitBox->getGlobalBounds().left > tEnemy->getXPos() && m_direction == DIR_RIGHT)
+				{
+					this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PROJECTILE_TO_PLAYER);
+				}
+
 				enemies->at(a)->markDead();
 			}
 		}
@@ -438,7 +450,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				m_swordHasHittedEnemy = true;
 				m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 					, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
-					100);
+					30, PARTICLE_COLOR_BLOOD,  2.5f);
 				ComboManager::getInstance()->increaseComboMeter();
 			}
 		}
@@ -456,7 +468,7 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 				m_swordHasHittedEnemy = true;
 				m_levelManager->addParticles(sf::Vector2f(m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().left + m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().width
 					, m_swordBoxesMap[m_animations->getCurrentAnimation()].getGlobalBounds().top),
-					100);
+					30, PARTICLE_COLOR_BLOOD,  2.5f);
 				ComboManager::getInstance()->increaseComboMeter();
 			}
 
@@ -501,10 +513,10 @@ void Player::update(float delta)
 	AudioMixer::getInstance()->setListenerPosition(m_xPos, m_yPos);
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
 	
-	if(m_comboTimeClock.getElapsedTime().asSeconds() >= m_comboTimeLimit
+	if(m_comboTimeClock.getElapsedTime().asSeconds() >= m_comboPopupLimit
 		&& ComboManager::getInstance()->canActivateCombo())
 	{
-		m_levelManager->addPopupImage("Combo", "Combo_0", sf::Vector2f(m_xPos, m_yPos - 100), sf::Vector2f(0.0, -30.0f), 2.0f);
+		m_levelManager->addPopupImage("Combo", "Combo_0", sf::Vector2f(m_xPos, m_yPos - 30), sf::Vector2f(0.0, -30.0f), 2.0f);
 		m_comboTimeClock.restart();
 	}
 

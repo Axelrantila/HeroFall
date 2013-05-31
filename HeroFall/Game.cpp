@@ -21,7 +21,7 @@ Game::Game(sf::RenderWindow*  window)
 	m_view->getCenter();
 	m_view->getSize();
 
-	sf::sleep(sf::seconds(6.0f));
+	sf::sleep(sf::seconds(6.5f));
 
 	AudioMixer::getInstance()->playMusic("The_Forest_Awakes", 0.0f, 15.0f, 15.0f, true);
 	ScoreManager::getInstance()->resetScore();

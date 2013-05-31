@@ -37,6 +37,9 @@ private:
 	BaseAIState m_currentState;
 	sf::Clock m_AIStateClock;
 	float m_AIChangeLimit;
+
+	sf::FloatRect m_hitBox;
+	sf::RectangleShape d_attackBoxTest;
 };
 
 #endif

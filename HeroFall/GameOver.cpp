@@ -1,6 +1,8 @@
 #include "GameOver.h"
 #include "SpriteSheetLoader.h"
 #include "InputManager.h"
+#include "ScoreManager.h"
+#include "Util.h"
 
 GameOver::GameOver(void)
 {
@@ -20,11 +22,20 @@ GameOver::GameOver(void)
 	Quit->m_down = SpriteSheetLoader::getInstance()->getSprite ("GameOverScreen", "Main_Menu");
 	Quit->SetPosition(sf::Vector2f(Continue->m_standard->getPosition()));
 	Quit->Move(sf::Vector2f(0.0f, (float)Quit->m_standard->getTextureRect().height + 50));
+
+	m_font = new sf::Font();
+	m_font->loadFromFile("assets/Fonts/Dragv2.ttf");
+	m_text = new sf::Text();
+	m_text->setFont(*m_font);
+	m_text->setString("Final Score: " + Util::getInstance()->toString(ScoreManager::getInstance()->getScore()));
+	m_text->setCharacterSize(120);
+	m_text->setPosition(430.0f, 530.0f);
 }
 
 
 GameOver::~GameOver(void)
 {
+	delete m_text;
 }
 
 void GameOver::update(StateManager* stateManager, float delta)
@@ -76,6 +87,7 @@ void GameOver::draw(sf::RenderWindow* window)
 	window->draw(*backgroundGA);
 	Continue->Draw(window);
 	Quit->Draw(window);
+	window->draw(*m_text);
 }
 
 void GameOver::handleEvents(sf::Event windowEvent)

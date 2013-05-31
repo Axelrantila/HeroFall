@@ -17,10 +17,10 @@ StateManager::StateManager()
 	m_window = new sf::RenderWindow(
 		sf::VideoMode(1920, 1080)
 		,SettingsManager::getSettings()->FRAME_TITLE
-		,sf::Style::Default);
+		,sf::Style::Fullscreen);
 	m_window->setMouseCursorVisible(false);
 	//m_window->setVerticalSyncEnabled(true);
-	//m_window->setFramerateLimit(60);
+	m_window->setFramerateLimit(60);
 	m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
 
 	addState(new Menus());
@@ -52,6 +52,11 @@ void StateManager::run()
 	{
 		m_deltaTime = m_clock.getElapsedTime().asSeconds();
 		m_clock.restart();
+
+		if(m_deltaTime > (1.0f/20.0f))
+		{
+			m_deltaTime = 1.0f/20.0f;
+		}
 
 		//Handle events
 		sf::Event windowEvent;
@@ -146,8 +151,6 @@ void StateManager::run()
 
 		AudioMixer::getInstance()->update();
 		InputManager::getInstance()->update();
-
-		//std::cout << ScoreManager::getInstance()->getScore() << std::endl;
 	}
 }
 

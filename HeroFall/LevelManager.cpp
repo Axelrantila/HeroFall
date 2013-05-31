@@ -12,6 +12,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_view = view;
 	m_window = window;
 
+	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 0.0f, 1.0f, 1700.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(0.0f, 1680.0f, 3500.0f, 200.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(3500.0f, 1600.0f, 1100.0f, 200.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(4600.0f, 1470.0f, 1360.0f, 200.0f, sf::Color::Magenta));
@@ -242,6 +243,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_enemies = new std::vector<Enemy*>();
 	m_enemies->push_back(new EnemyTroll(1800.0f, 1200.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(4000.0f, 1000.0f, m_view));
+	m_enemies->push_back(new EnemyBase(1800.0f, 1000.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(4600.0f, 1250.0f, 100.0f, m_player, DIR_LEFT, m_view));
 	m_enemies->push_back(new EnemyTroll(7000.0f, 1000.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(6900.0f, 1250.0f, 100.0f, m_player, DIR_LEFT, m_view));
@@ -322,8 +324,8 @@ void LevelManager::draw(sf::RenderWindow* window)
 	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
 		{window->draw(*m_backgroundSprites[a]);}
 		
-	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-		{m_levelObjects[a]->draw(window);}
+	//for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+	//	{m_levelObjects[a]->draw(window);}
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
@@ -384,6 +386,11 @@ void LevelManager::update(float deltaTime)
 	if(m_view->getCenter().y - m_view->getSize().y / 2.0f < 0)
 	{
 		m_view->setCenter(m_view->getCenter().x, m_view->getSize().y/2.0f);
+	}
+
+	if(m_view->getCenter().y > 1500.0f)
+	{
+		m_view->setCenter(m_view->getCenter().x, 1500.0f);
 	}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;

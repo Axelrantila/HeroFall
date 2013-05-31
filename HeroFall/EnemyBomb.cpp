@@ -58,6 +58,7 @@ void EnemyBomb::move(float delta, std::vector<LevelObject*> levelObjects)
 		m_yVel += getGravityDistance(delta);
 		m_yPos += m_yVel * delta;
 		m_sprite->setPosition(m_xPos, m_yPos);
+		m_animations->update(m_xPos, m_yPos);
 
 		for(unsigned int a = 0; a < levelObjects.size(); a++)
 		{
@@ -68,10 +69,15 @@ void EnemyBomb::move(float delta, std::vector<LevelObject*> levelObjects)
 				AudioMixer::getInstance()->playSound("Explosion_1", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 1200.0f, 10.0f, 1.0f);
 				m_bombHasBlasted = true;
 
+				
+
+				m_bombBlastArea.setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + m_animations->getCurrentSprite()->getGlobalBounds().width / 2.0f - m_bombBlastArea.getSize().x / 2.0f
+					,m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height - m_bombBlastArea.getSize().y);
+
 				m_animations->setCurrentAnimation("Explosion_Exploding_0");
 
-				m_bombBlastArea.setPosition(m_sprite->getGlobalBounds().left + m_sprite->getGlobalBounds().width / 2.0f - m_bombBlastArea.getSize().x / 2.0f
-					,m_sprite->getGlobalBounds().top + m_sprite->getGlobalBounds().height - m_bombBlastArea.getSize().y);
+				m_xPos = m_bombBlastArea.getGlobalBounds().left;
+				m_yPos = m_bombBlastArea.getGlobalBounds().top;
 
 				break;
 			}

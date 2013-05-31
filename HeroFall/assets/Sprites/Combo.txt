@@ -1,5 +1,5 @@
-wSheet=1612
-hSheet=164
-wSprite=1612
-hSprite=164
+wSheet=387
+hSheet=50
+wSprite=387
+hSprite=50
 Combo_0

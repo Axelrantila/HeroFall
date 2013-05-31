@@ -132,7 +132,7 @@
       <Filter>Old</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBase.cpp">
-      <Filter>Old</Filter>
+      <Filter>Game\Characters\Enemies\Primary</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,7 +272,7 @@
       <Filter>Old</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBase.h">
-      <Filter>Old</Filter>
+      <Filter>Game\Characters\Enemies\Primary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -141,8 +141,6 @@ void GameOverVictory::update(StateManager* stateManager, float deltaTime)
 	newString.append("\t");
 	newString.append(Util::getInstance()->toString(ScoreManager::getInstance()->getScore()));
 
-	std::cout << m_letters <<  "\t" << newString << std::endl;
-
 	m_renderText->setString(newString);
 }
 

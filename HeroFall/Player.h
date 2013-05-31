@@ -84,6 +84,7 @@ private:
 	float m_delta;
 	bool m_knockedBack;
 	float m_comboTimeLimit;
+	float m_comboPopupLimit;
 	sf::Clock m_comboTimeClock;
 };
 

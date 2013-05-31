@@ -56,14 +56,13 @@ void HUD::update()
 	m_combobar->setScale(Util::getInstance()->getCapedValue(ComboManager::getInstance()->getComboPercentage(), 1.0f), 1.0f);
 	m_combobar->setPosition(m_GUI->getPosition().x + 255.0f, m_GUI->getPosition().y + 180.0f);
 
-	m_text->setPosition(m_GUI->getGlobalBounds().left + m_GUI->getGlobalBounds().width
+	m_text->setString(Util::getInstance()->toString(ScoreManager::getInstance()->getScore()));
+	m_text->setPosition(m_GUI->getGlobalBounds().left + 270.0f
 		, m_GUI->getGlobalBounds().top);
 }
 
 void HUD::update(float delta)
 {
-	m_text->setString(Util::getInstance()->toString(ScoreManager::getInstance()->getScore())
-		+ "\t" + Util::getInstance()->toString(1.0f/delta));
 	update();
 }
 
@@ -72,5 +71,5 @@ void HUD::draw(sf::RenderWindow* window)
 	window->draw(*m_GUI);
 	window->draw(*m_healthbar);
 	window->draw(*m_combobar);
-	//window->draw(*m_text);
+	window->draw(*m_text);
 }

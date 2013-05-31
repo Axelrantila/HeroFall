@@ -29,7 +29,7 @@ Particle::Particle(sf::Vector2f position, ParticleColor color, float timeLimit)
 	}
 
 	m_timeElapsed = 0.0f;
-	m_timeLimit = Util::getInstance()->getRandomFloat(1.0f, timeLimit);
+	m_timeLimit = Util::getInstance()->getRandomFloat(0.1f, timeLimit);
 }
 
 Particle::~Particle()

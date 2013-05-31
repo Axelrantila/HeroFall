@@ -8,13 +8,17 @@
 EnemyBase::EnemyBase(float xPos, float yPos, sf::View* view)
 	:Enemy(ENEMY_BASE, xPos, yPos, SettingsManager::getSettings()->ENEMY_BASE_HEALTH, view)
 {
+	m_normalDirection = DIR_LEFT;
+	m_direction = DIR_LEFT;
+
 	m_yVel = 0.0f;
 	m_xVel = -SettingsManager::getSettings()->ENEMY_BASE_SPEED_BASE 
 		* Util::getInstance()->getRandomFloat(SettingsManager::getSettings()->ENEMY_BASE_SPEED_MIN_MULTIPLIER, SettingsManager::getSettings()->ENEMY_BASE_SPEED_MAX_MULTIPLIER);
 
 	m_animations = new AnimationManager(this);
-	m_animations->addAnimation("Base_Walk_0", 1.0f, xPos, yPos);
-	m_animations->setCurrentAnimation("Base_Walk_0");
+	m_animations->addAnimation("BaseWalking_Walking_0", 1.0f, xPos, yPos);
+	m_animations->addAnimation("BaseDying_Dying_0", m_deathTime, xPos, yPos);
+	m_animations->setCurrentAnimation("BaseWalking_Walking_0");
 
 	m_seen = false;
 	m_isDying = false;
@@ -25,6 +29,14 @@ EnemyBase::EnemyBase(float xPos, float yPos, sf::View* view)
 	m_currentState = BASE_AI_WALKING_FORWARD;
 	m_AIChangeLimit = 5.0f;
 	m_AIStateClock.restart();
+
+	m_hitBox.left = 110.0f;
+	m_hitBox.top = 20.0f;
+	m_hitBox.width = 95.0f;
+	m_hitBox.height = 150.0f;
+
+	d_attackBoxTest.setSize(sf::Vector2f(m_hitBox.width, m_hitBox.height));
+	d_attackBoxTest.setFillColor(sf::Color(0,0,255,128));
 }
 
 
@@ -37,8 +49,14 @@ void EnemyBase::update(float delta)
 {
 	m_animations->update(m_xPos, m_yPos);
 	
+	m_hitBox.left = m_animations->getCurrentSprite()->getGlobalBounds().left + 110.0f;
+	m_hitBox.top = m_animations->getCurrentSprite()->getGlobalBounds().top + 20.0f;
+
+	d_attackBoxTest.setPosition(m_hitBox.left, m_hitBox.top);
+
 	if(m_isDying)
 	{
+		m_animations->setCurrentAnimation("BaseDying_Dying_0", m_direction);
 		m_timeDead += delta;
 		if(m_timeDead > m_deathTime)
 		{
@@ -70,6 +88,7 @@ void EnemyBase::update(float delta)
 void EnemyBase::draw(sf::RenderWindow* window)
 {
 	window->draw(*m_animations->getCurrentSprite());
+	//window->draw(d_attackBoxTest);
 }
 
 bool EnemyBase::collidesWith(LevelObject* levelObject)
@@ -128,7 +147,7 @@ void EnemyBase::takeDamage(float damage)
 
 sf::FloatRect EnemyBase::getHitBox()
 {
-	return m_animations->getCurrentSprite()->getGlobalBounds();
+	return m_hitBox;
 }
 
 sf::Vector2f EnemyBase::getCenter()
@@ -143,10 +162,18 @@ void EnemyBase::updateState(Player* player)
 	{
 		m_AIStateClock.restart();
 
-		if((player->getCenter().x > this->getCenter().x && m_xVel < 0)
-			|| (player->getCenter().x < this->getCenter().x && m_xVel > 0))
+		if(player->getCenter().x > this->getCenter().x && m_xVel < 0)
 		{
 			m_xVel *= -1;
+			m_direction = DIR_RIGHT;
 		}
+
+		else if (player->getCenter().x < this->getCenter().x && m_xVel > 0)
+		{
+			m_xVel *= -1;
+			m_direction = DIR_LEFT;
+		}
+
+		m_animations->setCurrentAnimation("BaseWalking_Walking_0", m_direction);
 	}
 }
