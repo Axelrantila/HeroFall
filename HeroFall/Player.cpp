@@ -499,6 +499,7 @@ void Player::swingSword(AttackType type)
 	if(type == ATTACK_COMBO_0)
 	{
 		m_animations->setCurrentAnimation("AvatarRCombo_Combo_0", m_direction);
+		AudioMixer::getInstance()->playSound("Combo_attack");
 	}
 
 	else if(type == ATTACK_NORMAL)

@@ -1,0 +1,5 @@
+wSheet=10002
+hSheet=3006
+wSprite=10002
+hSprite=3006
+2

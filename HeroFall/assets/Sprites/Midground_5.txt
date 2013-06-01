@@ -1,0 +1,5 @@
+wSheet=5609
+hSheet=1982
+wSprite=5609
+hSprite=1982
+5

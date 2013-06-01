@@ -1,7 +1,8 @@
 wSheet=3800
-hSheet=2660
+hSheet=3220
 wSprite=1900
-hSprite=1330
-ForestSegment_01
-ForestSegment_02
+hSprite=1610
+forestSegment_01
+forestSegment_02
 forestSegment_03
+forestSegment_04

@@ -48,10 +48,11 @@ private:
 
 	std::vector<sf::Sprite*> m_backgroundSprites;
 	std::vector<sf::Sprite*> m_foregroundSprites;
-	sf::Sprite* d_bg;
-	sf::Sprite* d_bg1;
-	sf::Sprite* d_bg2;
-	sf::Sprite* d_bg3;
+
+	std::vector<sf::Sprite*> m_foreMidgroundLayer;
+	std::vector<sf::Sprite*> m_midgroundLayer;
+	std::vector<sf::Sprite*> m_backMidgroundLayer;
+	std::vector<sf::Sprite*> m_backgroundLayer;
 
 	sf::Vector2f m_cameraMove;
 	sf::Vector2f m_prevCameraCenter;

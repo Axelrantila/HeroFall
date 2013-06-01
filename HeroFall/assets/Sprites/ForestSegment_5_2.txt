@@ -1,0 +1,5 @@
+wSheet=1327
+hSheet=69
+wSprite=1327
+hSprite=69
+forestSegment_5_bridge_front

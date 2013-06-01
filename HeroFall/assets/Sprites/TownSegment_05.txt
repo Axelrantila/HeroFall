@@ -1,5 +1,5 @@
 wSheet=4952
-hSheet=2400
+hSheet=2390
 wSprite=4952
-hSprite=2400
+hSprite=2390
 TownSegment_05_temp2
