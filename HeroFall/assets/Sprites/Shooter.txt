@@ -1,8 +1,7 @@
-wSheet=720
-hSheet=960
-wSprite=120
-hSprite=160
-Shooter_Die_0_0
+wSheet=1600
+hSheet=900
+wSprite=320
+hSprite=180
 Shooter_Shoot_0_0
 Shooter_Shoot_0_1
 Shooter_Shoot_0_10
@@ -21,11 +20,6 @@ Shooter_Shoot_0_21
 Shooter_Shoot_0_22
 Shooter_Shoot_0_23
 Shooter_Shoot_0_24
-Shooter_Shoot_0_25
-Shooter_Shoot_0_26
-Shooter_Shoot_0_27
-Shooter_Shoot_0_28
-Shooter_Shoot_0_29
 Shooter_Shoot_0_3
 Shooter_Shoot_0_4
 Shooter_Shoot_0_5

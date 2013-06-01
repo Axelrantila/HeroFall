@@ -38,7 +38,7 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_animations->addAnimation("AvatarRBlock_Block_0", 1.0f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRCombo_Combo_0", SettingsManager::getSettings()->PLAYER_SWORD_SWING_TIME, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRDie_Die_0", m_deathTime, this->m_xPos, this->m_yPos);
-	m_animations->addAnimation("AvatarRHit_Hit_0", SettingsManager::getSettings()->PLAYER_HIT_TIME_LIMIT_MELEE, this->m_xPos, this->m_yPos);
+	m_animations->addAnimation("AvatarRHit_Hit_0", SettingsManager::getSettings()->PLAYER_HIT_TIME_LIMIT_MELEE * 2.0f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRIdle_Idle_0", 0.5f, this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRJump0_Jump_0", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);
 	m_animations->addAnimation("AvatarRJump1_Jump_1", Util::getInstance()->jumpUpTime(), this->m_xPos, this->m_yPos);

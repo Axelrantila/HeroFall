@@ -19,7 +19,7 @@ EnemyShooter::EnemyShooter(float xPos, float yPos, float health, Player* player,
 
 	m_animations = new AnimationManager(this);
 	m_animations->addAnimation("Shooter_Shoot_0", m_shootTime, this->getXPos(), this->getYPos());
-	m_animations->addAnimation("Shooter_Die_0", m_deathTime, this->getXPos(), this->getYPos());
+	m_animations->addAnimation("BaseDying_Dying_0", m_deathTime, this->getXPos(), this->getYPos());
 	m_animations->setCurrentAnimation("Shooter_Shoot_0", m_direction);
 
 	m_xVel = 0.0f;
@@ -43,10 +43,10 @@ void EnemyShooter::update(float delta)
 
 	if(m_isDying)
 	{
-		if(!m_animations->isCurrentAnimation("Shooter_Die_0"))
+		if(!m_animations->isCurrentAnimation("BaseDying_Dying_0"))
 		{
 			m_dyingClock.restart();
-			m_animations->setCurrentAnimation("Shooter_Die_0", m_direction);
+			m_animations->setCurrentAnimation("BaseDying_Dying_0", m_direction);
 			ScoreManager::getInstance()->addScore(KILL_SHOOTER);
 		}
 

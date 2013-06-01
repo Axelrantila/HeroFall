@@ -17,7 +17,7 @@ StateManager::StateManager()
 	m_window = new sf::RenderWindow(
 		sf::VideoMode(1920, 1080)
 		,SettingsManager::getSettings()->FRAME_TITLE
-		,sf::Style::Fullscreen);
+		,sf::Style::Default);
 	m_window->setMouseCursorVisible(false);
 	//m_window->setVerticalSyncEnabled(true);
 	m_window->setFramerateLimit(60);
