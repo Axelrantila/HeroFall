@@ -61,54 +61,118 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
     sf::Sprite* tempSprite;
 
 #pragma region Background
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Background_Static"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Background_Static", "Background");
 	tempSprite->setPosition(0.0f, 0.0f);
 	m_backgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Background_Static"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Background_Static", "Background");
 	tempSprite->setPosition(10001.0f, 0.0f);
 	m_backgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Background_Static"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Background_Static", "Background");
 	tempSprite->setPosition(20002.0f, 0.0f);
 	m_backgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Background_Static"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Background_Static", "Background");
 	tempSprite->setPosition(30003.0f, 0.0f);
 	m_backgroundLayer.push_back(tempSprite);
 
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Back_Midground_1"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Back_Midground_1", "1");
 	tempSprite->setPosition(0.0f, 0.0f);
 	m_backMidgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Back_Midground_2"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Back_Midground_2", "2");
 	tempSprite->setPosition(10002.0f, 0.0f);
 	m_backMidgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Back_Midground_3"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Back_Midground_3", "3");
 	tempSprite->setPosition(20004.0f, 0.0f);
 	m_backMidgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Back_Midground_4"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Back_Midground_4", "4");
 	tempSprite->setPosition(30006.0f, 0.0f);
 	m_backMidgroundLayer.push_back(tempSprite);
 
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Midground_1"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Midground_1", "1");
 	tempSprite->setPosition(0.0f, 1226.0f);
 	m_midgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Midground_2"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Midground_2", "2");
 	tempSprite->setPosition(10000.0f, 1226.0f);
 	m_midgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Midground_3"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Midground_3", "3");
 	tempSprite->setPosition(20000.0f, 1226.0f);
 	m_midgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Midground_4"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Midground_4", "4");
 	tempSprite->setPosition(30000.0f, 1024.0f);
 	m_midgroundLayer.push_back(tempSprite);
 
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Fore_Midground_1"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Fore_Midground_1", "1");
 	tempSprite->setPosition(0.0f, 0.0f);
 	m_foreMidgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Fore_Midground_2"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Fore_Midground_2", "2");
 	tempSprite->setPosition(10001.0f, 0.0f);
 	m_foreMidgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Fore_Midground_3"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Fore_Midground_3", "3");
 	tempSprite->setPosition(20002.0f, 0.0f);
 	m_foreMidgroundLayer.push_back(tempSprite);
+	if(!SpriteSheetLoader::getInstance()->isLoaded("Fore_Midground_4"))
+      {
+           sf::sleep(sf::seconds(2.0f));
+      }
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Fore_Midground_4", "4");
 	tempSprite->setPosition(30003.0f, 0.0f);
 	m_foreMidgroundLayer.push_back(tempSprite);
