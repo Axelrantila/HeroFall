@@ -175,9 +175,6 @@
     <ClInclude Include="State.h">
       <Filter>Engine\State</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteSheetLoader.h">
-      <Filter>Engine\Graphics\Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Engine\Graphics\Sprite</Filter>
     </ClInclude>
@@ -273,6 +270,9 @@
     </ClInclude>
     <ClInclude Include="EnemyBase.h">
       <Filter>Game\Characters\Enemies\Primary</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheetLoader.h">
+      <Filter>Engine\Graphics\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

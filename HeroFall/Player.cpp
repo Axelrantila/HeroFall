@@ -489,7 +489,7 @@ sf::Vector2f Player::getCenter()
 
 void Player::swingSword(AttackType type)
 {
-	if(m_hitted){return;}
+	if(m_hitted || m_isBlocking){return;}
 
 	m_swordIsSwinging = true;
 	m_swordHasHittedEnemy = false;

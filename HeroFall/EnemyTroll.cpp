@@ -288,7 +288,7 @@ sf::FloatRect EnemyTroll::getAttackHitbox()
 		return sf::FloatRect(-10000.0f, -10000.0f, 1.0f, 1.0f);
 	}
 
-	else if (m_animations->getCurrentAnimation()->getCurrentFrame() < 7 || m_animations->getCurrentAnimation()->getCurrentFrame() > 30)
+	else if (m_animations->getCurrentAnimation()->getCurrentFrame() < 7 || m_animations->getCurrentAnimation()->getCurrentFrame() > 9)
 	{
 		return sf::FloatRect(-10000.0f, -10000.0f, 1.0f, 1.0f);
 	}

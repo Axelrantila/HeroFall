@@ -46,6 +46,7 @@ public:
 	void block(bool blocking);
 	void takeDamage(float damage);
 	bool blocking(){return m_isBlocking;}
+	bool attacking(){return m_swordIsSwinging;}
 
 	bool isOnGround() {return m_isOnGround;}
 	void updateBoxes();

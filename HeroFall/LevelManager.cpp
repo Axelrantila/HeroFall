@@ -461,7 +461,7 @@ void LevelManager::updatePlayerSpeed()
 		m_player->block(false);
 	}
 
-	else if(InputManager::getInstance()->isKeyDown("P1_BLOCK"))
+	else if(InputManager::getInstance()->isKeyDown("P1_BLOCK") && !m_player->attacking())
 	{
 		m_player->block(true);
 	}
