@@ -19,6 +19,7 @@ EnemyProjectile::EnemyProjectile(EnemyShooter* parent, LevelManager* levelManage
 
 	m_particleSpawnTime = SettingsManager::getSettings()->ENEMY_SHOOTER_PROJECTILE_PARTICLE_SPAWN_TIME;
 	m_clock.restart();
+	m_lifeClock.restart();
 }
 
 
@@ -53,7 +54,10 @@ void EnemyProjectile::update(float delta)
 		m_clock.restart();
 	}
 
-	if(m_isDying)
+
+
+	if(m_isDying
+		|| m_lifeClock.getElapsedTime().asSeconds() > SettingsManager::getSettings()->ENEMY_SHOOTER_PROJECTILE_LIFE_TIME)
 	{
 		m_isDead = true;
 	}

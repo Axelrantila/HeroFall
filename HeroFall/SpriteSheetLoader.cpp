@@ -1,5 +1,7 @@
 #include "SpriteSheetLoader.h"
 
+#include <iostream>
+
 SpriteSheetLoader::SpriteSheetLoader(void)
 {
 }
@@ -114,4 +116,15 @@ void SpriteSheetLoader::removeAllSheets()
 	}
 
 	m_loadedSheets.clear();
+}
+
+bool SpriteSheetLoader::isLoaded(std::string sheetName)
+{
+	mapSurfacesIterator keyIterator = m_loadedSheets.find(sheetName);
+
+	if(keyIterator != m_loadedSheets.end())
+	{
+		return true;
+	}
+	return false;
 }

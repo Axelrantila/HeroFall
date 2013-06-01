@@ -26,6 +26,7 @@ private:
 	LevelManager* m_levelManager;
 	sf::Clock m_clock;
 	float m_particleSpawnTime;
+	sf::Clock m_lifeClock;
 };
 
 #endif

@@ -130,7 +130,7 @@ sf::Vector2f EnemyShooter::getProjectileSpawnPoint()
 {
 	if(m_direction == DIR_LEFT)
 	{
-		return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left - 20.0f,
+		return sf::Vector2f(m_animations->getCurrentSprite()->getGlobalBounds().left + 20.0f,
 			m_animations->getCurrentSprite()->getGlobalBounds().top + m_animations->getCurrentSprite()->getGlobalBounds().height/2.0f);
 	}
 	else

@@ -1,6 +1,7 @@
 #include "EnemyGoblin.h"
 #include "ScoreManager.h"
 #include "SettingsManager.h"
+#include "SpriteSheetLoader.h"
 
 EnemyGoblin::EnemyGoblin(float xPos, float yPos, float travelDistance)
 	:Enemy(ENEMY_GOBLIN, xPos, yPos, SettingsManager::getSettings()->ENEMY_GOBLIN_HEALTH)
@@ -11,8 +12,13 @@ EnemyGoblin::EnemyGoblin(float xPos, float yPos, float travelDistance)
 	m_xPos0 = xPos;
 	m_xPos1 = xPos + travelDistance;
 
+	if(!SpriteSheetLoader::getInstance()->isLoaded("AirshipAttack"))
+	{
+		sf::sleep(sf::seconds(2.0f));
+	}
+
 	m_animations = new AnimationManager(this);
-	m_animations->addAnimation("AirshipAttack_Attack_0", 1.0f, xPos, yPos);
+	m_animations->addAnimation("AirshipAttack_Attack_0", SettingsManager::getSettings()->ENEMY_GOBLIN_BOMB_SPAWN_TIME, xPos, yPos);
 	m_animations->addAnimation("Airship_Die_0", m_deathTime, xPos, yPos);
 	m_animations->setCurrentAnimation("AirshipAttack_Attack_0");
 

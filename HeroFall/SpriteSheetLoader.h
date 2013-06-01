@@ -29,6 +29,8 @@ public:
 
 	void removeSheet(string sheetUniqueName);
 	void removeAllSheets();
+
+	bool isLoaded(std::string sheetName);
 };
 
 #endif
