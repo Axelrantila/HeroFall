@@ -553,7 +553,8 @@ void Player::update(float delta)
 		//Jump
 		if(m_jumping
 			&& !m_swordIsSwinging
-			&& !m_hitted)
+			&& !m_hitted
+			&& !m_knockedBack)
 		{
 			if(m_yVel < 0.0f)
 			{
@@ -624,7 +625,7 @@ void Player::update(float delta)
 			}
 		}
 
-		if(m_hitted)
+		if(m_hitted || m_knockedBack)
 		{
 			m_animations->setCurrentAnimation("AvatarRHit_Hit_0", m_direction);
 		}
