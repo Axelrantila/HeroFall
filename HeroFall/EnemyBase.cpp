@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "SettingsManager.h"
 #include "Util.h"
+#include "AudioMixer.h"
 
 EnemyBase::EnemyBase(float xPos, float yPos, sf::View* view)
 	:Enemy(ENEMY_BASE, xPos, yPos, SettingsManager::getSettings()->ENEMY_BASE_HEALTH, view)
@@ -56,6 +57,7 @@ void EnemyBase::update(float delta)
 
 	if(m_isDying)
 	{
+		AudioMixer::getInstance()->playSound("Death_Goblin", 0.0f, 0.0f, 100.0f, 100.0f, m_xPos, m_yPos, 10.0f, 0.0f, 1.0f);
 		m_animations->setCurrentAnimation("BaseDying_Dying_0", m_direction);
 		m_timeDead += delta;
 		if(m_timeDead > m_deathTime)
