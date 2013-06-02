@@ -94,6 +94,7 @@ bool SettingsManager::loadSettings()
 	m_settings->SCORE_KILL_TROLL = ini.GetLongValue("SCORE", "KILL_TROLL", 0);
 	m_settings->SCORE_KILL_GOBLIN = ini.GetLongValue("SCORE", "KILL_GOBLIN", 0);
 	m_settings->SCORE_KILL_SHOOTER = ini.GetLongValue("SCORE", "KILL_SHOOTER", 0);
+	m_settings->SCORE_KILL_BASE = ini.GetLongValue("SCORE", "KILL_BASE", 0);
 	m_settings->SCORE_TIME_LIMIT = (float)ini.GetDoubleValue("SCORE", "TIME_LIMIT", 0);
 
 	m_settings->HIGHSCORE_NAME = ini.GetValue("HIGHSCORE", "NAME", "");

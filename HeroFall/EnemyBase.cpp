@@ -2,6 +2,7 @@
 #include "EnemyBase.h"
 #include "LevelObjectRectangle.h"
 #include "Player.h"
+#include "ScoreManager.h"
 #include "SettingsManager.h"
 #include "Util.h"
 #include "AudioMixer.h"
@@ -145,6 +146,7 @@ void EnemyBase::move(float delta, std::vector<LevelObject*> levelObjects)
 void EnemyBase::takeDamage(float damage)
 {
 	m_isDying = true;
+	ScoreManager::getInstance()->addScore(KILL_BASE);
 }
 
 sf::FloatRect EnemyBase::getHitBox()

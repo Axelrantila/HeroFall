@@ -97,6 +97,7 @@ public:
 	unsigned int SCORE_KILL_TROLL;
 	unsigned int SCORE_KILL_GOBLIN;
 	unsigned int SCORE_KILL_SHOOTER;
+	unsigned int SCORE_KILL_BASE;
 	float SCORE_TIME_LIMIT;
 #pragma endregion
 

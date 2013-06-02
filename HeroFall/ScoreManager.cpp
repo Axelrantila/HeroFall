@@ -33,6 +33,11 @@ void ScoreManager::addScore(KillEnum type)
 	{
 		m_totalScore += SettingsManager::getSettings()->SCORE_KILL_SHOOTER;
 	}
+
+	else if(type == KILL_BASE)
+	{
+		m_totalScore += SettingsManager::getSettings()->SCORE_KILL_BASE;
+	}
 }
 
 unsigned int ScoreManager::getVictoryScore()

@@ -7,7 +7,8 @@ enum KillEnum
 {
 	KILL_TROLL,
 	KILL_GOBLIN,
-	KILL_SHOOTER
+	KILL_SHOOTER,
+	KILL_BASE
 };
 
 class ScoreManager
