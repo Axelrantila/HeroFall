@@ -1,5 +1,0 @@
-wSheet=5647
-hSheet=1982
-wSprite=5647
-hSprite=1982
-4

@@ -1,5 +1,5 @@
-wSheet=237
+wSheet=474
 hSheet=224
-wSprite=237
+wSprite=474
 hSprite=224
-bridge_from_mountain
+bridge_from_mountain_02

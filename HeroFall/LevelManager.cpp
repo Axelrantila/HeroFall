@@ -24,11 +24,11 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_levelObjects.push_back(new LevelObjectRectangle(13000.0f, 1630.0f, 280.0f, 40.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(13400.0f, 1700.0f, 280.0f, 40.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(13800.0f, 1550.0f, 280.0f, 40.0f, sf::Color::Magenta));
-	m_levelObjects.push_back(new LevelObjectRectangle(14200.0f, 1460.0f, 3900.0f, 200.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(14200.0f, 1460.0f, 4350.0f, 200.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(14660.0f, 1110.0f, 555.0f, 40.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(14940.0f, 770.0f, 260.0f, 40.0f, sf::Color::Magenta));
 
-	m_levelObjects.push_back(new LevelObjectRectangle(18100.0f, 1760.0f, 1260.0f, 500.0f, sf::Color::Magenta));
+	m_levelObjects.push_back(new LevelObjectRectangle(18300.0f, 1760.0f, 1260.0f, 500.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(19560.0f, 2170.0f, 3060.0f, 200.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(20950.0f, 1600.0f, 1000.0f, 100.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(22300.0f, 1970.0f, 1170.0f, 300.0f, sf::Color::Magenta));
@@ -60,7 +60,18 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_HUD = new HUD(m_view, m_player);
     sf::Sprite* tempSprite;
 
-
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Background_1", "1");
+	tempSprite->setPosition(0.0f, 0.0f);
+	m_background.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Background_2", "2");
+	tempSprite->setPosition(10000.0f, 0.0f);
+	m_background.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Background_3", "3");
+	tempSprite->setPosition(20000.0f, 0.0f);
+	m_background.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Background_4", "4");
+	tempSprite->setPosition(30000.0f, 0.0f);
+	m_background.push_back(tempSprite);
 
 #pragma region LevelMountains
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_01", "Mountain_01");
@@ -71,6 +82,9 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_03", "Mountain_03");
 	tempSprite->setPosition(14131.0f, 20.0f);
+	m_backgroundSprites.push_back(tempSprite);
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("TownSegment_02", "townSegment_02");
+	tempSprite->setPosition(18370.0f, 990.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("MountainSegment_04", "Mountain_04");
 	tempSprite->setPosition(16255.0f, 0.0f);
@@ -206,11 +220,11 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_foregroundSprites.push_back(tempSprite);
 #pragma endregion
 #pragma region LevelTown
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("TownSegment_02", "townSegment_02");
+	/*tempSprite = SpriteSheetLoader::getInstance()->getSprite("TownSegment_02", "townSegment_02");
 	tempSprite->setPosition(18370.0f, 950.0f);
-	m_backgroundSprites.push_back(tempSprite);
-	tempSprite = SpriteSheetLoader::getInstance()->getSprite("townSegment_bridgeFromMountain", "bridge_from_mountain");
-	tempSprite->setPosition(18140.0f, 1720.0f);
+	m_backgroundSprites.push_back(tempSprite);*/
+	tempSprite = SpriteSheetLoader::getInstance()->getSprite("townSegment_bridgeFromMountain", "bridge_from_mountain_02");
+	tempSprite->setPosition(18080.0f, 1430.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("TownSegment_03", "TownSegment_03");
 	tempSprite->setPosition(19560.0f, 1000.0f);
@@ -322,20 +336,14 @@ void LevelManager::draw(sf::RenderWindow* window)
 {
 	window->setView(*m_view);
 
-	for(unsigned int a = 0; a < m_backgroundLayer.size(); a++)
-		{window->draw(*m_backgroundLayer[a]);}
-	for(unsigned int a = 0; a < m_backMidgroundLayer.size(); a++)
-		{window->draw(*m_backMidgroundLayer[a]);}
-	for(unsigned int a = 0; a < m_midgroundLayer.size(); a++)
-		{window->draw(*m_midgroundLayer[a]);}
-	for(unsigned int a = 0; a < m_foreMidgroundLayer.size(); a++)
-		{window->draw(*m_foreMidgroundLayer[a]);}
+	for(unsigned int a = 0; a < m_background.size(); a++)
+		{window->draw(*m_background[a]);}
 
 	for(unsigned int a = 0; a < m_backgroundSprites.size(); a++)
 		{window->draw(*m_backgroundSprites[a]);}
 		
-	//for(unsigned int a = 0; a < m_levelObjects.size(); a++)
-	//	{m_levelObjects[a]->draw(window);}
+	for(unsigned int a = 0; a < m_levelObjects.size(); a++)
+		{m_levelObjects[a]->draw(window);}
 
 	for(unsigned int a = 0; a < m_enemies->size(); a++)
 		{m_enemies->at(a)->draw(window);}
@@ -398,9 +406,9 @@ void LevelManager::update(float deltaTime)
 		m_view->setCenter(m_view->getCenter().x, m_view->getSize().y/2.0f);
 	}
 
-	if(m_view->getCenter().y > 1500.0f)
+	if(m_view->getCenter().y > 2000.0f)
 	{
-		m_view->setCenter(m_view->getCenter().x, 1500.0f);
+		m_view->setCenter(m_view->getCenter().x, 2000.0f);
 	}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;

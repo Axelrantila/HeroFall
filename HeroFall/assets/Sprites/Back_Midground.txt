@@ -1,7 +1,0 @@
-wSheet=20004
-hSheet=6012
-wSprite=10002
-hSprite=3006
-1
-2
-3
