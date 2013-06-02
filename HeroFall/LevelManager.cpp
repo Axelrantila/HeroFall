@@ -103,6 +103,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	tempSprite->setPosition(16960.0f, 1210.0f);
 	m_backgroundSprites.push_back(tempSprite);
 #pragma endregion
+/*
 #pragma region ForeGround
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Foreground_01", "Foreground_01_leg");
 	tempSprite->setPosition(7290.0f, 280.0f);
@@ -177,6 +178,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	tempSprite->setPosition(16960.0f, 1290.0f);
 	m_foregroundSprites.push_back(tempSprite);
 #pragma endregion
+	*/
 #pragma region LevelForest
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("ForestSegment", "forestSegment_01");
 	tempSprite->setPosition(0.0f, 640.0f);
@@ -245,7 +247,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	/*m_enemies->push_back(new EnemyTroll(3800.0f, 1200.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(3800.0f, 1200.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(5200.0f, 1000.0f, m_view));
 	m_enemies->push_back(new EnemyBase(1800.0f, 1000.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(4700.0f, 1200.0f, 100.0f, m_player, DIR_LEFT, m_view));
@@ -291,7 +293,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_enemies->push_back(new EnemyShooter(33660.0f, 900.0f, 100.0f, m_player, DIR_LEFT, m_view));
 	m_enemies->push_back(new EnemyTroll(31000.0f, 1620.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(32000.0f, 1620.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(30300.0f, 1620.0f, m_view));*/
+	m_enemies->push_back(new EnemyTroll(30300.0f, 1620.0f, m_view));
 
 	m_popupImages = new PopupImageManager();
 }
