@@ -261,7 +261,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyTroll(3800.0f, 1200.0f, m_view));
+	/*m_enemies->push_back(new EnemyTroll(3800.0f, 1200.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(5200.0f, 1000.0f, m_view));
 	m_enemies->push_back(new EnemyBase(1800.0f, 1000.0f, m_view));
 	m_enemies->push_back(new EnemyShooter(4700.0f, 1200.0f, 100.0f, m_player, DIR_LEFT, m_view));
@@ -307,7 +307,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_enemies->push_back(new EnemyShooter(33660.0f, 900.0f, 100.0f, m_player, DIR_LEFT, m_view));
 	m_enemies->push_back(new EnemyTroll(31000.0f, 1620.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(32000.0f, 1620.0f, m_view));
-	m_enemies->push_back(new EnemyTroll(30300.0f, 1620.0f, m_view));
+	m_enemies->push_back(new EnemyTroll(30300.0f, 1620.0f, m_view));*/
 
 	m_popupImages = new PopupImageManager();
 }
