@@ -28,6 +28,8 @@ private:
 
 	sf::Clock m_clock;
 	float m_bombSpawnTime;
+
+	sf::RectangleShape m_hitbox;
 };
 
 #endif

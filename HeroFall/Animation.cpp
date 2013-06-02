@@ -109,7 +109,7 @@ void Animation::update(float xPos, float yPos)
 		m_clock.restart();
 	}
 
-	else
+	else if (m_playing)
 	{
 		m_totalDeltaTime += m_clock.getElapsedTime().asSeconds();
 		m_clock.restart();

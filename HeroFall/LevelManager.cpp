@@ -264,6 +264,8 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
+	m_enemies->push_back(new EnemyGoblin(0.0f, 500.0f, 1500.0f));
+
 	/*m_enemies->push_back(new EnemyTroll(3800.0f, 1200.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(5200.0f, 1000.0f, m_view));
 	m_enemies->push_back(new EnemyBase(1800.0f, 1000.0f, m_view));

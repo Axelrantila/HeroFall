@@ -3,6 +3,8 @@
 #include "SettingsManager.h"
 #include "SpriteSheetLoader.h"
 
+#include <iostream>
+
 EnemyGoblin::EnemyGoblin(float xPos, float yPos, float travelDistance)
 	:Enemy(ENEMY_GOBLIN, xPos, yPos, SettingsManager::getSettings()->ENEMY_GOBLIN_HEALTH)
 {
@@ -27,6 +29,9 @@ EnemyGoblin::EnemyGoblin(float xPos, float yPos, float travelDistance)
 
 	m_bombSpawnTime = SettingsManager::getSettings()->ENEMY_GOBLIN_BOMB_SPAWN_TIME;
 	m_clock.restart();
+
+	m_hitbox.setFillColor(sf::Color::Yellow);
+	m_hitbox.setSize(sf::Vector2f(892.0f, 682.0f));
 }
 
 
@@ -46,12 +51,13 @@ void EnemyGoblin::update(float update)
 
 	if(m_isDying)
 	{
-		if(!m_animations->isCurrentAnimation("Airship_Die_0"))
+		if(m_animations->getCurrentAnimation()->isPlaying())
 		{
 			m_dyingClock.restart();
-			m_animations->setCurrentAnimation("Airship_Die_0");
-			ScoreManager::getInstance()->addScore(KILL_SHOOTER);
+			m_animations->getCurrentAnimation()->pause();
+			ScoreManager::getInstance()->addScore(KILL_GOBLIN);
 		}
+		m_animations->getCurrentSprite()->setColor(sf::Color(255, 255, 255, 255 - (sf::Uint8)((m_dyingClock.getElapsedTime().asSeconds()/m_deathTime) * 255.0f)));
 		if(m_dyingClock.getElapsedTime().asSeconds() > m_deathTime)
 		{
 			m_isDead = true;
@@ -67,7 +73,12 @@ bool EnemyGoblin::collidesWith(LevelObject* levelObject)
 void EnemyGoblin::move(float delta, std::vector<LevelObject*> levelObjects)
 {
 	if(m_isDying)
-	{return;}
+	{
+		m_yVel += SettingsManager::getSettings()->WORLD_GRAVITY * delta * 5.0f;
+		m_yPos += m_yVel * delta;
+		std::cout << m_yPos << std::endl;
+		return;
+	}
 
 	m_yPos += m_yVel * delta;
 
@@ -85,6 +96,15 @@ void EnemyGoblin::move(float delta, std::vector<LevelObject*> levelObjects)
 	}
 
 	m_xPos += m_xVel * delta;
+
+	if(m_direction == DIR_RIGHT)
+	{
+		m_hitbox.setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 1.0f, m_animations->getCurrentSprite()->getGlobalBounds().top + 20);
+	}
+	else if(m_direction == DIR_LEFT)
+	{
+		m_hitbox.setPosition(m_animations->getCurrentSprite()->getGlobalBounds().left + 187.0f, m_animations->getCurrentSprite()->getGlobalBounds().top + 20);
+	}
 
 	m_animations->setCurrentAnimation("AirshipAttack_Attack_0", m_direction);
 }
@@ -110,5 +130,5 @@ bool EnemyGoblin::shouldSpawnBomb()
 
 sf::FloatRect EnemyGoblin::getGlobalBounds()
 {
-	return m_animations->getCurrentSprite()->getGlobalBounds();
+	return m_hitbox.getGlobalBounds();
 }

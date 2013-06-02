@@ -28,6 +28,8 @@ public:
 
 	std::string getName() {return m_spriteBaseName;}
 
+	bool isPlaying(){return m_playing;}
+
 private:
 	Character* m_parent;
 	CharacterDirection m_standardDirection;
