@@ -75,6 +75,7 @@ private:
 	float m_meleeHitTime;
 	bool m_hitted;
 
+	bool m_xColliding;
 	bool m_isOnGround;
 	bool m_groundMarked;
 	bool m_isIdle;

@@ -24,7 +24,7 @@ GameOver::GameOver(void)
 	Quit->Move(sf::Vector2f(0.0f, (float)Quit->m_standard->getTextureRect().height + 50));
 
 	m_font = new sf::Font();
-	m_font->loadFromFile("assets/Fonts/Dragv2.ttf");
+	m_font->loadFromFile("assets/Fonts/RomanUncialModern.ttf");
 	m_text = new sf::Text();
 	m_text->setFont(*m_font);
 	m_text->setString("Final Score: " + Util::getInstance()->toString(ScoreManager::getInstance()->getScore()));

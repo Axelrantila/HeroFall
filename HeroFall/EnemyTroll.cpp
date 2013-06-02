@@ -112,7 +112,6 @@ void EnemyTroll::update(float delta)
 	}
 #pragma endregion
 
-	//std::cout << m_animations->getCurrentAnimation()->getName() << "\t" << m_animations->getCurrentAnimation()->getCurrentFrame() << std::endl;
 	m_animations->update(m_xPos, m_yPos);
 }
 

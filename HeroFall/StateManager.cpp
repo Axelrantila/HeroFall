@@ -1,4 +1,5 @@
 #include "AudioMixer.h"
+#include "Credits.h"
 #include "Game.h"
 #include "GameOver.h"
 #include "GameOverVictory.h"
@@ -136,6 +137,12 @@ void StateManager::run()
 				{
 					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
 					m_states.push_back(new GameOverVictory());
+				}
+
+				else if(m_statesToAdd[0] == STATE_GAMEOVER_VICTORY)
+				{
+					m_window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f)));
+					m_states.push_back(new Credits());
 				}
 
 				m_statesToAdd.pop_back();

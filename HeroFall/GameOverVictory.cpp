@@ -14,14 +14,12 @@ GameOverVictory::GameOverVictory()
 {
 	m_bg = SpriteSheetLoader::getInstance()->getSprite("Highscore", "Highscore_BG");
 
-	m_letters[0] = 'A';
-	m_letters[1] = 'A';
-	m_letters[2] = 'A';
+	m_letters = "AAA";
 
 	m_currentLetter = 0;
 	
 	m_font = new sf::Font();
-	m_font->loadFromFile("assets/Fonts/Dragv2.ttf");
+	m_font->loadFromFile("assets/Fonts/RomanUncialModern.ttf");
 
 	m_score1Text = new sf::Text();
 	m_score1Text->setFont(*m_font);
@@ -54,13 +52,21 @@ GameOverVictory::GameOverVictory()
 		m_score3Text->setString(SettingsManager::getSettings()->HIGHSCORE3_NAME + "\t" + Util::getInstance()->toString(SettingsManager::getSettings()->HIGHSCORE3_SCORE));
 		m_renderText = m_score2Text;
 	}
-	else
+	else if(ScoreManager::getInstance()->getScore() > SettingsManager::getSettings()->HIGHSCORE3_SCORE)
 	{
 		m_scoreToBeUpdated = 2;
 		m_score2Text->setString(SettingsManager::getSettings()->HIGHSCORE2_NAME + "\t" + Util::getInstance()->toString(SettingsManager::getSettings()->HIGHSCORE2_SCORE));
 		m_score1Text->setString(SettingsManager::getSettings()->HIGHSCORE_NAME + "\t" + Util::getInstance()->toString(SettingsManager::getSettings()->HIGHSCORE_SCORE));
 		m_score3Text->setString(m_letters);
 		m_renderText = m_score3Text;
+	}
+
+	else
+	{
+		m_score1Text->setString(SettingsManager::getSettings()->HIGHSCORE_NAME + "\t" + Util::getInstance()->toString(SettingsManager::getSettings()->HIGHSCORE_SCORE));
+		m_score2Text->setString(SettingsManager::getSettings()->HIGHSCORE2_NAME + "\t" + Util::getInstance()->toString(SettingsManager::getSettings()->HIGHSCORE2_SCORE));
+		m_score3Text->setString(SettingsManager::getSettings()->HIGHSCORE3_NAME + "\t" + Util::getInstance()->toString(SettingsManager::getSettings()->HIGHSCORE3_SCORE));
+		m_scoreToBeUpdated = -1;
 	}
 }
 
@@ -94,7 +100,7 @@ void GameOverVictory::update(StateManager* stateManager, float deltaTime)
 			SettingsManager::getSettings()->HIGHSCORE2_SCORE = ScoreManager::getInstance()->getScore();
 			SettingsManager::getSettings()->HIGHSCORE2_NAME = m_letters;
 		}
-		else
+		else if(m_scoreToBeUpdated == 2)
 		{
 			SettingsManager::getSettings()->HIGHSCORE3_SCORE = ScoreManager::getInstance()->getScore();
 			SettingsManager::getSettings()->HIGHSCORE3_NAME = m_letters;
@@ -102,46 +108,49 @@ void GameOverVictory::update(StateManager* stateManager, float deltaTime)
 		
 		SettingsManager::getInstance()->saveSettings();
 		this->markForDeletion();
-		stateManager->addState(STATE_GAME);
+		stateManager->addState(STATE_MENUS);
 	}
 
-	//Check if letter is being changed
-	if(InputManager::getInstance()->isKeyPressed("P1_MOVE_LEFT"))
+	if(m_scoreToBeUpdated != -1)
 	{
-		m_currentLetter--;
-		if(m_currentLetter < 0)
-		{m_currentLetter = 2;}
-	}
+		//Check if letter is being changed
+		if(InputManager::getInstance()->isKeyPressed("P1_MOVE_LEFT"))
+		{
+			m_currentLetter--;
+			if(m_currentLetter < 0)
+			{m_currentLetter = 2;}
+		}
 
-	else if(InputManager::getInstance()->isKeyPressed("P1_MOVE_RIGHT"))
-	{
-		m_currentLetter++;
-		if(m_currentLetter > 2)
-		{m_currentLetter = 0;}
-	}
+		else if(InputManager::getInstance()->isKeyPressed("P1_MOVE_RIGHT"))
+		{
+			m_currentLetter++;
+			if(m_currentLetter > 2)
+			{m_currentLetter = 0;}
+		}
 
-	//Change the current letter
-	else if(InputManager::getInstance()->isKeyPressed("P1_MOVE_DOWN"))
-	{
-		m_letters[m_currentLetter]++;
-		if(m_letters[m_currentLetter] > 'Z')
-		{m_letters[m_currentLetter] = 'A';}
-	}
+		//Change the current letter
+		else if(InputManager::getInstance()->isKeyPressed("P1_MOVE_DOWN"))
+		{
+			m_letters[m_currentLetter]++;
+			if(m_letters[m_currentLetter] > 'Z')
+			{m_letters[m_currentLetter] = 'A';}
+		}
 
-	else if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP"))
-	{
-		m_letters[m_currentLetter]--;
-		if(m_letters[m_currentLetter] < 'A')
-		{m_letters[m_currentLetter] = 'Z';}
-	}
+		else if(InputManager::getInstance()->isKeyPressed("P1_MOVE_UP"))
+		{
+			m_letters[m_currentLetter]--;
+			if(m_letters[m_currentLetter] < 'A')
+			{m_letters[m_currentLetter] = 'Z';}
+		}
 
 	
 
-	std::string newString = m_letters;
-	newString.append("\t");
-	newString.append(Util::getInstance()->toString(ScoreManager::getInstance()->getScore()));
+		std::string newString = m_letters;
+		newString.append("\t");
+		newString.append(Util::getInstance()->toString(ScoreManager::getInstance()->getScore()));
 
-	m_renderText->setString(newString);
+		m_renderText->setString(newString);
+	}
 }
 
 void GameOverVictory::draw(sf::RenderWindow* window)

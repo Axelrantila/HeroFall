@@ -57,8 +57,11 @@ void Game::update(StateManager* stateManager, float delta)
 		}
 	}
 	
-	else if(m_levelManager->getPlayer()->getXPos() > 36320)
-	{ stateManager->addState(STATE_GAMEOVER_VICTORY); }
+	else if(m_levelManager->getPlayer()->getXPos() > 34600)
+	{
+		markForDeletion();
+		stateManager->addState(STATE_GAMEOVER_VICTORY);
+	}
 }
 
 void Game::draw(sf::RenderWindow* window)

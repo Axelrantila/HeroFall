@@ -112,8 +112,8 @@ void Menus::draw(sf::RenderWindow* window)
 	window->draw(*background);
 
 	Play->Draw(window);
-	Options->Draw(window);
-	Credits->Draw(window);
+	//Options->Draw(window);
+	//Credits->Draw(window);
 	Quit->Draw(window);
 }
 

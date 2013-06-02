@@ -96,6 +96,7 @@
     <ClCompile Include="AudioMixer.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="ComboManager.cpp" />
+    <ClCompile Include="Credits.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
     <ClCompile Include="EnemyBomb.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterDirection.h" />
     <ClInclude Include="ComboManager.h" />
+    <ClInclude Include="Credits.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="EnemyBomb.h" />

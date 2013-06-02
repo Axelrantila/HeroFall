@@ -21,7 +21,7 @@ HUD::HUD(sf::View* view, Player* player)
 	m_playerMaxHealth = player->getHealth();
 
 	m_font = new sf::Font();
-	m_font->loadFromFile("assets/Fonts/Dragv2.TTF");
+	m_font->loadFromFile("assets/Fonts/RomanUncialModern.ttf");
 
 	m_text =  new sf::Text("0", *m_font, 50);
 	m_text->setColor(sf::Color(255, 127, 0));

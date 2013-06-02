@@ -3,6 +3,8 @@
 
 #include "State.h"
 
+#include <vector>
+
 namespace sf
 {
 	class Sprite;
@@ -22,7 +24,7 @@ public:
 	void handleEvents(sf::Event windowEvent);
 
 private:
-	char m_letters[3];
+	std::string m_letters;
 	int m_currentLetter;
 
 	sf::Sprite* m_bg;
@@ -39,6 +41,7 @@ private:
 	0 = First place
 	1 = Second place
 	2 = Third place
+	-1 = None
 	*/
 };
 

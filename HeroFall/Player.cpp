@@ -74,6 +74,8 @@ Player::Player(float xPos, float yPos, LevelManager* levelManager)
 	m_comboTimeLimit = 3.0f;
 	m_comboPopupLimit = 1.5f * m_comboTimeLimit;
 
+	m_xColliding = false;
+
 	m_meleeHitClock.restart();
 	m_comboTimeClock.restart();
 }
@@ -302,6 +304,9 @@ bool Player::collidesWith(LevelObject* levelObject)
 		float otherXPos = ((LevelObjectRectangle*)levelObject)->getXPos();
 		float otherYPos = ((LevelObjectRectangle*)levelObject)->getYPos();
 
+		m_xColliding = !(otherXPos > m_hitBox->getGlobalBounds().left + m_hitBox->getGlobalBounds().width
+			|| otherXPos + otherSize.x < m_hitBox->getGlobalBounds().left);
+
 		return(!(otherXPos > m_hitBox->getGlobalBounds().left + m_hitBox->getGlobalBounds().width
 			|| otherXPos + otherSize.x < m_hitBox->getGlobalBounds().left
 			|| otherYPos > m_hitBox->getGlobalBounds().top + m_hitBox->getGlobalBounds().height
@@ -419,8 +424,6 @@ void Player::collidesWith(std::vector<Enemy*>* enemies)
 			EnemyProjectile* tEnemy = ((EnemyProjectile*)enemies->at(a));
 			if(tEnemy->getGlobalBounds().intersects(m_hitBox->getGlobalBounds()))
 			{
-				std::cout << m_xPos << "\t" << tEnemy->getXPos() << std::endl;
-
 				if(!m_isBlocking)
 				{
 					this->takeDamage(SettingsManager::getSettings()->DAMAGE_ENEMY_PROJECTILE_TO_PLAYER);
@@ -514,6 +517,8 @@ void Player::update(float delta)
 	AudioMixer::getInstance()->setListenerPosition(m_xPos, m_yPos);
 	AudioMixer::getInstance()->setListenerDirection(m_xPos + 1.0f, m_yPos);
 	
+	std::cout << m_xPos << std::endl;
+
 	if(m_comboTimeClock.getElapsedTime().asSeconds() >= m_comboPopupLimit
 		&& ComboManager::getInstance()->canActivateCombo())
 	{
@@ -606,6 +611,11 @@ void Player::update(float delta)
 			m_isIdle = false;
 		}
 
+		if(m_xColliding && m_animations->isCurrentAnimation("AvatarRRunning_Running_0"))
+		{
+			m_animations->setCurrentAnimation("AvatarRIdle_Idle_0", m_direction);
+		}
+
 		/////////////////////////////////////////////////
 		if(m_swordIsSwinging)
 		{
@@ -662,7 +672,8 @@ void Player::setXSpeed(float xVel)
 	if(!m_swordIsSwinging
 		&& m_isOnGround
 		&& !m_knockedBack
-		&& !m_hitted)
+		&& !m_hitted
+		&& !m_xColliding)
 	{	
 		m_animations->setCurrentAnimation("AvatarRRunning_Running_0", m_direction);
 	}

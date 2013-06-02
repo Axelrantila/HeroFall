@@ -53,7 +53,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_levelObjects.push_back(new LevelObjectRectangle(33680.0f, 2070.0f, 2000.0f, 600.0f, sf::Color::Magenta));
 	m_levelObjects.push_back(new LevelObjectRectangle(33680.0f, 1970.0f, 100.0f, 100.0f, sf::Color::Magenta));
 
-	m_player = new Player(5200.0f, 800.0f, this);
+	m_player = new Player(0.0f, 800.0f, this);
 	m_view->setCenter(m_player->getCenter().x
 		, m_player->getCenter().y - (float)m_window->getSize().y / 3.5f);
 
@@ -403,15 +403,20 @@ void LevelManager::update(float deltaTime)
 		m_view->setCenter(m_view->getSize().x / 2.0f, m_view->getCenter().y);
 	}
 
+	if(m_view->getCenter().x + m_view->getSize().x > 36300.0f )
+	{
+		m_view->setCenter(36300.0f - m_view->getSize().x, m_view->getCenter().y);
+	}
+
 	//Set max view
 	if(m_view->getCenter().y - m_view->getSize().y / 2.0f < 0)
 	{
 		m_view->setCenter(m_view->getCenter().x, m_view->getSize().y/2.0f);
 	}
 
-	if(m_view->getCenter().y > 2000.0f)
+	if(m_view->getCenter().y > 1500.0f)
 	{
-		m_view->setCenter(m_view->getCenter().x, 2000.0f);
+		m_view->setCenter(m_view->getCenter().x, 1500.0f);
 	}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;

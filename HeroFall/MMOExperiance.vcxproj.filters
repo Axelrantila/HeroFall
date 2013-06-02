@@ -134,6 +134,7 @@
     <ClCompile Include="EnemyBase.cpp">
       <Filter>Game\Characters\Enemies\Primary</Filter>
     </ClCompile>
+    <ClCompile Include="Credits.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -274,6 +275,7 @@
     <ClInclude Include="SpriteSheetLoader.h">
       <Filter>Engine\Graphics\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="Credits.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
