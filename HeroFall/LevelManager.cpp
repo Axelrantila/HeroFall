@@ -105,7 +105,7 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	tempSprite->setPosition(12460.0f, 1370.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Banner_02", "Banner_02");
-	tempSprite->setPosition(13600.0f, 1210.0f);
+	tempSprite->setPosition(14600.0f, 1210.0f);
 	m_backgroundSprites.push_back(tempSprite);
 	tempSprite = SpriteSheetLoader::getInstance()->getSprite("Banner_02", "Banner_02");
 	tempSprite->setPosition(15600.0f, 1210.0f);
@@ -264,8 +264,6 @@ LevelManager::LevelManager(sf::View* view, sf::RenderWindow* window)
 	m_cameraMove = m_view->getCenter();
 
 	m_enemies = new std::vector<Enemy*>();
-	m_enemies->push_back(new EnemyGoblin(0.0f, 500.0f, 1500.0f));
-
 	/*m_enemies->push_back(new EnemyTroll(3800.0f, 1200.0f, m_view));
 	m_enemies->push_back(new EnemyTroll(5200.0f, 1000.0f, m_view));
 	m_enemies->push_back(new EnemyBase(1800.0f, 1000.0f, m_view));
@@ -416,9 +414,9 @@ void LevelManager::update(float deltaTime)
 		m_view->setCenter(m_view->getCenter().x, m_view->getSize().y/2.0f);
 	}
 
-	if(m_view->getCenter().y > 1500.0f)
+	if(m_view->getCenter().y > 2000.0f)
 	{
-		m_view->setCenter(m_view->getCenter().x, 1500.0f);
+		m_view->setCenter(m_view->getCenter().x, 2000.0f);
 	}
 
 	m_cameraMove = m_view->getCenter() - m_prevCameraCenter;
